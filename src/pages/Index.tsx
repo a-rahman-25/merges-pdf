@@ -5,8 +5,8 @@ import {
   Upload, Cpu, Download, Shield, Zap, Globe, Lock, Layers, FileText,
   Code, ChevronRight, Star, MessageSquare, Droplets, Trash2, FileOutput, Brain, Languages, Palette, Hash, Unlock
 } from 'lucide-react';
-import ThemeToggle from '@/components/ThemeToggle';
 import SEOHead from '@/components/SEOHead';
+import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 

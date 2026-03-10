@@ -1,8 +1,7 @@
 import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Combine } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import ThemeToggle from '@/components/ThemeToggle';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import AIDocumentTool from '@/components/AIDocumentTool';
 import ToolFAQ from '@/components/ToolFAQ';
 import { getToolBySlug } from '@/lib/ai-tools-config';

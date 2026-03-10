@@ -6,12 +6,23 @@ import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { getPageCount, extractPages, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
+import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import ReviewDialog from '@/components/ReviewDialog';
+import PreDownloadSummary from '@/components/PreDownloadSummary';
 
 const PDFPageExtractor = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
   const [processing, setProcessing] = useState(false);
-  const [done, setDone] = useState(false);
+  const [result, setResult] = useState<{ data: Uint8Array; extractedCount: number } | null>(null);
   const [rangeInput, setRangeInput] = useState('');
+
+  const doDownload = useCallback(() => {
+    if (!result || !file) return;
+    const baseName = file.name.replace(/\.pdf$/i, '');
+    downloadBlob(result.data, `${baseName}_extracted.pdf`);
+  }, [result, file]);
+
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -19,7 +30,7 @@ const PDFPageExtractor = () => {
     let pageCount: number | null = null;
     try { pageCount = await getPageCount(f); } catch {}
     setFile({ file: f, name: f.name, size: f.size, pageCount });
-    setDone(false);
+    setResult(null);
     toast.success(`Selected: ${f.name}`);
   }, []);
 
@@ -28,9 +39,8 @@ const PDFPageExtractor = () => {
     const parts = input.split(',').map(s => s.trim()).filter(Boolean);
     for (const part of parts) {
       const rangeParts = part.split('-').map(s => parseInt(s.trim(), 10));
-      if (rangeParts.length === 1 && !isNaN(rangeParts[0])) {
-        indices.add(rangeParts[0] - 1);
-      } else if (rangeParts.length === 2 && !isNaN(rangeParts[0]) && !isNaN(rangeParts[1])) {
+      if (rangeParts.length === 1 && !isNaN(rangeParts[0])) indices.add(rangeParts[0] - 1);
+      else if (rangeParts.length === 2 && !isNaN(rangeParts[0]) && !isNaN(rangeParts[1])) {
         for (let i = rangeParts[0]; i <= rangeParts[1]; i++) indices.add(i - 1);
       }
     }
@@ -41,16 +51,11 @@ const PDFPageExtractor = () => {
     if (!file) return;
     const max = file.pageCount ?? 9999;
     const indices = parseRange(rangeInput, max);
-    if (indices.length === 0) {
-      toast.error('Enter valid page numbers, e.g. "1-3, 5"');
-      return;
-    }
+    if (indices.length === 0) { toast.error('Enter valid page numbers, e.g. "1-3, 5"'); return; }
     setProcessing(true);
     try {
       const data = await extractPages(file.file, indices);
-      const baseName = file.name.replace(/\.pdf$/i, '');
-      downloadBlob(data, `${baseName}_extracted.pdf`);
-      setDone(true);
+      setResult({ data, extractedCount: indices.length });
       toast.success(`Extracted ${indices.length} page${indices.length > 1 ? 's' : ''}!`);
     } catch (err) {
       toast.error(`Failed to extract pages. Contact ${SUPPORT_EMAIL} for help.`);
@@ -60,13 +65,13 @@ const PDFPageExtractor = () => {
     }
   };
 
-  const reset = () => { setFile(null); setDone(false); setRangeInput(''); };
+  const reset = () => { setFile(null); setResult(null); setRangeInput(''); };
 
   return (
     <div className="mx-auto w-full max-w-2xl space-y-6">
       {!file && <DropZone onFiles={addFile} disabled={processing} />}
       <AnimatePresence>
-        {file && (
+        {file && !result && (
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
             <div className="flex items-center justify-between px-1">
               <p className="text-sm font-medium text-muted-foreground">Selected file</p>
@@ -86,32 +91,30 @@ const PDFPageExtractor = () => {
                 </p>
               </div>
             </div>
-            {!done && (
-              <div className="space-y-3">
-                <Input
-                  placeholder={`Pages to extract, e.g. 1-3, 5, 8 (max ${file.pageCount ?? '?'})`}
-                  value={rangeInput}
-                  onChange={e => setRangeInput(e.target.value)}
-                  className="text-center font-mono"
-                />
-                <p className="text-xs text-muted-foreground text-center">
-                  Selected pages will be extracted into a new PDF
-                </p>
-              </div>
-            )}
-            {!done && (
-              <Button onClick={handleExtract} disabled={processing || !rangeInput.trim()} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-                {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Extracting…</>) : (<><FileOutput className="h-5 w-5" />Extract Pages</>)}
-              </Button>
-            )}
-            {done && (
-              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl bg-accent/50 p-4 border border-border text-center">
-                <p className="text-sm font-medium text-foreground">✓ Pages extracted and downloaded</p>
-              </motion.div>
-            )}
+            <div className="space-y-3">
+              <Input placeholder={`Pages to extract, e.g. 1-3, 5, 8 (max ${file.pageCount ?? '?'})`} value={rangeInput} onChange={e => setRangeInput(e.target.value)} className="text-center font-mono" />
+              <p className="text-xs text-muted-foreground text-center">Selected pages will be extracted into a new PDF</p>
+            </div>
+            <Button onClick={handleExtract} disabled={processing || !rangeInput.trim()} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
+              {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Extracting…</>) : (<><FileOutput className="h-5 w-5" />Extract Pages</>)}
+            </Button>
           </motion.div>
         )}
+
+        {file && result && (
+          <PreDownloadSummary
+            title="Pages Extracted"
+            items={[
+              { label: 'Source File', value: file.name },
+              { label: 'Pages Extracted', value: `${result.extractedCount}` },
+              { label: 'Output Size', value: formatFileSize(result.data.length) },
+            ]}
+            onDownload={triggerDownload}
+          />
+        )}
       </AnimatePresence>
+
+      <ReviewDialog open={showReview} toolName="Page Extractor" onSubmit={handleSubmit} onSkip={handleSkip} />
     </div>
   );
 };

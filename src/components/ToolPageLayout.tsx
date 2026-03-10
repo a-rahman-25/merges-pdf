@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileText, Shield, Zap, Globe, Lock, Layers, Code, Droplets, Trash2, FileOutput, Brain, Languages, MessageSquare, ChevronDown, Palette } from 'lucide-react';
+import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileText, Shield, Zap, Globe, Lock, Layers, Code, Droplets, Trash2, FileOutput, Brain, Languages, MessageSquare, ChevronDown, Palette, Hash, Unlock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import PrivacyNotice from '@/components/PrivacyNotice';
 
-type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale';
+type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock';
 
 interface TabItem {
   id: TabId;
@@ -30,8 +30,11 @@ const tabGroups: TabGroup[] = [
       { id: 'rotate', label: 'Rotate', icon: RotateCw, path: '/rotate' },
       { id: 'delete-pages', label: 'Delete Pages', icon: Trash2, path: '/delete-pages' },
       { id: 'extract-pages', label: 'Extract Pages', icon: FileOutput, path: '/extract-pages' },
+      { id: 'page-numbers', label: 'Page Numbers', icon: Hash, path: '/page-numbers' },
       { id: 'add-watermark', label: 'Add Watermark', icon: Droplets, path: '/add-watermark' },
       { id: 'encrypt', label: 'Encrypt', icon: Lock, path: '/encrypt' },
+      { id: 'unlock', label: 'Unlock', icon: Unlock, path: '/unlock-pdf' },
+      { id: 'flatten', label: 'Flatten', icon: Layers, path: '/flatten' },
     ],
   },
   {

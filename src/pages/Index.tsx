@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser,
   Upload, Cpu, Download, Shield, Zap, Globe, Lock, Layers, FileText,
-  Code, ChevronRight, Star, MessageSquare, Droplets, Trash2, FileOutput, Brain, Languages, Palette
+  Code, ChevronRight, Star, MessageSquare, Droplets, Trash2, FileOutput, Brain, Languages, Palette, Hash, Unlock
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import SEOHead from '@/components/SEOHead';
@@ -24,6 +24,9 @@ const tools = [
   { icon: Eraser, title: 'Remove Background', desc: 'AI-powered background removal — 100% in your browser.', path: '/bg-remover', color: 'bg-tool-cyan/15 text-tool-cyan' },
   { icon: Droplets, title: 'Remove Watermark', desc: 'Strip watermarks from PDF files — processed locally.', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
   { icon: Lock, title: 'Encrypt PDF', desc: 'Add password protection to your PDF files.', path: '/encrypt', color: 'bg-tool-indigo/15 text-tool-indigo' },
+  { icon: Unlock, title: 'Unlock PDF', desc: 'Remove print/copy/edit restrictions from PDFs.', path: '/unlock-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
+  { icon: Hash, title: 'Page Numbers', desc: 'Add sequential page numbers to every page of your PDF.', path: '/page-numbers', color: 'bg-tool-amber/15 text-tool-amber' },
+  { icon: Layers, title: 'Flatten PDF', desc: 'Remove form fields, annotations, and layers from PDFs.', path: '/flatten', color: 'bg-tool-teal/15 text-tool-teal' },
   { icon: Brain, title: 'AI Summarizer', desc: 'Upload a PDF and get an AI-generated summary instantly.', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet' },
   { icon: Languages, title: 'AI Translator', desc: 'Translate PDF documents into any language with AI.', path: '/ai-translate', color: 'bg-tool-emerald/15 text-tool-emerald' },
   { icon: MessageSquare, title: 'AI Q&A', desc: 'Ask questions about your PDF and get AI-powered answers.', path: '/ai-qa', color: 'bg-tool-blue/15 text-tool-blue' },

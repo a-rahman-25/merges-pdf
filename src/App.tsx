@@ -32,6 +32,10 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Blog = lazy(() => import("./pages/Blog"));
 const Privacy = lazy(() => import("./pages/Privacy"));
 const Terms = lazy(() => import("./pages/Terms"));
+const PageNumbers = lazy(() => import("./pages/PageNumbers"));
+const Flatten = lazy(() => import("./pages/Flatten"));
+const UnlockPdf = lazy(() => import("./pages/UnlockPdf"));
+const SEOLandingRouter = lazy(() => import("./pages/SEOLandingRouter"));
 
 const queryClient = new QueryClient();
 
@@ -66,11 +70,16 @@ const AnimatedRoutes = () => {
         <Route path="/ai-qa" element={<AiQa />} />
         <Route path="/batch" element={<Batch />} />
         <Route path="/grayscale" element={<Grayscale />} />
+        <Route path="/page-numbers" element={<PageNumbers />} />
+        <Route path="/flatten" element={<Flatten />} />
+        <Route path="/unlock-pdf" element={<UnlockPdf />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<Blog />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/tools/:slug" element={<SEOLandingRouter />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

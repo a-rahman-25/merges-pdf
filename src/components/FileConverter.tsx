@@ -139,7 +139,7 @@ const FileConverter = () => {
       } else if (mode === 'xml-convert') {
         if (xmlFormat === 'pdf') {
           const data = await xmlToPDF(files[0]);
-          const xmlPdfBlob = new Blob([data], { type: 'application/pdf' });
+          const xmlPdfBlob = new Blob([data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)], { type: 'application/pdf' });
           blobs.push({ blob: xmlPdfBlob, filename: `${name}.pdf` });
           summaryItems.push(
             { label: 'Input', value: files[0].name },

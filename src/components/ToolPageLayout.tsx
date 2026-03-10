@@ -4,6 +4,7 @@ import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileTex
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import PrivacyNotice from '@/components/PrivacyNotice';
+import Footer from '@/components/Footer';
 
 type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock';
 

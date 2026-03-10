@@ -3,6 +3,7 @@ import { Combine, Shield, Zap, Globe, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import SEOHead from '@/components/SEOHead';
+import Footer from '@/components/Footer';
 
 const About = () => (
   <div className="min-h-screen bg-background">

@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
-import ThemeToggle from '@/components/ThemeToggle';
-import { Combine, ChevronRight } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const PrivacyPolicy = () => (
   <div className="min-h-screen bg-background">
@@ -11,17 +11,7 @@ const PrivacyPolicy = () => (
       description="Read the MergesPDF.com privacy policy. Learn how we protect your data — all files are processed in your browser and automatically deleted."
       path="/privacy"
     />
-    <header className="border-b border-border/60">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Combine className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <span className="font-display text-xl font-bold text-foreground">MergesPDF</span>
-        </Link>
-        <ThemeToggle />
-      </div>
-    </header>
+    <Header />
 
     <motion.main initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mx-auto max-w-3xl px-6 py-16">
       <h1 className="font-display text-4xl font-bold text-foreground">Privacy Policy</h1>
@@ -88,16 +78,7 @@ const PrivacyPolicy = () => (
       </div>
     </motion.main>
 
-    <footer className="border-t border-border/60 py-8">
-      <div className="mx-auto max-w-6xl px-6 text-center text-sm text-muted-foreground">
-        <div className="flex justify-center gap-6 mb-4">
-          <Link to="/" className="hover:text-foreground">Home</Link>
-          <Link to="/terms" className="hover:text-foreground">Terms of Service</Link>
-          <Link to="/contact" className="hover:text-foreground">Contact</Link>
-        </div>
-        <p>© {new Date().getFullYear()} MergesPDF.com — All rights reserved</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 );
 

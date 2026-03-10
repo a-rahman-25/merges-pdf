@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileText, Shield, Zap, Globe, Lock, Layers, Code, Droplets, Trash2, FileOutput, Brain, Languages, MessageSquare, ChevronDown, Palette, Hash, Unlock } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ThemeToggle from '@/components/ThemeToggle';
+import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
 
@@ -98,23 +98,7 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border/60">
-        <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-              <Combine className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="font-display text-xl font-bold text-foreground">MergePDF</span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <p className="hidden text-sm text-muted-foreground sm:block">
-              100% Free · Not a single cent
-            </p>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="mx-auto max-w-4xl px-6 py-12 md:py-20">
         {/* Grouped Navigation */}

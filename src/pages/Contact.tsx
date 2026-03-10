@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Combine, Mail, MessageSquare, Clock, CheckCircle } from 'lucide-react';
+import { Mail, MessageSquare, Clock, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import ThemeToggle from '@/components/ThemeToggle';
+import Header from '@/components/Header';
 import SEOHead from '@/components/SEOHead';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -57,21 +57,7 @@ const Contact = () => {
         path="/contact"
       />
 
-      <header className="border-b border-border/60">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-              <Combine className="h-5 w-5 text-primary-foreground" />
-            </div>
-            <span className="font-display text-xl font-bold text-foreground">MergesPDF</span>
-          </Link>
-          <div className="flex items-center gap-4">
-            <Link to="/about" className="hidden text-sm text-muted-foreground hover:text-foreground sm:block">About</Link>
-            <Link to="/blog" className="hidden text-sm text-muted-foreground hover:text-foreground sm:block">Blog</Link>
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main className="mx-auto max-w-3xl px-6 py-16 md:py-24">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>

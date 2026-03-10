@@ -296,17 +296,7 @@ const BlogIndex = () => (
       </motion.div>
     </main>
 
-    <footer className="border-t border-border/60 py-8">
-      <div className="mx-auto max-w-6xl px-6 text-center text-sm text-muted-foreground">
-        <div className="flex justify-center gap-6 mb-4">
-          <Link to="/" className="hover:text-foreground">Home</Link>
-          <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
-          <Link to="/terms" className="hover:text-foreground">Terms</Link>
-          <Link to="/contact" className="hover:text-foreground">Contact</Link>
-        </div>
-        <p>© {new Date().getFullYear()} MergesPDF.com — All tools free, forever.</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 );
 

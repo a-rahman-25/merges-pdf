@@ -1,25 +1,36 @@
 import { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Loader2, Download, RotateCcw } from 'lucide-react';
+import { FileText, Loader2, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
+import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import ReviewDialog from '@/components/ReviewDialog';
+import PreDownloadSummary from '@/components/PreDownloadSummary';
 
 const PDFToWord = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
   const [processing, setProcessing] = useState(false);
-  const [done, setDone] = useState(false);
+  const [result, setResult] = useState<{ blob: Blob; pageCount: number } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const doDownload = useCallback(() => {
+    if (!result || !file) return;
+    const baseName = file.name.replace(/\.pdf$/i, '');
+    saveAs(result.blob, `${baseName}.docx`);
+  }, [result, file]);
+
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
 
   const handleFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0];
     if (!f) return;
     if (f.type !== 'application/pdf') { toast.error('Please select a PDF file.'); return; }
     setFile({ file: f, name: f.name, size: f.size });
-    setDone(false);
+    setResult(null);
     toast.success(`Selected: ${f.name}`);
     e.target.value = '';
   }, []);
@@ -32,41 +43,21 @@ const PDFToWord = () => {
       const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
       const pages = pdf.getPages();
 
-      // Extract text content from each page
       const paragraphs: Paragraph[] = [
-        new Paragraph({
-          children: [new TextRun({ text: `Converted from: ${file.name}`, bold: true, size: 28 })],
-          spacing: { after: 300 },
-        }),
+        new Paragraph({ children: [new TextRun({ text: `Converted from: ${file.name}`, bold: true, size: 28 })], spacing: { after: 300 } }),
       ];
 
       for (let i = 0; i < pages.length; i++) {
         paragraphs.push(
-          new Paragraph({
-            children: [new TextRun({ text: `— Page ${i + 1} —`, bold: true, size: 24 })],
-            spacing: { before: 400, after: 200 },
-          }),
-          new Paragraph({
-            children: [
-              new TextRun({
-                text: `[Page ${i + 1} content — pdf-lib extracts structure but not raw text. For full text extraction, use a server-side tool. Page dimensions: ${Math.round(pages[i].getWidth())} × ${Math.round(pages[i].getHeight())} pts]`,
-                size: 22,
-              }),
-            ],
-            spacing: { after: 200 },
-          })
+          new Paragraph({ children: [new TextRun({ text: `— Page ${i + 1} —`, bold: true, size: 24 })], spacing: { before: 400, after: 200 } }),
+          new Paragraph({ children: [new TextRun({ text: `[Page ${i + 1} content — pdf-lib extracts structure but not raw text. Page dimensions: ${Math.round(pages[i].getWidth())} × ${Math.round(pages[i].getHeight())} pts]`, size: 22 })], spacing: { after: 200 } })
         );
       }
 
-      const doc = new Document({
-        sections: [{ children: paragraphs }],
-      });
-
+      const doc = new Document({ sections: [{ children: paragraphs }] });
       const blob = await Packer.toBlob(doc);
-      const baseName = file.name.replace(/\.pdf$/i, '');
-      saveAs(blob, `${baseName}.docx`);
-      setDone(true);
-      toast.success('Converted to Word and downloaded!');
+      setResult({ blob, pageCount: pages.length });
+      toast.success('Converted to Word!');
     } catch (err) {
       toast.error('Failed to convert PDF to Word.');
       console.error(err);
@@ -75,29 +66,23 @@ const PDFToWord = () => {
     }
   };
 
-  const reset = () => { setFile(null); setDone(false); };
+  const reset = () => { setFile(null); setResult(null); };
 
   return (
     <div className="mx-auto w-full max-w-2xl space-y-6">
       {!file ? (
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          onClick={() => inputRef.current?.click()}
-          className="cursor-pointer rounded-2xl border-2 border-dashed border-border p-12 text-center hover:border-primary/50 hover:bg-accent/50 transition-all"
-        >
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} onClick={() => inputRef.current?.click()}
+          className="cursor-pointer rounded-2xl border-2 border-dashed border-border p-12 text-center hover:border-primary/50 hover:bg-accent/50 transition-all">
           <input ref={inputRef} type="file" accept=".pdf" onChange={handleFile} className="hidden" />
           <div className="flex flex-col items-center gap-4">
-            <div className="rounded-xl bg-primary/10 p-4">
-              <FileText className="h-8 w-8 text-primary" />
-            </div>
+            <div className="rounded-xl bg-primary/10 p-4"><FileText className="h-8 w-8 text-primary" /></div>
             <div>
               <p className="text-lg font-display font-semibold text-foreground">Select a PDF to convert</p>
               <p className="mt-1 text-sm text-muted-foreground">Convert PDF to Microsoft Word (.docx) format</p>
             </div>
           </div>
         </motion.div>
-      ) : (
+      ) : !result ? (
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
           <div className="flex items-center justify-between px-1">
             <p className="text-sm font-medium text-muted-foreground">{file.name}</p>
@@ -114,14 +99,25 @@ const PDFToWord = () => {
               <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
             </div>
           </div>
-          <p className="text-xs text-center text-muted-foreground">
-            Note: Browser-based PDF to Word conversion extracts document structure. For full text extraction, use a dedicated desktop tool.
-          </p>
-          <Button onClick={handleConvert} disabled={processing || done} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-            {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Converting…</>) : done ? (<><Download className="h-5 w-5" />Done!</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
+          <p className="text-xs text-center text-muted-foreground">Note: Browser-based conversion extracts document structure. For full text extraction, use a dedicated desktop tool.</p>
+          <Button onClick={handleConvert} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
+            {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Converting…</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
           </Button>
         </motion.div>
+      ) : (
+        <PreDownloadSummary
+          title="Converted to Word"
+          items={[
+            { label: 'Source', value: file.name },
+            { label: 'Pages', value: `${result.pageCount}` },
+            { label: 'Output', value: `${file.name.replace(/\.pdf$/i, '.docx')}` },
+            { label: 'Size', value: formatFileSize(result.blob.size) },
+          ]}
+          onDownload={triggerDownload}
+        />
       )}
+
+      <ReviewDialog open={showReview} toolName="PDF to Word" onSubmit={handleSubmit} onSkip={handleSkip} />
     </div>
   );
 };

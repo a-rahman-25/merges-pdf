@@ -31,6 +31,7 @@ serve(async (req) => {
             content: `Please translate information about this PDF document into ${targetLanguage}:\n\nFilename: ${filename}\nPages: ${pageCount}\n\nProvide a comprehensive translation of the document overview, key sections, and any relevant metadata in ${targetLanguage}.`,
           },
         ],
+        stream: true,
       }),
     });
 
@@ -46,11 +47,8 @@ serve(async (req) => {
       throw new Error("AI gateway error");
     }
 
-    const data = await response.json();
-    const translation = data.choices?.[0]?.message?.content || "No translation generated.";
-
-    return new Response(JSON.stringify({ translation }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    return new Response(response.body, {
+      headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
     });
   } catch (e) {
     console.error("translate error:", e);

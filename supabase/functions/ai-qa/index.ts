@@ -37,6 +37,7 @@ serve(async (req) => {
       body: JSON.stringify({
         model: "google/gemini-3-flash-preview",
         messages,
+        stream: true,
       }),
     });
 
@@ -52,11 +53,8 @@ serve(async (req) => {
       throw new Error("AI gateway error");
     }
 
-    const data = await response.json();
-    const answer = data.choices?.[0]?.message?.content || "No answer generated.";
-
-    return new Response(JSON.stringify({ answer }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    return new Response(response.body, {
+      headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
     });
   } catch (e) {
     console.error("qa error:", e);

@@ -31,6 +31,7 @@ serve(async (req) => {
             content: `Please summarize this PDF document:\n\nFilename: ${filename}\nPages: ${pageCount}\nContent description: ${text}`,
           },
         ],
+        stream: true,
       }),
     });
 
@@ -46,11 +47,8 @@ serve(async (req) => {
       throw new Error("AI gateway error");
     }
 
-    const data = await response.json();
-    const summary = data.choices?.[0]?.message?.content || "No summary generated.";
-
-    return new Response(JSON.stringify({ summary }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+    return new Response(response.body, {
+      headers: { ...corsHeaders, "Content-Type": "text/event-stream" },
     });
   } catch (e) {
     console.error("summarize error:", e);

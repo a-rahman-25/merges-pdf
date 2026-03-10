@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import SEOHead from '@/components/SEOHead';
-import ThemeToggle from '@/components/ThemeToggle';
-import { Combine, ChevronRight } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const PrivacyPolicy = () => (
   <div className="min-h-screen bg-background">

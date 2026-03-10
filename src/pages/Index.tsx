@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import SEOHead from '@/components/SEOHead';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
 const tools = [

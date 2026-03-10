@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { Combine, Shield, Zap, Globe, Heart } from 'lucide-react';
+import { Shield, Zap, Globe, Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
-import ThemeToggle from '@/components/ThemeToggle';
+import Header from '@/components/Header';
 import SEOHead from '@/components/SEOHead';
 import Footer from '@/components/Footer';
 

@@ -152,17 +152,7 @@ const BlogArticlePage = ({ article }: { article: BlogArticle }) => (
         publisher: { '@type': 'Organization', name: 'MergesPDF', url: 'https://mergespdf.com' },
       }}
     />
-    <header className="border-b border-border/60">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-2.5">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-            <Combine className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <span className="font-display text-xl font-bold text-foreground">MergesPDF</span>
-        </Link>
-        <ThemeToggle />
-      </div>
-    </header>
+    <Header />
 
     <motion.main initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mx-auto max-w-3xl px-6 py-12 md:py-20">
       <Link to="/blog" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-8">

@@ -82,6 +82,47 @@ const AnimatedRoutes = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/tools/:slug" element={<SEOLandingRouter />} />
+        <Route path="/ai-document-tools" element={<AIDocumentTools />} />
+        <Route path="/ai-document-map" element={<AIToolPage />} />
+        <Route path="/ai-document-timeline" element={<AIToolPage />} />
+        <Route path="/ai-keyword-extractor" element={<AIToolPage />} />
+        <Route path="/ai-idea-generator-from-document" element={<AIToolPage />} />
+        <Route path="/ai-report-generator" element={<AIToolPage />} />
+        <Route path="/ai-policy-generator" element={<AIToolPage />} />
+        <Route path="/ai-presentation-generator" element={<AIToolPage />} />
+        <Route path="/compare-documents-ai" element={<AIToolPage />} />
+        <Route path="/ai-fact-check-document" element={<AIToolPage />} />
+        <Route path="/ai-generate-questions-from-document" element={<AIToolPage />} />
+        <Route path="/ai-knowledge-extractor" element={<AIToolPage />} />
+        <Route path="/ai-task-extractor" element={<AIToolPage />} />
+        <Route path="/ai-email-from-document" element={<AIToolPage />} />
+        <Route path="/ai-document-tagger" element={<AIToolPage />} />
+        <Route path="/ai-document-rewriter" element={<AIToolPage />} />
+        <Route path="/ai-expand-text" element={<AIToolPage />} />
+        <Route path="/ai-multi-level-summary" element={<AIToolPage />} />
+        <Route path="/ai-action-items" element={<AIToolPage />} />
+        <Route path="/ai-knowledge-graph" element={<AIToolPage />} />
+        <Route path="/ai-entity-extractor" element={<AIToolPage />} />
+        <Route path="/ai-risk-detector" element={<AIToolPage />} />
+        <Route path="/ai-compliance-check" element={<AIToolPage />} />
+        <Route path="/ai-duplicate-detector" element={<AIToolPage />} />
+        <Route path="/ai-writing-analyzer" element={<AIToolPage />} />
+        <Route path="/ai-document-classifier" element={<AIToolPage />} />
+        <Route path="/ai-title-generator" element={<AIToolPage />} />
+        <Route path="/ai-summary-slides" element={<AIToolPage />} />
+        <Route path="/ai-data-insights" element={<AIToolPage />} />
+        <Route path="/ai-outline-generator" element={<AIToolPage />} />
+        <Route path="/ai-tone-converter" element={<AIToolPage />} />
+        <Route path="/ai-document-qa" element={<AIToolPage />} />
+        <Route path="/ai-key-takeaways" element={<AIToolPage />} />
+        <Route path="/ai-learning-notes" element={<AIToolPage />} />
+        <Route path="/ai-flashcard-generator" element={<AIToolPage />} />
+        <Route path="/ai-concept-explainer" element={<AIToolPage />} />
+        <Route path="/ai-abstract-generator" element={<AIToolPage />} />
+        <Route path="/ai-headline-generator" element={<AIToolPage />} />
+        <Route path="/ai-highlight-important-parts" element={<AIToolPage />} />
+        <Route path="/ai-topic-detector" element={<AIToolPage />} />
+        <Route path="/ai-document-similarity" element={<AIToolPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

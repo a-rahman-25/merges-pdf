@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Combine } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';

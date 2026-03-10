@@ -145,6 +145,59 @@ export async function addTextWatermark(
   return pdf.save();
 }
 
+export async function reorderPages(
+  file: File,
+  newOrder: number[]
+): Promise<Uint8Array> {
+  const buffer = await file.arrayBuffer();
+  const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
+  const newPdf = await PDFDocument.create();
+  const validOrder = newOrder.filter(i => i >= 0 && i < pdf.getPageCount());
+  const pages = await newPdf.copyPages(pdf, validOrder);
+  pages.forEach(page => newPdf.addPage(page));
+  return newPdf.save();
+}
+
+export async function addPageNumbers(
+  file: File,
+  options: { position?: 'bottom' | 'top'; fontSize?: number; startNumber?: number } = {}
+): Promise<Uint8Array> {
+  const { position = 'bottom', fontSize = 12, startNumber = 1 } = options;
+  const buffer = await file.arrayBuffer();
+  const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
+  const pages = pdf.getPages();
+
+  for (let i = 0; i < pages.length; i++) {
+    const page = pages[i];
+    const { width, height } = page.getSize();
+    const text = `${startNumber + i}`;
+    const y = position === 'bottom' ? 20 : height - 30;
+    page.drawText(text, {
+      x: width / 2 - (text.length * fontSize * 0.25),
+      y,
+      size: fontSize,
+      opacity: 0.7,
+    });
+  }
+
+  return pdf.save();
+}
+
+export async function flattenPDF(file: File): Promise<Uint8Array> {
+  const buffer = await file.arrayBuffer();
+  const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
+  const newDoc = await PDFDocument.create();
+  const pages = await newDoc.copyPages(srcDoc, srcDoc.getPageIndices());
+  pages.forEach(page => newDoc.addPage(page));
+  newDoc.setTitle('');
+  newDoc.setAuthor('');
+  newDoc.setSubject('');
+  newDoc.setKeywords([]);
+  newDoc.setProducer('MergesPDF');
+  newDoc.setCreator('MergesPDF');
+  return newDoc.save();
+}
+
 export function formatFileSize(bytes: number): string {
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';

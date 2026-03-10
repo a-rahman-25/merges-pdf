@@ -13,7 +13,7 @@ interface SEOHeadProps {
   jsonLd?: Record<string, unknown>;
 }
 
-const BASE_URL = 'https://mergepdf.st';
+const BASE_URL = 'https://mergespdf.com';
 
 const OG_IMAGE_MAP: Record<string, string> = {
   '/': '/og/og-default.png',

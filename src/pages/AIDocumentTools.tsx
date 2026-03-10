@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Combine } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import ThemeToggle from '@/components/ThemeToggle';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 import { aiTools, aiToolCategories } from '@/lib/ai-tools-config';
 import { useState } from 'react';
 

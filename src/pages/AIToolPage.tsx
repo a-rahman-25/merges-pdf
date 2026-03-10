@@ -9,8 +9,9 @@ import { getToolBySlug } from '@/lib/ai-tools-config';
 import NotFound from '@/pages/NotFound';
 
 const AIToolPage = () => {
-  const { slug } = useParams<{ slug: string }>();
-  const tool = slug ? getToolBySlug(slug) : undefined;
+  const location = useLocation();
+  const slug = location.pathname.slice(1); // remove leading /
+  const tool = getToolBySlug(slug);
 
   if (!tool) return <NotFound />;
 

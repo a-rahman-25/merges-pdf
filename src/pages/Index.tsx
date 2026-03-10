@@ -32,6 +32,7 @@ const tools = [
   { icon: MessageSquare, title: 'AI Q&A', desc: 'Ask questions about your PDF and get AI-powered answers.', path: '/ai-qa', color: 'bg-tool-blue/15 text-tool-blue' },
   { icon: Layers, title: 'Batch Process', desc: 'Process multiple PDFs at once — batch merge or compress.', path: '/batch', color: 'bg-tool-amber/15 text-tool-amber' },
   { icon: Code, title: 'XML to PDF/Word', desc: 'Parse XML files and convert to formatted PDF or Word documents.', path: '/convert', color: 'bg-tool-lime/15 text-tool-lime' },
+  { icon: Brain, title: 'AI Document Tools', desc: '40 AI-powered tools: extract, analyze, generate & transform docs.', path: '/ai-document-tools', color: 'bg-tool-pink/15 text-tool-pink' },
 ];
 
 const steps = [

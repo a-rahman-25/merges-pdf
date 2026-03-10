@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Combine, Mail, MessageSquare, Clock, CheckCircle } from 'lucide-react';
+import { Mail, MessageSquare, Clock, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import ThemeToggle from '@/components/ThemeToggle';
+import Header from '@/components/Header';
 import SEOHead from '@/components/SEOHead';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';

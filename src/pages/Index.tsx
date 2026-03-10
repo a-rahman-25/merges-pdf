@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import {
   Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser,
   Upload, Cpu, Download, Shield, Zap, Globe, Lock, Layers, FileText,
-  Code, ChevronRight, Star, MessageSquare, Droplets, Trash2, FileOutput, Brain, Languages, Palette
+  Code, ChevronRight, Star, MessageSquare, Droplets, Trash2, FileOutput, Brain, Languages, Palette, Hash, Unlock
 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import SEOHead from '@/components/SEOHead';

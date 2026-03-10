@@ -3,6 +3,7 @@ import { Combine, ChevronRight, Calendar, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import SEOHead from '@/components/SEOHead';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
 interface BlogArticle {

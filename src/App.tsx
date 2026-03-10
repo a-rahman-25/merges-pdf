@@ -124,7 +124,7 @@ const AnimatedRoutes = () => {
         <Route path="/ai-document-similarity" element={<AIToolPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </AnimatePresence>
+    </>
   );
 };
 

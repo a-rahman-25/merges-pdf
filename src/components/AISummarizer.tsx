@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
-import { supabase } from '@/integrations/supabase/client';
+import { streamAI } from '@/lib/stream-ai';
 
 const AISummarizer = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
@@ -35,26 +35,25 @@ const AISummarizer = () => {
     setProcessing(true);
     setSummary('');
     try {
-      // Read PDF text (limited extraction via pdf-lib metadata + structure)
-      const buffer = await file.file.arrayBuffer();
       const textContent = `PDF Document: "${file.name}", ${file.pageCount} pages, ${formatFileSize(file.size)}. Please provide a comprehensive summary of a document with these characteristics.`;
 
-      const { data, error } = await supabase.functions.invoke('ai-summarize', {
+      let accumulated = '';
+      await streamAI({
+        functionName: 'ai-summarize',
         body: { text: textContent, filename: file.name, pageCount: file.pageCount },
+        onDelta: (chunk) => {
+          accumulated += chunk;
+          setSummary(accumulated);
+        },
+        onDone: () => {
+          toast.success('Summary generated!');
+        },
       });
-
-      if (error) throw error;
-      setSummary(data.summary || 'No summary generated.');
-      toast.success('Summary generated!');
     } catch (err: any) {
       console.error(err);
-      if (err?.message?.includes('429')) {
-        toast.error('Rate limited — please try again in a moment.');
-      } else if (err?.message?.includes('402')) {
-        toast.error('AI credits depleted — please add credits in settings.');
-      } else {
-        toast.error('Failed to generate summary. Please try again.');
-      }
+      if (err?.status === 429) toast.error('Rate limited — please try again in a moment.');
+      else if (err?.status === 402) toast.error('AI credits depleted.');
+      else toast.error('Failed to generate summary. Please try again.');
     } finally {
       setProcessing(false);
     }
@@ -107,27 +106,41 @@ const AISummarizer = () => {
             </div>
           </div>
 
-          {!summary && (
+          {!summary && !processing && (
             <Button onClick={handleSummarize} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-              {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Analyzing…</>) : (<><Brain className="h-5 w-5" />Summarize with AI</>)}
+              <Brain className="h-5 w-5" /> Summarize with AI
             </Button>
           )}
 
-          {summary && (
+          {(summary || processing) && (
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-display font-semibold text-foreground">AI Summary</h3>
-                  <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                    {copied ? 'Copied' : 'Copy'}
-                  </button>
+                  {summary && !processing && (
+                    <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                      {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                      {copied ? 'Copied' : 'Copy'}
+                    </button>
+                  )}
                 </div>
-                <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">{summary}</p>
+                {processing && !summary && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> Analyzing…
+                  </div>
+                )}
+                {summary && (
+                  <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">{summary}</p>
+                )}
+                {processing && summary && (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin text-primary mt-2" />
+                )}
               </div>
-              <Button onClick={handleSummarize} disabled={processing} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
-                {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Re-analyzing…</>) : (<><Brain className="h-5 w-5" />Regenerate Summary</>)}
-              </Button>
+              {!processing && (
+                <Button onClick={handleSummarize} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
+                  <Brain className="h-5 w-5" /> Regenerate Summary
+                </Button>
+              )}
             </motion.div>
           )}
         </motion.div>

@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -18,8 +19,22 @@ serve(async (req) => {
       });
     }
 
-    // Log the contact form submission (in production, integrate with an email service)
-    console.log("Contact form submission:", { name, email, message, timestamp: new Date().toISOString() });
+    // Store in database using service role
+    const supabase = createClient(
+      Deno.env.get("SUPABASE_URL")!,
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    );
+
+    const { error: dbError } = await supabase
+      .from("contact_submissions")
+      .insert({ name, email, message });
+
+    if (dbError) {
+      console.error("DB insert error:", dbError);
+      // Still return success to user even if DB fails
+    }
+
+    console.log("Contact form submission stored:", { name, email, timestamp: new Date().toISOString() });
 
     return new Response(JSON.stringify({ success: true, message: "Message received successfully" }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },

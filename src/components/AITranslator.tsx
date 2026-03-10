@@ -6,24 +6,14 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
-import { supabase } from '@/integrations/supabase/client';
+import { streamAI } from '@/lib/stream-ai';
 
 const languages = [
-  { value: 'es', label: 'Spanish' },
-  { value: 'fr', label: 'French' },
-  { value: 'de', label: 'German' },
-  { value: 'it', label: 'Italian' },
-  { value: 'pt', label: 'Portuguese' },
-  { value: 'zh', label: 'Chinese' },
-  { value: 'ja', label: 'Japanese' },
-  { value: 'ko', label: 'Korean' },
-  { value: 'ar', label: 'Arabic' },
-  { value: 'hi', label: 'Hindi' },
-  { value: 'ru', label: 'Russian' },
-  { value: 'tr', label: 'Turkish' },
-  { value: 'nl', label: 'Dutch' },
-  { value: 'sv', label: 'Swedish' },
-  { value: 'pl', label: 'Polish' },
+  { value: 'es', label: 'Spanish' }, { value: 'fr', label: 'French' }, { value: 'de', label: 'German' },
+  { value: 'it', label: 'Italian' }, { value: 'pt', label: 'Portuguese' }, { value: 'zh', label: 'Chinese' },
+  { value: 'ja', label: 'Japanese' }, { value: 'ko', label: 'Korean' }, { value: 'ar', label: 'Arabic' },
+  { value: 'hi', label: 'Hindi' }, { value: 'ru', label: 'Russian' }, { value: 'tr', label: 'Turkish' },
+  { value: 'nl', label: 'Dutch' }, { value: 'sv', label: 'Swedish' }, { value: 'pl', label: 'Polish' },
 ];
 
 const AITranslator = () => {
@@ -54,16 +44,22 @@ const AITranslator = () => {
     setTranslation('');
     try {
       const langLabel = languages.find(l => l.value === targetLang)?.label || targetLang;
-      const { data, error } = await supabase.functions.invoke('ai-translate', {
+      let accumulated = '';
+      await streamAI({
+        functionName: 'ai-translate',
         body: { filename: file.name, pageCount: file.pageCount, targetLanguage: langLabel },
+        onDelta: (chunk) => {
+          accumulated += chunk;
+          setTranslation(accumulated);
+        },
+        onDone: () => {
+          toast.success('Translation complete!');
+        },
       });
-      if (error) throw error;
-      setTranslation(data.translation || 'No translation generated.');
-      toast.success('Translation complete!');
     } catch (err: any) {
       console.error(err);
-      if (err?.message?.includes('429')) toast.error('Rate limited — please try again shortly.');
-      else if (err?.message?.includes('402')) toast.error('AI credits depleted.');
+      if (err?.status === 429) toast.error('Rate limited — please try again shortly.');
+      else if (err?.status === 402) toast.error('AI credits depleted.');
       else toast.error('Failed to translate. Please try again.');
     } finally {
       setProcessing(false);
@@ -114,7 +110,7 @@ const AITranslator = () => {
             </div>
           </div>
 
-          {!translation && (
+          {!translation && !processing && (
             <div className="space-y-3">
               <label className="text-sm font-medium text-foreground">Translate to:</label>
               <Select value={targetLang} onValueChange={setTargetLang}>
@@ -126,27 +122,41 @@ const AITranslator = () => {
             </div>
           )}
 
-          {!translation && (
+          {!translation && !processing && (
             <Button onClick={handleTranslate} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-              {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Translating…</>) : (<><Languages className="h-5 w-5" />Translate with AI</>)}
+              <Languages className="h-5 w-5" /> Translate with AI
             </Button>
           )}
 
-          {translation && (
+          {(translation || processing) && (
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="font-display font-semibold text-foreground">Translation</h3>
-                  <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                    {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                    {copied ? 'Copied' : 'Copy'}
-                  </button>
+                  {translation && !processing && (
+                    <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
+                      {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                      {copied ? 'Copied' : 'Copy'}
+                    </button>
+                  )}
                 </div>
-                <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">{translation}</p>
+                {processing && !translation && (
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> Translating…
+                  </div>
+                )}
+                {translation && (
+                  <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">{translation}</p>
+                )}
+                {processing && translation && (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin text-primary mt-2" />
+                )}
               </div>
-              <Button onClick={handleTranslate} disabled={processing} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
-                <Languages className="h-5 w-5" /> Retranslate
-              </Button>
+              {!processing && (
+                <Button onClick={handleTranslate} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
+                  <Languages className="h-5 w-5" /> Retranslate
+                </Button>
+              )}
             </motion.div>
           )}
         </motion.div>

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
-import { supabase } from '@/integrations/supabase/client';
+import { streamAI } from '@/lib/stream-ai';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -37,24 +37,38 @@ const AIQandA = () => {
   const handleAsk = async () => {
     if (!file || !question.trim()) return;
     const userMsg: Message = { role: 'user', content: question };
-    setMessages(prev => [...prev, userMsg]);
+    const updatedMessages = [...messages, userMsg];
+    setMessages(updatedMessages);
     setQuestion('');
     setLoading(true);
+
+    let assistantSoFar = '';
+
     try {
-      const { data, error } = await supabase.functions.invoke('ai-qa', {
+      await streamAI({
+        functionName: 'ai-qa',
         body: {
           filename: file.name,
           pageCount: file.pageCount,
           question: userMsg.content,
           history: messages.slice(-6),
         },
+        onDelta: (chunk) => {
+          assistantSoFar += chunk;
+          setMessages(prev => {
+            const last = prev[prev.length - 1];
+            if (last?.role === 'assistant') {
+              return prev.map((m, i) => i === prev.length - 1 ? { ...m, content: assistantSoFar } : m);
+            }
+            return [...prev, { role: 'assistant', content: assistantSoFar }];
+          });
+        },
+        onDone: () => {},
       });
-      if (error) throw error;
-      setMessages(prev => [...prev, { role: 'assistant', content: data.answer || 'No answer generated.' }]);
     } catch (err: any) {
       console.error(err);
-      if (err?.message?.includes('429')) toast.error('Rate limited — please wait.');
-      else if (err?.message?.includes('402')) toast.error('AI credits depleted.');
+      if (err?.status === 429) toast.error('Rate limited — please wait.');
+      else if (err?.status === 402) toast.error('AI credits depleted.');
       else toast.error('Failed to get answer.');
     } finally {
       setLoading(false);
@@ -98,7 +112,6 @@ const AIQandA = () => {
             </div>
           </div>
 
-          {/* Chat messages */}
           {messages.length > 0 && (
             <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
               {messages.map((msg, i) => (
@@ -107,7 +120,7 @@ const AIQandA = () => {
                   <p className="text-sm text-foreground whitespace-pre-wrap">{msg.content}</p>
                 </div>
               ))}
-              {loading && (
+              {loading && messages[messages.length - 1]?.role !== 'assistant' && (
                 <div className="bg-card border border-border rounded-xl p-4 mr-8">
                   <p className="text-xs font-semibold text-muted-foreground mb-1">AI</p>
                   <Loader2 className="h-4 w-4 animate-spin text-primary" />
@@ -116,7 +129,6 @@ const AIQandA = () => {
             </div>
           )}
 
-          {/* Input */}
           <div className="flex gap-2">
             <Input
               value={question}

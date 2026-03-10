@@ -42,4 +42,46 @@
   <url><loc>https://mergespdf.com/tools/pdf-to-jpg-converter</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://mergespdf.com/privacy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://mergespdf.com/terms</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <!-- AI Document Intelligence Tools -->
+  <url><loc>https://mergespdf.com/ai-document-tools</loc><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://mergespdf.com/ai-document-map</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-document-timeline</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-keyword-extractor</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-idea-generator-from-document</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-report-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-policy-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-presentation-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/compare-documents-ai</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-fact-check-document</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-generate-questions-from-document</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-knowledge-extractor</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-task-extractor</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-email-from-document</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-document-tagger</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-document-rewriter</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-expand-text</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-multi-level-summary</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-action-items</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-knowledge-graph</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-entity-extractor</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-risk-detector</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-compliance-check</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-duplicate-detector</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-writing-analyzer</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-document-classifier</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-title-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-summary-slides</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-data-insights</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-outline-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-tone-converter</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-document-qa</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-key-takeaways</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-learning-notes</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-flashcard-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-concept-explainer</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-abstract-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-headline-generator</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-highlight-important-parts</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-topic-detector</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://mergespdf.com/ai-document-similarity</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>

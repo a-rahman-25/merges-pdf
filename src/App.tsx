@@ -50,7 +50,7 @@ const AnimatedRoutes = () => {
   const location = useLocation();
   usePageTracking();
   return (
-    <AnimatePresence>
+    <>
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Index />} />
         <Route path="/merge" element={<Merge />} />

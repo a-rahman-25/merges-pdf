@@ -15,7 +15,7 @@ import { supabase } from '@/integrations/supabase/client';
 const PDFMerger = () => {
   const [files, setFiles] = useState<PDFFileItem[]>([]);
   const [merging, setMerging] = useState(false);
-  const [mergedBlob, setMergedBlob] = useState<Blob | null>(null);
+  const [mergedBlob, setMergedBlob] = useState<Uint8Array | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
   const [aiSummary, setAiSummary] = useState('');
   const [aiLoading, setAiLoading] = useState(false);

@@ -165,7 +165,7 @@ const PDFMerger = () => {
                 items={[
                   { label: 'Files merged', value: `${files.length}` },
                   { label: 'Total pages', value: `${totalPages}` },
-                  { label: 'Output size', value: formatFileSize(mergedBlob.size) },
+                  { label: 'Output size', value: formatFileSize(mergedBlob.byteLength) },
                   { label: 'File order', value: files.map(f => f.name.replace('.pdf', '')).join(' → ') },
                 ]}
                 aiSummary={aiSummary}

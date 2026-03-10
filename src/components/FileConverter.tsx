@@ -139,11 +139,12 @@ const FileConverter = () => {
       } else if (mode === 'xml-convert') {
         if (xmlFormat === 'pdf') {
           const data = await xmlToPDF(files[0]);
-          blobs.push({ blob: data, filename: `${name}.pdf` });
+          const xmlPdfBlob = new Blob([data], { type: 'application/pdf' });
+          blobs.push({ blob: xmlPdfBlob, filename: `${name}.pdf` });
           summaryItems.push(
             { label: 'Input', value: files[0].name },
             { label: 'Output', value: `${name}.pdf` },
-            { label: 'Output size', value: formatFileSize(data.size) },
+            { label: 'Output size', value: formatFileSize(xmlPdfBlob.size) },
           );
           trackToolUsage('file_converter', 'xml_to_pdf');
         } else {

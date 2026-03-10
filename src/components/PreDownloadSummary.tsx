@@ -25,8 +25,8 @@ const PreDownloadSummary = ({ title, items, aiSummary, aiLoading, onDownload, do
       className="rounded-2xl border border-border bg-card p-6 space-y-5"
     >
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-green-500/10">
-          <CheckCircle2 className="h-5 w-5 text-green-500" />
+        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+          <CheckCircle2 className="h-5 w-5 text-primary" />
         </div>
         <div>
           <h3 className="font-display text-lg font-bold text-foreground">{title}</h3>

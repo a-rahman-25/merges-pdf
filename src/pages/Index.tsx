@@ -10,30 +10,45 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
-const tools = [
-  { icon: Combine, title: 'Merge PDFs', desc: 'Combine multiple PDF files into one document with drag-to-reorder.', path: '/merge', color: 'bg-tool-blue/15 text-tool-blue' },
-  { icon: Scissors, title: 'Split PDFs', desc: 'Split PDFs into individual pages or extract custom page ranges.', path: '/split', color: 'bg-tool-rose/15 text-tool-rose' },
-  { icon: Minimize2, title: 'Compress PDF', desc: 'Reduce file size by stripping metadata and rebuilding structure.', path: '/compress', color: 'bg-tool-emerald/15 text-tool-emerald' },
-  { icon: Palette, title: 'Grayscale PDF', desc: 'Convert color PDFs to grayscale to reduce file size further.', path: '/grayscale', color: 'bg-tool-cyan/15 text-tool-cyan' },
-  { icon: ArrowRightLeft, title: 'Convert Files', desc: 'Convert between PDF, images, and document formats instantly.', path: '/convert', color: 'bg-tool-violet/15 text-tool-violet' },
-  { icon: RotateCw, title: 'Rotate Pages', desc: 'Rotate PDF pages by 90°, 180°, or 270° with a single click.', path: '/rotate', color: 'bg-tool-amber/15 text-tool-amber' },
-  { icon: Trash2, title: 'Delete Pages', desc: 'Remove specific pages from any PDF document.', path: '/delete-pages', color: 'bg-tool-rose/15 text-tool-rose' },
-  { icon: FileOutput, title: 'Extract Pages', desc: 'Pull specific pages from any PDF into a new document.', path: '/extract-pages', color: 'bg-tool-pink/15 text-tool-pink' },
-  { icon: Droplets, title: 'Add Watermark', desc: 'Stamp text watermarks on every page of your PDF.', path: '/add-watermark', color: 'bg-tool-teal/15 text-tool-teal' },
-  { icon: ArrowRightLeft, title: 'PDF to Word', desc: 'Convert PDF documents to editable Word (.docx) files.', path: '/pdf-to-word', color: 'bg-tool-blue/15 text-tool-blue' },
-  { icon: ArrowRightLeft, title: 'Word to PDF', desc: 'Convert Word documents to PDF format.', path: '/word-to-pdf', color: 'bg-tool-indigo/15 text-tool-indigo' },
-  { icon: Eraser, title: 'Remove Background', desc: 'AI-powered background removal — 100% in your browser.', path: '/bg-remover', color: 'bg-tool-cyan/15 text-tool-cyan' },
-  { icon: Droplets, title: 'Remove Watermark', desc: 'Strip watermarks from PDF files — processed locally.', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
-  { icon: Lock, title: 'Encrypt PDF', desc: 'Add password protection to your PDF files.', path: '/encrypt', color: 'bg-tool-indigo/15 text-tool-indigo' },
-  { icon: Unlock, title: 'Unlock PDF', desc: 'Remove print/copy/edit restrictions from PDFs.', path: '/unlock-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
-  { icon: Hash, title: 'Page Numbers', desc: 'Add sequential page numbers to every page of your PDF.', path: '/page-numbers', color: 'bg-tool-amber/15 text-tool-amber' },
-  { icon: Layers, title: 'Flatten PDF', desc: 'Remove form fields, annotations, and layers from PDFs.', path: '/flatten', color: 'bg-tool-teal/15 text-tool-teal' },
-  { icon: Brain, title: 'AI Summarizer', desc: 'Upload a PDF and get an AI-generated summary instantly.', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet' },
-  { icon: Languages, title: 'AI Translator', desc: 'Translate PDF documents into any language with AI.', path: '/ai-translate', color: 'bg-tool-emerald/15 text-tool-emerald' },
-  { icon: MessageSquare, title: 'AI Q&A', desc: 'Ask questions about your PDF and get AI-powered answers.', path: '/ai-qa', color: 'bg-tool-blue/15 text-tool-blue' },
-  { icon: Layers, title: 'Batch Process', desc: 'Process multiple PDFs at once — batch merge or compress.', path: '/batch', color: 'bg-tool-amber/15 text-tool-amber' },
-  { icon: Code, title: 'XML to PDF/Word', desc: 'Parse XML files and convert to formatted PDF or Word documents.', path: '/convert', color: 'bg-tool-lime/15 text-tool-lime' },
-  { icon: Brain, title: 'AI Document Tools', desc: '40 AI-powered tools: extract, analyze, generate & transform docs.', path: '/ai-document-tools', color: 'bg-tool-pink/15 text-tool-pink' },
+const toolCategories = [
+  {
+    label: 'PDF Tools',
+    tools: [
+      { icon: Combine, title: 'Merge PDFs', desc: 'Combine multiple PDF files into one document with drag-to-reorder.', path: '/merge', color: 'bg-tool-blue/15 text-tool-blue' },
+      { icon: Scissors, title: 'Split PDFs', desc: 'Split PDFs into individual pages or extract custom page ranges.', path: '/split', color: 'bg-tool-rose/15 text-tool-rose' },
+      { icon: Minimize2, title: 'Compress PDF', desc: 'Reduce file size by stripping metadata and rebuilding structure.', path: '/compress', color: 'bg-tool-emerald/15 text-tool-emerald' },
+      { icon: Palette, title: 'Grayscale PDF', desc: 'Convert color PDFs to grayscale to reduce file size further.', path: '/grayscale', color: 'bg-tool-cyan/15 text-tool-cyan' },
+      { icon: RotateCw, title: 'Rotate Pages', desc: 'Rotate PDF pages by 90°, 180°, or 270° with a single click.', path: '/rotate', color: 'bg-tool-amber/15 text-tool-amber' },
+      { icon: Trash2, title: 'Delete Pages', desc: 'Remove specific pages from any PDF document.', path: '/delete-pages', color: 'bg-tool-rose/15 text-tool-rose' },
+      { icon: FileOutput, title: 'Extract Pages', desc: 'Pull specific pages from any PDF into a new document.', path: '/extract-pages', color: 'bg-tool-pink/15 text-tool-pink' },
+      { icon: Droplets, title: 'Add Watermark', desc: 'Stamp text watermarks on every page of your PDF.', path: '/add-watermark', color: 'bg-tool-teal/15 text-tool-teal' },
+      { icon: Lock, title: 'Encrypt PDF', desc: 'Add password protection to your PDF files.', path: '/encrypt', color: 'bg-tool-indigo/15 text-tool-indigo' },
+      { icon: Unlock, title: 'Unlock PDF', desc: 'Remove print/copy/edit restrictions from PDFs.', path: '/unlock-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
+      { icon: Hash, title: 'Page Numbers', desc: 'Add sequential page numbers to every page of your PDF.', path: '/page-numbers', color: 'bg-tool-amber/15 text-tool-amber' },
+      { icon: Layers, title: 'Flatten PDF', desc: 'Remove form fields, annotations, and layers from PDFs.', path: '/flatten', color: 'bg-tool-teal/15 text-tool-teal' },
+    ],
+  },
+  {
+    label: 'Converters',
+    tools: [
+      { icon: ArrowRightLeft, title: 'Convert Files', desc: 'Convert between PDF, images, and document formats instantly.', path: '/convert', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: ArrowRightLeft, title: 'PDF to Word', desc: 'Convert PDF documents to editable Word (.docx) files.', path: '/pdf-to-word', color: 'bg-tool-blue/15 text-tool-blue' },
+      { icon: ArrowRightLeft, title: 'Word to PDF', desc: 'Convert Word documents to PDF format.', path: '/word-to-pdf', color: 'bg-tool-indigo/15 text-tool-indigo' },
+      { icon: Code, title: 'XML to PDF/Word', desc: 'Parse XML files and convert to formatted PDF or Word documents.', path: '/convert', color: 'bg-tool-lime/15 text-tool-lime' },
+      { icon: Eraser, title: 'Remove Background', desc: 'AI-powered background removal — 100% in your browser.', path: '/bg-remover', color: 'bg-tool-cyan/15 text-tool-cyan' },
+      { icon: Droplets, title: 'Remove Watermark', desc: 'Strip watermarks from PDF files — processed locally.', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
+    ],
+  },
+  {
+    label: 'AI Tools',
+    tools: [
+      { icon: Brain, title: 'AI Summarizer', desc: 'Upload a PDF and get an AI-generated summary instantly.', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: Languages, title: 'AI Translator', desc: 'Translate PDF documents into any language with AI.', path: '/ai-translate', color: 'bg-tool-emerald/15 text-tool-emerald' },
+      { icon: MessageSquare, title: 'AI Q&A', desc: 'Ask questions about your PDF and get AI-powered answers.', path: '/ai-qa', color: 'bg-tool-blue/15 text-tool-blue' },
+      { icon: Brain, title: '40+ AI Document Tools', desc: 'Extract, analyze, generate & transform docs with AI.', path: '/ai-document-tools', color: 'bg-tool-pink/15 text-tool-pink' },
+      { icon: Layers, title: 'Batch Process', desc: 'Process multiple PDFs at once — batch merge or compress.', path: '/batch', color: 'bg-tool-amber/15 text-tool-amber' },
+    ],
+  },
 ];
 
 const steps = [

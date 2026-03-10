@@ -34,22 +34,7 @@ const AIToolPage = () => {
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <div className="min-h-screen bg-background">
-        <header className="border-b border-border/60">
-          <div className="mx-auto flex max-w-4xl items-center justify-between px-6 py-4">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
-                <Combine className="h-5 w-5 text-primary-foreground" />
-              </div>
-              <span className="font-display text-xl font-bold text-foreground">MergesPDF</span>
-            </Link>
-            <div className="flex items-center gap-3">
-              <Link to="/ai-document-tools" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                All AI Tools
-              </Link>
-              <ThemeToggle />
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <main className="mx-auto max-w-4xl px-6 py-12 md:py-20">
           <div className="mb-8 text-center">

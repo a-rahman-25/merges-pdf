@@ -130,29 +130,36 @@ const Index = () => (
             Every tool works instantly in your browser — no file ever touches a server.
           </p>
         </motion.div>
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {tools.map((tool, i) => (
-            <motion.div
-              key={tool.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-            >
-              <Link
-                to={tool.path}
-                className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
-              >
-                <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${tool.color}`}>
-                  <tool.icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-display text-lg font-semibold text-foreground">{tool.title}</h3>
-                <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{tool.desc}</p>
-                <span className="mt-4 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                  Try now <ChevronRight className="ml-1 h-4 w-4" />
-                </span>
-              </Link>
-            </motion.div>
+        <div className="mt-12 space-y-12">
+          {toolCategories.map((category) => (
+            <div key={category.label}>
+              <h3 className="font-display text-xl font-bold text-foreground mb-5">{category.label}</h3>
+              <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                {category.tools.map((tool, i) => (
+                  <motion.div
+                    key={tool.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.05 }}
+                  >
+                    <Link
+                      to={tool.path}
+                      className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                    >
+                      <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-xl ${tool.color}`}>
+                        <tool.icon className="h-6 w-6" />
+                      </div>
+                      <h3 className="font-display text-lg font-semibold text-foreground">{tool.title}</h3>
+                      <p className="mt-1.5 flex-1 text-sm text-muted-foreground">{tool.desc}</p>
+                      <span className="mt-4 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                        Try now <ChevronRight className="ml-1 h-4 w-4" />
+                      </span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

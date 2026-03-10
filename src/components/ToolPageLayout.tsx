@@ -4,6 +4,7 @@ import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileTex
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import PrivacyNotice from '@/components/PrivacyNotice';
+import Footer from '@/components/Footer';
 
 type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock';
 
@@ -209,29 +210,7 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
         </motion.div>
       </main>
 
-      <footer className="border-t border-border/60 py-10">
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <Combine className="h-4 w-4 text-primary-foreground" />
-              </div>
-              <span className="font-display text-lg font-bold text-foreground">MergePDF</span>
-            </div>
-            <div className="flex gap-6 text-sm text-muted-foreground">
-              <Link to="/about" className="hover:text-foreground">About</Link>
-              <Link to="/contact" className="hover:text-foreground">Contact</Link>
-              <Link to="/blog" className="hover:text-foreground">Blog</Link>
-            </div>
-          </div>
-          <div className="mt-6 border-t border-border/60 pt-6 text-center text-sm text-muted-foreground">
-            <p>Built with care · No data leaves your device · 100% Free</p>
-            <p className="mt-1">
-              Support: <a href="mailto:merge.pdf.st@gmail.com" className="text-primary hover:underline">merge.pdf.st@gmail.com</a>
-            </p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

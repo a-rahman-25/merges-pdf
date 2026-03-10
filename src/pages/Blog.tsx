@@ -3,6 +3,7 @@ import { Combine, ChevronRight, Calendar, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import ThemeToggle from '@/components/ThemeToggle';
 import SEOHead from '@/components/SEOHead';
+import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 
 interface BlogArticle {
@@ -243,17 +244,7 @@ const BlogArticlePage = ({ article }: { article: BlogArticle }) => (
       </div>
     </motion.main>
 
-    <footer className="border-t border-border/60 py-8">
-      <div className="mx-auto max-w-6xl px-6 text-center text-sm text-muted-foreground">
-        <div className="flex justify-center gap-6 mb-4">
-          <Link to="/" className="hover:text-foreground">Home</Link>
-          <Link to="/blog" className="hover:text-foreground">Blog</Link>
-          <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
-          <Link to="/terms" className="hover:text-foreground">Terms</Link>
-        </div>
-        <p>© {new Date().getFullYear()} MergesPDF.com — All tools free, forever.</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 );
 
@@ -305,17 +296,7 @@ const BlogIndex = () => (
       </motion.div>
     </main>
 
-    <footer className="border-t border-border/60 py-8">
-      <div className="mx-auto max-w-6xl px-6 text-center text-sm text-muted-foreground">
-        <div className="flex justify-center gap-6 mb-4">
-          <Link to="/" className="hover:text-foreground">Home</Link>
-          <Link to="/privacy" className="hover:text-foreground">Privacy</Link>
-          <Link to="/terms" className="hover:text-foreground">Terms</Link>
-          <Link to="/contact" className="hover:text-foreground">Contact</Link>
-        </div>
-        <p>© {new Date().getFullYear()} MergesPDF.com — All tools free, forever.</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 );
 

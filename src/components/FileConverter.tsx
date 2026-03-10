@@ -99,15 +99,16 @@ const FileConverter = () => {
 
       if (mode === 'images-to-pdf') {
         const data = await imagesToPDF(files);
-        blobs.push({ blob: data, filename: `${name}.pdf` });
+        const pdfBlob = new Blob([data], { type: 'application/pdf' });
+        blobs.push({ blob: pdfBlob, filename: `${name}.pdf` });
         summaryItems.push(
           { label: 'Input files', value: `${files.length} images` },
           { label: 'Output', value: `${name}.pdf` },
-          { label: 'Output size', value: formatFileSize(data.size) },
+          { label: 'Output size', value: formatFileSize(pdfBlob.size) },
         );
         trackToolUsage('file_converter', 'images_to_pdf', { file_count: files.length });
         trackFileProcess('file_converter', files.length);
-        fetchAiSummary(`Converted ${files.length} images (${files.map(f => f.name).join(', ')}) into a single PDF document "${name}.pdf" (${formatFileSize(data.size)}).`);
+        fetchAiSummary(`Converted ${files.length} images (${files.map(f => f.name).join(', ')}) into a single PDF document "${name}.pdf" (${formatFileSize(pdfBlob.size)}).`);
       } else if (mode === 'pdf-to-images') {
         const images = await pdfToImages(files[0]);
         for (let i = 0; i < images.length; i++) {

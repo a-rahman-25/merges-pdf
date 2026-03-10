@@ -78,16 +78,7 @@ const PrivacyPolicy = () => (
       </div>
     </motion.main>
 
-    <footer className="border-t border-border/60 py-8">
-      <div className="mx-auto max-w-6xl px-6 text-center text-sm text-muted-foreground">
-        <div className="flex justify-center gap-6 mb-4">
-          <Link to="/" className="hover:text-foreground">Home</Link>
-          <Link to="/terms" className="hover:text-foreground">Terms of Service</Link>
-          <Link to="/contact" className="hover:text-foreground">Contact</Link>
-        </div>
-        <p>© {new Date().getFullYear()} MergesPDF.com — All rights reserved</p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 );
 

@@ -99,7 +99,7 @@ const FileConverter = () => {
 
       if (mode === 'images-to-pdf') {
         const data = await imagesToPDF(files);
-        const pdfBlob = new Blob([data.buffer.slice(data.byteOffset, data.byteOffset + data.byteLength)], { type: 'application/pdf' });
+        const pdfBlob = new Blob([new Uint8Array(data)], { type: 'application/pdf' });
         blobs.push({ blob: pdfBlob, filename: `${name}.pdf` });
         summaryItems.push(
           { label: 'Input files', value: `${files.length} images` },

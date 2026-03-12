@@ -84,6 +84,8 @@ const AnimatedRoutes = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/tools/:slug" element={<SEOLandingRouter />} />
         <Route path="/ai-document-tools" element={<AIDocumentTools />} />
+        <Route path="/image-to-pdf" element={<ImageToPdf />} />
+        <Route path="/reorder-pages" element={<ReorderPages />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

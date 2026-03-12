@@ -47,6 +47,7 @@ const tabGroups: TabGroup[] = [
       { id: 'word-to-pdf', label: 'Word → PDF', icon: ArrowRightLeft, path: '/word-to-pdf' },
       { id: 'bg-remover', label: 'BG Remove', icon: Eraser, path: '/bg-remover' },
       { id: 'watermark-remover', label: 'Remove WM', icon: Layers, path: '/watermark-remover' },
+      { id: 'image-to-pdf', label: 'Image → PDF', icon: ArrowRightLeft, path: '/image-to-pdf' },
     ],
   },
   {

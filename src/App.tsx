@@ -126,6 +126,8 @@ const AnimatedRoutes = () => {
         <Route path="/ai-highlight-important-parts" element={<AIToolPage />} />
         <Route path="/ai-topic-detector" element={<AIToolPage />} />
         <Route path="/ai-document-similarity" element={<AIToolPage />} />
+        <Route path="/ai-contract-analyzer" element={<AIToolPage />} />
+        <Route path="/ai-citation-extractor" element={<AIToolPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

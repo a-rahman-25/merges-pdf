@@ -638,6 +638,39 @@ export const aiTools: AIToolConfig[] = [
       { q: 'How is similarity calculated?', a: 'AI analyzes topic overlap, matching sections, style similarity, and content coverage.' },
     ],
   },
+  {
+    slug: 'ai-contract-analyzer',
+    title: 'AI Contract Analyzer',
+    shortTitle: 'Contract',
+    description: 'Extract key clauses, dates, obligations, and parties from contracts and legal documents.',
+    metaDescription: 'Analyze contracts with AI. Extract clauses, obligations, dates, and parties. Free contract analysis tool.',
+    icon: Scale,
+    color: 'bg-tool-indigo/15 text-tool-indigo',
+    category: 'extraction',
+    systemPrompt: 'You are a legal contract analyst. Analyze the contract/document and extract: 1) Parties Involved, 2) Key Dates & Deadlines, 3) Obligations for each party, 4) Important Clauses (termination, liability, indemnity, confidentiality, IP), 5) Payment Terms, 6) Renewal/Expiration details, 7) Risks & Red Flags. Use clear headings and ⚠️ for risks.',
+    userPromptTemplate: 'Analyze this contract/legal document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
+    faqs: [
+      { q: 'What types of contracts work best?', a: 'Any contract, agreement, or legal document including NDAs, service agreements, employment contracts, and leases.' },
+      { q: 'Should I rely on this for legal advice?', a: 'No. AI analysis is for informational purposes. Always consult a qualified attorney for legal decisions.' },
+      { q: 'What information is extracted?', a: 'Parties, dates, obligations, key clauses, payment terms, risks, and renewal details.' },
+    ],
+  },
+  {
+    slug: 'ai-citation-extractor',
+    title: 'AI Citation Extractor',
+    shortTitle: 'Citations',
+    description: 'Pull references, bibliography, and citations from academic papers and research documents.',
+    metaDescription: 'Extract citations and references from papers with AI. Free bibliography extraction tool online.',
+    icon: BookOpen,
+    color: 'bg-tool-emerald/15 text-tool-emerald',
+    category: 'extraction',
+    systemPrompt: 'You are an academic citation specialist. Extract all references, citations, and bibliography entries from the document. For each: 1) Full citation in APA format, 2) Authors, 3) Year, 4) Title, 5) Source/Journal, 6) DOI/URL if available. Also provide: total citation count, most cited authors, publication year distribution, and citation types breakdown (journal, book, conference, web).',
+    userPromptTemplate: 'Extract all citations and references from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
+    faqs: [
+      { q: 'What citation formats are supported?', a: 'AI can recognize most citation styles and outputs in APA format. It handles in-text citations and bibliography sections.' },
+      { q: 'Does it find in-text citations too?', a: 'Yes, both in-text citations and full bibliography/reference list entries are extracted.' },
+    ],
+  },
 ];
 
 export function getToolBySlug(slug: string): AIToolConfig | undefined {

@@ -26,6 +26,7 @@ const toolCategories = [
       { icon: Unlock, title: 'Unlock PDF', desc: 'Remove print/copy/edit restrictions from PDFs.', path: '/unlock-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
       { icon: Hash, title: 'Page Numbers', desc: 'Add sequential page numbers to every page of your PDF.', path: '/page-numbers', color: 'bg-tool-amber/15 text-tool-amber' },
       { icon: Layers, title: 'Flatten PDF', desc: 'Remove form fields, annotations, and layers from PDFs.', path: '/flatten', color: 'bg-tool-teal/15 text-tool-teal' },
+      { icon: Layers, title: 'Reorder Pages', desc: 'Drag and drop to rearrange pages in your PDF.', path: '/reorder-pages', color: 'bg-tool-violet/15 text-tool-violet' },
     ],
   },
   {

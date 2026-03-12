@@ -37,6 +37,8 @@ const UnlockPdf = lazy(() => import("./pages/UnlockPdf"));
 const SEOLandingRouter = lazy(() => import("./pages/SEOLandingRouter"));
 const AIDocumentTools = lazy(() => import("./pages/AIDocumentTools"));
 const AIToolPage = lazy(() => import("./pages/AIToolPage"));
+const ImageToPdf = lazy(() => import("./pages/ImageToPdf"));
+const ReorderPages = lazy(() => import("./pages/ReorderPages"));
 
 const queryClient = new QueryClient();
 

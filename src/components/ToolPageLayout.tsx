@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
 
-type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock';
+type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages';
 
 interface TabItem {
   id: TabId;
@@ -36,6 +36,7 @@ const tabGroups: TabGroup[] = [
       { id: 'encrypt', label: 'Encrypt', icon: Lock, path: '/encrypt' },
       { id: 'unlock', label: 'Unlock', icon: Unlock, path: '/unlock-pdf' },
       { id: 'flatten', label: 'Flatten', icon: Layers, path: '/flatten' },
+      { id: 'reorder-pages', label: 'Reorder', icon: Layers, path: '/reorder-pages' },
     ],
   },
   {
@@ -46,6 +47,7 @@ const tabGroups: TabGroup[] = [
       { id: 'word-to-pdf', label: 'Word → PDF', icon: ArrowRightLeft, path: '/word-to-pdf' },
       { id: 'bg-remover', label: 'BG Remove', icon: Eraser, path: '/bg-remover' },
       { id: 'watermark-remover', label: 'Remove WM', icon: Layers, path: '/watermark-remover' },
+      { id: 'image-to-pdf', label: 'Image → PDF', icon: ArrowRightLeft, path: '/image-to-pdf' },
     ],
   },
   {

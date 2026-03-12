@@ -26,6 +26,7 @@ const toolCategories = [
       { icon: Unlock, title: 'Unlock PDF', desc: 'Remove print/copy/edit restrictions from PDFs.', path: '/unlock-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
       { icon: Hash, title: 'Page Numbers', desc: 'Add sequential page numbers to every page of your PDF.', path: '/page-numbers', color: 'bg-tool-amber/15 text-tool-amber' },
       { icon: Layers, title: 'Flatten PDF', desc: 'Remove form fields, annotations, and layers from PDFs.', path: '/flatten', color: 'bg-tool-teal/15 text-tool-teal' },
+      { icon: Layers, title: 'Reorder Pages', desc: 'Drag and drop to rearrange pages in your PDF.', path: '/reorder-pages', color: 'bg-tool-violet/15 text-tool-violet' },
     ],
   },
   {
@@ -37,6 +38,7 @@ const toolCategories = [
       { icon: Code, title: 'XML to PDF/Word', desc: 'Parse XML files and convert to formatted PDF or Word documents.', path: '/convert', color: 'bg-tool-lime/15 text-tool-lime' },
       { icon: Eraser, title: 'Remove Background', desc: 'AI-powered background removal — 100% in your browser.', path: '/bg-remover', color: 'bg-tool-cyan/15 text-tool-cyan' },
       { icon: Droplets, title: 'Remove Watermark', desc: 'Strip watermarks from PDF files — processed locally.', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
+      { icon: ArrowRightLeft, title: 'Image to PDF', desc: 'Convert and combine JPG, PNG images into a single PDF.', path: '/image-to-pdf', color: 'bg-tool-pink/15 text-tool-pink' },
     ],
   },
   {

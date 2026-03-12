@@ -37,6 +37,8 @@ const UnlockPdf = lazy(() => import("./pages/UnlockPdf"));
 const SEOLandingRouter = lazy(() => import("./pages/SEOLandingRouter"));
 const AIDocumentTools = lazy(() => import("./pages/AIDocumentTools"));
 const AIToolPage = lazy(() => import("./pages/AIToolPage"));
+const ImageToPdf = lazy(() => import("./pages/ImageToPdf"));
+const ReorderPages = lazy(() => import("./pages/ReorderPages"));
 
 const queryClient = new QueryClient();
 
@@ -82,6 +84,8 @@ const AnimatedRoutes = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/tools/:slug" element={<SEOLandingRouter />} />
         <Route path="/ai-document-tools" element={<AIDocumentTools />} />
+        <Route path="/image-to-pdf" element={<ImageToPdf />} />
+        <Route path="/reorder-pages" element={<ReorderPages />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />
@@ -122,6 +126,8 @@ const AnimatedRoutes = () => {
         <Route path="/ai-highlight-important-parts" element={<AIToolPage />} />
         <Route path="/ai-topic-detector" element={<AIToolPage />} />
         <Route path="/ai-document-similarity" element={<AIToolPage />} />
+        <Route path="/ai-contract-analyzer" element={<AIToolPage />} />
+        <Route path="/ai-citation-extractor" element={<AIToolPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

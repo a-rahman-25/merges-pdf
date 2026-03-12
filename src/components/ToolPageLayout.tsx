@@ -36,6 +36,7 @@ const tabGroups: TabGroup[] = [
       { id: 'encrypt', label: 'Encrypt', icon: Lock, path: '/encrypt' },
       { id: 'unlock', label: 'Unlock', icon: Unlock, path: '/unlock-pdf' },
       { id: 'flatten', label: 'Flatten', icon: Layers, path: '/flatten' },
+      { id: 'reorder-pages', label: 'Reorder', icon: Layers, path: '/reorder-pages' },
     ],
   },
   {

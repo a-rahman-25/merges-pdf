@@ -37,6 +37,9 @@ const tabGroups: TabGroup[] = [
       { id: 'unlock', label: 'Unlock', icon: Unlock, path: '/unlock-pdf' },
       { id: 'flatten', label: 'Flatten', icon: Layers, path: '/flatten' },
       { id: 'reorder-pages', label: 'Reorder', icon: Layers, path: '/reorder-pages' },
+      { id: 'pdf-signature', label: 'Signature', icon: Layers, path: '/pdf-signature' },
+      { id: 'crop-pages', label: 'Crop', icon: Layers, path: '/crop-pages' },
+      { id: 'pdf-metadata', label: 'Metadata', icon: Layers, path: '/pdf-metadata' },
     ],
   },
   {

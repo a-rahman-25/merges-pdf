@@ -89,6 +89,9 @@ const AnimatedRoutes = () => {
         <Route path="/ai-document-tools" element={<AIDocumentTools />} />
         <Route path="/image-to-pdf" element={<ImageToPdf />} />
         <Route path="/reorder-pages" element={<ReorderPages />} />
+        <Route path="/pdf-signature" element={<PdfSignature />} />
+        <Route path="/crop-pages" element={<CropPages />} />
+        <Route path="/pdf-metadata" element={<PdfMetadata />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

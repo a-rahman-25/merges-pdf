@@ -39,6 +39,9 @@ const AIDocumentTools = lazy(() => import("./pages/AIDocumentTools"));
 const AIToolPage = lazy(() => import("./pages/AIToolPage"));
 const ImageToPdf = lazy(() => import("./pages/ImageToPdf"));
 const ReorderPages = lazy(() => import("./pages/ReorderPages"));
+const PdfSignature = lazy(() => import("./pages/PdfSignature"));
+const CropPages = lazy(() => import("./pages/CropPages"));
+const PdfMetadata = lazy(() => import("./pages/PdfMetadata"));
 
 const queryClient = new QueryClient();
 

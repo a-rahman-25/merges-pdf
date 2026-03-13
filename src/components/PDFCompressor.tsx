@@ -1,26 +1,27 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Minimize2, Loader2, Download, RotateCcw, FileText } from 'lucide-react';
+import { Minimize2, Loader2, RotateCcw, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { getPageCount, compressPDF, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const PDFCompressor = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
   const [compressing, setCompressing] = useState(false);
   const [result, setResult] = useState<{ data: Uint8Array; originalSize: number; newSize: number } | null>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    const name = file.name.replace(/\.pdf$/i, '_compressed.pdf');
+    const name = filename || file.name.replace(/\.pdf$/i, '_compressed.pdf');
     downloadBlob(result.data, name);
+    toast.success('Downloaded!');
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(() => doDownload(), 'PDF Compressor');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -84,15 +85,24 @@ const PDFCompressor = () => {
         )}
 
         {file && result && (
-          <PreDownloadSummary
-            title="PDF Compressed"
-            items={[
-              { label: 'Original Size', value: formatFileSize(result.originalSize) },
-              { label: 'Compressed Size', value: formatFileSize(result.newSize) },
-              { label: 'Reduction', value: `${((1 - result.newSize / result.originalSize) * 100).toFixed(1)}%` },
-            ]}
-            onDownload={triggerDownload}
-          />
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result.data}
+              defaultFilename={file.name.replace(/\.pdf$/i, '_compressed.pdf')}
+              onDownload={(filename) => {
+                downloadBlob(result.data, filename);
+                toast.success('Downloaded!');
+              }}
+              summaryItems={[
+                { label: 'Original Size', value: formatFileSize(result.originalSize) },
+                { label: 'Compressed Size', value: formatFileSize(result.newSize) },
+                { label: 'Reduction', value: `${((1 - result.newSize / result.originalSize) * 100).toFixed(1)}%` },
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 

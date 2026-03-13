@@ -27,6 +27,9 @@ const toolCategories = [
       { icon: Hash, title: 'Page Numbers', desc: 'Add sequential page numbers to every page of your PDF.', path: '/page-numbers', color: 'bg-tool-amber/15 text-tool-amber' },
       { icon: Layers, title: 'Flatten PDF', desc: 'Remove form fields, annotations, and layers from PDFs.', path: '/flatten', color: 'bg-tool-teal/15 text-tool-teal' },
       { icon: Layers, title: 'Reorder Pages', desc: 'Drag and drop to rearrange pages in your PDF.', path: '/reorder-pages', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: Lock, title: 'PDF Signature', desc: 'Add a text signature to every page of your PDF.', path: '/pdf-signature', color: 'bg-tool-indigo/15 text-tool-indigo' },
+      { icon: Layers, title: 'Crop Pages', desc: 'Trim margins and crop pages in your PDF.', path: '/crop-pages', color: 'bg-tool-cyan/15 text-tool-cyan' },
+      { icon: FileText, title: 'Edit Metadata', desc: 'View and edit PDF title, author, keywords, and more.', path: '/pdf-metadata', color: 'bg-tool-emerald/15 text-tool-emerald' },
     ],
   },
   {

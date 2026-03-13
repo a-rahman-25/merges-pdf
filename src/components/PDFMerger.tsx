@@ -1,24 +1,21 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Combine, Loader2, Download, RotateCcw } from 'lucide-react';
+import { Combine, Loader2, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
 import { trackToolUsage, trackFileProcess } from '@/lib/analytics';
 import DropZone from '@/components/DropZone';
 import FileListItem from '@/components/FileListItem';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import { Button } from '@/components/ui/button';
 import { PDFFileItem, getPageCount, mergePDFs, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
-import { supabase } from '@/integrations/supabase/client';
 
 const PDFMerger = () => {
   const [files, setFiles] = useState<PDFFileItem[]>([]);
   const [merging, setMerging] = useState(false);
   const [mergedBlob, setMergedBlob] = useState<Uint8Array | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
-  const [aiSummary, setAiSummary] = useState('');
-  const [aiLoading, setAiLoading] = useState(false);
 
   const doDownload = useCallback(() => {
     if (mergedBlob) {
@@ -27,7 +24,7 @@ const PDFMerger = () => {
     }
   }, [mergedBlob]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Merger');
 
   const addFiles = useCallback(async (newFiles: File[]) => {
     const items: PDFFileItem[] = [];
@@ -38,14 +35,12 @@ const PDFMerger = () => {
     }
     setFiles((prev) => [...prev, ...items]);
     setMergedBlob(null);
-    setAiSummary('');
     toast.success(`Added ${items.length} file${items.length > 1 ? 's' : ''}`);
   }, []);
 
   const removeFile = useCallback((id: string) => {
     setFiles((prev) => prev.filter((f) => f.id !== id));
     setMergedBlob(null);
-    setAiSummary('');
   }, []);
 
   const handleDragStart = (index: number) => setDragIndex(index);
@@ -61,38 +56,16 @@ const PDFMerger = () => {
   };
   const handleDragEnd = () => setDragIndex(null);
 
-  const fetchAiSummary = async (fileList: PDFFileItem[], totalPages: number, totalSize: number) => {
-    setAiLoading(true);
-    try {
-      const { data, error } = await supabase.functions.invoke('ai-summarize', {
-        body: {
-          text: `Merged PDF from ${fileList.length} files: ${fileList.map(f => `"${f.name}" (${f.pageCount ?? '?'} pages)`).join(', ')}. Total: ${totalPages} pages, ${formatFileSize(totalSize)}.`,
-          filename: 'merged.pdf',
-          pageCount: totalPages,
-        },
-      });
-      if (error) throw error;
-      setAiSummary(data.summary || 'Merge completed successfully.');
-    } catch {
-      setAiSummary('✅ Your PDFs have been merged successfully in the order shown above. The output file contains all pages from the selected documents.');
-    } finally {
-      setAiLoading(false);
-    }
-  };
-
   const handleMerge = async () => {
     if (files.length < 2) { toast.error('Add at least 2 PDFs to merge'); return; }
     setMerging(true);
-    setAiSummary('');
     try {
       const result = await mergePDFs(files.map((f) => f.file));
       setMergedBlob(result);
       const totalSizeMB = files.reduce((sum, f) => sum + f.size, 0) / (1024 * 1024);
-      const totalPages = files.reduce((sum, f) => sum + (f.pageCount ?? 0), 0);
       trackToolUsage('pdf_merger', 'merge_complete', { file_count: files.length });
       trackFileProcess('pdf_merger', files.length, Math.round(totalSizeMB * 100) / 100);
-      toast.success('PDFs merged! Review below before downloading.');
-      fetchAiSummary(files, totalPages, result.byteLength);
+      toast.success('PDFs merged! Review the preview below.');
     } catch (err) {
       toast.error('Failed to merge PDFs. Contact merge.pdf.st@gmail.com for help.');
       console.error(err);
@@ -101,11 +74,7 @@ const PDFMerger = () => {
     }
   };
 
-  const reset = () => {
-    setFiles([]);
-    setMergedBlob(null);
-    setAiSummary('');
-  };
+  const reset = () => { setFiles([]); setMergedBlob(null); };
 
   const totalPages = files.reduce((sum, f) => sum + (f.pageCount ?? 0), 0);
 
@@ -160,18 +129,24 @@ const PDFMerger = () => {
             )}
 
             {mergedBlob && (
-              <PreDownloadSummary
-                title="Merge Complete"
-                items={[
-                  { label: 'Files merged', value: `${files.length}` },
-                  { label: 'Total pages', value: `${totalPages}` },
-                  { label: 'Output size', value: formatFileSize(mergedBlob.byteLength) },
-                  { label: 'File order', value: files.map(f => f.name.replace('.pdf', '')).join(' → ') },
-                ]}
-                aiSummary={aiSummary}
-                aiLoading={aiLoading}
-                onDownload={triggerDownload}
-              />
+              <div className="space-y-4">
+                <PDFPreviewDownload
+                  pdfData={mergedBlob}
+                  defaultFilename="merged.pdf"
+                  onDownload={(filename) => {
+                    downloadBlob(mergedBlob, filename);
+                    toast.success('Downloaded!');
+                  }}
+                  summaryItems={[
+                    { label: 'Files merged', value: `${files.length}` },
+                    { label: 'Total pages', value: `${totalPages}` },
+                    { label: 'Output size', value: formatFileSize(mergedBlob.byteLength) },
+                  ]}
+                />
+                <div className="flex justify-center">
+                  <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+                </div>
+              </div>
             )}
           </motion.div>
         )}

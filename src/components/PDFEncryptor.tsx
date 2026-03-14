@@ -135,15 +135,26 @@ const PDFEncryptor = () => {
           <p className="text-xs text-center text-muted-foreground">Note: Browser-based PDF encryption has limitations. For maximum security, use a desktop tool.</p>
         </motion.div>
       ) : (
-        <PreDownloadSummary
-          title="PDF Encrypted"
-          items={[
-            { label: 'File', value: file.name },
-            { label: 'Size', value: formatFileSize(result.size) },
-            { label: 'Protection', value: 'Password protected' },
-          ]}
-          onDownload={triggerDownload}
-        />
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+          {(() => {
+            const pdfData = new Uint8Array(result.size);
+            const reader = new FileReader();
+            // For encryptor, result is a Blob - we show summary only since encrypted PDFs may not render in preview
+            return null;
+          })()}
+          <PreDownloadSummaryFallback
+            title="PDF Encrypted"
+            items={[
+              { label: 'File', value: file.name },
+              { label: 'Size', value: formatFileSize(result.size) },
+              { label: 'Protection', value: 'Password protected' },
+            ]}
+            onDownload={triggerDownload}
+          />
+          <div className="flex justify-center">
+            <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+          </div>
+        </motion.div>
       )}
 
       <ReviewDialog open={showReview} toolName="PDF Encryptor" onSubmit={handleSubmit} onSkip={handleSkip} />

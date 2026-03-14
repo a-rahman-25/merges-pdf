@@ -172,15 +172,20 @@ const PDFSplitter = () => {
 
             {/* Range extract — show review summary */}
             {splitDone && splitMode === 'range' && rangeResult && (
-              <PreDownloadSummary
-                title="Pages Extracted"
-                items={[
-                  { label: 'Source', value: file.name },
-                  { label: 'Pages Extracted', value: `${rangeResult.count}` },
-                  { label: 'Output Size', value: formatFileSize(rangeResult.data.length) },
-                ]}
-                onDownload={triggerDownload}
-              />
+              <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+                <PDFPreviewDownload
+                  pdfData={rangeResult.data}
+                  defaultFilename={`${file.name.replace(/\.pdf$/i, '')}_pages_${rangeInput.replace(/\s/g, '')}.pdf`}
+                  onDownload={(filename) => { downloadBlob(rangeResult.data, filename); toast.success('Downloaded!'); }}
+                  summaryItems={[
+                    { label: 'Pages Extracted', value: `${rangeResult.count}` },
+                    { label: 'Output Size', value: formatFileSize(rangeResult.data.length) },
+                  ]}
+                />
+                <div className="flex justify-center">
+                  <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+                </div>
+              </motion.div>
             )}
           </motion.div>
         )}

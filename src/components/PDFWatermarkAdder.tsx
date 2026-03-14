@@ -109,16 +109,21 @@ const PDFWatermarkAdder = () => {
           </Button>
         </motion.div>
       ) : (
-        <PreDownloadSummary
-          title="Watermark Added"
-          items={[
-            { label: 'File', value: file.name },
-            { label: 'Watermark', value: watermarkText },
-            { label: 'Pages', value: file.pageCount !== null ? `${file.pageCount}` : 'All' },
-            { label: 'Output Size', value: formatFileSize(result.length) },
-          ]}
-          onDownload={triggerDownload}
-        />
+        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+          <PDFPreviewDownload
+            pdfData={result}
+            defaultFilename={file.name.replace(/\.pdf$/i, '_watermarked.pdf')}
+            onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+            summaryItems={[
+              { label: 'Watermark', value: watermarkText },
+              { label: 'Pages', value: file.pageCount !== null ? `${file.pageCount}` : 'All' },
+              { label: 'Output Size', value: formatFileSize(result.length) },
+            ]}
+          />
+          <div className="flex justify-center">
+            <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+          </div>
+        </motion.div>
       )}
 
       <ReviewDialog open={showReview} toolName="Watermark Adder" onSubmit={handleSubmit} onSkip={handleSkip} />

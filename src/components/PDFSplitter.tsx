@@ -28,7 +28,7 @@ const PDFSplitter = () => {
     downloadBlob(rangeResult.data, `${baseName}_pages_${rangeInput.replace(/\s/g, '')}.pdf`);
   }, [rangeResult, file, rangeInput]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doRangeDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doRangeDownload, 'PDF Splitter');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];

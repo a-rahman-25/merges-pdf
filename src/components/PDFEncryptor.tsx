@@ -31,7 +31,7 @@ const PDFEncryptor = () => {
     URL.revokeObjectURL(url);
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Encryptor');
 
   const handleFile = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];

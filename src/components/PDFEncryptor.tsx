@@ -9,7 +9,7 @@ import { PDFDocument } from 'pdf-lib';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const PDFEncryptor = () => {
   const [file, setFile] = useState<File | null>(null);

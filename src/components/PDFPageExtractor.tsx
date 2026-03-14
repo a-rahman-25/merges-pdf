@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { getPageCount, extractPages, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const PDFPageExtractor = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -18,11 +18,10 @@ const PDFPageExtractor = () => {
 
   const doDownload = useCallback(() => {
     if (!result || !file) return;
-    const baseName = file.name.replace(/\.pdf$/i, '');
-    downloadBlob(result.data, `${baseName}_extracted.pdf`);
+    downloadBlob(result.data, `${file.name.replace(/\.pdf$/i, '')}_extracted.pdf`);
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Page Extractor');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -102,15 +101,20 @@ const PDFPageExtractor = () => {
         )}
 
         {file && result && (
-          <PreDownloadSummary
-            title="Pages Extracted"
-            items={[
-              { label: 'Source File', value: file.name },
-              { label: 'Pages Extracted', value: `${result.extractedCount}` },
-              { label: 'Output Size', value: formatFileSize(result.data.length) },
-            ]}
-            onDownload={triggerDownload}
-          />
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result.data}
+              defaultFilename={file.name.replace(/\.pdf$/i, '_extracted.pdf')}
+              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              summaryItems={[
+                { label: 'Pages Extracted', value: `${result.extractedCount}` },
+                { label: 'Output Size', value: formatFileSize(result.data.length) },
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 

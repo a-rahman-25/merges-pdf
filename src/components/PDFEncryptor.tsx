@@ -136,21 +136,34 @@ const PDFEncryptor = () => {
         </motion.div>
       ) : (
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
-          {(() => {
-            const pdfData = new Uint8Array(result.size);
-            const reader = new FileReader();
-            // For encryptor, result is a Blob - we show summary only since encrypted PDFs may not render in preview
-            return null;
-          })()}
-          <PreDownloadSummaryFallback
-            title="PDF Encrypted"
-            items={[
-              { label: 'File', value: file.name },
-              { label: 'Size', value: formatFileSize(result.size) },
-              { label: 'Protection', value: 'Password protected' },
-            ]}
-            onDownload={triggerDownload}
-          />
+          <div className="rounded-2xl border border-border bg-card p-6 space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                <Lock className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display text-lg font-bold text-foreground">PDF Encrypted</h3>
+                <p className="text-sm text-muted-foreground">Ready to download</p>
+              </div>
+            </div>
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between rounded-lg bg-accent/50 px-3 py-2">
+                <span className="text-xs text-muted-foreground">File</span>
+                <span className="text-xs font-medium text-foreground">{file.name}</span>
+              </div>
+              <div className="flex items-center justify-between rounded-lg bg-accent/50 px-3 py-2">
+                <span className="text-xs text-muted-foreground">Size</span>
+                <span className="text-xs font-medium text-foreground">{formatFileSize(result.size)}</span>
+              </div>
+              <div className="flex items-center justify-between rounded-lg bg-accent/50 px-3 py-2">
+                <span className="text-xs text-muted-foreground">Protection</span>
+                <span className="text-xs font-medium text-foreground">Password protected</span>
+              </div>
+            </div>
+            <Button onClick={triggerDownload} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
+              <Download className="h-5 w-5" /> Download Encrypted PDF
+            </Button>
+          </div>
           <div className="flex justify-center">
             <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
           </div>

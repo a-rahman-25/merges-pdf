@@ -5,6 +5,9 @@ import { toast } from 'sonner';
 import { PDFDocument } from 'pdf-lib';
 import { Button } from '@/components/ui/button';
 import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import ReviewDialog from '@/components/ReviewDialog';
+import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 
 interface ImageFile {
   file: File;
@@ -20,6 +23,12 @@ const ImageToPDF = () => {
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  const doDownload = useCallback(() => {
+    if (result) downloadBlob(result.data, 'images-combined.pdf');
+  }, [result]);
+
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Image to PDF');
 
   const addFiles = useCallback((newFiles: File[]) => {
     const imageFiles = newFiles.filter(f => /\.(jpe?g|png|webp)$/i.test(f.name));
@@ -92,73 +101,80 @@ const ImageToPDF = () => {
   };
 
   return (
-    <AnimatePresence mode="wait">
-      {result ? (
-        <motion.div key="result" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
-          <div className="rounded-xl border border-border bg-card p-6 text-center">
-            <p className="text-lg font-semibold text-foreground">PDF Created Successfully!</p>
-            <p className="mt-1 text-sm text-muted-foreground">{result.pageCount} page(s) · {formatFileSize(result.data.length)}</p>
-          </div>
-          <div className="flex justify-center gap-3">
-            <Button onClick={() => downloadBlob(result.data, 'images-combined.pdf')} size="lg" className="rounded-xl px-8">Download PDF</Button>
-            <Button onClick={reset} variant="outline" size="lg" className="rounded-xl px-8">
-              <RotateCcw className="mr-2 h-4 w-4" /> Start Over
-            </Button>
-          </div>
-        </motion.div>
-      ) : images.length === 0 ? (
-        <motion.div key="drop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-          <div
-            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-            onDragLeave={() => setDragOver(false)}
-            onDrop={(e) => { e.preventDefault(); setDragOver(false); addFiles(Array.from(e.dataTransfer.files)); }}
-            onClick={() => inputRef.current?.click()}
-            className={`cursor-pointer rounded-2xl border-2 border-dashed p-12 text-center transition-all ${dragOver ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}`}
-          >
-            <FileUp className="mx-auto h-10 w-10 text-muted-foreground" />
-            <p className="mt-4 text-lg font-medium text-foreground">Drop JPG, PNG, or WEBP images here</p>
-            <p className="mt-1 text-sm text-muted-foreground">or click to browse</p>
-          </div>
-          <input ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" onChange={(e) => { if (e.target.files) addFiles(Array.from(e.target.files)); e.target.value = ''; }} />
-        </motion.div>
-      ) : (
-        <motion.div key="editor" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-            {images.map((img, i) => (
-              <div
-                key={img.preview}
-                draggable
-                onDragStart={() => handleDragStart(i)}
-                onDragOver={(e) => handleDragOver(e, i)}
-                onDragEnd={handleDragEnd}
-                className={`relative group rounded-xl border border-border bg-card overflow-hidden cursor-grab ${dragIdx === i ? 'opacity-50' : ''}`}
-              >
-                <img src={img.preview} alt={img.name} className="w-full h-32 object-cover" />
-                <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <GripVertical className="h-4 w-4 text-muted-foreground" />
+    <div className="mx-auto w-full max-w-2xl">
+      <AnimatePresence mode="wait">
+        {result ? (
+          <motion.div key="result" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result.data}
+              defaultFilename="images-combined.pdf"
+              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              summaryItems={[
+                { label: 'Pages', value: `${result.pageCount}` },
+                { label: 'Output Size', value: formatFileSize(result.data.length) },
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" size="lg" className="rounded-xl px-8">
+                <RotateCcw className="mr-2 h-4 w-4" /> Start Over
+              </Button>
+            </div>
+          </motion.div>
+        ) : images.length === 0 ? (
+          <motion.div key="drop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <div
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onDrop={(e) => { e.preventDefault(); setDragOver(false); addFiles(Array.from(e.dataTransfer.files)); }}
+              onClick={() => inputRef.current?.click()}
+              className={`cursor-pointer rounded-2xl border-2 border-dashed p-12 text-center transition-all ${dragOver ? 'border-primary bg-primary/5' : 'border-border hover:border-primary/50'}`}
+            >
+              <FileUp className="mx-auto h-10 w-10 text-muted-foreground" />
+              <p className="mt-4 text-lg font-medium text-foreground">Drop JPG, PNG, or WEBP images here</p>
+              <p className="mt-1 text-sm text-muted-foreground">or click to browse</p>
+            </div>
+            <input ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" onChange={(e) => { if (e.target.files) addFiles(Array.from(e.target.files)); e.target.value = ''; }} />
+          </motion.div>
+        ) : (
+          <motion.div key="editor" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+              {images.map((img, i) => (
+                <div
+                  key={img.preview}
+                  draggable
+                  onDragStart={() => handleDragStart(i)}
+                  onDragOver={(e) => handleDragOver(e, i)}
+                  onDragEnd={handleDragEnd}
+                  className={`relative group rounded-xl border border-border bg-card overflow-hidden cursor-grab ${dragIdx === i ? 'opacity-50' : ''}`}
+                >
+                  <img src={img.preview} alt={img.name} className="w-full h-32 object-cover" />
+                  <div className="absolute top-1 left-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <GripVertical className="h-4 w-4 text-muted-foreground" />
+                  </div>
+                  <button onClick={() => removeImage(i)} className="absolute top-1 right-1 p-1 rounded-full bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <X className="h-3 w-3 text-foreground" />
+                  </button>
+                  <div className="p-2">
+                    <p className="text-xs text-muted-foreground truncate">{img.name}</p>
+                    <p className="text-xs text-muted-foreground">{formatFileSize(img.size)}</p>
+                  </div>
                 </div>
-                <button onClick={() => removeImage(i)} className="absolute top-1 right-1 p-1 rounded-full bg-background/80 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <X className="h-3 w-3 text-foreground" />
-                </button>
-                <div className="p-2">
-                  <p className="text-xs text-muted-foreground truncate">{img.name}</p>
-                  <p className="text-xs text-muted-foreground">{formatFileSize(img.size)}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-center gap-3">
-            <Button onClick={() => inputRef.current?.click()} variant="outline" className="rounded-xl">
-              Add More Images
-            </Button>
-            <Button onClick={convert} disabled={processing} className="rounded-xl px-8">
-              {processing ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Converting…</> : `Convert ${images.length} Image(s) to PDF`}
-            </Button>
-          </div>
-          <input ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" onChange={(e) => { if (e.target.files) addFiles(Array.from(e.target.files)); e.target.value = ''; }} />
-        </motion.div>
-      )}
-    </AnimatePresence>
+              ))}
+            </div>
+            <div className="flex justify-center gap-3">
+              <Button onClick={() => inputRef.current?.click()} variant="outline" className="rounded-xl">
+                Add More Images
+              </Button>
+              <Button onClick={convert} disabled={processing} className="rounded-xl px-8">
+                {processing ? <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Converting…</> : `Convert ${images.length} Image(s) to PDF`}
+              </Button>
+            </div>
+            <input ref={inputRef} type="file" accept="image/jpeg,image/png,image/webp" multiple className="hidden" onChange={(e) => { if (e.target.files) addFiles(Array.from(e.target.files)); e.target.value = ''; }} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <ReviewDialog open={showReview} toolName="Image to PDF" onSubmit={handleSubmit} onSkip={handleSkip} />
+    </div>
   );
 };
 

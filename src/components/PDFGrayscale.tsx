@@ -9,7 +9,7 @@ import { PDFDocument, grayscale } from 'pdf-lib';
 import { trackToolUsage, trackFileProcess } from '@/lib/analytics';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 async function convertToGrayscale(file: File): Promise<Uint8Array> {
   const arrayBuffer = await file.arrayBuffer();
@@ -31,11 +31,10 @@ const PDFGrayscale = () => {
 
   const doDownload = useCallback(() => {
     if (!result || !file) return;
-    const name = file.name.replace(/\.pdf$/i, '_grayscale.pdf');
-    downloadBlob(result.data, name);
+    downloadBlob(result.data, file.name.replace(/\.pdf$/i, '_grayscale.pdf'));
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Grayscale Converter');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -100,16 +99,21 @@ const PDFGrayscale = () => {
         )}
 
         {file && result && (
-          <PreDownloadSummary
-            title="Converted to Grayscale"
-            items={[
-              { label: 'File', value: file.name },
-              { label: 'Original Size', value: formatFileSize(result.originalSize) },
-              { label: 'Output Size', value: formatFileSize(result.newSize) },
-              ...(result.newSize < result.originalSize ? [{ label: 'Reduction', value: `${((1 - result.newSize / result.originalSize) * 100).toFixed(1)}%` }] : []),
-            ]}
-            onDownload={triggerDownload}
-          />
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result.data}
+              defaultFilename={file.name.replace(/\.pdf$/i, '_grayscale.pdf')}
+              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              summaryItems={[
+                { label: 'Original Size', value: formatFileSize(result.originalSize) },
+                { label: 'Output Size', value: formatFileSize(result.newSize) },
+                ...(result.newSize < result.originalSize ? [{ label: 'Reduction', value: `${((1 - result.newSize / result.originalSize) * 100).toFixed(1)}%` }] : []),
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 

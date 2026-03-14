@@ -8,7 +8,7 @@ import { getPageCount, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib
 import { PDFDocument } from 'pdf-lib';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const PDFUnlocker = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -20,7 +20,7 @@ const PDFUnlocker = () => {
     downloadBlob(result, file.name.replace(/\.pdf$/i, '_unlocked.pdf'));
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Unlocker');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -87,11 +87,20 @@ const PDFUnlocker = () => {
           </motion.div>
         )}
         {file && result && (
-          <PreDownloadSummary title="PDF Unlocked" items={[
-            { label: 'File', value: file.name },
-            { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'Unknown' },
-            { label: 'Output Size', value: formatFileSize(result.length) },
-          ]} onDownload={triggerDownload} />
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result}
+              defaultFilename={file.name.replace(/\.pdf$/i, '_unlocked.pdf')}
+              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              summaryItems={[
+                { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'Unknown' },
+                { label: 'Output Size', value: formatFileSize(result.length) },
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
       <ReviewDialog open={showReview} toolName="PDF Unlocker" onSubmit={handleSubmit} onSkip={handleSkip} />

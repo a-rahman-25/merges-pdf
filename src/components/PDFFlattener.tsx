@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { getPageCount, flattenPDF, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const PDFFlattener = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -19,7 +19,7 @@ const PDFFlattener = () => {
     downloadBlob(result.data, file.name.replace(/\.pdf$/i, '_flattened.pdf'));
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Flattener');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -79,11 +79,20 @@ const PDFFlattener = () => {
           </motion.div>
         )}
         {file && result && (
-          <PreDownloadSummary title="PDF Flattened" items={[
-            { label: 'File', value: file.name },
-            { label: 'Original Size', value: formatFileSize(result.originalSize) },
-            { label: 'Output Size', value: formatFileSize(result.data.length) },
-          ]} onDownload={triggerDownload} />
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result.data}
+              defaultFilename={file.name.replace(/\.pdf$/i, '_flattened.pdf')}
+              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              summaryItems={[
+                { label: 'Original Size', value: formatFileSize(result.originalSize) },
+                { label: 'Output Size', value: formatFileSize(result.data.length) },
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
       <ReviewDialog open={showReview} toolName="PDF Flattener" onSubmit={handleSubmit} onSkip={handleSkip} />

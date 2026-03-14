@@ -8,7 +8,7 @@ import { Slider } from '@/components/ui/slider';
 import { getPageCount, addTextWatermark, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const PDFWatermarkAdder = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);

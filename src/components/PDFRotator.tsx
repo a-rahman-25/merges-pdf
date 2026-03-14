@@ -1,13 +1,13 @@
 import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RotateCw, Loader2, Download, RotateCcw, FileText } from 'lucide-react';
+import { RotateCw, Loader2, RotateCcw, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { getPageCount, rotatePDFPages, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const rotations = [
   { value: 90 as const, label: '90°' },
@@ -27,7 +27,7 @@ const PDFRotator = () => {
     downloadBlob(result, name);
   }, [result, file, rotation]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Rotator');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -101,16 +101,21 @@ const PDFRotator = () => {
         )}
 
         {file && result && (
-          <PreDownloadSummary
-            title="PDF Rotated"
-            items={[
-              { label: 'File', value: file.name },
-              { label: 'Rotation', value: `${rotation}°` },
-              { label: 'Pages', value: file.pageCount !== null ? `${file.pageCount}` : 'Unknown' },
-              { label: 'Output Size', value: formatFileSize(result.length) },
-            ]}
-            onDownload={triggerDownload}
-          />
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result}
+              defaultFilename={file.name.replace(/\.pdf$/i, `_rotated_${rotation}.pdf`)}
+              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              summaryItems={[
+                { label: 'Rotation', value: `${rotation}°` },
+                { label: 'Pages', value: file.pageCount !== null ? `${file.pageCount}` : 'Unknown' },
+                { label: 'Output Size', value: formatFileSize(result.length) },
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
 

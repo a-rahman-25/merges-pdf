@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { getPageCount, addPageNumbers, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
-import PreDownloadSummary from '@/components/PreDownloadSummary';
+import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 
 const PDFPageNumberer = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -20,7 +20,7 @@ const PDFPageNumberer = () => {
     downloadBlob(result, file.name.replace(/\.pdf$/i, '_numbered.pdf'));
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Page Numbers');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];
@@ -90,12 +90,21 @@ const PDFPageNumberer = () => {
           </motion.div>
         )}
         {file && result && (
-          <PreDownloadSummary title="Page Numbers Added" items={[
-            { label: 'File', value: file.name },
-            { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'All' },
-            { label: 'Position', value: position },
-            { label: 'Output Size', value: formatFileSize(result.length) },
-          ]} onDownload={triggerDownload} />
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="space-y-4">
+            <PDFPreviewDownload
+              pdfData={result}
+              defaultFilename={file.name.replace(/\.pdf$/i, '_numbered.pdf')}
+              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              summaryItems={[
+                { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'All' },
+                { label: 'Position', value: position },
+                { label: 'Output Size', value: formatFileSize(result.length) },
+              ]}
+            />
+            <div className="flex justify-center">
+              <Button onClick={reset} variant="outline" className="rounded-xl"><RotateCcw className="mr-2 h-4 w-4" /> Start Over</Button>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
       <ReviewDialog open={showReview} toolName="Page Numbers" onSubmit={handleSubmit} onSkip={handleSkip} />

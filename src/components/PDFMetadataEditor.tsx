@@ -26,9 +26,10 @@ const PDFMetadataEditor = () => {
   const [result, setResult] = useState<Uint8Array | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (result && file) {
-      downloadBlob(result, file.name.replace(/\.pdf$/i, '_metadata.pdf'));
+      downloadBlob(result, filename || file.name.replace(/\.pdf$/i, '_metadata.pdf'));
+      toast.success('Downloaded!');
     }
   }, [result, file]);
 

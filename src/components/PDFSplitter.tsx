@@ -177,7 +177,7 @@ const PDFSplitter = () => {
                 <PDFPreviewDownload
                   pdfData={rangeResult.data}
                   defaultFilename={`${file.name.replace(/\.pdf$/i, '')}_pages_${rangeInput.replace(/\s/g, '')}.pdf`}
-                  onDownload={(filename) => { downloadBlob(rangeResult.data, filename); toast.success('Downloaded!'); }}
+                  onDownload={(filename) => triggerDownload(filename)}
                   summaryItems={[
                     { label: 'Pages Extracted', value: `${rangeResult.count}` },
                     { label: 'Output Size', value: formatFileSize(rangeResult.data.length) },

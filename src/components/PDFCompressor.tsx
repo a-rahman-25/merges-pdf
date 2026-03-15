@@ -89,10 +89,7 @@ const PDFCompressor = () => {
             <PDFPreviewDownload
               pdfData={result.data}
               defaultFilename={file.name.replace(/\.pdf$/i, '_compressed.pdf')}
-              onDownload={(filename) => {
-                downloadBlob(result.data, filename);
-                toast.success('Downloaded!');
-              }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Original Size', value: formatFileSize(result.originalSize) },
                 { label: 'Compressed Size', value: formatFileSize(result.newSize) },

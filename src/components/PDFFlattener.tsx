@@ -84,7 +84,7 @@ const PDFFlattener = () => {
             <PDFPreviewDownload
               pdfData={result.data}
               defaultFilename={file.name.replace(/\.pdf$/i, '_flattened.pdf')}
-              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Original Size', value: formatFileSize(result.originalSize) },
                 { label: 'Output Size', value: formatFileSize(result.data.length) },

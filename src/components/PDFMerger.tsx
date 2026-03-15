@@ -133,10 +133,7 @@ const PDFMerger = () => {
                 <PDFPreviewDownload
                   pdfData={mergedBlob}
                   defaultFilename="merged.pdf"
-                  onDownload={(filename) => {
-                    downloadBlob(mergedBlob, filename);
-                    toast.success('Downloaded!');
-                  }}
+                  onDownload={(filename) => triggerDownload(filename)}
                   summaryItems={[
                     { label: 'Files merged', value: `${files.length}` },
                     { label: 'Total pages', value: `${totalPages}` },

@@ -106,7 +106,7 @@ const PDFPageExtractor = () => {
             <PDFPreviewDownload
               pdfData={result.data}
               defaultFilename={file.name.replace(/\.pdf$/i, '_extracted.pdf')}
-              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages Extracted', value: `${result.extractedCount}` },
                 { label: 'Output Size', value: formatFileSize(result.data.length) },

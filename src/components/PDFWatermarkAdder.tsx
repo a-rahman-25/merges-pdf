@@ -113,7 +113,7 @@ const PDFWatermarkAdder = () => {
           <PDFPreviewDownload
             pdfData={result}
             defaultFilename={file.name.replace(/\.pdf$/i, '_watermarked.pdf')}
-            onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+            onDownload={(filename) => triggerDownload(filename)}
             summaryItems={[
               { label: 'Watermark', value: watermarkText },
               { label: 'Pages', value: file.pageCount !== null ? `${file.pageCount}` : 'All' },

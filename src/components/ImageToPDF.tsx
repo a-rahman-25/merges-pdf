@@ -111,7 +111,7 @@ const ImageToPDF = () => {
             <PDFPreviewDownload
               pdfData={result.data}
               defaultFilename="images-combined.pdf"
-              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages', value: `${result.pageCount}` },
                 { label: 'Output Size', value: formatFileSize(result.data.length) },

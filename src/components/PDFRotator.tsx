@@ -105,7 +105,7 @@ const PDFRotator = () => {
             <PDFPreviewDownload
               pdfData={result}
               defaultFilename={file.name.replace(/\.pdf$/i, `_rotated_${rotation}.pdf`)}
-              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Rotation', value: `${rotation}°` },
                 { label: 'Pages', value: file.pageCount !== null ? `${file.pageCount}` : 'Unknown' },

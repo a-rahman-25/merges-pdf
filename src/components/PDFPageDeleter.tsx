@@ -107,7 +107,7 @@ const PDFPageDeleter = () => {
             <PDFPreviewDownload
               pdfData={result.data}
               defaultFilename={file.name.replace(/\.pdf$/i, '_deleted.pdf')}
-              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages Deleted', value: `${result.deletedCount}` },
                 { label: 'Remaining', value: file.pageCount ? `${file.pageCount - result.deletedCount}` : 'Unknown' },

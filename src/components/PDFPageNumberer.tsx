@@ -95,7 +95,7 @@ const PDFPageNumberer = () => {
             <PDFPreviewDownload
               pdfData={result}
               defaultFilename={file.name.replace(/\.pdf$/i, '_numbered.pdf')}
-              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'All' },
                 { label: 'Position', value: position },

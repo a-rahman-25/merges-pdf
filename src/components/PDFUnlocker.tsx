@@ -92,7 +92,7 @@ const PDFUnlocker = () => {
             <PDFPreviewDownload
               pdfData={result}
               defaultFilename={file.name.replace(/\.pdf$/i, '_unlocked.pdf')}
-              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'Unknown' },
                 { label: 'Output Size', value: formatFileSize(result.length) },

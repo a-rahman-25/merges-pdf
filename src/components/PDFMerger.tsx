@@ -17,9 +17,9 @@ const PDFMerger = () => {
   const [mergedBlob, setMergedBlob] = useState<Uint8Array | null>(null);
   const [dragIndex, setDragIndex] = useState<number | null>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (mergedBlob) {
-      downloadBlob(mergedBlob, 'merged.pdf');
+      downloadBlob(mergedBlob, filename || 'merged.pdf');
       toast.success('Downloaded!');
     }
   }, [mergedBlob]);

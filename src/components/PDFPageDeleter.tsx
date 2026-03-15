@@ -16,9 +16,10 @@ const PDFPageDeleter = () => {
   const [result, setResult] = useState<{ data: Uint8Array; deletedCount: number } | null>(null);
   const [rangeInput, setRangeInput] = useState('');
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    downloadBlob(result.data, `${file.name.replace(/\.pdf$/i, '')}_deleted.pdf`);
+    downloadBlob(result.data, filename || `${file.name.replace(/\.pdf$/i, '')}_deleted.pdf`);
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Page Deleter');

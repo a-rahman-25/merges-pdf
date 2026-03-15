@@ -15,9 +15,10 @@ const PDFUnlocker = () => {
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState<Uint8Array | null>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    downloadBlob(result, file.name.replace(/\.pdf$/i, '_unlocked.pdf'));
+    downloadBlob(result, filename || file.name.replace(/\.pdf$/i, '_unlocked.pdf'));
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Unlocker');

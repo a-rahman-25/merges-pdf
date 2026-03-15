@@ -21,10 +21,10 @@ const PDFRotator = () => {
   const [rotation, setRotation] = useState<90 | 180 | 270>(90);
   const [result, setResult] = useState<Uint8Array | null>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    const name = file.name.replace(/\.pdf$/i, `_rotated_${rotation}.pdf`);
-    downloadBlob(result, name);
+    downloadBlob(result, filename || file.name.replace(/\.pdf$/i, `_rotated_${rotation}.pdf`));
+    toast.success('Downloaded!');
   }, [result, file, rotation]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Rotator');

@@ -21,10 +21,11 @@ const PDFSignature = () => {
   const [result, setResult] = useState<Uint8Array | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (result && file) {
-      const name = file.name.replace(/\.pdf$/i, '_signed.pdf');
+      const name = filename || file.name.replace(/\.pdf$/i, '_signed.pdf');
       downloadBlob(result, name);
+      toast.success('Downloaded!');
     }
   }, [result, file]);
 

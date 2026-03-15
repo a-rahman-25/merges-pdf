@@ -15,9 +15,10 @@ const PDFUnlocker = () => {
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState<Uint8Array | null>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    downloadBlob(result, file.name.replace(/\.pdf$/i, '_unlocked.pdf'));
+    downloadBlob(result, filename || file.name.replace(/\.pdf$/i, '_unlocked.pdf'));
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Unlocker');
@@ -91,7 +92,7 @@ const PDFUnlocker = () => {
             <PDFPreviewDownload
               pdfData={result}
               defaultFilename={file.name.replace(/\.pdf$/i, '_unlocked.pdf')}
-              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'Unknown' },
                 { label: 'Output Size', value: formatFileSize(result.length) },

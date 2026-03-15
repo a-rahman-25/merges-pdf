@@ -22,10 +22,11 @@ const PDFSplitter = () => {
   const [splitMode, setSplitMode] = useState<SplitMode>('all');
   const [rangeInput, setRangeInput] = useState('');
 
-  const doRangeDownload = useCallback(() => {
+  const doRangeDownload = useCallback((filename?: string) => {
     if (!rangeResult || !file) return;
     const baseName = file.name.replace(/\.pdf$/i, '');
-    downloadBlob(rangeResult.data, `${baseName}_pages_${rangeInput.replace(/\s/g, '')}.pdf`);
+    downloadBlob(rangeResult.data, filename || `${baseName}_pages_${rangeInput.replace(/\s/g, '')}.pdf`);
+    toast.success('Downloaded!');
   }, [rangeResult, file, rangeInput]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doRangeDownload, 'PDF Splitter');
@@ -176,7 +177,7 @@ const PDFSplitter = () => {
                 <PDFPreviewDownload
                   pdfData={rangeResult.data}
                   defaultFilename={`${file.name.replace(/\.pdf$/i, '')}_pages_${rangeInput.replace(/\s/g, '')}.pdf`}
-                  onDownload={(filename) => { downloadBlob(rangeResult.data, filename); toast.success('Downloaded!'); }}
+                  onDownload={(filename) => triggerDownload(filename)}
                   summaryItems={[
                     { label: 'Pages Extracted', value: `${rangeResult.count}` },
                     { label: 'Output Size', value: formatFileSize(rangeResult.data.length) },

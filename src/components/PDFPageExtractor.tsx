@@ -16,9 +16,10 @@ const PDFPageExtractor = () => {
   const [result, setResult] = useState<{ data: Uint8Array; extractedCount: number } | null>(null);
   const [rangeInput, setRangeInput] = useState('');
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    downloadBlob(result.data, `${file.name.replace(/\.pdf$/i, '')}_extracted.pdf`);
+    downloadBlob(result.data, filename || `${file.name.replace(/\.pdf$/i, '')}_extracted.pdf`);
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Page Extractor');
@@ -105,7 +106,7 @@ const PDFPageExtractor = () => {
             <PDFPreviewDownload
               pdfData={result.data}
               defaultFilename={file.name.replace(/\.pdf$/i, '_extracted.pdf')}
-              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages Extracted', value: `${result.extractedCount}` },
                 { label: 'Output Size', value: formatFileSize(result.data.length) },

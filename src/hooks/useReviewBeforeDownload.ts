@@ -1,26 +1,28 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
 /**
  * Hook that intercepts downloads to show a review dialog first.
- * On submit, sends the review via email through the backend.
+ * Supports an optional filename parameter passed through triggerDownload.
  */
-export function useReviewBeforeDownload(downloadFn: () => void, toolName?: string) {
+export function useReviewBeforeDownload(downloadFn: (filename?: string) => void, toolName?: string) {
   const [showReview, setShowReview] = useState(false);
+  const pendingFilename = useRef<string | undefined>();
 
-  const triggerDownload = useCallback(() => {
+  const triggerDownload = useCallback((filename?: string) => {
+    pendingFilename.current = filename;
     setShowReview(true);
   }, []);
 
   const handleSkip = useCallback(() => {
     setShowReview(false);
-    downloadFn();
+    downloadFn(pendingFilename.current);
   }, [downloadFn]);
 
   const handleSubmit = useCallback((rating: number, feedback: string) => {
     setShowReview(false);
-    downloadFn();
+    downloadFn(pendingFilename.current);
 
     // Store locally
     try {

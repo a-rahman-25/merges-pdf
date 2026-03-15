@@ -160,7 +160,7 @@ const PDFEncryptor = () => {
                 <span className="text-xs font-medium text-foreground">Password protected</span>
               </div>
             </div>
-            <Button onClick={triggerDownload} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
+            <Button onClick={() => triggerDownload()} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
               <Download className="h-5 w-5" /> Download Encrypted PDF
             </Button>
           </div>

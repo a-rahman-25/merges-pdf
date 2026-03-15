@@ -15,9 +15,10 @@ const PDFPageNumberer = () => {
   const [result, setResult] = useState<Uint8Array | null>(null);
   const [position, setPosition] = useState<'bottom' | 'top'>('bottom');
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    downloadBlob(result, file.name.replace(/\.pdf$/i, '_numbered.pdf'));
+    downloadBlob(result, filename || file.name.replace(/\.pdf$/i, '_numbered.pdf'));
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Page Numbers');
@@ -94,7 +95,7 @@ const PDFPageNumberer = () => {
             <PDFPreviewDownload
               pdfData={result}
               defaultFilename={file.name.replace(/\.pdf$/i, '_numbered.pdf')}
-              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages', value: file.pageCount ? `${file.pageCount}` : 'All' },
                 { label: 'Position', value: position },

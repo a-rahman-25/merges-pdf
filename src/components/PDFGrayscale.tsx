@@ -29,9 +29,10 @@ const PDFGrayscale = () => {
   const [converting, setConverting] = useState(false);
   const [result, setResult] = useState<{ data: Uint8Array; originalSize: number; newSize: number } | null>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    downloadBlob(result.data, file.name.replace(/\.pdf$/i, '_grayscale.pdf'));
+    downloadBlob(result.data, filename || file.name.replace(/\.pdf$/i, '_grayscale.pdf'));
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Grayscale Converter');
@@ -103,7 +104,7 @@ const PDFGrayscale = () => {
             <PDFPreviewDownload
               pdfData={result.data}
               defaultFilename={file.name.replace(/\.pdf$/i, '_grayscale.pdf')}
-              onDownload={(filename) => { downloadBlob(result.data, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Original Size', value: formatFileSize(result.originalSize) },
                 { label: 'Output Size', value: formatFileSize(result.newSize) },

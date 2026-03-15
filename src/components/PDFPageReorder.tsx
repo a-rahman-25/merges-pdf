@@ -22,9 +22,10 @@ const PDFPageReorder = () => {
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (result && file) {
-      downloadBlob(result, file.name.replace(/\.pdf$/i, '_reordered.pdf'));
+      downloadBlob(result, filename || file.name.replace(/\.pdf$/i, '_reordered.pdf'));
+      toast.success('Downloaded!');
     }
   }, [result, file]);
 
@@ -85,7 +86,7 @@ const PDFPageReorder = () => {
             <PDFPreviewDownload
               pdfData={result}
               defaultFilename={file.name.replace(/\.pdf$/i, '_reordered.pdf')}
-              onDownload={(filename) => { downloadBlob(result, filename); toast.success('Downloaded!'); }}
+              onDownload={(filename) => triggerDownload(filename)}
               summaryItems={[
                 { label: 'Pages', value: `${pages.length}` },
                 { label: 'Output Size', value: formatFileSize(result.byteLength) },

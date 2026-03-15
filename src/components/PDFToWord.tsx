@@ -17,10 +17,11 @@ const PDFToWord = () => {
   const [result, setResult] = useState<{ blob: Blob; pageCount: number } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
     const baseName = file.name.replace(/\.pdf$/i, '');
-    saveAs(result.blob, `${baseName}.docx`);
+    saveAs(result.blob, filename || `${baseName}.docx`);
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);

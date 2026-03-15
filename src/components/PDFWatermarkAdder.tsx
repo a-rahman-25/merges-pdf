@@ -19,10 +19,10 @@ const PDFWatermarkAdder = () => {
   const [result, setResult] = useState<Uint8Array | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    const baseName = file.name.replace(/\.pdf$/i, '');
-    downloadBlob(result, `${baseName}_watermarked.pdf`);
+    downloadBlob(result, filename || `${file.name.replace(/\.pdf$/i, '')}_watermarked.pdf`);
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload);

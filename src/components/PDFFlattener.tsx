@@ -14,9 +14,10 @@ const PDFFlattener = () => {
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState<{ data: Uint8Array; originalSize: number } | null>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (!result || !file) return;
-    downloadBlob(result.data, file.name.replace(/\.pdf$/i, '_flattened.pdf'));
+    downloadBlob(result.data, filename || file.name.replace(/\.pdf$/i, '_flattened.pdf'));
+    toast.success('Downloaded!');
   }, [result, file]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Flattener');

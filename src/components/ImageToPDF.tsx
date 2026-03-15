@@ -24,8 +24,11 @@ const ImageToPDF = () => {
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const doDownload = useCallback(() => {
-    if (result) downloadBlob(result.data, 'images-combined.pdf');
+  const doDownload = useCallback((filename?: string) => {
+    if (result) {
+      downloadBlob(result.data, filename || 'images-combined.pdf');
+      toast.success('Downloaded!');
+    }
   }, [result]);
 
   const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'Image to PDF');

@@ -21,7 +21,7 @@ const PDFCompressor = () => {
     toast.success('Downloaded!');
   }, [result, file]);
 
-  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(() => doDownload(), 'PDF Compressor');
+  const { showReview, triggerDownload, handleSubmit, handleSkip } = useReviewBeforeDownload(doDownload, 'PDF Compressor');
 
   const addFile = useCallback(async (newFiles: File[]) => {
     const f = newFiles[0];

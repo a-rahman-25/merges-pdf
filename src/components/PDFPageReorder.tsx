@@ -22,9 +22,10 @@ const PDFPageReorder = () => {
   const [dragIdx, setDragIdx] = useState<number | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const doDownload = useCallback(() => {
+  const doDownload = useCallback((filename?: string) => {
     if (result && file) {
-      downloadBlob(result, file.name.replace(/\.pdf$/i, '_reordered.pdf'));
+      downloadBlob(result, filename || file.name.replace(/\.pdf$/i, '_reordered.pdf'));
+      toast.success('Downloaded!');
     }
   }, [result, file]);
 

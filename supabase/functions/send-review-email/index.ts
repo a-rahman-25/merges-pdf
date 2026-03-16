@@ -5,18 +5,29 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
 const SUPPORT_EMAIL = "merge.pdf.st@gmail.com";
 
 serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
+    const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
+    console.log("RESEND_API_KEY present:", !!RESEND_API_KEY);
+
     const { rating, feedback, toolName, date } = await req.json();
+    console.log("Review payload:", { rating, feedback, toolName, date });
 
     if (!rating || !toolName) {
       return new Response(JSON.stringify({ error: "Missing rating or toolName" }), {
         status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+
+    if (!RESEND_API_KEY) {
+      console.error("RESEND_API_KEY is NOT configured. Cannot send email.");
+      return new Response(JSON.stringify({ success: false, error: "Email not configured" }), {
+        status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -30,13 +41,7 @@ serve(async (req) => {
       <p><strong>Date:</strong> ${date || new Date().toISOString()}</p>
     `;
 
-    if (!RESEND_API_KEY) {
-      console.log("No RESEND_API_KEY set. Review logged:", { rating, feedback, toolName, date });
-      return new Response(JSON.stringify({ success: true, message: "Review logged (email not configured)" }), {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
-    }
-
+    console.log("Sending email via Resend...");
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -51,13 +56,15 @@ serve(async (req) => {
       }),
     });
 
+    const resBody = await res.text();
+    console.log("Resend response status:", res.status);
+    console.log("Resend response body:", resBody);
+
     if (!res.ok) {
-      const err = await res.text();
-      console.error("Resend error:", err);
-      // Still return success — don't block user download
+      console.error("Resend API error:", res.status, resBody);
     }
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ success: res.ok, resendStatus: res.status }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (e) {

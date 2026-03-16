@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
 
-type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages' | 'pdf-signature' | 'crop-pages' | 'pdf-metadata';
+type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages' | 'pdf-signature' | 'crop-pages' | 'pdf-metadata' | 'merge-images';
 
 interface TabItem {
   id: TabId;
@@ -51,6 +51,7 @@ const tabGroups: TabGroup[] = [
       { id: 'bg-remover', label: 'BG Remove', icon: Eraser, path: '/bg-remover' },
       { id: 'watermark-remover', label: 'Remove WM', icon: Layers, path: '/watermark-remover' },
       { id: 'image-to-pdf', label: 'Image → PDF', icon: ArrowRightLeft, path: '/image-to-pdf' },
+      { id: 'merge-images', label: 'Merge Images', icon: Combine, path: '/merge-images' },
     ],
   },
   {

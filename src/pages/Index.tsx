@@ -42,6 +42,7 @@ const toolCategories = [
       { icon: Eraser, title: 'Remove Background', desc: 'AI-powered background removal — 100% in your browser.', path: '/bg-remover', color: 'bg-tool-cyan/15 text-tool-cyan' },
       { icon: Droplets, title: 'Remove Watermark', desc: 'Strip watermarks from PDF files — processed locally.', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
       { icon: ArrowRightLeft, title: 'Image to PDF', desc: 'Convert and combine JPG, PNG images into a single PDF.', path: '/image-to-pdf', color: 'bg-tool-pink/15 text-tool-pink' },
+      { icon: Combine, title: 'Merge Images to PDF', desc: 'Merge multiple images into a single PDF document.', path: '/merge-images', color: 'bg-tool-amber/15 text-tool-amber' },
     ],
   },
   {

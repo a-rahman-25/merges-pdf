@@ -237,6 +237,7 @@ const ur: T = {
   'cta.title': 'تیار ہیں؟ سائن اپ نہیں۔ فیس نہیں۔ طاقتور PDF ٹولز۔', 'cta.subtitle': 'لاکھوں صارفین سے جڑیں۔', 'cta.button': 'ابھی شروع کریں — مفت',
   'footer.desc': 'پرائیویسی فرسٹ PDF سویٹ۔', 'footer.pdftools': 'PDF ٹولز', 'footer.aitools': 'AI ٹولز', 'footer.company': 'کمپنی',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'تمام فائلیں مقامی طور پر پروسیس ہوتی ہیں۔',
+  'footer.privacy': 'رازداری کی پالیسی', 'footer.terms': 'سروس کی شرائط',
   'cat.pdftools': 'PDF ٹولز', 'cat.converters': 'کنورٹرز', 'cat.aitools': 'AI ٹولز',
   'step.upload': 'اپ لوڈ', 'step.upload.desc': 'فائلیں گھسیٹیں یا منتخب کریں۔', 'step.process': 'پروسیس', 'step.process.desc': 'فائلیں فوری طور پر پروسیس ہوتی ہیں۔', 'step.download': 'ڈاؤن لوڈ', 'step.download.desc': 'سیکنڈوں میں نتیجہ حاصل کریں۔',
 };

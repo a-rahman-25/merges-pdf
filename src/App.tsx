@@ -150,20 +150,22 @@ const AnimatedRoutes = () => {
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Suspense fallback={<Loading />}>
-          <AnimatedRoutes />
-        </Suspense>
-        <Suspense fallback={null}>
-          <PWAInstallPrompt />
-        </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <I18nProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Suspense fallback={<Loading />}>
+            <AnimatedRoutes />
+          </Suspense>
+          <Suspense fallback={null}>
+            <PWAInstallPrompt />
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </I18nProvider>
 );
 
 export default App;

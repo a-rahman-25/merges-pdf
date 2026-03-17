@@ -531,6 +531,7 @@ const th: T = {
   'cta.title': 'พร้อมแล้ว? ไม่ต้องสมัคร ไม่มีค่าใช้จ่าย', 'cta.subtitle': 'เข้าร่วมผู้ใช้นับล้าน', 'cta.button': 'เริ่มเลย — ฟรี',
   'footer.desc': 'ชุดเครื่องมือ PDF ที่เน้นความเป็นส่วนตัว', 'footer.pdftools': 'เครื่องมือ PDF', 'footer.aitools': 'เครื่องมือ AI', 'footer.company': 'บริษัท',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'ไฟล์ทั้งหมดประมวลผลในเครื่อง',
+  'footer.privacy': 'นโยบายความเป็นส่วนตัว', 'footer.terms': 'ข้อกำหนดการใช้บริการ',
   'cat.pdftools': 'เครื่องมือ PDF', 'cat.converters': 'ตัวแปลง', 'cat.aitools': 'เครื่องมือ AI',
   'step.upload': 'อัปโหลด', 'step.upload.desc': 'ลากหรือเลือกไฟล์', 'step.process': 'ประมวลผล', 'step.process.desc': 'ประมวลผลทันทีในเบราว์เซอร์', 'step.download': 'ดาวน์โหลด', 'step.download.desc': 'ได้ผลลัพธ์ในไม่กี่วินาที',
 };

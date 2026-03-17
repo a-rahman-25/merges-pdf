@@ -12,12 +12,13 @@ import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/hooks/useI18n';
 
 /* ──────────────────────── data ──────────────────────── */
 
 const toolCategories = [
   {
-    label: 'PDF Tools',
+    labelKey: 'cat.pdftools',
     tools: [
       { icon: Combine, title: 'Merge PDFs', desc: 'Combine multiple PDF files into one document.', path: '/merge', color: 'bg-tool-blue/15 text-tool-blue' },
       { icon: Scissors, title: 'Split PDFs', desc: 'Split PDFs into individual pages or ranges.', path: '/split', color: 'bg-tool-rose/15 text-tool-rose' },
@@ -38,7 +39,7 @@ const toolCategories = [
     ],
   },
   {
-    label: 'Converters',
+    labelKey: 'cat.converters',
     tools: [
       { icon: ArrowRightLeft, title: 'Convert Files', desc: 'Convert between PDF, images & docs.', path: '/convert', color: 'bg-tool-violet/15 text-tool-violet' },
       { icon: ArrowRightLeft, title: 'PDF to Word', desc: 'Convert PDF to editable Word files.', path: '/pdf-to-word', color: 'bg-tool-blue/15 text-tool-blue' },
@@ -51,7 +52,7 @@ const toolCategories = [
     ],
   },
   {
-    label: 'AI Tools',
+    labelKey: 'cat.aitools',
     tools: [
       { icon: Brain, title: 'AI Summarizer', desc: 'Get AI-generated summaries instantly.', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet' },
       { icon: Languages, title: 'AI Translator', desc: 'Translate documents with AI.', path: '/ai-translate', color: 'bg-tool-emerald/15 text-tool-emerald' },
@@ -64,19 +65,6 @@ const toolCategories = [
   },
 ];
 
-const steps = [
-  { icon: Upload, title: 'Upload', desc: 'Drag & drop or select your files from any device.' },
-  { icon: Cpu, title: 'Process', desc: 'Files are processed instantly in your browser — nothing is uploaded.' },
-  { icon: Download, title: 'Download', desc: 'Get your result file in seconds. Done!' },
-];
-
-const stats = [
-  { label: 'PDFs Processed', value: 2847391, suffix: '+', icon: FileText },
-  { label: 'Countries', value: 150, suffix: '+', icon: Globe },
-  { label: 'Average Rating', value: 4.9, suffix: '★', icon: Star },
-  { label: 'Server Uploads', value: 0, suffix: '', icon: Shield },
-];
-
 const testimonials = [
   { name: 'Sarah Chen', role: 'Law Student', quote: 'I merge my case study PDFs every week. The fact that nothing leaves my laptop is huge for confidentiality.', rating: 5 },
   { name: 'Marco Rossi', role: 'Accountant', quote: 'Compressing financial reports before emailing them saves me time. The quality stays perfect.', rating: 5 },
@@ -86,15 +74,6 @@ const testimonials = [
   { name: 'Carlos Mendez', role: 'Small Business Owner', quote: 'I sign invoices and contracts without paying for expensive tools. This is exactly what I needed.', rating: 5 },
   { name: 'Lisa Yamamoto', role: 'HR Manager', quote: 'Batch processing employee documents is seamless. Privacy compliance is a bonus.', rating: 5 },
   { name: 'Tom Nguyen', role: 'Software Developer', quote: 'Open-source and browser-based — I can verify the code myself. Trust through transparency.', rating: 5 },
-];
-
-const trustBadges = [
-  { icon: Lock, title: 'No Server Uploads', desc: 'Files stay in your browser — zero network transfers.' },
-  { icon: Shield, title: 'GDPR Compliant', desc: 'Full EU privacy regulation compliance built-in.' },
-  { icon: Lock, title: 'SSL Encrypted', desc: 'Secure HTTPS connection on every page.' },
-  { icon: Eye, title: 'No Tracking', desc: 'We don\'t track what files you process.' },
-  { icon: Recycle, title: 'Auto-Cleared', desc: 'Files removed from memory when you close the tab.' },
-  { icon: Globe, title: 'Open Source', desc: 'Transparent code — nothing hidden.' },
 ];
 
 const faqs = [
@@ -132,15 +111,23 @@ function useCountUp(target: number, duration = 2000) {
   return { count, ref };
 }
 
-function StatItem({ stat }: { stat: typeof stats[0] }) {
+const statsConfig = [
+  { labelKey: 'stats.pdfs', value: 2847391, suffix: '+', icon: FileText },
+  { labelKey: 'stats.countries', value: 150, suffix: '+', icon: Globe },
+  { labelKey: 'stats.rating', value: 4.9, suffix: '★', icon: Star },
+  { labelKey: 'stats.uploads', value: 0, suffix: '', icon: Shield },
+];
+
+function StatItem({ stat }: { stat: typeof statsConfig[0] }) {
   const { count, ref } = useCountUp(stat.value);
+  const { t } = useI18n();
   return (
     <div ref={ref} className="text-center">
       <stat.icon className="mx-auto h-6 w-6 text-primary-foreground/70 mb-2" />
       <div className="text-3xl md:text-4xl font-bold text-primary-foreground">
         {stat.value === 0 ? 'Zero' : count.toLocaleString()}{stat.suffix}
       </div>
-      <div className="text-sm text-primary-foreground/70 mt-1">{stat.label}</div>
+      <div className="text-sm text-primary-foreground/70 mt-1">{t(stat.labelKey)}</div>
     </div>
   );
 }
@@ -153,6 +140,22 @@ const Index = () => {
   const maxIdx = testimonials.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);
   const prev = useCallback(() => setTestimonialIdx(i => Math.max(i - 1, 0)), []);
+  const { t } = useI18n();
+
+  const trustBadges = [
+    { icon: Lock, title: 'No Server Uploads', desc: 'Files stay in your browser — zero network transfers.' },
+    { icon: Shield, title: 'GDPR Compliant', desc: 'Full EU privacy regulation compliance built-in.' },
+    { icon: Lock, title: 'SSL Encrypted', desc: 'Secure HTTPS connection on every page.' },
+    { icon: Eye, title: 'No Tracking', desc: 'We don\'t track what files you process.' },
+    { icon: Recycle, title: 'Auto-Cleared', desc: 'Files removed from memory when you close the tab.' },
+    { icon: Globe, title: 'Open Source', desc: 'Transparent code — nothing hidden.' },
+  ];
+
+  const steps = [
+    { icon: Upload, title: t('step.upload'), desc: t('step.upload.desc') },
+    { icon: Cpu, title: t('step.process'), desc: t('step.process.desc') },
+    { icon: Download, title: t('step.download'), desc: t('step.download.desc') },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -176,31 +179,30 @@ const Index = () => {
           >
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-sm text-muted-foreground shadow-sm">
               <Sparkles className="h-4 w-4 text-primary" />
-              100% Free · No Login · No Uploads · Forever Private
+              {t('hero.badge')}
             </div>
             <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1]">
-              The Privacy-First<br />
-              <span className="gradient-text">PDF Suite — Free Forever</span>
+              {t('hero.title1')}<br />
+              <span className="gradient-text">{t('hero.title2')}</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl leading-relaxed">
-              Every tool runs in your browser. Your files never leave your device.
-              Merge, split, compress, sign, and convert PDFs with zero server uploads.
+              {t('hero.subtitle')}
             </p>
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <Button asChild size="lg" className="rounded-2xl px-8 text-base font-bold h-14 gradient-bg border-0 shadow-lg hover:shadow-xl transition-shadow">
                 <Link to="/merge">
-                  Start Merging <ChevronRight className="ml-1 h-5 w-5" />
+                  {t('hero.cta1')} <ChevronRight className="ml-1 h-5 w-5" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="rounded-2xl px-8 text-base h-14 border-border">
-                <a href="#tools">Explore All Tools</a>
+                <a href="#tools">{t('hero.cta2')}</a>
               </Button>
             </div>
 
             {/* Mini trust bar */}
             <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-              {['🔒 Private', '⚡ Instant', '💸 Free', '✅ No Sign-Up'].map((t) => (
-                <span key={t} className="flex items-center gap-1">{t}</span>
+              {[t('trust.private'), t('trust.instant'), t('trust.free'), t('trust.nosignup')].map((txt) => (
+                <span key={txt} className="flex items-center gap-1">{txt}</span>
               ))}
             </div>
           </motion.div>
@@ -210,8 +212,8 @@ const Index = () => {
       {/* ─── Animated Stats ─── */}
       <section className="gradient-bg py-14">
         <div className="mx-auto max-w-5xl px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-          {stats.map((stat) => (
-            <StatItem key={stat.label} stat={stat} />
+          {statsConfig.map((stat) => (
+            <StatItem key={stat.labelKey} stat={stat} />
           ))}
         </div>
       </section>
@@ -221,16 +223,16 @@ const Index = () => {
         <div className="mx-auto max-w-6xl px-6">
           <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
             <h2 className="text-center text-3xl font-bold text-foreground md:text-4xl">
-              All the PDF tools you need
+              {t('tools.title')}
             </h2>
             <p className="mx-auto mt-3 max-w-lg text-center text-muted-foreground">
-              Every tool works instantly in your browser — no file ever touches a server.
+              {t('tools.subtitle')}
             </p>
           </motion.div>
           <div className="mt-14 space-y-14">
             {toolCategories.map((category) => (
-              <div key={category.label}>
-                <h3 className="text-xl font-bold text-foreground mb-6">{category.label}</h3>
+              <div key={category.labelKey}>
+                <h3 className="text-xl font-bold text-foreground mb-6">{t(category.labelKey)}</h3>
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {category.tools.map((tool, i) => (
                     <motion.div
@@ -250,7 +252,7 @@ const Index = () => {
                         <h3 className="font-semibold text-foreground">{tool.title}</h3>
                         <p className="mt-1 flex-1 text-sm text-muted-foreground">{tool.desc}</p>
                         <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                          Try now <ChevronRight className="ml-1 h-4 w-4" />
+                          {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
                         </span>
                       </Link>
                     </motion.div>
@@ -265,9 +267,9 @@ const Index = () => {
       {/* ─── How It Works ─── */}
       <section className="border-t border-border/60 bg-card/50 py-20">
         <div className="mx-auto max-w-4xl px-6">
-          <h2 className="text-center text-3xl font-bold text-foreground md:text-4xl">How it works</h2>
+          <h2 className="text-center text-3xl font-bold text-foreground md:text-4xl">{t('howit.title')}</h2>
           <p className="mx-auto mt-3 max-w-md text-center text-muted-foreground">
-            Three simple steps — your files never leave your device.
+            {t('howit.subtitle')}
           </p>
           <div className="mt-14 grid gap-8 sm:grid-cols-3">
             {steps.map((step, i) => (
@@ -282,7 +284,7 @@ const Index = () => {
                 <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-accent">
                   <step.icon className="h-7 w-7 text-primary" />
                 </div>
-                <div className="mb-2 text-sm font-bold text-primary">Step {i + 1}</div>
+                <div className="mb-2 text-sm font-bold text-primary">{t('howit.step')} {i + 1}</div>
                 <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{step.desc}</p>
               </motion.div>
@@ -295,10 +297,10 @@ const Index = () => {
       <section className="py-20">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="text-center text-3xl font-bold text-foreground md:text-4xl">
-            Loved by thousands
+            {t('testimonials.title')}
           </h2>
           <p className="mx-auto mt-3 max-w-md text-center text-muted-foreground">
-            Join users in 150+ countries who trust MergesPDF.
+            {t('testimonials.subtitle')}
           </p>
 
           <div className="relative mt-12">
@@ -346,10 +348,10 @@ const Index = () => {
       <section className="border-t border-border/60 bg-card/50 py-20">
         <div className="mx-auto max-w-6xl px-6">
           <h2 className="text-center text-3xl font-bold text-foreground md:text-4xl">
-            Security & Privacy
+            {t('security.title')}
           </h2>
           <p className="mx-auto mt-3 max-w-md text-center text-muted-foreground">
-            Your files, your device, your privacy. Always.
+            {t('security.subtitle')}
           </p>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {trustBadges.map((badge) => (
@@ -371,7 +373,7 @@ const Index = () => {
       <section className="py-20">
         <div className="mx-auto max-w-3xl px-6">
           <h2 className="text-center text-3xl font-bold text-foreground md:text-4xl">
-            Frequently asked questions
+            {t('faq.title')}
           </h2>
           <div className="mt-12 space-y-3">
             {faqs.map((faq) => (
@@ -392,14 +394,14 @@ const Index = () => {
         <div className="absolute inset-0 gradient-bg opacity-90" />
         <div className="relative mx-auto max-w-3xl px-6 py-20 text-center">
           <h2 className="text-3xl font-bold text-primary-foreground md:text-4xl">
-            Ready? No signup. No fees.<br />Just powerful PDF tools.
+            {t('cta.title')}
           </h2>
           <p className="mt-4 text-primary-foreground/80">
-            Join millions of users processing documents privately in their browser.
+            {t('cta.subtitle')}
           </p>
           <Button asChild size="lg" variant="secondary" className="mt-8 rounded-2xl px-8 text-base font-bold h-14">
             <Link to="/merge">
-              Start Now — It's Free <ChevronRight className="ml-1 h-5 w-5" />
+              {t('cta.button')} <ChevronRight className="ml-1 h-5 w-5" />
             </Link>
           </Button>
         </div>

@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { I18nProvider } from "./hooks/useI18n";
 import Index from "./pages/Index";
 import usePageTracking from "./hooks/usePageTracking";
 import NotFound from "./pages/NotFound";
@@ -149,20 +150,22 @@ const AnimatedRoutes = () => {
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Suspense fallback={<Loading />}>
-          <AnimatedRoutes />
-        </Suspense>
-        <Suspense fallback={null}>
-          <PWAInstallPrompt />
-        </Suspense>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <I18nProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Suspense fallback={<Loading />}>
+            <AnimatedRoutes />
+          </Suspense>
+          <Suspense fallback={null}>
+            <PWAInstallPrompt />
+          </Suspense>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </I18nProvider>
 );
 
 export default App;

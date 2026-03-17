@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Code } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
 import { useState } from 'react';
 import {
@@ -13,10 +14,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import { useI18n } from '@/hooks/useI18n';
 
 const toolGroups = [
   {
-    label: 'PDF Tools',
+    labelKey: 'cat.pdftools',
     icon: FileText,
     items: [
       { to: '/merge', label: 'Merge PDFs' },
@@ -31,7 +33,7 @@ const toolGroups = [
     ],
   },
   {
-    label: 'Converters',
+    labelKey: 'cat.converters',
     icon: ArrowRightLeft,
     items: [
       { to: '/convert', label: 'Convert Files' },
@@ -43,7 +45,7 @@ const toolGroups = [
     ],
   },
   {
-    label: 'AI Tools',
+    labelKey: 'cat.aitools',
     icon: Brain,
     items: [
       { to: '/ai-summarize', label: 'AI Summarizer' },
@@ -54,16 +56,17 @@ const toolGroups = [
   },
 ];
 
-const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
-  { to: '/blog', label: 'Blog' },
-];
-
 const Header = () => {
   const { pathname } = useLocation();
   const [open, setOpen] = useState(false);
+  const { t } = useI18n();
+
+  const navLinks = [
+    { to: '/', label: t('nav.home') },
+    { to: '/about', label: t('nav.about') },
+    { to: '/contact', label: t('nav.contact') },
+    { to: '/blog', label: t('nav.blog') },
+  ];
 
   const isActive = (to: string) =>
     to === '/' ? pathname === '/' : pathname.startsWith(to);
@@ -97,16 +100,16 @@ const Header = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <button className="flex items-center gap-1 text-sm px-3 py-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors">
-                Tools <ChevronDown className="h-3.5 w-3.5" />
+                {t('nav.tools')} <ChevronDown className="h-3.5 w-3.5" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="start">
               {toolGroups.map((group, gi) => (
-                <div key={group.label}>
+                <div key={group.labelKey}>
                   {gi > 0 && <DropdownMenuSeparator />}
                   <DropdownMenuLabel className="flex items-center gap-2">
                     <group.icon className="h-3.5 w-3.5" />
-                    {group.label}
+                    {t(group.labelKey)}
                   </DropdownMenuLabel>
                   <DropdownMenuGroup>
                     {group.items.map((item) => (
@@ -135,10 +138,11 @@ const Header = () => {
           ))}
 
           <div className="ml-2 flex items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Button asChild size="sm" className="rounded-xl gradient-bg border-0 font-semibold">
               <Link to="/ai-document-tools" className="flex items-center gap-1.5">
-                <Code className="h-3.5 w-3.5" /> API
+                <Code className="h-3.5 w-3.5" /> {t('nav.api')}
               </Link>
             </Button>
           </div>
@@ -146,6 +150,7 @@ const Header = () => {
 
         {/* Mobile nav */}
         <div className="flex md:hidden items-center gap-2">
+          <LanguageSwitcher />
           <ThemeToggle />
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -172,8 +177,8 @@ const Header = () => {
                 ))}
                 <div className="mt-2 border-t border-border pt-2">
                   {toolGroups.map((group) => (
-                    <div key={group.label} className="mt-3">
-                      <p className="px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{group.label}</p>
+                    <div key={group.labelKey} className="mt-3">
+                      <p className="px-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{t(group.labelKey)}</p>
                       {group.items.map((item) => (
                         <Link
                           key={item.to}

@@ -37,7 +37,7 @@ function buildIco(pngs: Uint8Array[], sizes: number[]): Blob {
     offset += pngs[i].length;
   }
 
-  return new Blob([header, dirEntries, ...pngs], { type: 'image/x-icon' });
+  return new Blob([header, dirEntries, ...pngs.map(p => p.buffer as ArrayBuffer)], { type: 'image/x-icon' });
 }
 
 const formatOptions: { value: OutputFormat; label: string; mime: string }[] = [

@@ -5,91 +5,92 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
+import { useI18n } from '@/hooks/useI18n';
 
 type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages' | 'pdf-signature' | 'crop-pages' | 'pdf-metadata' | 'merge-images' | 'pdf-to-images' | 'form-filler' | 'redact';
 
 interface TabItem {
   id: TabId;
-  label: string;
+  labelKey: string;
   icon: typeof Combine;
   path: string;
 }
 
 interface TabGroup {
-  label: string;
+  labelKey: string;
   tabs: TabItem[];
 }
 
 const tabGroups: TabGroup[] = [
   {
-    label: 'PDF Tools',
+    labelKey: 'cat.pdftools',
     tabs: [
-      { id: 'merge', label: 'Merge', icon: Combine, path: '/merge' },
-      { id: 'split', label: 'Split', icon: Scissors, path: '/split' },
-      { id: 'compress', label: 'Compress', icon: Minimize2, path: '/compress' },
-      { id: 'grayscale', label: 'Grayscale', icon: Palette, path: '/grayscale' },
-      { id: 'rotate', label: 'Rotate', icon: RotateCw, path: '/rotate' },
-      { id: 'delete-pages', label: 'Delete Pages', icon: Trash2, path: '/delete-pages' },
-      { id: 'extract-pages', label: 'Extract Pages', icon: FileOutput, path: '/extract-pages' },
-      { id: 'page-numbers', label: 'Page Numbers', icon: Hash, path: '/page-numbers' },
-      { id: 'add-watermark', label: 'Add Watermark', icon: Droplets, path: '/add-watermark' },
-      { id: 'encrypt', label: 'Encrypt', icon: Lock, path: '/encrypt' },
-      { id: 'unlock', label: 'Unlock', icon: Unlock, path: '/unlock-pdf' },
-      { id: 'flatten', label: 'Flatten', icon: Layers, path: '/flatten' },
-      { id: 'reorder-pages', label: 'Reorder', icon: Layers, path: '/reorder-pages' },
-      { id: 'pdf-signature', label: 'Signature', icon: Layers, path: '/pdf-signature' },
-      { id: 'crop-pages', label: 'Crop', icon: Layers, path: '/crop-pages' },
-      { id: 'pdf-metadata', label: 'Metadata', icon: Layers, path: '/pdf-metadata' },
-      { id: 'pdf-to-images', label: 'PDF → Images', icon: ImageIcon, path: '/pdf-to-images' },
-      { id: 'form-filler', label: 'Fill Forms', icon: FormInput, path: '/pdf-form-filler' },
-      { id: 'redact', label: 'Redact', icon: EyeOff, path: '/pdf-redact' },
+      { id: 'merge', labelKey: 'tool.merge', icon: Combine, path: '/merge' },
+      { id: 'split', labelKey: 'tool.split', icon: Scissors, path: '/split' },
+      { id: 'compress', labelKey: 'tool.compress', icon: Minimize2, path: '/compress' },
+      { id: 'grayscale', labelKey: 'tool.grayscale', icon: Palette, path: '/grayscale' },
+      { id: 'rotate', labelKey: 'tool.rotate', icon: RotateCw, path: '/rotate' },
+      { id: 'delete-pages', labelKey: 'tool.deletePages', icon: Trash2, path: '/delete-pages' },
+      { id: 'extract-pages', labelKey: 'tool.extractPages', icon: FileOutput, path: '/extract-pages' },
+      { id: 'page-numbers', labelKey: 'tool.pageNumbers', icon: Hash, path: '/page-numbers' },
+      { id: 'add-watermark', labelKey: 'tool.watermark', icon: Droplets, path: '/add-watermark' },
+      { id: 'encrypt', labelKey: 'tool.encrypt', icon: Lock, path: '/encrypt' },
+      { id: 'unlock', labelKey: 'tool.unlock', icon: Unlock, path: '/unlock-pdf' },
+      { id: 'flatten', labelKey: 'tool.flatten', icon: Layers, path: '/flatten' },
+      { id: 'reorder-pages', labelKey: 'tool.reorder', icon: Layers, path: '/reorder-pages' },
+      { id: 'pdf-signature', labelKey: 'tool.sign', icon: Layers, path: '/pdf-signature' },
+      { id: 'crop-pages', labelKey: 'tool.crop', icon: Layers, path: '/crop-pages' },
+      { id: 'pdf-metadata', labelKey: 'tool.metadata', icon: Layers, path: '/pdf-metadata' },
+      { id: 'pdf-to-images', labelKey: 'tool.pdfToImages', icon: ImageIcon, path: '/pdf-to-images' },
+      { id: 'form-filler', labelKey: 'tool.formFiller', icon: FormInput, path: '/pdf-form-filler' },
+      { id: 'redact', labelKey: 'tool.redact', icon: EyeOff, path: '/pdf-redact' },
     ],
   },
   {
-    label: 'Converters',
+    labelKey: 'cat.converters',
     tabs: [
-      { id: 'convert', label: 'Convert', icon: ArrowRightLeft, path: '/convert' },
-      { id: 'pdf-to-word', label: 'PDF → Word', icon: ArrowRightLeft, path: '/pdf-to-word' },
-      { id: 'word-to-pdf', label: 'Word → PDF', icon: ArrowRightLeft, path: '/word-to-pdf' },
-      { id: 'bg-remover', label: 'BG Remove', icon: Eraser, path: '/bg-remover' },
-      { id: 'watermark-remover', label: 'Remove WM', icon: Layers, path: '/watermark-remover' },
-      { id: 'image-to-pdf', label: 'Image → PDF', icon: ArrowRightLeft, path: '/image-to-pdf' },
-      { id: 'merge-images', label: 'Merge Images', icon: Combine, path: '/merge-images' },
+      { id: 'convert', labelKey: 'tool.convert', icon: ArrowRightLeft, path: '/convert' },
+      { id: 'pdf-to-word', labelKey: 'tool.pdfToWord', icon: ArrowRightLeft, path: '/pdf-to-word' },
+      { id: 'word-to-pdf', labelKey: 'tool.wordToPdf', icon: ArrowRightLeft, path: '/word-to-pdf' },
+      { id: 'bg-remover', labelKey: 'tool.bgRemove', icon: Eraser, path: '/bg-remover' },
+      { id: 'watermark-remover', labelKey: 'tool.wmRemove', icon: Layers, path: '/watermark-remover' },
+      { id: 'image-to-pdf', labelKey: 'tool.imageToPdf', icon: ArrowRightLeft, path: '/image-to-pdf' },
+      { id: 'merge-images', labelKey: 'tool.mergeImages', icon: Combine, path: '/merge-images' },
     ],
   },
   {
-    label: 'AI Tools',
+    labelKey: 'cat.aitools',
     tabs: [
-      { id: 'ai-summarize', label: 'Summarize', icon: Brain, path: '/ai-summarize' },
-      { id: 'ai-translate', label: 'Translate', icon: Languages, path: '/ai-translate' },
-      { id: 'ai-qa', label: 'Q&A', icon: MessageSquare, path: '/ai-qa' },
-      { id: 'batch', label: 'Batch', icon: Layers, path: '/batch' },
+      { id: 'ai-summarize', labelKey: 'tool.aiSummarize', icon: Brain, path: '/ai-summarize' },
+      { id: 'ai-translate', labelKey: 'tool.aiTranslate', icon: Languages, path: '/ai-translate' },
+      { id: 'ai-qa', labelKey: 'tool.aiQa', icon: MessageSquare, path: '/ai-qa' },
+      { id: 'batch', labelKey: 'tool.batch', icon: Layers, path: '/batch' },
     ],
   },
 ];
 
 const features = [
-  { icon: Combine, title: 'Merge PDFs', desc: 'Combine multiple PDF files into one document. Drag to reorder pages before merging.', color: 'bg-tool-blue/15 text-tool-blue' },
-  { icon: Scissors, title: 'Split & Extract', desc: 'Split PDFs into individual pages or extract a custom page range into a new file.', color: 'bg-tool-rose/15 text-tool-rose' },
-  { icon: Minimize2, title: 'Compress PDFs', desc: 'Reduce file size by stripping metadata and rebuilding the document structure.', color: 'bg-tool-emerald/15 text-tool-emerald' },
-  { icon: ArrowRightLeft, title: 'Convert Files', desc: 'Convert images to PDF, PDF to images, or between PNG, JPG, and WEBP formats.', color: 'bg-tool-violet/15 text-tool-violet' },
-  { icon: RotateCw, title: 'Rotate Pages', desc: 'Rotate all pages in a PDF by 90°, 180°, or 270° with a single click.', color: 'bg-tool-amber/15 text-tool-amber' },
-  { icon: Code, title: 'XML to PDF/Word', desc: 'Parse XML files and convert them to formatted PDF or Word documents.', color: 'bg-tool-lime/15 text-tool-lime' },
-  { icon: Eraser, title: 'Remove Background', desc: 'Remove image backgrounds instantly using AI — 100% in your browser, no uploads.', color: 'bg-tool-cyan/15 text-tool-cyan' },
-  { icon: Droplets, title: 'Remove Watermark', desc: 'Strip watermarks from PDF files — processed entirely in your browser.', color: 'bg-tool-teal/15 text-tool-teal' },
-  { icon: Lock, title: 'Encrypt PDF', desc: 'Add password protection to your PDF files — processed in your browser.', color: 'bg-tool-indigo/15 text-tool-indigo' },
-  { icon: Zap, title: 'Lightning Fast', desc: 'Instant processing powered by your device. No server queues, no waiting.', color: 'bg-tool-amber/15 text-tool-amber' },
-  { icon: Globe, title: 'Works Offline', desc: 'No internet needed after loading. Process files anywhere, anytime.', color: 'bg-tool-cyan/15 text-tool-cyan' },
-  { icon: Lock, title: 'No Sign-Up', desc: 'Use every feature instantly — no accounts, no emails, no passwords required.', color: 'bg-tool-indigo/15 text-tool-indigo' },
-  { icon: Layers, title: 'Any PDF Size', desc: 'Works with any standard PDF file regardless of page count or file size.', color: 'bg-tool-violet/15 text-tool-violet' },
-  { icon: FileText, title: 'Totally Free', desc: 'No subscriptions, no hidden fees, no watermarks — not a single cent, ever.', color: 'bg-tool-pink/15 text-tool-pink' },
+  { icon: Combine, titleKey: 'feat.merge', descKey: 'feat.merge.desc', color: 'bg-tool-blue/15 text-tool-blue' },
+  { icon: Scissors, titleKey: 'feat.split', descKey: 'feat.split.desc', color: 'bg-tool-rose/15 text-tool-rose' },
+  { icon: Minimize2, titleKey: 'feat.compress', descKey: 'feat.compress.desc', color: 'bg-tool-emerald/15 text-tool-emerald' },
+  { icon: ArrowRightLeft, titleKey: 'feat.convert', descKey: 'feat.convert.desc', color: 'bg-tool-violet/15 text-tool-violet' },
+  { icon: RotateCw, titleKey: 'feat.rotate', descKey: 'feat.rotate.desc', color: 'bg-tool-amber/15 text-tool-amber' },
+  { icon: Code, titleKey: 'feat.xml', descKey: 'feat.xml.desc', color: 'bg-tool-lime/15 text-tool-lime' },
+  { icon: Eraser, titleKey: 'feat.bgRemove', descKey: 'feat.bgRemove.desc', color: 'bg-tool-cyan/15 text-tool-cyan' },
+  { icon: Droplets, titleKey: 'feat.wmRemove', descKey: 'feat.wmRemove.desc', color: 'bg-tool-teal/15 text-tool-teal' },
+  { icon: Lock, titleKey: 'feat.encrypt', descKey: 'feat.encrypt.desc', color: 'bg-tool-indigo/15 text-tool-indigo' },
+  { icon: Zap, titleKey: 'feat.fast', descKey: 'feat.fast.desc', color: 'bg-tool-amber/15 text-tool-amber' },
+  { icon: Globe, titleKey: 'feat.offline', descKey: 'feat.offline.desc', color: 'bg-tool-cyan/15 text-tool-cyan' },
+  { icon: Lock, titleKey: 'feat.noSignup', descKey: 'feat.noSignup.desc', color: 'bg-tool-indigo/15 text-tool-indigo' },
+  { icon: Layers, titleKey: 'feat.anySize', descKey: 'feat.anySize.desc', color: 'bg-tool-violet/15 text-tool-violet' },
+  { icon: FileText, titleKey: 'feat.free', descKey: 'feat.free.desc', color: 'bg-tool-pink/15 text-tool-pink' },
 ];
 
 const findActiveGroup = (activeTab: TabId): string => {
   for (const group of tabGroups) {
-    if (group.tabs.some(t => t.id === activeTab)) return group.label;
+    if (group.tabs.some(t => t.id === activeTab)) return group.labelKey;
   }
-  return tabGroups[0].label;
+  return tabGroups[0].labelKey;
 };
 
 interface ToolPageLayoutProps {
@@ -100,9 +101,10 @@ interface ToolPageLayoutProps {
 const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
   const [openGroup, setOpenGroup] = useState<string | null>(null);
   const activeGroup = findActiveGroup(activeTab);
+  const { t } = useI18n();
 
-  const toggleGroup = (label: string) => {
-    setOpenGroup(prev => prev === label ? null : label);
+  const toggleGroup = (labelKey: string) => {
+    setOpenGroup(prev => prev === labelKey ? null : labelKey);
   };
 
   return (
@@ -115,12 +117,12 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
           <div className="flex justify-center">
             <div className="inline-flex rounded-xl border border-border bg-card p-1 gap-1">
               {tabGroups.map((group) => {
-                const isGroupActive = activeGroup === group.label;
-                const isOpen = openGroup === group.label;
+                const isGroupActive = activeGroup === group.labelKey;
+                const isOpen = openGroup === group.labelKey;
                 return (
                   <button
-                    key={group.label}
-                    onClick={() => toggleGroup(group.label)}
+                    key={group.labelKey}
+                    onClick={() => toggleGroup(group.labelKey)}
                     className={`
                       flex items-center gap-1.5 rounded-lg px-4 py-2.5 text-sm font-display font-semibold transition-all
                       ${isGroupActive
@@ -129,7 +131,7 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
                       }
                     `}
                   >
-                    {group.label}
+                    {t(group.labelKey)}
                     <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
                 );
@@ -149,7 +151,7 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
                 <div className="flex justify-center pt-1">
                   <div className="inline-flex flex-wrap justify-center gap-1.5 rounded-xl border border-border bg-card/80 p-2">
                     {tabGroups
-                      .find(g => g.label === openGroup)
+                      .find(g => g.labelKey === openGroup)
                       ?.tabs.map((tab) => (
                         <Link
                           key={tab.id}
@@ -164,7 +166,7 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
                           `}
                         >
                           <tab.icon className="h-4 w-4" />
-                          {tab.label}
+                          {t(tab.labelKey)}
                         </Link>
                       ))}
                   </div>
@@ -187,16 +189,16 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
           className="mt-20 space-y-10"
         >
           <h2 className="text-center font-display text-2xl font-bold text-foreground md:text-3xl">
-            Everything you need for PDFs
+            {t('layout.allTools')}
           </h2>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {features.map((feat) => (
-              <div key={feat.title} className="rounded-xl border border-border bg-card p-5">
+              <div key={feat.titleKey} className="rounded-xl border border-border bg-card p-5">
                 <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-lg ${feat.color}`}>
                   <feat.icon className="h-5 w-5" />
                 </div>
-                <h3 className="font-display font-semibold text-foreground">{feat.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{feat.desc}</p>
+                <h3 className="font-display font-semibold text-foreground">{t(feat.titleKey)}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{t(feat.descKey)}</p>
               </div>
             ))}
           </div>

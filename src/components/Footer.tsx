@@ -1,31 +1,111 @@
 import { Link } from 'react-router-dom';
-import { Combine } from 'lucide-react';
+import { Combine, Shield, Globe } from 'lucide-react';
+
+const toolLinks = [
+  { to: '/merge', label: 'Merge PDFs' },
+  { to: '/split', label: 'Split PDFs' },
+  { to: '/compress', label: 'Compress PDF' },
+  { to: '/rotate', label: 'Rotate Pages' },
+  { to: '/pdf-signature', label: 'Sign PDF' },
+  { to: '/encrypt', label: 'Encrypt PDF' },
+  { to: '/pdf-to-word', label: 'PDF to Word' },
+  { to: '/word-to-pdf', label: 'Word to PDF' },
+  { to: '/image-to-pdf', label: 'Image to PDF' },
+  { to: '/bg-remover', label: 'Remove Background' },
+];
+
+const companyLinks = [
+  { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
+  { to: '/blog', label: 'Blog' },
+  { to: '/privacy', label: 'Privacy Policy' },
+  { to: '/terms', label: 'Terms of Service' },
+];
+
+const aiLinks = [
+  { to: '/ai-summarize', label: 'AI Summarizer' },
+  { to: '/ai-translate', label: 'AI Translator' },
+  { to: '/ai-qa', label: 'AI Q&A' },
+  { to: '/ai-document-tools', label: '40+ AI Tools' },
+];
 
 const Footer = () => (
-  <footer className="border-t border-border/60 py-10">
-    <div className="mx-auto max-w-6xl px-6">
-      <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-            <Combine className="h-4 w-4 text-primary-foreground" />
+  <footer className="border-t border-border/60 bg-card/50">
+    <div className="mx-auto max-w-6xl px-6 py-12">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Brand */}
+        <div>
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-bg">
+              <Combine className="h-4 w-4 text-primary-foreground" />
+            </div>
+            <span className="text-lg font-bold text-foreground">MergesPDF</span>
+          </Link>
+          <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
+            The privacy-first PDF suite. Every tool runs in your browser — files never leave your device.
+          </p>
+          <div className="mt-4 flex items-center gap-3">
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Shield className="h-3.5 w-3.5" /> GDPR Compliant
+            </div>
+            <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+              <Globe className="h-3.5 w-3.5" /> 150+ Countries
+            </div>
           </div>
-          <span className="font-display text-lg font-bold text-foreground">MergesPDF</span>
         </div>
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-          <Link to="/" className="hover:text-foreground">Home</Link>
-          <Link to="/ai-document-tools" className="hover:text-foreground">AI Tools</Link>
-          <Link to="/about" className="hover:text-foreground">About</Link>
-          <Link to="/contact" className="hover:text-foreground">Contact</Link>
-          <Link to="/blog" className="hover:text-foreground">Blog</Link>
-          <Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link>
-          <Link to="/terms" className="hover:text-foreground">Terms of Service</Link>
+
+        {/* PDF Tools */}
+        <div>
+          <h4 className="text-sm font-semibold text-foreground mb-3">PDF Tools</h4>
+          <ul className="space-y-2">
+            {toolLinks.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* AI Tools */}
+        <div>
+          <h4 className="text-sm font-semibold text-foreground mb-3">AI Tools</h4>
+          <ul className="space-y-2">
+            {aiLinks.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Company */}
+        <div>
+          <h4 className="text-sm font-semibold text-foreground mb-3">Company</h4>
+          <ul className="space-y-2">
+            {companyLinks.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs text-muted-foreground">
+            Support: <a href="mailto:merge.pdf.st@gmail.com" className="text-primary hover:underline">merge.pdf.st@gmail.com</a>
+          </p>
         </div>
       </div>
-      <div className="mt-6 border-t border-border/60 pt-6 text-center text-sm text-muted-foreground">
-        <p>All files are automatically deleted after processing to protect your privacy.</p>
-        <p className="mt-1">Built with care · 100% Free · No sign-up required</p>
-        <p className="mt-1">
-          Support: <a href="mailto:merge.pdf.st@gmail.com" className="text-primary hover:underline">merge.pdf.st@gmail.com</a>
+
+      <div className="mt-10 border-t border-border/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p className="text-xs text-muted-foreground">
+          © {new Date().getFullYear()} MergesPDF · Privacy Policy · GDPR · Open Source
+        </p>
+        <p className="text-xs text-muted-foreground">
+          All files are processed locally and auto-deleted. Zero server uploads.
         </p>
       </div>
     </div>

@@ -141,7 +141,7 @@ function StatItem({ stat }: { stat: typeof statsConfig[0] }) {
 const Index = () => {
   const [testimonialIdx, setTestimonialIdx] = useState(0);
   const visibleCount = 3;
-  const maxIdx = testimonials.length - visibleCount;
+  const maxIdx = testimonialKeys.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);
   const prev = useCallback(() => setTestimonialIdx(i => Math.max(i - 1, 0)), []);
   const { t } = useI18n();

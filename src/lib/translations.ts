@@ -165,6 +165,7 @@ const ar: T = {
   'cta.title': 'مستعد؟ بدون تسجيل. بدون رسوم. أدوات PDF قوية.', 'cta.subtitle': 'انضم لملايين المستخدمين.', 'cta.button': 'ابدأ الآن — مجاناً',
   'footer.desc': 'مجموعة PDF التي تضع الخصوصية أولاً.', 'footer.pdftools': 'أدوات PDF', 'footer.aitools': 'أدوات الذكاء الاصطناعي', 'footer.company': 'الشركة',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'جميع الملفات تُعالج محلياً وتُحذف تلقائياً.',
+  'footer.privacy': 'سياسة الخصوصية', 'footer.terms': 'شروط الخدمة',
   'cat.pdftools': 'أدوات PDF', 'cat.converters': 'المحولات', 'cat.aitools': 'أدوات الذكاء الاصطناعي',
   'step.upload': 'رفع', 'step.upload.desc': 'اسحب وأفلت أو اختر ملفاتك.', 'step.process': 'معالجة', 'step.process.desc': 'تُعالج الملفات فوراً في متصفحك.', 'step.download': 'تحميل', 'step.download.desc': 'احصل على ملفك في ثوانٍ.',
   // Tool names

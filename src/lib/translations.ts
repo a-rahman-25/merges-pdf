@@ -1032,6 +1032,19 @@ const nl: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': 'Samenvatting', 'ai.page.summarize.sub': 'Upload een PDF en laat AI het samenvatten.',
   'ai.page.translate.h1b': 'Vertaler', 'ai.page.translate.sub': 'Vertaal je PDF\'s naar elke taal met AI.',
   'ai.page.qa.h1b': 'Vragen', 'ai.page.qa.sub': 'Upload een PDF en stel vragen — AI antwoordt.',
+  'faq.heading': 'Veelgestelde vragen',
+  'faq.summarize.q1': 'Hoe werkt AI-samenvatting?', 'faq.summarize.a1': 'Upload een PDF en ons AI-model analyseert de structuur en inhoud voor een uitgebreide samenvatting.',
+  'faq.summarize.q2': 'Is de samenvatting nauwkeurig?', 'faq.summarize.a2': 'AI-samenvattingen bieden een nuttig overzicht maar controleer met het originele document.',
+  'faq.summarize.q3': 'Wordt mijn document naar een server gestuurd?', 'faq.summarize.a3': 'Documentmetadata wordt naar de AI-service gestuurd. De daadwerkelijke inhoud blijft in je browser.',
+  'faq.summarize.q4': 'Kan ik grote documenten samenvatten?', 'faq.summarize.a4': 'Ja, documenten van elke grootte kunnen worden samengevat.',
+  'faq.qa.q1': 'Hoe werkt AI Q&A?', 'faq.qa.a1': 'Upload een PDF en stel elke vraag. AI analyseert de documentcontext en geeft relevante antwoorden.',
+  'faq.qa.q2': 'Kan ik vervolgvragen stellen?', 'faq.qa.a2': 'Ja! De chat bewaart de gespreksgeschiedenis.',
+  'faq.qa.q3': 'Hoe nauwkeurig zijn de antwoorden?', 'faq.qa.a3': 'AI-antwoorden zijn gebaseerd op documentanalyse. Controleer bij kritieke beslissingen met het origineel.',
+  'faq.qa.q4': 'Is er een vraagenlimiet?', 'faq.qa.a4': 'Je kunt zoveel vragen stellen als je wilt. Er zijn ruime gratis gebruikslimieten.',
+  'faq.translate.q1': 'Welke talen worden ondersteund?', 'faq.translate.a1': 'We ondersteunen 15+ talen waaronder Spaans, Frans, Duits, Chinees, Japans, Arabisch en meer.',
+  'faq.translate.q2': 'Hoe nauwkeurig is de vertaling?', 'faq.translate.a2': 'AI levert vertalingen van hoge kwaliteit. Voor officiële documenten raden we professionele vertaling aan.',
+  'faq.translate.q3': 'Kan ik de hele PDF vertalen?', 'faq.translate.a3': 'AI analyseert het document en vertaalt de inhoudsstructuur. Kopieer de tekst voor volledige vertaling.',
+  'faq.translate.q4': 'Is het gratis?', 'faq.translate.a4': 'Ja, AI-vertaling is gratis met ruime gebruikslimieten.',
 };
 
 const id: T = {

@@ -40,6 +40,9 @@ const tabGroups: TabGroup[] = [
       { id: 'pdf-signature', label: 'Signature', icon: Layers, path: '/pdf-signature' },
       { id: 'crop-pages', label: 'Crop', icon: Layers, path: '/crop-pages' },
       { id: 'pdf-metadata', label: 'Metadata', icon: Layers, path: '/pdf-metadata' },
+      { id: 'pdf-to-images', label: 'PDF → Images', icon: ImageIcon, path: '/pdf-to-images' },
+      { id: 'form-filler', label: 'Fill Forms', icon: FormInput, path: '/pdf-form-filler' },
+      { id: 'redact', label: 'Redact', icon: EyeOff, path: '/pdf-redact' },
     ],
   },
   {

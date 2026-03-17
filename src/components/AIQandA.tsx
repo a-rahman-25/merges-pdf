@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
 import { streamAI } from '@/lib/stream-ai';
+import { useI18n } from '@/hooks/useI18n';
 
 interface Message {
   role: 'user' | 'assistant';
@@ -14,6 +15,7 @@ interface Message {
 }
 
 const AIQandA = () => {
+  const { t } = useI18n();
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [question, setQuestion] = useState('');
@@ -89,8 +91,8 @@ const AIQandA = () => {
           <div className="flex flex-col items-center gap-4">
             <div className="rounded-xl bg-primary/10 p-4"><MessageSquare className="h-8 w-8 text-primary" /></div>
             <div>
-              <p className="text-lg font-display font-semibold text-foreground">Upload a PDF to ask questions</p>
-              <p className="mt-1 text-sm text-muted-foreground">AI will answer questions about your document</p>
+              <p className="text-lg font-display font-semibold text-foreground">{t('ai.upload.qa')}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t('ai.upload.qa.desc')}</p>
             </div>
           </div>
         </motion.div>
@@ -99,7 +101,7 @@ const AIQandA = () => {
           <div className="flex items-center justify-between px-1">
             <p className="text-sm font-medium text-muted-foreground">{file.name}</p>
             <button onClick={reset} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-              <RotateCcw className="h-3.5 w-3.5" /> Clear
+              <RotateCcw className="h-3.5 w-3.5" /> {t('ai.clear')}
             </button>
           </div>
           <div className="flex items-center gap-3 rounded-xl bg-card p-3 pr-4 border border-border">
@@ -108,7 +110,7 @@ const AIQandA = () => {
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} pages</p>
+              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} {t('ai.pages')}</p>
             </div>
           </div>
 
@@ -116,13 +118,13 @@ const AIQandA = () => {
             <div className="space-y-3 max-h-80 overflow-y-auto pr-1">
               {messages.map((msg, i) => (
                 <div key={i} className={`rounded-xl p-4 ${msg.role === 'user' ? 'bg-primary/10 ml-8' : 'bg-card border border-border mr-8'}`}>
-                  <p className="text-xs font-semibold text-muted-foreground mb-1">{msg.role === 'user' ? 'You' : 'AI'}</p>
+                  <p className="text-xs font-semibold text-muted-foreground mb-1">{msg.role === 'user' ? t('ai.qa.you') : t('ai.qa.ai')}</p>
                   <p className="text-sm text-foreground whitespace-pre-wrap">{msg.content}</p>
                 </div>
               ))}
               {loading && messages[messages.length - 1]?.role !== 'assistant' && (
                 <div className="bg-card border border-border rounded-xl p-4 mr-8">
-                  <p className="text-xs font-semibold text-muted-foreground mb-1">AI</p>
+                  <p className="text-xs font-semibold text-muted-foreground mb-1">{t('ai.qa.ai')}</p>
                   <Loader2 className="h-4 w-4 animate-spin text-primary" />
                 </div>
               )}
@@ -134,7 +136,7 @@ const AIQandA = () => {
               value={question}
               onChange={e => setQuestion(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && !loading && handleAsk()}
-              placeholder="Ask a question about this PDF..."
+              placeholder={t('ai.qa.placeholder')}
               disabled={loading}
               className="flex-1"
             />

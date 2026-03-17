@@ -3,6 +3,7 @@ import AITranslator from '@/components/AITranslator';
 import ToolPageLayout from '@/components/ToolPageLayout';
 import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
+import { useI18n } from '@/hooks/useI18n';
 
 const faqs = [
   { q: 'Which languages are supported?', a: 'We support 15+ languages including Spanish, French, German, Chinese, Japanese, Korean, Arabic, Hindi, Russian, and more.' },
@@ -11,27 +12,30 @@ const faqs = [
   { q: 'Is this free?', a: 'Yes, AI translation is free to use with generous usage limits.' },
 ];
 
-const AiTranslate = () => (
-  <ToolPageLayout activeTab="ai-translate">
-    <SEOHead
-      title="AI PDF Translator — Free | MergePDF"
-      description="Translate PDF documents into any language using AI. Free and instant."
-      path="/ai-translate"
-      faqs={faqs}
-    />
-    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
-      <div className="mb-10 text-center">
-        <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-          AI PDF <span className="text-primary">Translator</span>
-        </h1>
-        <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
-          Translate your PDF documents into any language with AI.
-        </p>
-      </div>
-      <AITranslator />
-      <ToolFAQ faqs={faqs} />
-    </motion.div>
-  </ToolPageLayout>
-);
+const AiTranslate = () => {
+  const { t } = useI18n();
+  return (
+    <ToolPageLayout activeTab="ai-translate">
+      <SEOHead
+        title="AI PDF Translator — Free | MergePDF"
+        description="Translate PDF documents into any language using AI. Free and instant."
+        path="/ai-translate"
+        faqs={faqs}
+      />
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+        <div className="mb-10 text-center">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            {t('ai.page.summarize.h1a')} <span className="text-primary">{t('ai.page.translate.h1b')}</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
+            {t('ai.page.translate.sub')}
+          </p>
+        </div>
+        <AITranslator />
+        <ToolFAQ faqs={faqs} />
+      </motion.div>
+    </ToolPageLayout>
+  );
+};
 
 export default AiTranslate;

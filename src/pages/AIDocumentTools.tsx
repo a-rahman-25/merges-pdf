@@ -5,8 +5,19 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { aiTools, aiToolCategories } from '@/lib/ai-tools-config';
 import { useState } from 'react';
+import { useI18n } from '@/hooks/useI18n';
+
+const categoryKeyMap: Record<string, string> = {
+  analysis: 'ai.cat.analysis',
+  extraction: 'ai.cat.extraction',
+  generation: 'ai.cat.generation',
+  writing: 'ai.cat.writing',
+  education: 'ai.cat.education',
+  compliance: 'ai.cat.compliance',
+};
 
 const AIDocumentTools = () => {
+  const { t } = useI18n();
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const filtered = activeCategory ? aiTools.filter(t => t.category === activeCategory) : aiTools;
 
@@ -23,10 +34,10 @@ const AIDocumentTools = () => {
         <main className="mx-auto max-w-6xl px-6 py-12 md:py-20">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
             <h1 className="font-display text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-              AI Document Intelligence Tools
+              {t('ai.tools.title')}
             </h1>
             <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              40 free AI-powered tools to analyze, extract, generate, and transform your documents. No sign-up required.
+              {t('ai.tools.subtitle')}
             </p>
           </motion.div>
 
@@ -37,7 +48,7 @@ const AIDocumentTools = () => {
                 onClick={() => setActiveCategory(null)}
                 className={`rounded-lg px-4 py-2 text-sm font-display font-semibold transition-all ${!activeCategory ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
               >
-                All ({aiTools.length})
+                {t('ai.tools.all')} ({aiTools.length})
               </button>
               {aiToolCategories.map(cat => {
                 const count = aiTools.filter(t => t.category === cat.id).length;
@@ -47,7 +58,7 @@ const AIDocumentTools = () => {
                     onClick={() => setActiveCategory(cat.id)}
                     className={`rounded-lg px-4 py-2 text-sm font-display font-semibold transition-all ${activeCategory === cat.id ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
                   >
-                    {cat.label} ({count})
+                    {t(categoryKeyMap[cat.id] || cat.label)} ({count})
                   </button>
                 );
               })}
@@ -74,7 +85,7 @@ const AIDocumentTools = () => {
                     {tool.title}
                   </h3>
                   <p className="mt-1 text-xs text-muted-foreground line-clamp-2 flex-1">{tool.description}</p>
-                  <span className="mt-3 text-xs font-medium text-primary">Use Free →</span>
+                  <span className="mt-3 text-xs font-medium text-primary">{t('ai.tools.usefree')}</span>
                 </Link>
               </motion.div>
             ))}
@@ -83,7 +94,7 @@ const AIDocumentTools = () => {
           {/* Privacy Notice */}
           <div className="mt-16 rounded-xl border border-border bg-card p-6 text-center">
             <p className="text-sm text-muted-foreground">
-              🔒 All uploaded files are automatically deleted after processing to protect your privacy. No data is stored.
+              🔒 {t('ai.privacy.full')}
             </p>
           </div>
         </main>

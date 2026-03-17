@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
 import { streamAI } from '@/lib/stream-ai';
+import { useI18n } from '@/hooks/useI18n';
 
 const languages = [
   { value: 'es', label: 'Spanish' }, { value: 'fr', label: 'French' }, { value: 'de', label: 'German' },
@@ -17,6 +18,7 @@ const languages = [
 ];
 
 const AITranslator = () => {
+  const { t } = useI18n();
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
   const [targetLang, setTargetLang] = useState('es');
   const [processing, setProcessing] = useState(false);
@@ -48,28 +50,21 @@ const AITranslator = () => {
       await streamAI({
         functionName: 'ai-translate',
         body: { filename: file.name, pageCount: file.pageCount, targetLanguage: langLabel },
-        onDelta: (chunk) => {
-          accumulated += chunk;
-          setTranslation(accumulated);
-        },
-        onDone: () => {
-          toast.success('Translation complete!');
-        },
+        onDelta: (chunk) => { accumulated += chunk; setTranslation(accumulated); },
+        onDone: () => { toast.success('Translation complete!'); },
       });
     } catch (err: any) {
       console.error(err);
       if (err?.status === 429) toast.error('Rate limited — please try again shortly.');
       else if (err?.status === 402) toast.error('AI credits depleted.');
       else toast.error('Failed to translate. Please try again.');
-    } finally {
-      setProcessing(false);
-    }
+    } finally { setProcessing(false); }
   };
 
   const handleCopy = () => {
     navigator.clipboard.writeText(translation);
     setCopied(true);
-    toast.success('Copied!');
+    toast.success(t('ai.copied'));
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -87,8 +82,8 @@ const AITranslator = () => {
           <div className="flex flex-col items-center gap-4">
             <div className="rounded-xl bg-primary/10 p-4"><Languages className="h-8 w-8 text-primary" /></div>
             <div>
-              <p className="text-lg font-display font-semibold text-foreground">Upload a PDF to translate</p>
-              <p className="mt-1 text-sm text-muted-foreground">AI will translate your document content</p>
+              <p className="text-lg font-display font-semibold text-foreground">{t('ai.upload.translate')}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t('ai.upload.translate.desc')}</p>
             </div>
           </div>
         </motion.div>
@@ -97,7 +92,7 @@ const AITranslator = () => {
           <div className="flex items-center justify-between px-1">
             <p className="text-sm font-medium text-muted-foreground">{file.name}</p>
             <button onClick={reset} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-              <RotateCcw className="h-3.5 w-3.5" /> Clear
+              <RotateCcw className="h-3.5 w-3.5" /> {t('ai.clear')}
             </button>
           </div>
           <div className="flex items-center gap-3 rounded-xl bg-card p-3 pr-4 border border-border">
@@ -106,13 +101,13 @@ const AITranslator = () => {
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} pages</p>
+              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} {t('ai.pages')}</p>
             </div>
           </div>
 
           {!translation && !processing && (
             <div className="space-y-3">
-              <label className="text-sm font-medium text-foreground">Translate to:</label>
+              <label className="text-sm font-medium text-foreground">{t('ai.translate.to')}</label>
               <Select value={targetLang} onValueChange={setTargetLang}>
                 <SelectTrigger><SelectValue /></SelectTrigger>
                 <SelectContent>
@@ -124,7 +119,7 @@ const AITranslator = () => {
 
           {!translation && !processing && (
             <Button onClick={handleTranslate} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-              <Languages className="h-5 w-5" /> Translate with AI
+              <Languages className="h-5 w-5" /> {t('ai.translate.btn')}
             </Button>
           )}
 
@@ -132,17 +127,17 @@ const AITranslator = () => {
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-display font-semibold text-foreground">Translation</h3>
+                  <h3 className="font-display font-semibold text-foreground">{t('ai.translate.title')}</h3>
                   {translation && !processing && (
                     <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
                       {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                      {copied ? 'Copied' : 'Copy'}
+                      {copied ? t('ai.copied') : t('ai.copy')}
                     </button>
                   )}
                 </div>
                 {processing && !translation && (
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> Translating…
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> {t('ai.translating')}
                   </div>
                 )}
                 {translation && (
@@ -154,7 +149,7 @@ const AITranslator = () => {
               </div>
               {!processing && (
                 <Button onClick={handleTranslate} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
-                  <Languages className="h-5 w-5" /> Retranslate
+                  <Languages className="h-5 w-5" /> {t('ai.translate.regen')}
                 </Button>
               )}
             </motion.div>

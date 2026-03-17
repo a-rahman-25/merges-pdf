@@ -6,8 +6,10 @@ import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
 import { streamAI } from '@/lib/stream-ai';
+import { useI18n } from '@/hooks/useI18n';
 
 const AISummarizer = () => {
+  const { t } = useI18n();
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
   const [processing, setProcessing] = useState(false);
   const [summary, setSummary] = useState('');
@@ -62,7 +64,7 @@ const AISummarizer = () => {
   const handleCopy = () => {
     navigator.clipboard.writeText(summary);
     setCopied(true);
-    toast.success('Copied to clipboard!');
+    toast.success(t('ai.copied'));
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -83,8 +85,8 @@ const AISummarizer = () => {
               <Brain className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <p className="text-lg font-display font-semibold text-foreground">Upload a PDF to summarize</p>
-              <p className="mt-1 text-sm text-muted-foreground">AI will analyze your document and generate a summary</p>
+              <p className="text-lg font-display font-semibold text-foreground">{t('ai.upload.summarize')}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{t('ai.upload.summarize.desc')}</p>
             </div>
           </div>
         </motion.div>
@@ -93,7 +95,7 @@ const AISummarizer = () => {
           <div className="flex items-center justify-between px-1">
             <p className="text-sm font-medium text-muted-foreground">{file.name}</p>
             <button onClick={reset} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-              <RotateCcw className="h-3.5 w-3.5" /> Clear
+              <RotateCcw className="h-3.5 w-3.5" /> {t('ai.clear')}
             </button>
           </div>
           <div className="flex items-center gap-3 rounded-xl bg-card p-3 pr-4 border border-border">
@@ -102,13 +104,13 @@ const AISummarizer = () => {
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} pages</p>
+              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} {t('ai.pages')}</p>
             </div>
           </div>
 
           {!summary && !processing && (
             <Button onClick={handleSummarize} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-              <Brain className="h-5 w-5" /> Summarize with AI
+              <Brain className="h-5 w-5" /> {t('ai.summarize.btn')}
             </Button>
           )}
 
@@ -116,17 +118,17 @@ const AISummarizer = () => {
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-display font-semibold text-foreground">AI Summary</h3>
+                  <h3 className="font-display font-semibold text-foreground">{t('ai.summarize.title')}</h3>
                   {summary && !processing && (
                     <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
                       {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                      {copied ? 'Copied' : 'Copy'}
+                      {copied ? t('ai.copied') : t('ai.copy')}
                     </button>
                   )}
                 </div>
                 {processing && !summary && (
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> Analyzing…
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> {t('ai.analyzing')}
                   </div>
                 )}
                 {summary && (
@@ -138,7 +140,7 @@ const AISummarizer = () => {
               </div>
               {!processing && (
                 <Button onClick={handleSummarize} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
-                  <Brain className="h-5 w-5" /> Regenerate Summary
+                  <Brain className="h-5 w-5" /> {t('ai.summarize.regen')}
                 </Button>
               )}
             </motion.div>

@@ -81,6 +81,8 @@ const en: T = {
   'footer.company': 'Company',
   'footer.copyright': '© {year} MergesPDF · Privacy Policy · GDPR · Open Source',
   'footer.notice': 'All files are processed locally and auto-deleted. Zero server uploads.',
+  'footer.privacy': 'Privacy Policy',
+  'footer.terms': 'Terms of Service',
   // Tool categories
   'cat.pdftools': 'PDF Tools',
   'cat.converters': 'Converters',

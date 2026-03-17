@@ -49,6 +49,7 @@ const toolCategories = [
       { icon: Droplets, title: 'Remove Watermark', desc: 'Strip watermarks from PDF files.', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
       { icon: ArrowRightLeft, title: 'Image to PDF', desc: 'Convert images into a single PDF.', path: '/image-to-pdf', color: 'bg-tool-pink/15 text-tool-pink' },
       { icon: Combine, title: 'Merge Images', desc: 'Merge multiple images into one PDF.', path: '/merge-images', color: 'bg-tool-amber/15 text-tool-amber' },
+      { icon: ArrowRightLeft, title: 'SVG to Image', desc: 'Convert SVG to PNG, JPG, WEBP or BMP.', path: '/svg-to-image', color: 'bg-tool-lime/15 text-tool-lime' },
     ],
   },
   {

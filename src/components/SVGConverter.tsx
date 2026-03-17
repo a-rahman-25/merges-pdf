@@ -4,13 +4,48 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Download, Upload, Image, Loader2, Trash2 } from 'lucide-react';
 
-type OutputFormat = 'png' | 'jpg' | 'webp' | 'bmp';
+type OutputFormat = 'png' | 'jpg' | 'webp' | 'bmp' | 'ico';
+
+/** Build an ICO file from PNG buffers at given sizes */
+function buildIco(pngs: Uint8Array[], sizes: number[]): Blob {
+  const headerSize = 6;
+  const dirEntrySize = 16;
+  const numImages = pngs.length;
+  let offset = headerSize + dirEntrySize * numImages;
+
+  // ICO header: reserved(2) + type(2) + count(2)
+  const header = new Uint8Array(headerSize);
+  const hv = new DataView(header.buffer);
+  hv.setUint16(0, 0, true);       // reserved
+  hv.setUint16(2, 1, true);       // type = ICO
+  hv.setUint16(4, numImages, true);
+
+  const dirEntries = new Uint8Array(dirEntrySize * numImages);
+  const dv = new DataView(dirEntries.buffer);
+
+  for (let i = 0; i < numImages; i++) {
+    const s = sizes[i] >= 256 ? 0 : sizes[i];
+    const off = i * dirEntrySize;
+    dv.setUint8(off, s);           // width
+    dv.setUint8(off + 1, s);      // height
+    dv.setUint8(off + 2, 0);      // palette
+    dv.setUint8(off + 3, 0);      // reserved
+    dv.setUint16(off + 4, 1, true); // color planes
+    dv.setUint16(off + 6, 32, true); // bits per pixel
+    dv.setUint32(off + 8, pngs[i].length, true); // size
+    dv.setUint32(off + 12, offset, true); // offset
+    offset += pngs[i].length;
+  }
+
+  return new Blob([header, dirEntries, ...pngs.map(p => p.buffer as ArrayBuffer)], { type: 'image/x-icon' });
+}
 
 const formatOptions: { value: OutputFormat; label: string; mime: string }[] = [
   { value: 'png', label: 'PNG', mime: 'image/png' },
   { value: 'jpg', label: 'JPG', mime: 'image/jpeg' },
   { value: 'webp', label: 'WEBP', mime: 'image/webp' },
   { value: 'bmp', label: 'BMP', mime: 'image/bmp' },
+  { value: 'ico', label: 'ICO (Favicon)', mime: 'image/x-icon' },
 ];
 
 const scaleOptions = [1, 2, 3, 4];
@@ -80,6 +115,30 @@ const SVGConverter = () => {
         img.src = url;
       });
 
+      // ICO needs fixed sizes
+      if (format === 'ico') {
+        const icoSizes = [16, 32, 48];
+        const pngBlobs: Uint8Array[] = [];
+
+        for (const size of icoSizes) {
+          const c = document.createElement('canvas');
+          c.width = size;
+          c.height = size;
+          const cx = c.getContext('2d')!;
+          cx.drawImage(img, 0, 0, size, size);
+          const blob = await new Promise<Blob>((res) => c.toBlob((b) => res(b!), 'image/png'));
+          pngBlobs.push(new Uint8Array(await blob.arrayBuffer()));
+        }
+
+        // Build ICO binary
+        const icoBlob = buildIco(pngBlobs, icoSizes);
+        const icoUrl = URL.createObjectURL(icoBlob);
+        setResultUrl(icoUrl);
+        URL.revokeObjectURL(url);
+        toast({ title: 'Converted!', description: `SVG → ICO (${icoSizes.join(', ')}px)` });
+        return;
+      }
+
       const canvas = document.createElement('canvas');
       canvas.width = scaledW;
       canvas.height = scaledH;
@@ -111,7 +170,7 @@ const SVGConverter = () => {
     if (!resultUrl || !svgFile) return;
     const a = document.createElement('a');
     a.href = resultUrl;
-    a.download = svgFile.name.replace(/\.svg$/i, '') + '.' + format;
+    a.download = svgFile.name.replace(/\.svg$/i, '') + '.' + (format === 'ico' ? 'ico' : format);
     a.click();
   }, [resultUrl, svgFile, format]);
 

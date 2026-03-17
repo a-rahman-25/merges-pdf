@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Code } from 'lucide-react';
+import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
@@ -43,16 +43,6 @@ const toolGroups = [
       { to: '/merge-images', label: 'Merge Images' },
       { to: '/bg-remover', label: 'Remove Background' },
       { to: '/svg-to-image', label: 'SVG to Image' },
-    ],
-  },
-  {
-    labelKey: 'cat.aitools',
-    icon: Brain,
-    items: [
-      { to: '/ai-summarize', label: 'AI Summarizer' },
-      { to: '/ai-translate', label: 'AI Translator' },
-      { to: '/ai-qa', label: 'AI Q&A' },
-      { to: '/ai-document-tools', label: '40+ AI Tools' },
     ],
   },
 ];
@@ -144,7 +134,7 @@ const Header = () => {
             <ThemeToggle />
             <Button asChild size="sm" className="rounded-xl gradient-bg border-0 font-semibold">
               <Link to="/ai-document-tools" className="flex items-center gap-1.5">
-                <Code className="h-3.5 w-3.5" /> {t('nav.api')}
+                <Brain className="h-3.5 w-3.5" /> ✨ AI Tools
               </Link>
             </Button>
           </div>

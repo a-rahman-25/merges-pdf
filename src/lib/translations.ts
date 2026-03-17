@@ -363,6 +363,7 @@ const zh: T = {
   'cta.title': '准备好了吗？无需注册。无需费用。强大的PDF工具。', 'cta.subtitle': '加入数百万用户。', 'cta.button': '立即开始 — 免费',
   'footer.desc': '隐私优先的PDF工具套件。', 'footer.pdftools': 'PDF工具', 'footer.aitools': 'AI工具', 'footer.company': '公司',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': '所有文件在本地处理。',
+  'footer.privacy': '隐私政策', 'footer.terms': '服务条款',
   'cat.pdftools': 'PDF工具', 'cat.converters': '转换器', 'cat.aitools': 'AI工具',
   'step.upload': '上传', 'step.upload.desc': '拖放或选择文件。', 'step.process': '处理', 'step.process.desc': '在浏览器中即时处理。', 'step.download': '下载', 'step.download.desc': '几秒钟获取结果。',
 };

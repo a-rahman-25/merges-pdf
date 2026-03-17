@@ -81,6 +81,8 @@ const en: T = {
   'footer.company': 'Company',
   'footer.copyright': '© {year} MergesPDF · Privacy Policy · GDPR · Open Source',
   'footer.notice': 'All files are processed locally and auto-deleted. Zero server uploads.',
+  'footer.privacy': 'Privacy Policy',
+  'footer.terms': 'Terms of Service',
   // Tool categories
   'cat.pdftools': 'PDF Tools',
   'cat.converters': 'Converters',
@@ -163,6 +165,7 @@ const ar: T = {
   'cta.title': 'مستعد؟ بدون تسجيل. بدون رسوم. أدوات PDF قوية.', 'cta.subtitle': 'انضم لملايين المستخدمين.', 'cta.button': 'ابدأ الآن — مجاناً',
   'footer.desc': 'مجموعة PDF التي تضع الخصوصية أولاً.', 'footer.pdftools': 'أدوات PDF', 'footer.aitools': 'أدوات الذكاء الاصطناعي', 'footer.company': 'الشركة',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'جميع الملفات تُعالج محلياً وتُحذف تلقائياً.',
+  'footer.privacy': 'سياسة الخصوصية', 'footer.terms': 'شروط الخدمة',
   'cat.pdftools': 'أدوات PDF', 'cat.converters': 'المحولات', 'cat.aitools': 'أدوات الذكاء الاصطناعي',
   'step.upload': 'رفع', 'step.upload.desc': 'اسحب وأفلت أو اختر ملفاتك.', 'step.process': 'معالجة', 'step.process.desc': 'تُعالج الملفات فوراً في متصفحك.', 'step.download': 'تحميل', 'step.download.desc': 'احصل على ملفك في ثوانٍ.',
   // Tool names
@@ -234,6 +237,7 @@ const ur: T = {
   'cta.title': 'تیار ہیں؟ سائن اپ نہیں۔ فیس نہیں۔ طاقتور PDF ٹولز۔', 'cta.subtitle': 'لاکھوں صارفین سے جڑیں۔', 'cta.button': 'ابھی شروع کریں — مفت',
   'footer.desc': 'پرائیویسی فرسٹ PDF سویٹ۔', 'footer.pdftools': 'PDF ٹولز', 'footer.aitools': 'AI ٹولز', 'footer.company': 'کمپنی',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'تمام فائلیں مقامی طور پر پروسیس ہوتی ہیں۔',
+  'footer.privacy': 'رازداری کی پالیسی', 'footer.terms': 'سروس کی شرائط',
   'cat.pdftools': 'PDF ٹولز', 'cat.converters': 'کنورٹرز', 'cat.aitools': 'AI ٹولز',
   'step.upload': 'اپ لوڈ', 'step.upload.desc': 'فائلیں گھسیٹیں یا منتخب کریں۔', 'step.process': 'پروسیس', 'step.process.desc': 'فائلیں فوری طور پر پروسیس ہوتی ہیں۔', 'step.download': 'ڈاؤن لوڈ', 'step.download.desc': 'سیکنڈوں میں نتیجہ حاصل کریں۔',
 };
@@ -254,6 +258,7 @@ const hi: T = {
   'cta.title': 'तैयार हैं? साइन-अप नहीं। शुल्क नहीं। शक्तिशाली PDF टूल्स।', 'cta.subtitle': 'लाखों उपयोगकर्ताओं से जुड़ें।', 'cta.button': 'अभी शुरू करें — मुफ्त',
   'footer.desc': 'प्राइवेसी-फर्स्ट PDF सूट।', 'footer.pdftools': 'PDF टूल्स', 'footer.aitools': 'AI टूल्स', 'footer.company': 'कंपनी',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'सभी फ़ाइलें स्थानीय रूप से प्रोसेस होती हैं।',
+  'footer.privacy': 'गोपनीयता नीति', 'footer.terms': 'सेवा की शर्तें',
   'cat.pdftools': 'PDF टूल्स', 'cat.converters': 'कनवर्टर', 'cat.aitools': 'AI टूल्स',
   'step.upload': 'अपलोड', 'step.upload.desc': 'फ़ाइलें खींचें या चुनें।', 'step.process': 'प्रोसेस', 'step.process.desc': 'फ़ाइलें तुरंत प्रोसेस होती हैं।', 'step.download': 'डाउनलोड', 'step.download.desc': 'सेकंडों में परिणाम प्राप्त करें।',
 };
@@ -274,6 +279,7 @@ const es: T = {
   'cta.title': '¿Listo? Sin registro. Sin tarifas. Herramientas PDF poderosas.', 'cta.subtitle': 'Únete a millones de usuarios.', 'cta.button': 'Empezar — Es gratis',
   'footer.desc': 'Suite PDF con privacidad primero.', 'footer.pdftools': 'Herramientas PDF', 'footer.aitools': 'Herramientas IA', 'footer.company': 'Empresa',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Todos los archivos se procesan localmente.',
+  'footer.privacy': 'Política de privacidad', 'footer.terms': 'Términos de servicio',
   'cat.pdftools': 'Herramientas PDF', 'cat.converters': 'Convertidores', 'cat.aitools': 'Herramientas IA',
   'step.upload': 'Subir', 'step.upload.desc': 'Arrastra o selecciona tus archivos.', 'step.process': 'Procesar', 'step.process.desc': 'Se procesan al instante en tu navegador.', 'step.download': 'Descargar', 'step.download.desc': 'Obtén el resultado en segundos.',
 };
@@ -294,6 +300,7 @@ const ptBR: T = {
   'cta.title': 'Pronto? Sem cadastro. Sem taxas. Ferramentas PDF poderosas.', 'cta.subtitle': 'Junte-se a milhões de usuários.', 'cta.button': 'Começar — É grátis',
   'footer.desc': 'Suite PDF com privacidade primeiro.', 'footer.pdftools': 'Ferramentas PDF', 'footer.aitools': 'Ferramentas IA', 'footer.company': 'Empresa',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Todos os arquivos são processados localmente.',
+  'footer.privacy': 'Política de privacidade', 'footer.terms': 'Termos de serviço',
   'cat.pdftools': 'Ferramentas PDF', 'cat.converters': 'Conversores', 'cat.aitools': 'Ferramentas IA',
   'step.upload': 'Enviar', 'step.upload.desc': 'Arraste ou selecione seus arquivos.', 'step.process': 'Processar', 'step.process.desc': 'Processado instantaneamente no navegador.', 'step.download': 'Baixar', 'step.download.desc': 'Obtenha o resultado em segundos.',
 };
@@ -314,6 +321,7 @@ const fr: T = {
   'cta.title': 'Prêt ? Sans inscription. Sans frais. Des outils PDF puissants.', 'cta.subtitle': 'Rejoignez des millions d\'utilisateurs.', 'cta.button': 'Commencer — C\'est gratuit',
   'footer.desc': 'Suite PDF confidentialité d\'abord.', 'footer.pdftools': 'Outils PDF', 'footer.aitools': 'Outils IA', 'footer.company': 'Entreprise',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tous les fichiers sont traités localement.',
+  'footer.privacy': 'Politique de confidentialité', 'footer.terms': 'Conditions d\'utilisation',
   'cat.pdftools': 'Outils PDF', 'cat.converters': 'Convertisseurs', 'cat.aitools': 'Outils IA',
   'step.upload': 'Envoyer', 'step.upload.desc': 'Glissez-déposez vos fichiers.', 'step.process': 'Traiter', 'step.process.desc': 'Traitement instantané dans le navigateur.', 'step.download': 'Télécharger', 'step.download.desc': 'Obtenez le résultat en secondes.',
 };
@@ -334,6 +342,7 @@ const de: T = {
   'cta.title': 'Bereit? Keine Anmeldung. Keine Gebühren. Leistungsstarke PDF-Tools.', 'cta.subtitle': 'Millionen Nutzer verarbeiten Dokumente privat.', 'cta.button': 'Jetzt starten — Kostenlos',
   'footer.desc': 'Datenschutz-orientierte PDF Suite.', 'footer.pdftools': 'PDF-Werkzeuge', 'footer.aitools': 'KI-Werkzeuge', 'footer.company': 'Unternehmen',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Alle Dateien werden lokal verarbeitet.',
+  'footer.privacy': 'Datenschutzrichtlinie', 'footer.terms': 'Nutzungsbedingungen',
   'cat.pdftools': 'PDF-Werkzeuge', 'cat.converters': 'Konverter', 'cat.aitools': 'KI-Werkzeuge',
   'step.upload': 'Hochladen', 'step.upload.desc': 'Dateien ziehen oder auswählen.', 'step.process': 'Verarbeiten', 'step.process.desc': 'Sofortige Verarbeitung im Browser.', 'step.download': 'Herunterladen', 'step.download.desc': 'Ergebnis in Sekunden erhalten.',
 };
@@ -354,6 +363,7 @@ const zh: T = {
   'cta.title': '准备好了吗？无需注册。无需费用。强大的PDF工具。', 'cta.subtitle': '加入数百万用户。', 'cta.button': '立即开始 — 免费',
   'footer.desc': '隐私优先的PDF工具套件。', 'footer.pdftools': 'PDF工具', 'footer.aitools': 'AI工具', 'footer.company': '公司',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': '所有文件在本地处理。',
+  'footer.privacy': '隐私政策', 'footer.terms': '服务条款',
   'cat.pdftools': 'PDF工具', 'cat.converters': '转换器', 'cat.aitools': 'AI工具',
   'step.upload': '上传', 'step.upload.desc': '拖放或选择文件。', 'step.process': '处理', 'step.process.desc': '在浏览器中即时处理。', 'step.download': '下载', 'step.download.desc': '几秒钟获取结果。',
 };
@@ -374,6 +384,7 @@ const ja: T = {
   'cta.title': '準備はいいですか？登録不要。無料。', 'cta.subtitle': '何百万人ものユーザーに参加。', 'cta.button': '今すぐ開始 — 無料',
   'footer.desc': 'プライバシーファーストPDFスイート。', 'footer.pdftools': 'PDFツール', 'footer.aitools': 'AIツール', 'footer.company': '会社',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'すべてのファイルはローカルで処理されます。',
+  'footer.privacy': 'プライバシーポリシー', 'footer.terms': '利用規約',
   'cat.pdftools': 'PDFツール', 'cat.converters': 'コンバーター', 'cat.aitools': 'AIツール',
   'step.upload': 'アップロード', 'step.upload.desc': 'ファイルをドラッグまたは選択。', 'step.process': '処理', 'step.process.desc': 'ブラウザで即座に処理。', 'step.download': 'ダウンロード', 'step.download.desc': '数秒で結果を取得。',
 };
@@ -394,6 +405,7 @@ const ko: T = {
   'cta.title': '준비되셨나요? 가입 불필요. 무료. 강력한 PDF 도구.', 'cta.subtitle': '수백만 사용자와 함께하세요.', 'cta.button': '지금 시작 — 무료',
   'footer.desc': '프라이버시 퍼스트 PDF 도구.', 'footer.pdftools': 'PDF 도구', 'footer.aitools': 'AI 도구', 'footer.company': '회사',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': '모든 파일은 로컬에서 처리됩니다.',
+  'footer.privacy': '개인정보 처리방침', 'footer.terms': '이용약관',
   'cat.pdftools': 'PDF 도구', 'cat.converters': '변환기', 'cat.aitools': 'AI 도구',
   'step.upload': '업로드', 'step.upload.desc': '파일을 드래그하거나 선택.', 'step.process': '처리', 'step.process.desc': '브라우저에서 즉시 처리.', 'step.download': '다운로드', 'step.download.desc': '몇 초 만에 결과 획득.',
 };
@@ -414,6 +426,7 @@ const tr: T = {
   'cta.title': 'Hazır mısınız? Kayıt yok. Ücret yok. Güçlü PDF araçları.', 'cta.subtitle': 'Milyonlarca kullanıcıya katılın.', 'cta.button': 'Şimdi başla — Ücretsiz',
   'footer.desc': 'Gizlilik öncelikli PDF paketi.', 'footer.pdftools': 'PDF Araçları', 'footer.aitools': 'AI Araçları', 'footer.company': 'Şirket',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tüm dosyalar yerel olarak işlenir.',
+  'footer.privacy': 'Gizlilik Politikası', 'footer.terms': 'Kullanım Şartları',
   'cat.pdftools': 'PDF Araçları', 'cat.converters': 'Dönüştürücüler', 'cat.aitools': 'AI Araçları',
   'step.upload': 'Yükle', 'step.upload.desc': 'Dosyalarınızı sürükleyin veya seçin.', 'step.process': 'İşle', 'step.process.desc': 'Tarayıcıda anında işlenir.', 'step.download': 'İndir', 'step.download.desc': 'Saniyeler içinde sonuç alın.',
 };
@@ -434,6 +447,7 @@ const ru: T = {
   'cta.title': 'Готовы? Без регистрации. Без оплаты. Мощные PDF инструменты.', 'cta.subtitle': 'Присоединяйтесь к миллионам.', 'cta.button': 'Начать — Бесплатно',
   'footer.desc': 'PDF набор с приоритетом конфиденциальности.', 'footer.pdftools': 'PDF инструменты', 'footer.aitools': 'AI инструменты', 'footer.company': 'Компания',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Все файлы обрабатываются локально.',
+  'footer.privacy': 'Политика конфиденциальности', 'footer.terms': 'Условия использования',
   'cat.pdftools': 'PDF инструменты', 'cat.converters': 'Конвертеры', 'cat.aitools': 'AI инструменты',
   'step.upload': 'Загрузить', 'step.upload.desc': 'Перетащите или выберите файлы.', 'step.process': 'Обработать', 'step.process.desc': 'Мгновенная обработка в браузере.', 'step.download': 'Скачать', 'step.download.desc': 'Результат за секунды.',
 };
@@ -454,6 +468,7 @@ const it: T = {
   'cta.title': 'Pronto? Senza registrazione. Senza costi. Strumenti PDF potenti.', 'cta.subtitle': 'Unisciti a milioni di utenti.', 'cta.button': 'Inizia — È gratuito',
   'footer.desc': 'Suite PDF privacy-first.', 'footer.pdftools': 'Strumenti PDF', 'footer.aitools': 'Strumenti AI', 'footer.company': 'Azienda',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tutti i file vengono elaborati localmente.',
+  'footer.privacy': 'Informativa sulla privacy', 'footer.terms': 'Termini di servizio',
   'cat.pdftools': 'Strumenti PDF', 'cat.converters': 'Convertitori', 'cat.aitools': 'Strumenti AI',
   'step.upload': 'Carica', 'step.upload.desc': 'Trascina o seleziona i file.', 'step.process': 'Elabora', 'step.process.desc': 'Elaborazione istantanea nel browser.', 'step.download': 'Scarica', 'step.download.desc': 'Risultato in pochi secondi.',
 };
@@ -474,6 +489,7 @@ const nl: T = {
   'cta.title': 'Klaar? Geen registratie. Geen kosten. Krachtige PDF-tools.', 'cta.subtitle': 'Sluit je aan bij miljoenen gebruikers.', 'cta.button': 'Nu starten — Gratis',
   'footer.desc': 'Privacy-first PDF suite.', 'footer.pdftools': 'PDF Tools', 'footer.aitools': 'AI Tools', 'footer.company': 'Bedrijf',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Alle bestanden worden lokaal verwerkt.',
+  'footer.privacy': 'Privacybeleid', 'footer.terms': 'Servicevoorwaarden',
   'cat.pdftools': 'PDF Tools', 'cat.converters': 'Converters', 'cat.aitools': 'AI Tools',
   'step.upload': 'Uploaden', 'step.upload.desc': 'Sleep of selecteer bestanden.', 'step.process': 'Verwerken', 'step.process.desc': 'Direct verwerkt in de browser.', 'step.download': 'Downloaden', 'step.download.desc': 'Resultaat in seconden.',
 };
@@ -494,6 +510,7 @@ const id: T = {
   'cta.title': 'Siap? Tanpa daftar. Tanpa biaya. Alat PDF yang kuat.', 'cta.subtitle': 'Bergabung jutaan pengguna.', 'cta.button': 'Mulai — Gratis',
   'footer.desc': 'Suite PDF privasi utama.', 'footer.pdftools': 'Alat PDF', 'footer.aitools': 'Alat AI', 'footer.company': 'Perusahaan',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Semua file diproses secara lokal.',
+  'footer.privacy': 'Kebijakan Privasi', 'footer.terms': 'Ketentuan Layanan',
   'cat.pdftools': 'Alat PDF', 'cat.converters': 'Konverter', 'cat.aitools': 'Alat AI',
   'step.upload': 'Unggah', 'step.upload.desc': 'Seret atau pilih file.', 'step.process': 'Proses', 'step.process.desc': 'Diproses instan di browser.', 'step.download': 'Unduh', 'step.download.desc': 'Hasil dalam hitungan detik.',
 };
@@ -514,6 +531,7 @@ const th: T = {
   'cta.title': 'พร้อมแล้ว? ไม่ต้องสมัคร ไม่มีค่าใช้จ่าย', 'cta.subtitle': 'เข้าร่วมผู้ใช้นับล้าน', 'cta.button': 'เริ่มเลย — ฟรี',
   'footer.desc': 'ชุดเครื่องมือ PDF ที่เน้นความเป็นส่วนตัว', 'footer.pdftools': 'เครื่องมือ PDF', 'footer.aitools': 'เครื่องมือ AI', 'footer.company': 'บริษัท',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'ไฟล์ทั้งหมดประมวลผลในเครื่อง',
+  'footer.privacy': 'นโยบายความเป็นส่วนตัว', 'footer.terms': 'ข้อกำหนดการใช้บริการ',
   'cat.pdftools': 'เครื่องมือ PDF', 'cat.converters': 'ตัวแปลง', 'cat.aitools': 'เครื่องมือ AI',
   'step.upload': 'อัปโหลด', 'step.upload.desc': 'ลากหรือเลือกไฟล์', 'step.process': 'ประมวลผล', 'step.process.desc': 'ประมวลผลทันทีในเบราว์เซอร์', 'step.download': 'ดาวน์โหลด', 'step.download.desc': 'ได้ผลลัพธ์ในไม่กี่วินาที',
 };
@@ -534,6 +552,7 @@ const vi: T = {
   'cta.title': 'Sẵn sàng? Không đăng ký. Không phí. Công cụ PDF mạnh mẽ.', 'cta.subtitle': 'Tham gia hàng triệu người dùng.', 'cta.button': 'Bắt đầu — Miễn phí',
   'footer.desc': 'Bộ PDF ưu tiên quyền riêng tư.', 'footer.pdftools': 'Công cụ PDF', 'footer.aitools': 'Công cụ AI', 'footer.company': 'Công ty',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tất cả tệp được xử lý cục bộ.',
+  'footer.privacy': 'Chính sách bảo mật', 'footer.terms': 'Điều khoản dịch vụ',
   'cat.pdftools': 'Công cụ PDF', 'cat.converters': 'Chuyển đổi', 'cat.aitools': 'Công cụ AI',
   'step.upload': 'Tải lên', 'step.upload.desc': 'Kéo thả hoặc chọn tệp.', 'step.process': 'Xử lý', 'step.process.desc': 'Xử lý ngay trong trình duyệt.', 'step.download': 'Tải xuống', 'step.download.desc': 'Nhận kết quả trong giây lát.',
 };
@@ -554,6 +573,7 @@ const bn: T = {
   'cta.title': 'প্রস্তুত? সাইন-আপ নেই। ফি নেই। শক্তিশালী PDF টুল।', 'cta.subtitle': 'লক্ষ লক্ষ ব্যবহারকারীদের সাথে যোগ দিন।', 'cta.button': 'এখনই শুরু করুন — বিনামূল্যে',
   'footer.desc': 'গোপনীয়তা-প্রথম PDF স্যুট।', 'footer.pdftools': 'PDF টুলস', 'footer.aitools': 'AI টুলস', 'footer.company': 'কোম্পানি',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'সব ফাইল স্থানীয়ভাবে প্রক্রিয়াকৃত।',
+  'footer.privacy': 'গোপনীয়তা নীতি', 'footer.terms': 'সেবার শর্তাবলী',
   'cat.pdftools': 'PDF টুলস', 'cat.converters': 'কনভার্টার', 'cat.aitools': 'AI টুলস',
   'step.upload': 'আপলোড', 'step.upload.desc': 'ফাইল টেনে আনুন বা বাছাই করুন।', 'step.process': 'প্রক্রিয়া', 'step.process.desc': 'ব্রাউজারে তাৎক্ষণিক প্রক্রিয়া।', 'step.download': 'ডাউনলোড', 'step.download.desc': 'সেকেন্ডে ফলাফল পান।',
 };
@@ -574,6 +594,7 @@ const sw: T = {
   'cta.title': 'Uko tayari? Bila kusajili. Bila ada. Zana zenye nguvu za PDF.', 'cta.subtitle': 'Jiunge na mamilioni ya watumiaji.', 'cta.button': 'Anza sasa — Bure',
   'footer.desc': 'PDF suite ya faragha kwanza.', 'footer.pdftools': 'Zana za PDF', 'footer.aitools': 'Zana za AI', 'footer.company': 'Kampuni',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Faili zote zinachakatwa ndani ya kifaa.',
+  'footer.privacy': 'Sera ya Faragha', 'footer.terms': 'Masharti ya Huduma',
   'cat.pdftools': 'Zana za PDF', 'cat.converters': 'Vibadilishaji', 'cat.aitools': 'Zana za AI',
   'step.upload': 'Pakia', 'step.upload.desc': 'Buruta au chagua faili.', 'step.process': 'Chakata', 'step.process.desc': 'Inachakatwa mara moja kwenye kivinjari.', 'step.download': 'Pakua', 'step.download.desc': 'Pata matokeo kwa sekunde.',
 };

@@ -3,31 +3,31 @@ import { Combine, Shield, Globe } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
 
 const toolLinks = [
-  { to: '/merge', label: 'Merge PDFs' },
-  { to: '/split', label: 'Split PDFs' },
-  { to: '/compress', label: 'Compress PDF' },
-  { to: '/rotate', label: 'Rotate Pages' },
-  { to: '/pdf-signature', label: 'Sign PDF' },
-  { to: '/encrypt', label: 'Encrypt PDF' },
-  { to: '/pdf-to-word', label: 'PDF to Word' },
-  { to: '/word-to-pdf', label: 'Word to PDF' },
-  { to: '/image-to-pdf', label: 'Image to PDF' },
-  { to: '/bg-remover', label: 'Remove Background' },
+  { to: '/merge', key: 'tool.merge' },
+  { to: '/split', key: 'tool.split' },
+  { to: '/compress', key: 'tool.compress' },
+  { to: '/rotate', key: 'tool.rotate' },
+  { to: '/pdf-signature', key: 'tool.sign' },
+  { to: '/encrypt', key: 'tool.encrypt' },
+  { to: '/pdf-to-word', key: 'tool.pdfToWord' },
+  { to: '/word-to-pdf', key: 'tool.wordToPdf' },
+  { to: '/image-to-pdf', key: 'tool.imageToPdf' },
+  { to: '/bg-remover', key: 'tool.bgRemove' },
 ];
 
 const companyLinks = [
-  { to: '/about', labelKey: 'nav.about' },
-  { to: '/contact', labelKey: 'nav.contact' },
-  { to: '/blog', labelKey: 'nav.blog' },
-  { to: '/privacy', label: 'Privacy Policy' },
-  { to: '/terms', label: 'Terms of Service' },
+  { to: '/about', key: 'nav.about' },
+  { to: '/contact', key: 'nav.contact' },
+  { to: '/blog', key: 'nav.blog' },
+  { to: '/privacy', key: 'footer.privacy' },
+  { to: '/terms', key: 'footer.terms' },
 ];
 
 const aiLinks = [
-  { to: '/ai-summarize', label: 'AI Summarizer' },
-  { to: '/ai-translate', label: 'AI Translator' },
-  { to: '/ai-qa', label: 'AI Q&A' },
-  { to: '/ai-document-tools', label: '40+ AI Tools' },
+  { to: '/ai-summarize', key: 'tool.aiSummarize' },
+  { to: '/ai-translate', key: 'tool.aiTranslate' },
+  { to: '/ai-qa', key: 'tool.aiQa' },
+  { to: '/ai-document-tools', key: 'tool.aiTools' },
 ];
 
 const Footer = () => {
@@ -65,7 +65,7 @@ const Footer = () => {
               {toolLinks.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -79,7 +79,7 @@ const Footer = () => {
               {aiLinks.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -93,7 +93,7 @@ const Footer = () => {
               {companyLinks.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {'labelKey' in link ? t(link.labelKey) : link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}

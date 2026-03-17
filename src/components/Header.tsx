@@ -45,16 +45,6 @@ const toolGroups = [
       { to: '/svg-to-image', label: 'SVG to Image' },
     ],
   },
-  {
-    labelKey: 'cat.aitools',
-    icon: Brain,
-    items: [
-      { to: '/ai-summarize', label: 'AI Summarizer' },
-      { to: '/ai-translate', label: 'AI Translator' },
-      { to: '/ai-qa', label: 'AI Q&A' },
-      { to: '/ai-document-tools', label: '40+ AI Tools' },
-    ],
-  },
 ];
 
 const Header = () => {

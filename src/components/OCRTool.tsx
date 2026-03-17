@@ -95,7 +95,7 @@ const OCRTool = () => {
           canvas.width = vp.width;
           canvas.height = vp.height;
           const ctx = canvas.getContext('2d')!;
-          await page.render({ canvasContext: ctx, viewport: vp }).promise;
+          await page.render({ canvasContext: ctx, viewport: vp, canvas } as any).promise;
           images.push(canvas.toDataURL('image/png'));
         }
       } else {

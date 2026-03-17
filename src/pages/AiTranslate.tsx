@@ -5,15 +5,14 @@ import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 
-const faqs = [
-  { q: 'Which languages are supported?', a: 'We support 15+ languages including Spanish, French, German, Chinese, Japanese, Korean, Arabic, Hindi, Russian, and more.' },
-  { q: 'How accurate is the translation?', a: 'Our AI provides high-quality translations suitable for general understanding. For official or legal documents, we recommend professional human translation.' },
-  { q: 'Can I translate the entire PDF?', a: 'AI analyzes the document and translates the content structure. For full page-by-page translation, copy the text content and provide it for best results.' },
-  { q: 'Is this free?', a: 'Yes, AI translation is free to use with generous usage limits.' },
-];
-
 const AiTranslate = () => {
   const { t } = useI18n();
+  const faqs = [
+    { q: t('faq.translate.q1'), a: t('faq.translate.a1') },
+    { q: t('faq.translate.q2'), a: t('faq.translate.a2') },
+    { q: t('faq.translate.q3'), a: t('faq.translate.a3') },
+    { q: t('faq.translate.q4'), a: t('faq.translate.a4') },
+  ];
   return (
     <ToolPageLayout activeTab="ai-translate">
       <SEOHead

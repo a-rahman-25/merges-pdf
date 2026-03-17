@@ -69,26 +69,26 @@ const toolCategories = [
   },
 ];
 
-const testimonials = [
-  { name: 'Sarah Chen', role: 'Law Student', quote: 'I merge my case study PDFs every week. The fact that nothing leaves my laptop is huge for confidentiality.', rating: 5 },
-  { name: 'Marco Rossi', role: 'Accountant', quote: 'Compressing financial reports before emailing them saves me time. The quality stays perfect.', rating: 5 },
-  { name: 'Aisha Patel', role: 'UX Designer', quote: 'Converting my portfolio images to PDF took seconds. No sign-up, no watermark — just works.', rating: 5 },
-  { name: 'James O\'Brien', role: 'High School Teacher', quote: 'I split exam papers into individual student copies. My students\' data stays safe.', rating: 5 },
-  { name: 'Dr. Nina Fischer', role: 'Researcher', quote: 'The AI summarizer helps me triage dozens of papers. Saves hours of reading time.', rating: 5 },
-  { name: 'Carlos Mendez', role: 'Small Business Owner', quote: 'I sign invoices and contracts without paying for expensive tools. This is exactly what I needed.', rating: 5 },
-  { name: 'Lisa Yamamoto', role: 'HR Manager', quote: 'Batch processing employee documents is seamless. Privacy compliance is a bonus.', rating: 5 },
-  { name: 'Tom Nguyen', role: 'Software Developer', quote: 'Open-source and browser-based — I can verify the code myself. Trust through transparency.', rating: 5 },
+const testimonialKeys = [
+  { nameKey: 'testimonial.1.name', roleKey: 'testimonial.1.role', quoteKey: 'testimonial.1.quote', rating: 5 },
+  { nameKey: 'testimonial.2.name', roleKey: 'testimonial.2.role', quoteKey: 'testimonial.2.quote', rating: 5 },
+  { nameKey: 'testimonial.3.name', roleKey: 'testimonial.3.role', quoteKey: 'testimonial.3.quote', rating: 5 },
+  { nameKey: 'testimonial.4.name', roleKey: 'testimonial.4.role', quoteKey: 'testimonial.4.quote', rating: 5 },
+  { nameKey: 'testimonial.5.name', roleKey: 'testimonial.5.role', quoteKey: 'testimonial.5.quote', rating: 5 },
+  { nameKey: 'testimonial.6.name', roleKey: 'testimonial.6.role', quoteKey: 'testimonial.6.quote', rating: 5 },
+  { nameKey: 'testimonial.7.name', roleKey: 'testimonial.7.role', quoteKey: 'testimonial.7.quote', rating: 5 },
+  { nameKey: 'testimonial.8.name', roleKey: 'testimonial.8.role', quoteKey: 'testimonial.8.quote', rating: 5 },
 ];
 
-const faqs = [
-  { q: 'Is MergesPDF really free?', a: 'Yes, 100% free with no hidden costs, no subscriptions, and no watermarks. Every feature is available to everyone.' },
-  { q: 'Are my files safe?', a: 'Absolutely. All processing happens in your browser using WebAssembly and JavaScript. Files never leave your device.' },
-  { q: 'Do I need to create an account?', a: 'No. Every tool works immediately without signing up, logging in, or providing personal information.' },
-  { q: 'What file formats are supported?', a: 'PDF, PNG, JPG, WEBP, DOCX, XML, and more. Convert between formats and manipulate PDFs in countless ways.' },
-  { q: 'Does it work on mobile?', a: 'Yes! Fully responsive and works on any device with a modern browser — phones, tablets, and desktops.' },
-  { q: 'Can I use it offline?', a: 'Once loaded, most tools work without internet since all processing is done locally in your browser.' },
-  { q: 'How many files can I process?', a: 'There are no limits. Process as many files as your device can handle — no per-file fees or daily caps.' },
-  { q: 'Is there an API for developers?', a: 'We offer AI-powered document tools that developers can integrate. Check our AI Tools section for details.' },
+const faqKeys = [
+  { qKey: 'home.faq.q1', aKey: 'home.faq.a1' },
+  { qKey: 'home.faq.q2', aKey: 'home.faq.a2' },
+  { qKey: 'home.faq.q3', aKey: 'home.faq.a3' },
+  { qKey: 'home.faq.q4', aKey: 'home.faq.a4' },
+  { qKey: 'home.faq.q5', aKey: 'home.faq.a5' },
+  { qKey: 'home.faq.q6', aKey: 'home.faq.a6' },
+  { qKey: 'home.faq.q7', aKey: 'home.faq.a7' },
+  { qKey: 'home.faq.q8', aKey: 'home.faq.a8' },
 ];
 
 /* ──────────────────────── hooks ──────────────────────── */

@@ -552,6 +552,7 @@ const vi: T = {
   'cta.title': 'Sẵn sàng? Không đăng ký. Không phí. Công cụ PDF mạnh mẽ.', 'cta.subtitle': 'Tham gia hàng triệu người dùng.', 'cta.button': 'Bắt đầu — Miễn phí',
   'footer.desc': 'Bộ PDF ưu tiên quyền riêng tư.', 'footer.pdftools': 'Công cụ PDF', 'footer.aitools': 'Công cụ AI', 'footer.company': 'Công ty',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tất cả tệp được xử lý cục bộ.',
+  'footer.privacy': 'Chính sách bảo mật', 'footer.terms': 'Điều khoản dịch vụ',
   'cat.pdftools': 'Công cụ PDF', 'cat.converters': 'Chuyển đổi', 'cat.aitools': 'Công cụ AI',
   'step.upload': 'Tải lên', 'step.upload.desc': 'Kéo thả hoặc chọn tệp.', 'step.process': 'Xử lý', 'step.process.desc': 'Xử lý ngay trong trình duyệt.', 'step.download': 'Tải xuống', 'step.download.desc': 'Nhận kết quả trong giây lát.',
 };

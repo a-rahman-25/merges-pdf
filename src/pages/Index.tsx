@@ -6,7 +6,7 @@ import {
   Upload, Cpu, Download, Shield, Zap, Globe, Lock, Layers, FileText,
   ChevronRight, Star, Brain, Languages, Droplets, Trash2, FileOutput,
   Hash, Unlock, Palette, MessageSquare, ChevronLeft, Eye, Recycle,
-  Code, Sparkles, PenTool, ScanLine, Type
+  Code, Sparkles, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
@@ -36,6 +36,9 @@ const toolCategories = [
       { icon: PenTool, title: 'Sign PDF', desc: 'Add e-signatures to your documents.', path: '/pdf-signature', color: 'bg-tool-indigo/15 text-tool-indigo' },
       { icon: Layers, title: 'Crop Pages', desc: 'Trim margins and crop PDF pages.', path: '/crop-pages', color: 'bg-tool-cyan/15 text-tool-cyan' },
       { icon: FileText, title: 'Edit Metadata', desc: 'View and edit title, author & more.', path: '/pdf-metadata', color: 'bg-tool-emerald/15 text-tool-emerald' },
+      { icon: ImageIcon, title: 'PDF to Images', desc: 'Convert PDF pages to PNG or JPG.', path: '/pdf-to-images', color: 'bg-tool-cyan/15 text-tool-cyan' },
+      { icon: FormInput, title: 'Fill PDF Forms', desc: 'Detect and fill form fields in PDFs.', path: '/pdf-form-filler', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: EyeOff, title: 'Redact PDF', desc: 'Black out sensitive information.', path: '/pdf-redact', color: 'bg-tool-rose/15 text-tool-rose' },
     ],
   },
   {

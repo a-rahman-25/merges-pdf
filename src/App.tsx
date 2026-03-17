@@ -47,6 +47,9 @@ const MergeImages = lazy(() => import("./pages/MergeImages"));
 const OcrPdf = lazy(() => import("./pages/OcrPdf"));
 const PdfEditor = lazy(() => import("./pages/PdfEditor"));
 const SvgToImage = lazy(() => import("./pages/SvgToImage"));
+const PdfToImages = lazy(() => import("./pages/PdfToImages"));
+const PdfFormFiller = lazy(() => import("./pages/PdfFormFiller"));
+const PdfRedact = lazy(() => import("./pages/PdfRedact"));
 
 const queryClient = new QueryClient();
 
@@ -101,6 +104,9 @@ const AnimatedRoutes = () => {
         <Route path="/ocr-pdf" element={<OcrPdf />} />
         <Route path="/pdf-editor" element={<PdfEditor />} />
         <Route path="/svg-to-image" element={<SvgToImage />} />
+        <Route path="/pdf-to-images" element={<PdfToImages />} />
+        <Route path="/pdf-form-filler" element={<PdfFormFiller />} />
+        <Route path="/pdf-redact" element={<PdfRedact />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileText, Shield, Zap, Globe, Lock, Layers, Code, Droplets, Trash2, FileOutput, Brain, Languages, MessageSquare, ChevronDown, Palette, Hash, Unlock } from 'lucide-react';
+import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileText, Shield, Zap, Globe, Lock, Layers, Code, Droplets, Trash2, FileOutput, Brain, Languages, MessageSquare, ChevronDown, Palette, Hash, Unlock, ImageIcon, FormInput, EyeOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
 
-type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages' | 'pdf-signature' | 'crop-pages' | 'pdf-metadata' | 'merge-images';
+type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages' | 'pdf-signature' | 'crop-pages' | 'pdf-metadata' | 'merge-images' | 'pdf-to-images' | 'form-filler' | 'redact';
 
 interface TabItem {
   id: TabId;
@@ -40,6 +40,9 @@ const tabGroups: TabGroup[] = [
       { id: 'pdf-signature', label: 'Signature', icon: Layers, path: '/pdf-signature' },
       { id: 'crop-pages', label: 'Crop', icon: Layers, path: '/crop-pages' },
       { id: 'pdf-metadata', label: 'Metadata', icon: Layers, path: '/pdf-metadata' },
+      { id: 'pdf-to-images', label: 'PDF → Images', icon: ImageIcon, path: '/pdf-to-images' },
+      { id: 'form-filler', label: 'Fill Forms', icon: FormInput, path: '/pdf-form-filler' },
+      { id: 'redact', label: 'Redact', icon: EyeOff, path: '/pdf-redact' },
     ],
   },
   {

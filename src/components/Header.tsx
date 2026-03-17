@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code } from 'lucide-react';
+import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code, ImageIcon, FormInput, EyeOff } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
@@ -22,6 +22,9 @@ const toolGroups = [
       { to: '/add-watermark', label: 'Add Watermark', icon: Droplets },
       { to: '/encrypt', label: 'Encrypt PDF', icon: Lock },
       { to: '/pdf-signature', label: 'Sign PDF', icon: PenTool },
+      { to: '/pdf-to-images', label: 'PDF to Images', icon: ImageIcon },
+      { to: '/pdf-form-filler', label: 'Fill Forms', icon: FormInput },
+      { to: '/pdf-redact', label: 'Redact PDF', icon: EyeOff },
     ],
   },
   {

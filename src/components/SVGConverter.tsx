@@ -4,13 +4,14 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Download, Upload, Image, Loader2, Trash2 } from 'lucide-react';
 
-type OutputFormat = 'png' | 'jpg' | 'webp' | 'bmp';
+type OutputFormat = 'png' | 'jpg' | 'webp' | 'bmp' | 'ico';
 
 const formatOptions: { value: OutputFormat; label: string; mime: string }[] = [
   { value: 'png', label: 'PNG', mime: 'image/png' },
   { value: 'jpg', label: 'JPG', mime: 'image/jpeg' },
   { value: 'webp', label: 'WEBP', mime: 'image/webp' },
   { value: 'bmp', label: 'BMP', mime: 'image/bmp' },
+  { value: 'ico', label: 'ICO (Favicon)', mime: 'image/x-icon' },
 ];
 
 const scaleOptions = [1, 2, 3, 4];

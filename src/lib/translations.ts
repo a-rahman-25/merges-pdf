@@ -573,6 +573,7 @@ const bn: T = {
   'cta.title': 'প্রস্তুত? সাইন-আপ নেই। ফি নেই। শক্তিশালী PDF টুল।', 'cta.subtitle': 'লক্ষ লক্ষ ব্যবহারকারীদের সাথে যোগ দিন।', 'cta.button': 'এখনই শুরু করুন — বিনামূল্যে',
   'footer.desc': 'গোপনীয়তা-প্রথম PDF স্যুট।', 'footer.pdftools': 'PDF টুলস', 'footer.aitools': 'AI টুলস', 'footer.company': 'কোম্পানি',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'সব ফাইল স্থানীয়ভাবে প্রক্রিয়াকৃত।',
+  'footer.privacy': 'গোপনীয়তা নীতি', 'footer.terms': 'সেবার শর্তাবলী',
   'cat.pdftools': 'PDF টুলস', 'cat.converters': 'কনভার্টার', 'cat.aitools': 'AI টুলস',
   'step.upload': 'আপলোড', 'step.upload.desc': 'ফাইল টেনে আনুন বা বাছাই করুন।', 'step.process': 'প্রক্রিয়া', 'step.process.desc': 'ব্রাউজারে তাৎক্ষণিক প্রক্রিয়া।', 'step.download': 'ডাউনলোড', 'step.download.desc': 'সেকেন্ডে ফলাফল পান।',
 };

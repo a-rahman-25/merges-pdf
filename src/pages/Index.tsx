@@ -380,13 +380,13 @@ const Index = () => {
             {t('faq.title')}
           </h2>
           <div className="mt-12 space-y-3">
-            {faqs.map((faq) => (
-              <details key={faq.q} className="group rounded-2xl border border-border bg-card">
+            {faqKeys.map((faq) => (
+              <details key={faq.qKey} className="group rounded-2xl border border-border bg-card">
                 <summary className="flex cursor-pointer items-center justify-between p-5 font-semibold text-foreground">
-                  {faq.q}
+                  {t(faq.qKey)}
                   <ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground transition-transform group-open:rotate-90" />
                 </summary>
-                <p className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">{faq.a}</p>
+                <p className="px-5 pb-5 text-sm text-muted-foreground leading-relaxed">{t(faq.aKey)}</p>
               </details>
             ))}
           </div>

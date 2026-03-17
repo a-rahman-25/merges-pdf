@@ -3,7 +3,7 @@
 
 import type { Lang } from './translations';
 
-type ToolTranslations = Record<string, Record<Lang, string>>;
+type ToolTranslations = Record<string, Partial<Record<Lang, string>> & { en: string }>;
 
 export const toolTranslations: ToolTranslations = {
   // ── Merge ──

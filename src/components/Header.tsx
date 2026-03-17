@@ -42,6 +42,7 @@ const toolGroups = [
       { to: '/image-to-pdf', label: 'Image to PDF' },
       { to: '/merge-images', label: 'Merge Images' },
       { to: '/bg-remover', label: 'Remove Background' },
+      { to: '/svg-to-image', label: 'SVG to Image' },
     ],
   },
   {

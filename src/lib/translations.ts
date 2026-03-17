@@ -1297,6 +1297,19 @@ const sw: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': 'Muhtasari', 'ai.page.summarize.sub': 'Pakia PDF na uache AI ifanye muhtasari.',
   'ai.page.translate.h1b': 'Mtafsiri', 'ai.page.translate.sub': 'Tafsiri PDF kwa lugha yoyote na AI.',
   'ai.page.qa.h1b': 'Maswali', 'ai.page.qa.sub': 'Pakia PDF na uulize maswali — AI itajibu.',
+  'faq.heading': 'Maswali Yanayoulizwa Mara kwa Mara',
+  'faq.summarize.q1': 'Muhtasari wa AI unafanyaje kazi?', 'faq.summarize.a1': 'Pakia PDF na mfano wetu wa AI utachambua muundo na maudhui kuunda muhtasari kamili.',
+  'faq.summarize.q2': 'Muhtasari ni sahihi?', 'faq.summarize.a2': 'Muhtasari wa AI hutoa muhtasari muhimu lakini thibitisha na hati asili kwa matumizi muhimu.',
+  'faq.summarize.q3': 'Hati yangu inatumwa kwa seva?', 'faq.summarize.a3': 'Data ya hati hutumwa kwa huduma ya AI. Maudhui halisi ya faili hubaki kwenye kivinjari chako.',
+  'faq.summarize.q4': 'Naweza kufanya muhtasari wa hati kubwa?', 'faq.summarize.a4': 'Ndiyo, hati za ukubwa wowote zinaweza kufanywa muhtasari.',
+  'faq.qa.q1': 'Maswali na Majibu ya AI yanafanyaje kazi?', 'faq.qa.a1': 'Pakia PDF na uulize swali lolote. AI inachambua muktadha wa hati na kutoa majibu yanayohusiana.',
+  'faq.qa.q2': 'Naweza kuuliza maswali ya ufuatiliaji?', 'faq.qa.a2': 'Ndiyo! Mazungumzo yanahifadhi historia ya mazungumzo.',
+  'faq.qa.q3': 'Majibu ni sahihi kiasi gani?', 'faq.qa.a3': 'Majibu ya AI yanategemea uchambuzi wa hati. Kwa maamuzi muhimu, thibitisha na asili.',
+  'faq.qa.q4': 'Kuna kikomo cha maswali?', 'faq.qa.a4': 'Unaweza kuuliza maswali mengi unavyotaka. Kuna vikomo vya matumizi bure vya ukarimu.',
+  'faq.translate.q1': 'Lugha zipi zinaungwa mkono?', 'faq.translate.a1': 'Tunaunga mkono lugha 15+ ikiwa ni pamoja na Kihispania, Kifaransa, Kijerumani, Kichina, Kijapani, Kiarabu na zaidi.',
+  'faq.translate.q2': 'Tafsiri ni sahihi kiasi gani?', 'faq.translate.a2': 'AI hutoa tafsiri za ubora wa juu. Kwa hati rasmi tunapendekeza tafsiri ya kitaalamu.',
+  'faq.translate.q3': 'Naweza kutafsiri PDF nzima?', 'faq.translate.a3': 'AI inachambua hati na kutafsiri muundo wa maudhui. Kwa tafsiri kamili, nakili maandishi.',
+  'faq.translate.q4': 'Ni bure?', 'faq.translate.a4': 'Ndiyo, tafsiri ya AI ni bure na vikomo vya matumizi vya ukarimu.',
 };
 
 export const translations: Record<Lang, T> = {

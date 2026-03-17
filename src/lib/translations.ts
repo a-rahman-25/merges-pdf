@@ -510,6 +510,7 @@ const id: T = {
   'cta.title': 'Siap? Tanpa daftar. Tanpa biaya. Alat PDF yang kuat.', 'cta.subtitle': 'Bergabung jutaan pengguna.', 'cta.button': 'Mulai — Gratis',
   'footer.desc': 'Suite PDF privasi utama.', 'footer.pdftools': 'Alat PDF', 'footer.aitools': 'Alat AI', 'footer.company': 'Perusahaan',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Semua file diproses secara lokal.',
+  'footer.privacy': 'Kebijakan Privasi', 'footer.terms': 'Ketentuan Layanan',
   'cat.pdftools': 'Alat PDF', 'cat.converters': 'Konverter', 'cat.aitools': 'Alat AI',
   'step.upload': 'Unggah', 'step.upload.desc': 'Seret atau pilih file.', 'step.process': 'Proses', 'step.process.desc': 'Diproses instan di browser.', 'step.download': 'Unduh', 'step.download.desc': 'Hasil dalam hitungan detik.',
 };

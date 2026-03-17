@@ -58,6 +58,8 @@ const toolCategories = [
       { icon: MessageSquare, title: 'AI Q&A', desc: 'Ask questions about your PDF.', path: '/ai-qa', color: 'bg-tool-blue/15 text-tool-blue' },
       { icon: Brain, title: '40+ AI Tools', desc: 'Extract, analyze & transform docs.', path: '/ai-document-tools', color: 'bg-tool-pink/15 text-tool-pink' },
       { icon: Layers, title: 'Batch Process', desc: 'Process multiple PDFs at once.', path: '/batch', color: 'bg-tool-amber/15 text-tool-amber' },
+      { icon: ScanLine, title: 'OCR PDF', desc: 'Extract text from scanned PDFs.', path: '/ocr-pdf', color: 'bg-tool-teal/15 text-tool-teal' },
+      { icon: Type, title: 'PDF Editor', desc: 'Annotate, draw & edit PDFs.', path: '/pdf-editor', color: 'bg-tool-rose/15 text-tool-rose' },
     ],
   },
 ];

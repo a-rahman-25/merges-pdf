@@ -133,6 +133,32 @@ const articles: BlogArticle[] = [
       { q: 'Can I split encrypted PDFs?', a: 'The tool attempts to process encrypted PDFs, but some with strict restrictions may not be supported.' },
     ],
   },
+  {
+    slug: 'how-to-sign-pdf-free',
+    title: 'How to Sign a PDF for Free Online — No Adobe Needed',
+    seoTitle: 'How to Sign a PDF Free Online — No Adobe Needed | MergesPDF',
+    description: 'Learn how to add e-signatures to PDFs for free using MergesPDF. Draw, type, or upload signatures — all processed in your browser.',
+    date: 'March 2026',
+    toolPath: '/pdf-signature',
+    toolName: 'Sign PDF',
+    content: [
+      { heading: 'Why Sign PDFs Digitally?', body: 'Gone are the days of printing, signing with a pen, scanning, and emailing documents back. Digital signatures save time, paper, and hassle. Whether you\'re signing a contract, approving a document, or adding your initials to a form, e-signatures make the process instant.\n\nBut most e-signature tools either charge monthly fees (DocuSign starts at $10/month) or require account creation. MergesPDF offers a completely free alternative that works entirely in your browser.' },
+      { heading: 'Three Ways to Create Your Signature', body: 'MergesPDF gives you three options to create your signature:\n\n**Draw** — Use your mouse, trackpad, or touchscreen to draw your signature freehand. Choose from black, blue, or red ink and adjust pen thickness.\n\n**Type** — Type your name and choose from four handwriting-style fonts (Dancing Script, Great Vibes, Pacifico, Sacramento). Pick your preferred color.\n\n**Upload** — Already have a signature image? Upload a PNG with a transparent background for the cleanest result.' },
+      { heading: 'Step 1: Upload Your PDF', body: 'Open mergespdf.com/pdf-signature and drag & drop your PDF file. The tool renders each page so you can see exactly where to place your signature.' },
+      { heading: 'Step 2: Create Your Signature', body: 'Choose your preferred method (Draw, Type, or Upload) from the tabbed interface. For typed signatures, you\'ll see a live preview in each font style so you can pick the one that looks best.\n\nYour signature is created locally — it\'s never sent to any server.' },
+      { heading: 'Step 3: Place Your Signature', body: 'Navigate to the page where you want your signature. Click "Add Signature" to place it, then drag it to the exact position. You can also add date stamps and name fields.\n\nNeed to sign multiple pages? Add signatures to as many pages as needed. Each placement is independent.' },
+      { heading: 'Step 4: Apply and Download', body: 'Click "Apply & Download" and the tool embeds your signature directly into the PDF as an image element. The output is a standard PDF that looks the same on every device and viewer.\n\nThe signed PDF includes metadata noting the signature date for your records.' },
+      { heading: 'Is This Legally Valid?', body: 'Visual e-signatures created with MergesPDF are accepted for most everyday purposes — contracts, agreements, approvals, and forms. Many jurisdictions recognize electronic signatures under laws like the ESIGN Act (US) and eIDAS (EU).\n\nHowever, for documents requiring certified digital signatures with cryptographic audit trails (like notarized documents or government filings), you may need specialized services like DocuSign or Adobe Sign.\n\nFor most business and personal use, a visual e-signature is perfectly sufficient and legally recognized.' },
+      { heading: 'Privacy & Security', body: 'Unlike cloud-based signature tools, MergesPDF never uploads your documents. Your PDF, signature, and the final signed document all stay on your device. When you close the tab, everything is gone.\n\nThis makes it ideal for signing sensitive documents like:\n• Employment contracts\n• Non-disclosure agreements\n• Medical consent forms\n• Financial documents\n• Personal agreements' },
+    ],
+    faqs: [
+      { q: 'Is the e-signature tool free?', a: 'Yes, completely free. No account needed, no watermarks, no limits on documents signed.' },
+      { q: 'Are e-signatures created here legally binding?', a: 'Visual e-signatures are accepted for most business and personal documents. For certified digital signatures with audit trails, use specialized services.' },
+      { q: 'Can I sign multiple pages?', a: 'Yes! You can add signatures, dates, and name fields to any page of the document.' },
+      { q: 'Is my document uploaded anywhere?', a: 'No. Everything is processed in your browser. Your documents never leave your device.' },
+      { q: 'What signature styles are available?', a: 'You can draw freehand, type with handwriting fonts (4 styles), or upload a signature image.' },
+    ],
+  },
 ];
 
 const BlogArticlePage = ({ article }: { article: BlogArticle }) => (

@@ -81,6 +81,30 @@ const SVGConverter = () => {
         img.src = url;
       });
 
+      // ICO needs fixed sizes
+      if (format === 'ico') {
+        const icoSizes = [16, 32, 48];
+        const pngBlobs: Uint8Array[] = [];
+
+        for (const size of icoSizes) {
+          const c = document.createElement('canvas');
+          c.width = size;
+          c.height = size;
+          const cx = c.getContext('2d')!;
+          cx.drawImage(img, 0, 0, size, size);
+          const blob = await new Promise<Blob>((res) => c.toBlob((b) => res(b!), 'image/png'));
+          pngBlobs.push(new Uint8Array(await blob.arrayBuffer()));
+        }
+
+        // Build ICO binary
+        const icoBlob = buildIco(pngBlobs, icoSizes);
+        const icoUrl = URL.createObjectURL(icoBlob);
+        setResultUrl(icoUrl);
+        URL.revokeObjectURL(url);
+        toast({ title: 'Converted!', description: `SVG → ICO (${icoSizes.join(', ')}px)` });
+        return;
+      }
+
       const canvas = document.createElement('canvas');
       canvas.width = scaledW;
       canvas.height = scaledH;

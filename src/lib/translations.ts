@@ -468,6 +468,7 @@ const it: T = {
   'cta.title': 'Pronto? Senza registrazione. Senza costi. Strumenti PDF potenti.', 'cta.subtitle': 'Unisciti a milioni di utenti.', 'cta.button': 'Inizia — È gratuito',
   'footer.desc': 'Suite PDF privacy-first.', 'footer.pdftools': 'Strumenti PDF', 'footer.aitools': 'Strumenti AI', 'footer.company': 'Azienda',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tutti i file vengono elaborati localmente.',
+  'footer.privacy': 'Informativa sulla privacy', 'footer.terms': 'Termini di servizio',
   'cat.pdftools': 'Strumenti PDF', 'cat.converters': 'Convertitori', 'cat.aitools': 'Strumenti AI',
   'step.upload': 'Carica', 'step.upload.desc': 'Trascina o seleziona i file.', 'step.process': 'Elabora', 'step.process.desc': 'Elaborazione istantanea nel browser.', 'step.download': 'Scarica', 'step.download.desc': 'Risultato in pochi secondi.',
 };

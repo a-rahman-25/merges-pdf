@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
 import { streamAI } from '@/lib/stream-ai';
+import { useI18n } from '@/hooks/useI18n';
 import type { AIToolConfig } from '@/lib/ai-tools-config';
 
 interface FileInfo {
@@ -16,6 +17,7 @@ interface FileInfo {
 }
 
 const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
+  const { t } = useI18n();
   const [files, setFiles] = useState<FileInfo[]>([]);
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState('');
@@ -81,7 +83,7 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(result);
     setCopied(true);
-    toast.success('Copied!');
+    toast.success(t('ai.copied'));
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -122,12 +124,12 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
             </div>
             <div>
               <p className="text-lg font-display font-semibold text-foreground">
-                {tool.acceptMultiple ? 'Upload PDF files' : 'Upload a PDF'}
+                {tool.acceptMultiple ? t('ai.upload.pdfs') : t('ai.upload.pdf')}
               </p>
               <p className="mt-1 text-sm text-muted-foreground">{tool.description}</p>
             </div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <Upload className="h-3.5 w-3.5" /> Click or drag & drop
+              <Upload className="h-3.5 w-3.5" /> {t('ai.click.drag')}
             </div>
           </div>
         </motion.div>
@@ -138,7 +140,7 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
               {files.map(f => f.name).join(' & ')}
             </p>
             <button onClick={reset} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-              <RotateCcw className="h-3.5 w-3.5" /> Clear
+              <RotateCcw className="h-3.5 w-3.5" /> {t('ai.clear')}
             </button>
           </div>
 
@@ -149,14 +151,14 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-foreground">{f.name}</p>
-                <p className="text-xs text-muted-foreground">{formatFileSize(f.size)} · {f.pageCount} pages</p>
+                <p className="text-xs text-muted-foreground">{formatFileSize(f.size)} · {f.pageCount} {t('ai.pages')}</p>
               </div>
             </div>
           ))}
 
           {!result && !processing && (
             <Button onClick={handleProcess} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-              <Icon className="h-5 w-5" /> {tool.shortTitle} with AI
+              <Icon className="h-5 w-5" /> {tool.shortTitle} {t('ai.withAI')}
             </Button>
           )}
 
@@ -164,22 +166,22 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
             <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="space-y-3">
               <div className="rounded-xl border border-border bg-card p-5">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-display font-semibold text-foreground">Result</h3>
+                  <h3 className="font-display font-semibold text-foreground">{t('ai.result')}</h3>
                   {result && !processing && (
                     <div className="flex items-center gap-2">
                       <button onClick={handleCopy} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
                         {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
-                        {copied ? 'Copied' : 'Copy'}
+                        {copied ? t('ai.copied') : t('ai.copy')}
                       </button>
                       <button onClick={handleDownload} className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                        <Download className="h-3.5 w-3.5" /> Download
+                        <Download className="h-3.5 w-3.5" /> {t('ai.download')}
                       </button>
                     </div>
                   )}
                 </div>
                 {processing && !result && (
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> Analyzing…
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" /> {t('ai.analyzing')}
                   </div>
                 )}
                 {result && (
@@ -191,7 +193,7 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
               </div>
               {!processing && (
                 <Button onClick={handleProcess} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
-                  <Icon className="h-5 w-5" /> Regenerate
+                  <Icon className="h-5 w-5" /> {t('ai.regenerate')}
                 </Button>
               )}
             </motion.div>
@@ -200,7 +202,7 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
       )}
 
       <p className="text-center text-xs text-muted-foreground">
-        All uploaded files are automatically deleted after processing to protect your privacy.
+        {t('ai.privacy')}
       </p>
     </div>
   );

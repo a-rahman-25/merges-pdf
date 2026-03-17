@@ -489,6 +489,7 @@ const nl: T = {
   'cta.title': 'Klaar? Geen registratie. Geen kosten. Krachtige PDF-tools.', 'cta.subtitle': 'Sluit je aan bij miljoenen gebruikers.', 'cta.button': 'Nu starten — Gratis',
   'footer.desc': 'Privacy-first PDF suite.', 'footer.pdftools': 'PDF Tools', 'footer.aitools': 'AI Tools', 'footer.company': 'Bedrijf',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Alle bestanden worden lokaal verwerkt.',
+  'footer.privacy': 'Privacybeleid', 'footer.terms': 'Servicevoorwaarden',
   'cat.pdftools': 'PDF Tools', 'cat.converters': 'Converters', 'cat.aitools': 'AI Tools',
   'step.upload': 'Uploaden', 'step.upload.desc': 'Sleep of selecteer bestanden.', 'step.process': 'Verwerken', 'step.process.desc': 'Direct verwerkt in de browser.', 'step.download': 'Downloaden', 'step.download.desc': 'Resultaat in seconden.',
 };

@@ -222,6 +222,38 @@ const en: T = {
   'faq.translate.a3': 'AI analyzes the document and translates the content structure. For full page-by-page translation, copy the text content and provide it for best results.',
   'faq.translate.q4': 'Is this free?',
   'faq.translate.a4': 'Yes, AI translation is free to use with generous usage limits.',
+  // Trust badges
+  'badge.noUploads': 'No Server Uploads', 'badge.noUploads.desc': 'Files stay in your browser — zero network transfers.',
+  'badge.gdpr': 'GDPR Compliant', 'badge.gdpr.desc': 'Full EU privacy regulation compliance built-in.',
+  'badge.ssl': 'SSL Encrypted', 'badge.ssl.desc': 'Secure HTTPS connection on every page.',
+  'badge.noTracking': 'No Tracking', 'badge.noTracking.desc': 'We don\'t track what files you process.',
+  'badge.autoCleared': 'Auto-Cleared', 'badge.autoCleared.desc': 'Files removed from memory when you close the tab.',
+  'badge.openSource': 'Open Source', 'badge.openSource.desc': 'Transparent code — nothing hidden.',
+  // Homepage FAQs
+  'home.faq.q1': 'Is MergesPDF really free?', 'home.faq.a1': 'Yes, 100% free with no hidden costs, no subscriptions, and no watermarks. Every feature is available to everyone.',
+  'home.faq.q2': 'Are my files safe?', 'home.faq.a2': 'Absolutely. All processing happens in your browser using WebAssembly and JavaScript. Files never leave your device.',
+  'home.faq.q3': 'Do I need to create an account?', 'home.faq.a3': 'No. Every tool works immediately without signing up, logging in, or providing personal information.',
+  'home.faq.q4': 'What file formats are supported?', 'home.faq.a4': 'PDF, PNG, JPG, WEBP, DOCX, XML, and more. Convert between formats and manipulate PDFs in countless ways.',
+  'home.faq.q5': 'Does it work on mobile?', 'home.faq.a5': 'Yes! Fully responsive and works on any device with a modern browser — phones, tablets, and desktops.',
+  'home.faq.q6': 'Can I use it offline?', 'home.faq.a6': 'Once loaded, most tools work without internet since all processing is done locally in your browser.',
+  'home.faq.q7': 'How many files can I process?', 'home.faq.a7': 'There are no limits. Process as many files as your device can handle — no per-file fees or daily caps.',
+  'home.faq.q8': 'Is there an API for developers?', 'home.faq.a8': 'We offer AI-powered document tools that developers can integrate. Check our AI Tools section for details.',
+  // Testimonials
+  'testimonial.1.name': 'Sarah Chen', 'testimonial.1.role': 'Law Student', 'testimonial.1.quote': 'I merge my case study PDFs every week. The fact that nothing leaves my laptop is huge for confidentiality.',
+  'testimonial.2.name': 'Marco Rossi', 'testimonial.2.role': 'Accountant', 'testimonial.2.quote': 'Compressing financial reports before emailing them saves me time. The quality stays perfect.',
+  'testimonial.3.name': 'Aisha Patel', 'testimonial.3.role': 'UX Designer', 'testimonial.3.quote': 'Converting my portfolio images to PDF took seconds. No sign-up, no watermark — just works.',
+  'testimonial.4.name': 'James O\'Brien', 'testimonial.4.role': 'High School Teacher', 'testimonial.4.quote': 'I split exam papers into individual student copies. My students\' data stays safe.',
+  'testimonial.5.name': 'Dr. Nina Fischer', 'testimonial.5.role': 'Researcher', 'testimonial.5.quote': 'The AI summarizer helps me triage dozens of papers. Saves hours of reading time.',
+  'testimonial.6.name': 'Carlos Mendez', 'testimonial.6.role': 'Small Business Owner', 'testimonial.6.quote': 'I sign invoices and contracts without paying for expensive tools. This is exactly what I needed.',
+  'testimonial.7.name': 'Lisa Yamamoto', 'testimonial.7.role': 'HR Manager', 'testimonial.7.quote': 'Batch processing employee documents is seamless. Privacy compliance is a bonus.',
+  'testimonial.8.name': 'Tom Nguyen', 'testimonial.8.role': 'Software Developer', 'testimonial.8.quote': 'Open-source and browser-based — I can verify the code myself. Trust through transparency.',
+  // Footer
+  'footer.support': 'Support',
+  // Privacy notice
+  'privacy.notice.title': 'Your Privacy is Protected',
+  'privacy.notice.local': 'All processing happens locally in your browser — files never leave your device',
+  'privacy.notice.noStore': 'No files are stored, cached, or logged — everything is discarded when you close the tab',
+  'privacy.notice.noSignup': 'No sign-up, no tracking, no third-party access to your documents',
 };
 
 const ar: T = {

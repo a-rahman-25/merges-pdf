@@ -79,7 +79,7 @@ const Footer = () => {
               {aiLinks.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}

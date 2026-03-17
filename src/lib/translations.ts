@@ -1191,6 +1191,19 @@ const vi: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': 'Tóm tắt', 'ai.page.summarize.sub': 'Tải lên PDF và để AI tóm tắt cho bạn.',
   'ai.page.translate.h1b': 'Dịch thuật', 'ai.page.translate.sub': 'Dịch PDF sang bất kỳ ngôn ngữ nào với AI.',
   'ai.page.qa.h1b': 'Hỏi đáp', 'ai.page.qa.sub': 'Tải lên PDF và đặt câu hỏi — AI sẽ trả lời.',
+  'faq.heading': 'Câu hỏi thường gặp',
+  'faq.summarize.q1': 'Tóm tắt AI hoạt động như thế nào?', 'faq.summarize.a1': 'Tải lên PDF và mô hình AI sẽ phân tích cấu trúc và nội dung để tạo bản tóm tắt toàn diện.',
+  'faq.summarize.q2': 'Bản tóm tắt có chính xác không?', 'faq.summarize.a2': 'Tóm tắt AI cung cấp tổng quan hữu ích nhưng nên xác minh với tài liệu gốc.',
+  'faq.summarize.q3': 'Tài liệu có được gửi lên máy chủ không?', 'faq.summarize.a3': 'Siêu dữ liệu tài liệu được gửi đến dịch vụ AI. Nội dung tệp thực tế vẫn ở trong trình duyệt.',
+  'faq.summarize.q4': 'Có thể tóm tắt tài liệu lớn không?', 'faq.summarize.a4': 'Có, tài liệu mọi kích thước đều có thể được tóm tắt.',
+  'faq.qa.q1': 'Hỏi đáp AI hoạt động như thế nào?', 'faq.qa.a1': 'Tải lên PDF và đặt câu hỏi bất kỳ. AI phân tích ngữ cảnh tài liệu và đưa ra câu trả lời phù hợp.',
+  'faq.qa.q2': 'Có thể đặt câu hỏi tiếp theo không?', 'faq.qa.a2': 'Có! Chat lưu giữ lịch sử hội thoại.',
+  'faq.qa.q3': 'Câu trả lời chính xác đến mức nào?', 'faq.qa.a3': 'Câu trả lời AI dựa trên phân tích tài liệu. Với quyết định quan trọng, hãy xác minh với tài liệu gốc.',
+  'faq.qa.q4': 'Có giới hạn câu hỏi không?', 'faq.qa.a4': 'Bạn có thể hỏi bao nhiêu câu tùy thích. Có giới hạn sử dụng miễn phí hào phóng.',
+  'faq.translate.q1': 'Hỗ trợ ngôn ngữ nào?', 'faq.translate.a1': 'Chúng tôi hỗ trợ 15+ ngôn ngữ bao gồm Tây Ban Nha, Pháp, Đức, Trung, Nhật, Ả Rập và nhiều hơn.',
+  'faq.translate.q2': 'Bản dịch chính xác không?', 'faq.translate.a2': 'AI cung cấp bản dịch chất lượng cao. Với tài liệu chính thức, chúng tôi khuyên dùng dịch thuật chuyên nghiệp.',
+  'faq.translate.q3': 'Có thể dịch toàn bộ PDF không?', 'faq.translate.a3': 'AI phân tích tài liệu và dịch cấu trúc nội dung. Để dịch đầy đủ, hãy sao chép văn bản.',
+  'faq.translate.q4': 'Miễn phí không?', 'faq.translate.a4': 'Có, dịch thuật AI miễn phí với giới hạn sử dụng hào phóng.',
 };
 
 const bn: T = {

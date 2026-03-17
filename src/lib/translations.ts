@@ -426,6 +426,7 @@ const tr: T = {
   'cta.title': 'Hazır mısınız? Kayıt yok. Ücret yok. Güçlü PDF araçları.', 'cta.subtitle': 'Milyonlarca kullanıcıya katılın.', 'cta.button': 'Şimdi başla — Ücretsiz',
   'footer.desc': 'Gizlilik öncelikli PDF paketi.', 'footer.pdftools': 'PDF Araçları', 'footer.aitools': 'AI Araçları', 'footer.company': 'Şirket',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tüm dosyalar yerel olarak işlenir.',
+  'footer.privacy': 'Gizlilik Politikası', 'footer.terms': 'Kullanım Şartları',
   'cat.pdftools': 'PDF Araçları', 'cat.converters': 'Dönüştürücüler', 'cat.aitools': 'AI Araçları',
   'step.upload': 'Yükle', 'step.upload.desc': 'Dosyalarınızı sürükleyin veya seçin.', 'step.process': 'İşle', 'step.process.desc': 'Tarayıcıda anında işlenir.', 'step.download': 'İndir', 'step.download.desc': 'Saniyeler içinde sonuç alın.',
 };

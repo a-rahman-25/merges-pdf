@@ -146,6 +146,8 @@ const AnimatedRoutes = () => {
   );
 };
 
+const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
@@ -154,6 +156,9 @@ const App = () => (
       <BrowserRouter>
         <Suspense fallback={<Loading />}>
           <AnimatedRoutes />
+        </Suspense>
+        <Suspense fallback={null}>
+          <PWAInstallPrompt />
         </Suspense>
       </BrowserRouter>
     </TooltipProvider>

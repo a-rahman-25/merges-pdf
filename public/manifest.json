@@ -1,0 +1,29 @@
+{
+  "name": "MergesPDF — The Privacy-First PDF Suite",
+  "short_name": "MergesPDF",
+  "description": "Free online PDF tools — merge, split, compress, convert, sign & OCR PDFs. 100% private, no uploads.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFF7ED",
+  "theme_color": "#F97316",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["productivity", "utilities"]
+}

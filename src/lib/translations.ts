@@ -502,6 +502,19 @@ const es: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': 'Resumidor', 'ai.page.summarize.sub': 'Sube un PDF y deja que la IA lo resuma.',
   'ai.page.translate.h1b': 'Traductor', 'ai.page.translate.sub': 'Traduce tus documentos PDF a cualquier idioma con IA.',
   'ai.page.qa.h1b': 'Preguntas', 'ai.page.qa.sub': 'Sube un PDF y haz preguntas — la IA responderá.',
+  'faq.heading': 'Preguntas frecuentes',
+  'faq.summarize.q1': '¿Cómo funciona el resumen con IA?', 'faq.summarize.a1': 'Sube un PDF y nuestro modelo de IA analizará la estructura y el contenido para generar un resumen completo.',
+  'faq.summarize.q2': '¿Es preciso el resumen?', 'faq.summarize.a2': 'Los resúmenes de IA proporcionan una visión útil pero deben verificarse con el documento original.',
+  'faq.summarize.q3': '¿Se envía mi documento a un servidor?', 'faq.summarize.a3': 'Los metadatos del documento se envían al servicio de IA. El contenido real permanece en tu navegador.',
+  'faq.summarize.q4': '¿Puedo resumir documentos grandes?', 'faq.summarize.a4': 'Sí, se pueden resumir documentos de cualquier tamaño.',
+  'faq.qa.q1': '¿Cómo funciona el Q&A con IA?', 'faq.qa.a1': 'Sube un PDF y haz cualquier pregunta. La IA analiza el contexto del documento y proporciona respuestas relevantes.',
+  'faq.qa.q2': '¿Puedo hacer preguntas de seguimiento?', 'faq.qa.a2': '¡Sí! El chat mantiene el historial de conversación.',
+  'faq.qa.q3': '¿Qué tan precisas son las respuestas?', 'faq.qa.a3': 'Las respuestas de IA se basan en el análisis del documento. Para decisiones críticas, verifica con el documento original.',
+  'faq.qa.q4': '¿Hay un límite de preguntas?', 'faq.qa.a4': 'Puedes hacer tantas preguntas como quieras. Hay límites de uso gratuitos generosos.',
+  'faq.translate.q1': '¿Qué idiomas son compatibles?', 'faq.translate.a1': 'Admitimos más de 15 idiomas incluyendo español, francés, alemán, chino, japonés, árabe y más.',
+  'faq.translate.q2': '¿Qué tan precisa es la traducción?', 'faq.translate.a2': 'La IA proporciona traducciones de alta calidad. Para documentos oficiales recomendamos traducción profesional.',
+  'faq.translate.q3': '¿Puedo traducir todo el PDF?', 'faq.translate.a3': 'La IA analiza el documento y traduce la estructura del contenido. Para traducción completa, copia el texto.',
+  'faq.translate.q4': '¿Es gratis?', 'faq.translate.a4': 'Sí, la traducción con IA es gratuita con límites de uso generosos.',
 };
 
 const ptBR: T = {

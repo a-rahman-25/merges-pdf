@@ -2,6 +2,8 @@ import SEOHead from '@/components/SEOHead';
 import ToolPageLayout from '@/components/ToolPageLayout';
 import OCRTool from '@/components/OCRTool';
 import ToolFAQ from '@/components/ToolFAQ';
+import { useI18n } from '@/hooks/useI18n';
+import { tt } from '@/lib/tool-translations';
 
 const faqs = [
   { q: 'What is OCR?', a: 'OCR (Optical Character Recognition) converts images of text into machine-readable text, making scanned documents searchable and editable.' },
@@ -11,22 +13,25 @@ const faqs = [
   { q: 'Can I OCR a scanned PDF?', a: 'Yes! Upload a scanned PDF and the tool will render each page, then extract text using OCR.' },
 ];
 
-const OcrPdf = () => (
-  <ToolPageLayout activeTab="merge">
-    <SEOHead
-      title="OCR PDF — Extract Text from Scanned PDFs Free | MergesPDF"
-      description="Convert scanned PDFs and images to searchable text using OCR. 100% in-browser, private, free."
-      path="/ocr-pdf"
-    />
-    <div className="mb-6 text-center">
-      <h1 className="text-2xl font-bold text-foreground md:text-3xl">
-        OCR — Extract Text from <span className="gradient-text">Scanned PDFs</span>
-      </h1>
-      <p className="mt-2 text-muted-foreground">Convert scanned documents and images into searchable, editable text.</p>
-    </div>
-    <OCRTool />
-    <ToolFAQ faqs={faqs} />
-  </ToolPageLayout>
-);
+const OcrPdf = () => {
+  const { lang } = useI18n();
+  return (
+    <ToolPageLayout activeTab="merge">
+      <SEOHead
+        title="OCR PDF — Extract Text from Scanned PDFs Free | MergesPDF"
+        description="Convert scanned PDFs and images to searchable text using OCR. 100% in-browser, private, free."
+        path="/ocr-pdf"
+      />
+      <div className="mb-6 text-center">
+        <h1 className="text-2xl font-bold text-foreground md:text-3xl">
+          {tt('page.ocrPdf.h1a', lang)} <span className="gradient-text">{tt('page.ocrPdf.h1b', lang)}</span>
+        </h1>
+        <p className="mt-2 text-muted-foreground">{tt('page.ocrPdf.sub', lang)}</p>
+      </div>
+      <OCRTool />
+      <ToolFAQ faqs={faqs} />
+    </ToolPageLayout>
+  );
+};
 
 export default OcrPdf;

@@ -3,6 +3,8 @@ import PDFSplitter from '@/components/PDFSplitter';
 import ToolPageLayout from '@/components/ToolPageLayout';
 import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
+import { useI18n } from '@/hooks/useI18n';
+import { tt } from '@/lib/tool-translations';
 
 const faqs = [
   { q: 'How does PDF splitting work?', a: 'Upload a PDF file and choose to split all pages into individual files, or enter a page range (e.g., "1-3, 5") to extract specific pages into a new PDF.' },
@@ -12,27 +14,30 @@ const faqs = [
   { q: 'Is this free?', a: 'Completely free. No subscriptions, no watermarks, no hidden costs.' },
 ];
 
-const Split = () => (
-  <ToolPageLayout activeTab="split">
-    <SEOHead
-      title="Split PDF Pages Online — Free, Private | MergePDF"
-      description="Split PDF into individual pages or extract a custom range. 100% free and private — processed locally in your browser."
-      path="/split"
-      faqs={faqs}
-    />
-    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
-      <div className="mb-10 text-center">
-        <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-          Split PDF into <span className="text-primary">pages</span>
-        </h1>
-        <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
-          Extract every page from your PDF as a separate file — entirely in your browser.
-        </p>
-      </div>
-      <PDFSplitter />
-      <ToolFAQ faqs={faqs} />
-    </motion.div>
-  </ToolPageLayout>
-);
+const Split = () => {
+  const { lang } = useI18n();
+  return (
+    <ToolPageLayout activeTab="split">
+      <SEOHead
+        title="Split PDF Pages Online — Free, Private | MergePDF"
+        description="Split PDF into individual pages or extract a custom range. 100% free and private — processed locally in your browser."
+        path="/split"
+        faqs={faqs}
+      />
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+        <div className="mb-10 text-center">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            {tt('page.split.h1a', lang)} <span className="text-primary">{tt('page.split.h1b', lang)}</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
+            {tt('page.split.sub', lang)}
+          </p>
+        </div>
+        <PDFSplitter />
+        <ToolFAQ faqs={faqs} />
+      </motion.div>
+    </ToolPageLayout>
+  );
+};
 
 export default Split;

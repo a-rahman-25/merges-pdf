@@ -3,6 +3,8 @@ import BatchProcessor from '@/components/BatchProcessor';
 import ToolPageLayout from '@/components/ToolPageLayout';
 import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
+import { useI18n } from '@/hooks/useI18n';
+import { tt } from '@/lib/tool-translations';
 
 const faqs = [
   { q: 'What batch operations are available?', a: 'You can batch merge (combine all PDFs into one) or batch compress (compress each PDF individually) with progress tracking.' },
@@ -11,27 +13,30 @@ const faqs = [
   { q: 'Are all files processed locally?', a: 'Yes. All batch processing happens in your browser. No files are uploaded to any server.' },
 ];
 
-const Batch = () => (
-  <ToolPageLayout activeTab="batch">
-    <SEOHead
-      title="Batch PDF Processing — Free | MergePDF"
-      description="Process multiple PDF files at once — batch merge, compress, and convert. Free and private."
-      path="/batch"
-      faqs={faqs}
-    />
-    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
-      <div className="mb-10 text-center">
-        <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-          Batch <span className="text-primary">Processing</span>
-        </h1>
-        <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
-          Process multiple PDF files simultaneously with progress tracking.
-        </p>
-      </div>
-      <BatchProcessor />
-      <ToolFAQ faqs={faqs} />
-    </motion.div>
-  </ToolPageLayout>
-);
+const Batch = () => {
+  const { lang } = useI18n();
+  return (
+    <ToolPageLayout activeTab="batch">
+      <SEOHead
+        title="Batch PDF Processing — Free | MergePDF"
+        description="Process multiple PDF files at once — batch merge, compress, and convert. Free and private."
+        path="/batch"
+        faqs={faqs}
+      />
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+        <div className="mb-10 text-center">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            {tt('page.batch.h1a', lang)} <span className="text-primary">{tt('page.batch.h1b', lang)}</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
+            {tt('page.batch.sub', lang)}
+          </p>
+        </div>
+        <BatchProcessor />
+        <ToolFAQ faqs={faqs} />
+      </motion.div>
+    </ToolPageLayout>
+  );
+};
 
 export default Batch;

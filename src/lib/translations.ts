@@ -767,6 +767,19 @@ const ja: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': '要約', 'ai.page.summarize.sub': 'PDFをアップロードしてAIに要約させましょう。',
   'ai.page.translate.h1b': '翻訳', 'ai.page.translate.sub': 'AIでPDFをあらゆる言語に翻訳。',
   'ai.page.qa.h1b': 'Q&A', 'ai.page.qa.sub': 'PDFをアップロードして質問 — AIが回答します。',
+  'faq.heading': 'よくある質問',
+  'faq.summarize.q1': 'AI要約はどのように機能しますか？', 'faq.summarize.a1': 'PDFをアップロードすると、AIモデルが構造と内容を分析して包括的な要約を生成します。',
+  'faq.summarize.q2': '要約は正確ですか？', 'faq.summarize.a2': 'AI要約は有用な概要を提供しますが、重要な用途では原文書と照合してください。',
+  'faq.summarize.q3': '文書はサーバーに送信されますか？', 'faq.summarize.a3': '文書メタデータがAIサービスに送信されます。実際のファイル内容はブラウザに残ります。',
+  'faq.summarize.q4': '大きな文書も要約できますか？', 'faq.summarize.a4': 'はい、どんなサイズの文書も要約できます。',
+  'faq.qa.q1': 'AI Q&Aはどのように機能しますか？', 'faq.qa.a1': 'PDFをアップロードして質問すると、AIが文書のコンテキストを分析して関連する回答を提供します。',
+  'faq.qa.q2': 'フォローアップ質問はできますか？', 'faq.qa.a2': 'はい！チャットは会話履歴を保持します。',
+  'faq.qa.q3': '回答はどの程度正確ですか？', 'faq.qa.a3': 'AI回答は文書分析に基づいています。重要な判断には原文書で確認してください。',
+  'faq.qa.q4': '質問数に制限はありますか？', 'faq.qa.a4': '好きなだけ質問できます。寛大な無料使用制限があります。',
+  'faq.translate.q1': 'どの言語に対応していますか？', 'faq.translate.a1': 'スペイン語、フランス語、ドイツ語、中国語、日本語、アラビア語など15以上の言語に対応。',
+  'faq.translate.q2': '翻訳は正確ですか？', 'faq.translate.a2': 'AIは高品質の翻訳を提供します。公式文書にはプロの翻訳をお勧めします。',
+  'faq.translate.q3': 'PDF全体を翻訳できますか？', 'faq.translate.a3': 'AIが文書を分析してコンテンツ構造を翻訳します。完全な翻訳にはテキストをコピーしてください。',
+  'faq.translate.q4': '無料ですか？', 'faq.translate.a4': 'はい、AI翻訳は寛大な使用制限付きで無料です。',
 };
 
 const ko: T = {

@@ -342,6 +342,7 @@ const de: T = {
   'cta.title': 'Bereit? Keine Anmeldung. Keine Gebühren. Leistungsstarke PDF-Tools.', 'cta.subtitle': 'Millionen Nutzer verarbeiten Dokumente privat.', 'cta.button': 'Jetzt starten — Kostenlos',
   'footer.desc': 'Datenschutz-orientierte PDF Suite.', 'footer.pdftools': 'PDF-Werkzeuge', 'footer.aitools': 'KI-Werkzeuge', 'footer.company': 'Unternehmen',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Alle Dateien werden lokal verarbeitet.',
+  'footer.privacy': 'Datenschutzrichtlinie', 'footer.terms': 'Nutzungsbedingungen',
   'cat.pdftools': 'PDF-Werkzeuge', 'cat.converters': 'Konverter', 'cat.aitools': 'KI-Werkzeuge',
   'step.upload': 'Hochladen', 'step.upload.desc': 'Dateien ziehen oder auswählen.', 'step.process': 'Verarbeiten', 'step.process.desc': 'Sofortige Verarbeitung im Browser.', 'step.download': 'Herunterladen', 'step.download.desc': 'Ergebnis in Sekunden erhalten.',
 };

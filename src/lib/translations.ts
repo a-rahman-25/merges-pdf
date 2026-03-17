@@ -1085,6 +1085,19 @@ const id: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': 'Peringkas', 'ai.page.summarize.sub': 'Unggah PDF dan biarkan AI meringkasnya.',
   'ai.page.translate.h1b': 'Penerjemah', 'ai.page.translate.sub': 'Terjemahkan PDF ke bahasa apa pun dengan AI.',
   'ai.page.qa.h1b': 'Tanya Jawab', 'ai.page.qa.sub': 'Unggah PDF dan ajukan pertanyaan — AI akan menjawab.',
+  'faq.heading': 'Pertanyaan yang Sering Diajukan',
+  'faq.summarize.q1': 'Bagaimana ringkasan AI bekerja?', 'faq.summarize.a1': 'Unggah PDF dan model AI kami akan menganalisis struktur dan konten untuk menghasilkan ringkasan komprehensif.',
+  'faq.summarize.q2': 'Apakah ringkasannya akurat?', 'faq.summarize.a2': 'Ringkasan AI memberikan gambaran yang berguna tetapi harus diverifikasi dengan dokumen asli.',
+  'faq.summarize.q3': 'Apakah dokumen saya dikirim ke server?', 'faq.summarize.a3': 'Metadata dokumen dikirim ke layanan AI. Konten file sebenarnya tetap di browser Anda.',
+  'faq.summarize.q4': 'Bisakah meringkas dokumen besar?', 'faq.summarize.a4': 'Ya, dokumen dari ukuran apa pun dapat diringkas.',
+  'faq.qa.q1': 'Bagaimana tanya jawab AI bekerja?', 'faq.qa.a1': 'Unggah PDF dan ajukan pertanyaan apa pun. AI menganalisis konteks dokumen dan memberikan jawaban yang relevan.',
+  'faq.qa.q2': 'Bisakah mengajukan pertanyaan lanjutan?', 'faq.qa.a2': 'Ya! Chat menyimpan riwayat percakapan.',
+  'faq.qa.q3': 'Seberapa akurat jawabannya?', 'faq.qa.a3': 'Jawaban AI berdasarkan analisis dokumen. Untuk keputusan penting, verifikasi dengan dokumen asli.',
+  'faq.qa.q4': 'Apakah ada batas pertanyaan?', 'faq.qa.a4': 'Anda bisa bertanya sebanyak yang Anda mau. Ada batas penggunaan gratis yang murah hati.',
+  'faq.translate.q1': 'Bahasa apa saja yang didukung?', 'faq.translate.a1': 'Kami mendukung 15+ bahasa termasuk Spanyol, Prancis, Jerman, Cina, Jepang, Arab, dan lainnya.',
+  'faq.translate.q2': 'Seberapa akurat terjemahannya?', 'faq.translate.a2': 'AI memberikan terjemahan berkualitas tinggi. Untuk dokumen resmi, kami merekomendasikan terjemahan profesional.',
+  'faq.translate.q3': 'Bisakah menerjemahkan seluruh PDF?', 'faq.translate.a3': 'AI menganalisis dokumen dan menerjemahkan struktur konten. Untuk terjemahan lengkap, salin teksnya.',
+  'faq.translate.q4': 'Apakah gratis?', 'faq.translate.a4': 'Ya, terjemahan AI gratis dengan batas penggunaan yang murah hati.',
 };
 
 const th: T = {

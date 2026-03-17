@@ -5,15 +5,14 @@ import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 
-const faqs = [
-  { q: 'How does AI Q&A work?', a: 'Upload a PDF and ask any question about it. AI analyzes the document context and provides relevant answers in a chat interface.' },
-  { q: 'Can I ask follow-up questions?', a: 'Yes! The chat maintains conversation history, so you can ask follow-up questions and the AI will understand the context.' },
-  { q: 'How accurate are the answers?', a: 'AI answers are based on document analysis and general knowledge. For critical decisions, always verify answers against the original document.' },
-  { q: 'Is there a limit on questions?', a: 'You can ask as many questions as you like. There are generous free usage limits for the AI service.' },
-];
-
 const AiQa = () => {
   const { t } = useI18n();
+  const faqs = [
+    { q: t('faq.qa.q1'), a: t('faq.qa.a1') },
+    { q: t('faq.qa.q2'), a: t('faq.qa.a2') },
+    { q: t('faq.qa.q3'), a: t('faq.qa.a3') },
+    { q: t('faq.qa.q4'), a: t('faq.qa.a4') },
+  ];
   return (
     <ToolPageLayout activeTab="ai-qa">
       <SEOHead

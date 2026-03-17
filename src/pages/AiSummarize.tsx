@@ -5,15 +5,14 @@ import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 
-const faqs = [
-  { q: 'How does AI summarization work?', a: 'Upload a PDF and our AI model analyzes the document structure and content to generate a comprehensive summary of key points and topics.' },
-  { q: 'Is the summary accurate?', a: 'AI summaries provide a helpful overview but should be verified against the original document for critical use cases.' },
-  { q: 'Is my document sent to a server?', a: 'Document metadata is sent to our AI service for analysis. The actual file content stays in your browser. Our AI service does not store any data.' },
-  { q: 'Can I summarize large documents?', a: 'Yes, documents of any size can be summarized. Larger documents may take slightly longer to process.' },
-];
-
 const AiSummarize = () => {
   const { t } = useI18n();
+  const faqs = [
+    { q: t('faq.summarize.q1'), a: t('faq.summarize.a1') },
+    { q: t('faq.summarize.q2'), a: t('faq.summarize.a2') },
+    { q: t('faq.summarize.q3'), a: t('faq.summarize.a3') },
+    { q: t('faq.summarize.q4'), a: t('faq.summarize.a4') },
+  ];
   return (
     <ToolPageLayout activeTab="ai-summarize">
       <SEOHead

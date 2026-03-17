@@ -44,6 +44,7 @@ const CropPages = lazy(() => import("./pages/CropPages"));
 const PdfMetadata = lazy(() => import("./pages/PdfMetadata"));
 const MergeImages = lazy(() => import("./pages/MergeImages"));
 const OcrPdf = lazy(() => import("./pages/OcrPdf"));
+const PdfEditor = lazy(() => import("./pages/PdfEditor"));
 
 const queryClient = new QueryClient();
 

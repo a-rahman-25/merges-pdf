@@ -3,6 +3,8 @@ import PDFToImages from '@/components/PDFToImages';
 import ToolPageLayout from '@/components/ToolPageLayout';
 import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
+import { useI18n } from '@/hooks/useI18n';
+import { tt } from '@/lib/tool-translations';
 
 const faqs = [
   { q: 'How do I convert PDF to images?', a: 'Upload a PDF, select the image format (PNG or JPG) and quality, then click Convert. Each page becomes a separate image.' },
@@ -11,27 +13,30 @@ const faqs = [
   { q: 'Are my files uploaded to a server?', a: 'No — everything is processed locally in your browser. Your files never leave your device.' },
 ];
 
-const PdfToImagesPage = () => (
-  <ToolPageLayout activeTab={'pdf-to-images' as any}>
-    <SEOHead
-      title="PDF to Images — Convert PDF Pages to PNG/JPG | MergePDF"
-      description="Convert each PDF page into high-quality PNG or JPG images. Free, private — processed locally in your browser."
-      path="/pdf-to-images"
-      faqs={faqs}
-    />
-    <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
-      <div className="mb-10 text-center">
-        <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
-          PDF to <span className="text-primary">Images</span>
-        </h1>
-        <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
-          Convert each page to high-quality PNG or JPG — entirely in your browser.
-        </p>
-      </div>
-      <PDFToImages />
-      <ToolFAQ faqs={faqs} />
-    </motion.div>
-  </ToolPageLayout>
-);
+const PdfToImagesPage = () => {
+  const { lang } = useI18n();
+  return (
+    <ToolPageLayout activeTab={'pdf-to-images' as any}>
+      <SEOHead
+        title="PDF to Images — Convert PDF Pages to PNG/JPG | MergePDF"
+        description="Convert each PDF page into high-quality PNG or JPG images. Free, private — processed locally in your browser."
+        path="/pdf-to-images"
+        faqs={faqs}
+      />
+      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
+        <div className="mb-10 text-center">
+          <h1 className="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">
+            {tt('page.pdfToImages.h1a', lang)} <span className="text-primary">{tt('page.pdfToImages.h1b', lang)}</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">
+            {tt('page.pdfToImages.sub', lang)}
+          </p>
+        </div>
+        <PDFToImages />
+        <ToolFAQ faqs={faqs} />
+      </motion.div>
+    </ToolPageLayout>
+  );
+};
 
 export default PdfToImagesPage;

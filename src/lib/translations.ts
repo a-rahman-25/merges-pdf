@@ -714,6 +714,19 @@ const zh: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': '摘要器', 'ai.page.summarize.sub': '上传PDF，让AI为您摘要。',
   'ai.page.translate.h1b': '翻译器', 'ai.page.translate.sub': '用AI将PDF翻译成任何语言。',
   'ai.page.qa.h1b': '问答', 'ai.page.qa.sub': '上传PDF并提问——AI将根据文档回答。',
+  'faq.heading': '常见问题',
+  'faq.summarize.q1': 'AI摘要如何工作？', 'faq.summarize.a1': '上传PDF，AI模型会分析文档结构和内容生成全面摘要。',
+  'faq.summarize.q2': '摘要准确吗？', 'faq.summarize.a2': 'AI摘要提供有用的概述，但关键用途应与原始文档核实。',
+  'faq.summarize.q3': '我的文档会被发送到服务器吗？', 'faq.summarize.a3': '文档元数据会发送到AI服务。实际文件内容留在您的浏览器中。',
+  'faq.summarize.q4': '可以摘要大文档吗？', 'faq.summarize.a4': '是的，任何大小的文档都可以摘要。',
+  'faq.qa.q1': 'AI问答如何工作？', 'faq.qa.a1': '上传PDF并提出任何问题。AI会分析文档上下文提供相关回答。',
+  'faq.qa.q2': '可以提后续问题吗？', 'faq.qa.a2': '可以！聊天会保留对话历史。',
+  'faq.qa.q3': '回答准确吗？', 'faq.qa.a3': 'AI回答基于文档分析。关键决策请与原始文档核实。',
+  'faq.qa.q4': '问题有限制吗？', 'faq.qa.a4': '您可以提任意多的问题。有慷慨的免费使用限制。',
+  'faq.translate.q1': '支持哪些语言？', 'faq.translate.a1': '我们支持15+种语言，包括西班牙语、法语、德语、中文、日语、阿拉伯语等。',
+  'faq.translate.q2': '翻译准确吗？', 'faq.translate.a2': 'AI提供高质量翻译。官方文件建议使用专业人工翻译。',
+  'faq.translate.q3': '可以翻译整个PDF吗？', 'faq.translate.a3': 'AI分析文档并翻译内容结构。完整翻译请复制文本。',
+  'faq.translate.q4': '免费吗？', 'faq.translate.a4': '是的，AI翻译免费，有慷慨的使用限制。',
 };
 
 const ja: T = {

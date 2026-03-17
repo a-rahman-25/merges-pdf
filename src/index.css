@@ -6,35 +6,35 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 224 71% 4%;
+    --background: 30 20% 97%;
+    --foreground: 20 14% 8%;
 
     --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
+    --card-foreground: 20 14% 8%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
+    --popover-foreground: 20 14% 8%;
 
-    --primary: 239 84% 67%;
+    --primary: 25 95% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --primary-glow: 263 70% 58%;
+    --primary-glow: 15 90% 48%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 9% 46%;
+    --secondary: 30 14% 96%;
+    --secondary-foreground: 25 9% 46%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 30 14% 96%;
+    --muted-foreground: 25 9% 46%;
 
-    --accent: 239 84% 95%;
-    --accent-foreground: 239 84% 50%;
+    --accent: 25 90% 95%;
+    --accent-foreground: 25 95% 40%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 239 84% 67%;
+    --border: 30 13% 91%;
+    --input: 30 13% 91%;
+    --ring: 25 95% 53%;
 
     --radius: 0.75rem;
 
@@ -52,17 +52,17 @@
     --tool-pink: 330 81% 60%;
     --tool-teal: 172 66% 50%;
 
-    --gradient-primary: linear-gradient(135deg, hsl(239 84% 67%), hsl(263 70% 58%));
-    --shadow-elegant: 0 10px 30px -10px hsl(239 84% 67% / 0.25);
+    --gradient-primary: linear-gradient(135deg, hsl(25 95% 53%), hsl(15 90% 48%));
+    --shadow-elegant: 0 10px 30px -10px hsl(25 95% 53% / 0.25);
 
     --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-foreground: 20 5% 26%;
+    --sidebar-primary: 20 6% 10%;
     --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 30 5% 96%;
+    --sidebar-accent-foreground: 20 6% 10%;
+    --sidebar-border: 30 13% 91%;
+    --sidebar-ring: 25 95% 53%;
   }
 
   .dark {

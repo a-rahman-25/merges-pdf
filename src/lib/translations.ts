@@ -873,6 +873,19 @@ const tr: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': 'Özetleyici', 'ai.page.summarize.sub': 'PDF yükleyin ve AI özetlesin.',
   'ai.page.translate.h1b': 'Çevirmen', 'ai.page.translate.sub': 'AI ile PDF\'lerinizi herhangi bir dile çevirin.',
   'ai.page.qa.h1b': 'Soru-Cevap', 'ai.page.qa.sub': 'PDF yükleyin ve sorular sorun — AI cevaplayacak.',
+  'faq.heading': 'Sıkça Sorulan Sorular',
+  'faq.summarize.q1': 'AI özetleme nasıl çalışır?', 'faq.summarize.a1': 'PDF yükleyin ve AI modelimiz belge yapısını ve içeriğini analiz ederek kapsamlı bir özet oluşturur.',
+  'faq.summarize.q2': 'Özet doğru mu?', 'faq.summarize.a2': 'AI özetleri yararlı bir genel bakış sağlar ancak kritik kullanımlar için orijinal belgeyle doğrulayın.',
+  'faq.summarize.q3': 'Belgem sunucuya gönderiliyor mu?', 'faq.summarize.a3': 'Belge meta verileri AI hizmetine gönderilir. Gerçek dosya içeriği tarayıcınızda kalır.',
+  'faq.summarize.q4': 'Büyük belgeleri özetleyebilir miyim?', 'faq.summarize.a4': 'Evet, her boyuttaki belge özetlenebilir.',
+  'faq.qa.q1': 'AI Soru-Cevap nasıl çalışır?', 'faq.qa.a1': 'PDF yükleyin ve herhangi bir soru sorun. AI belge bağlamını analiz eder ve ilgili cevaplar verir.',
+  'faq.qa.q2': 'Takip soruları sorabilir miyim?', 'faq.qa.a2': 'Evet! Sohbet konuşma geçmişini korur.',
+  'faq.qa.q3': 'Cevaplar ne kadar doğru?', 'faq.qa.a3': 'AI cevapları belge analizine dayanır. Kritik kararlar için orijinal belgeyle doğrulayın.',
+  'faq.qa.q4': 'Soru limiti var mı?', 'faq.qa.a4': 'İstediğiniz kadar soru sorabilirsiniz. Cömert ücretsiz kullanım limitleri var.',
+  'faq.translate.q1': 'Hangi diller destekleniyor?', 'faq.translate.a1': 'İspanyolca, Fransızca, Almanca, Çince, Japonca, Arapça ve daha fazlası dahil 15+ dili destekliyoruz.',
+  'faq.translate.q2': 'Çeviri ne kadar doğru?', 'faq.translate.a2': 'AI yüksek kaliteli çeviriler sağlar. Resmi belgeler için profesyonel çeviri öneriyoruz.',
+  'faq.translate.q3': 'Tüm PDF\'yi çevirebilir miyim?', 'faq.translate.a3': 'AI belgeyi analiz eder ve içerik yapısını çevirir. Tam çeviri için metni kopyalayın.',
+  'faq.translate.q4': 'Ücretsiz mi?', 'faq.translate.a4': 'Evet, AI çeviri cömert kullanım limitleriyle ücretsizdir.',
 };
 
 const ru: T = {

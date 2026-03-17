@@ -240,7 +240,7 @@ const Index = () => {
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {category.tools.map((tool, i) => (
                     <motion.div
-                      key={tool.title}
+                      key={tool.titleKey}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
@@ -253,8 +253,8 @@ const Index = () => {
                         <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${tool.color}`}>
                           <tool.icon className="h-5 w-5" />
                         </div>
-                        <h3 className="font-semibold text-foreground">{tool.title}</h3>
-                        <p className="mt-1 flex-1 text-sm text-muted-foreground">{tool.desc}</p>
+                        <h3 className="font-semibold text-foreground">{t(tool.titleKey)}</h3>
+                        <p className="mt-1 flex-1 text-sm text-muted-foreground">{t(tool.descKey)}</p>
                         <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
                           {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
                         </span>

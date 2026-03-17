@@ -46,7 +46,7 @@ const PDFToImages = () => {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
         const ctx = canvas.getContext('2d')!;
-        await page.render({ canvasContext: ctx, viewport }).promise;
+        await page.render({ canvasContext: ctx, viewport, canvas } as any).promise;
         
         const mimeType = format === 'jpg' ? 'image/jpeg' : 'image/png';
         const dataUrl = canvas.toDataURL(mimeType, 0.92);

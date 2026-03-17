@@ -12,7 +12,7 @@ const faqs = [
 ];
 
 const PdfFormFillerPage = () => (
-  <ToolPageLayout activeTab="form-filler" as any>
+  <ToolPageLayout activeTab={'form-filler' as any}>
     <SEOHead
       title="Fill PDF Forms Online — Free PDF Form Filler | MergePDF"
       description="Fill in PDF form fields directly in your browser. Free, private — no uploads, no sign-up required."

@@ -12,7 +12,7 @@ const faqs = [
 ];
 
 const PdfToImagesPage = () => (
-  <ToolPageLayout activeTab="pdf-to-images" as any>
+  <ToolPageLayout activeTab={'pdf-to-images' as any}>
     <SEOHead
       title="PDF to Images — Convert PDF Pages to PNG/JPG | MergePDF"
       description="Convert each PDF page into high-quality PNG or JPG images. Free, private — processed locally in your browser."

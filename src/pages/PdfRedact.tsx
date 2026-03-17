@@ -12,7 +12,7 @@ const faqs = [
 ];
 
 const PdfRedactPage = () => (
-  <ToolPageLayout activeTab="redact" as any>
+  <ToolPageLayout activeTab={'redact' as any}>
     <SEOHead
       title="Redact PDF — Black Out Sensitive Information | MergePDF"
       description="Redact sensitive information from PDFs by drawing black rectangles. Free, private — processed locally in your browser."

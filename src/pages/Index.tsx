@@ -147,12 +147,12 @@ const Index = () => {
   const { t } = useI18n();
 
   const trustBadges = [
-    { icon: Lock, title: 'No Server Uploads', desc: 'Files stay in your browser — zero network transfers.' },
-    { icon: Shield, title: 'GDPR Compliant', desc: 'Full EU privacy regulation compliance built-in.' },
-    { icon: Lock, title: 'SSL Encrypted', desc: 'Secure HTTPS connection on every page.' },
-    { icon: Eye, title: 'No Tracking', desc: 'We don\'t track what files you process.' },
-    { icon: Recycle, title: 'Auto-Cleared', desc: 'Files removed from memory when you close the tab.' },
-    { icon: Globe, title: 'Open Source', desc: 'Transparent code — nothing hidden.' },
+    { icon: Lock, titleKey: 'badge.noUploads', descKey: 'badge.noUploads.desc' },
+    { icon: Shield, titleKey: 'badge.gdpr', descKey: 'badge.gdpr.desc' },
+    { icon: Lock, titleKey: 'badge.ssl', descKey: 'badge.ssl.desc' },
+    { icon: Eye, titleKey: 'badge.noTracking', descKey: 'badge.noTracking.desc' },
+    { icon: Recycle, titleKey: 'badge.autoCleared', descKey: 'badge.autoCleared.desc' },
+    { icon: Globe, titleKey: 'badge.openSource', descKey: 'badge.openSource.desc' },
   ];
 
   const steps = [

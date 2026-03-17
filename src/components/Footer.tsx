@@ -99,7 +99,7 @@ const Footer = () => {
               ))}
             </ul>
             <p className="mt-4 text-xs text-muted-foreground">
-              Support: <a href="mailto:merge.pdf.st@gmail.com" className="text-primary hover:underline">merge.pdf.st@gmail.com</a>
+              {t('footer.support')}: <a href="mailto:merge.pdf.st@gmail.com" className="text-primary hover:underline">merge.pdf.st@gmail.com</a>
             </p>
           </div>
         </div>

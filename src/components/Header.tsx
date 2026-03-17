@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code } from 'lucide-react';
+import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code, ImageIcon, FormInput, EyeOff } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';

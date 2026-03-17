@@ -103,23 +103,24 @@ const Header = () => {
                 {t('nav.tools')} <ChevronDown className="h-3.5 w-3.5" />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="start">
-              {toolGroups.map((group, gi) => (
-                <div key={group.labelKey}>
-                  {gi > 0 && <DropdownMenuSeparator />}
-                  <DropdownMenuLabel className="flex items-center gap-2">
-                    <group.icon className="h-3.5 w-3.5" />
-                    {t(group.labelKey)}
-                  </DropdownMenuLabel>
-                  <DropdownMenuGroup>
-                    {group.items.map((item) => (
-                      <DropdownMenuItem key={item.to} asChild>
-                        <Link to={item.to} className="cursor-pointer">{item.label}</Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuGroup>
-                </div>
-              ))}
+            <DropdownMenuContent className="w-auto p-4" align="start">
+              <div className="flex gap-6">
+                {toolGroups.map((group) => (
+                  <div key={group.labelKey} className="min-w-[160px]">
+                    <DropdownMenuLabel className="flex items-center gap-2 px-0 mb-1">
+                      <group.icon className="h-3.5 w-3.5" />
+                      {t(group.labelKey)}
+                    </DropdownMenuLabel>
+                    <DropdownMenuGroup>
+                      {group.items.map((item) => (
+                        <DropdownMenuItem key={item.to} asChild>
+                          <Link to={item.to} className="cursor-pointer">{item.label}</Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuGroup>
+                  </div>
+                ))}
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
 

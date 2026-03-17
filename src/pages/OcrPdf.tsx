@@ -4,11 +4,11 @@ import OCRTool from '@/components/OCRTool';
 import ToolFAQ from '@/components/ToolFAQ';
 
 const faqs = [
-  { question: 'What is OCR?', answer: 'OCR (Optical Character Recognition) converts images of text into machine-readable text, making scanned documents searchable and editable.' },
-  { question: 'What languages are supported?', answer: 'English, Spanish, French, German, Portuguese, Arabic, Chinese (Simplified), Hindi, and Japanese.' },
-  { question: 'Is OCR processing done locally?', answer: 'Yes! Tesseract.js runs entirely in your browser. Your files never leave your device.' },
-  { question: 'How long does OCR take?', answer: 'Processing time depends on page count and complexity. Most single-page documents complete in under 10 seconds.' },
-  { question: 'Can I OCR a scanned PDF?', answer: 'Yes! Upload a scanned PDF and the tool will render each page, then extract text using OCR.' },
+  { q: 'What is OCR?', a: 'OCR (Optical Character Recognition) converts images of text into machine-readable text, making scanned documents searchable and editable.' },
+  { q: 'What languages are supported?', a: 'English, Spanish, French, German, Portuguese, Arabic, Chinese (Simplified), Hindi, and Japanese.' },
+  { q: 'Is OCR processing done locally?', a: 'Yes! Tesseract.js runs entirely in your browser. Your files never leave your device.' },
+  { q: 'How long does OCR take?', a: 'Processing time depends on page count and complexity. Most single-page documents complete in under 10 seconds.' },
+  { q: 'Can I OCR a scanned PDF?', a: 'Yes! Upload a scanned PDF and the tool will render each page, then extract text using OCR.' },
 ];
 
 const OcrPdf = () => (

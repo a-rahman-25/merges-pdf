@@ -6,6 +6,40 @@ import { Download, Upload, Image, Loader2, Trash2 } from 'lucide-react';
 
 type OutputFormat = 'png' | 'jpg' | 'webp' | 'bmp' | 'ico';
 
+/** Build an ICO file from PNG buffers at given sizes */
+function buildIco(pngs: Uint8Array[], sizes: number[]): Blob {
+  const headerSize = 6;
+  const dirEntrySize = 16;
+  const numImages = pngs.length;
+  let offset = headerSize + dirEntrySize * numImages;
+
+  // ICO header: reserved(2) + type(2) + count(2)
+  const header = new Uint8Array(headerSize);
+  const hv = new DataView(header.buffer);
+  hv.setUint16(0, 0, true);       // reserved
+  hv.setUint16(2, 1, true);       // type = ICO
+  hv.setUint16(4, numImages, true);
+
+  const dirEntries = new Uint8Array(dirEntrySize * numImages);
+  const dv = new DataView(dirEntries.buffer);
+
+  for (let i = 0; i < numImages; i++) {
+    const s = sizes[i] >= 256 ? 0 : sizes[i];
+    const off = i * dirEntrySize;
+    dv.setUint8(off, s);           // width
+    dv.setUint8(off + 1, s);      // height
+    dv.setUint8(off + 2, 0);      // palette
+    dv.setUint8(off + 3, 0);      // reserved
+    dv.setUint16(off + 4, 1, true); // color planes
+    dv.setUint16(off + 6, 32, true); // bits per pixel
+    dv.setUint32(off + 8, pngs[i].length, true); // size
+    dv.setUint32(off + 12, offset, true); // offset
+    offset += pngs[i].length;
+  }
+
+  return new Blob([header, dirEntries, ...pngs], { type: 'image/x-icon' });
+}
+
 const formatOptions: { value: OutputFormat; label: string; mime: string }[] = [
   { value: 'png', label: 'PNG', mime: 'image/png' },
   { value: 'jpg', label: 'JPG', mime: 'image/jpeg' },

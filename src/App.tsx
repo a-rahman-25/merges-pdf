@@ -47,6 +47,9 @@ const MergeImages = lazy(() => import("./pages/MergeImages"));
 const OcrPdf = lazy(() => import("./pages/OcrPdf"));
 const PdfEditor = lazy(() => import("./pages/PdfEditor"));
 const SvgToImage = lazy(() => import("./pages/SvgToImage"));
+const PdfToImages = lazy(() => import("./pages/PdfToImages"));
+const PdfFormFiller = lazy(() => import("./pages/PdfFormFiller"));
+const PdfRedact = lazy(() => import("./pages/PdfRedact"));
 
 const queryClient = new QueryClient();
 

@@ -820,6 +820,19 @@ const ko: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': '요약기', 'ai.page.summarize.sub': 'PDF를 업로드하고 AI가 요약하게 하세요.',
   'ai.page.translate.h1b': '번역기', 'ai.page.translate.sub': 'AI로 PDF를 모든 언어로 번역하세요.',
   'ai.page.qa.h1b': 'Q&A', 'ai.page.qa.sub': 'PDF를 업로드하고 질문하세요 — AI가 답합니다.',
+  'faq.heading': '자주 묻는 질문',
+  'faq.summarize.q1': 'AI 요약은 어떻게 작동하나요?', 'faq.summarize.a1': 'PDF를 업로드하면 AI 모델이 문서 구조와 내용을 분석하여 포괄적인 요약을 생성합니다.',
+  'faq.summarize.q2': '요약이 정확한가요?', 'faq.summarize.a2': 'AI 요약은 유용한 개요를 제공하지만 중요한 용도에는 원본 문서와 대조하세요.',
+  'faq.summarize.q3': '문서가 서버로 전송되나요?', 'faq.summarize.a3': '문서 메타데이터가 AI 서비스로 전송됩니다. 실제 파일 내용은 브라우저에 남습니다.',
+  'faq.summarize.q4': '큰 문서도 요약할 수 있나요?', 'faq.summarize.a4': '네, 모든 크기의 문서를 요약할 수 있습니다.',
+  'faq.qa.q1': 'AI Q&A는 어떻게 작동하나요?', 'faq.qa.a1': 'PDF를 업로드하고 질문하면 AI가 문서 맥락을 분석하여 관련 답변을 제공합니다.',
+  'faq.qa.q2': '후속 질문을 할 수 있나요?', 'faq.qa.a2': '네! 채팅은 대화 기록을 유지합니다.',
+  'faq.qa.q3': '답변이 정확한가요?', 'faq.qa.a3': 'AI 답변은 문서 분석에 기반합니다. 중요한 결정에는 원본 문서로 확인하세요.',
+  'faq.qa.q4': '질문 수 제한이 있나요?', 'faq.qa.a4': '원하는 만큼 질문할 수 있습니다. 넉넉한 무료 사용 한도가 있습니다.',
+  'faq.translate.q1': '어떤 언어를 지원하나요?', 'faq.translate.a1': '스페인어, 프랑스어, 독일어, 중국어, 일본어, 아랍어 등 15개 이상의 언어를 지원합니다.',
+  'faq.translate.q2': '번역이 정확한가요?', 'faq.translate.a2': 'AI는 고품질 번역을 제공합니다. 공식 문서에는 전문 번역을 권장합니다.',
+  'faq.translate.q3': '전체 PDF를 번역할 수 있나요?', 'faq.translate.a3': 'AI가 문서를 분석하고 콘텐츠 구조를 번역합니다. 전체 번역은 텍스트를 복사하세요.',
+  'faq.translate.q4': '무료인가요?', 'faq.translate.a4': '네, AI 번역은 넉넉한 사용 한도와 함께 무료입니다.',
 };
 
 const tr: T = {

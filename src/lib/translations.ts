@@ -300,6 +300,7 @@ const ptBR: T = {
   'cta.title': 'Pronto? Sem cadastro. Sem taxas. Ferramentas PDF poderosas.', 'cta.subtitle': 'Junte-se a milhões de usuários.', 'cta.button': 'Começar — É grátis',
   'footer.desc': 'Suite PDF com privacidade primeiro.', 'footer.pdftools': 'Ferramentas PDF', 'footer.aitools': 'Ferramentas IA', 'footer.company': 'Empresa',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Todos os arquivos são processados localmente.',
+  'footer.privacy': 'Política de privacidade', 'footer.terms': 'Termos de serviço',
   'cat.pdftools': 'Ferramentas PDF', 'cat.converters': 'Conversores', 'cat.aitools': 'Ferramentas IA',
   'step.upload': 'Enviar', 'step.upload.desc': 'Arraste ou selecione seus arquivos.', 'step.process': 'Processar', 'step.process.desc': 'Processado instantaneamente no navegador.', 'step.download': 'Baixar', 'step.download.desc': 'Obtenha o resultado em segundos.',
 };

@@ -661,6 +661,19 @@ const de: T = {
   'ai.page.summarize.h1a': 'AI PDF', 'ai.page.summarize.h1b': 'Zusammenfasser', 'ai.page.summarize.sub': 'Laden Sie ein PDF hoch und lassen Sie KI es zusammenfassen.',
   'ai.page.translate.h1b': 'Übersetzer', 'ai.page.translate.sub': 'Übersetzen Sie Ihre PDFs in jede Sprache mit KI.',
   'ai.page.qa.h1b': 'Fragen', 'ai.page.qa.sub': 'Laden Sie ein PDF hoch und stellen Sie Fragen — KI antwortet.',
+  'faq.heading': 'Häufig gestellte Fragen',
+  'faq.summarize.q1': 'Wie funktioniert die KI-Zusammenfassung?', 'faq.summarize.a1': 'Laden Sie ein PDF hoch und unser KI-Modell analysiert die Struktur und den Inhalt für eine umfassende Zusammenfassung.',
+  'faq.summarize.q2': 'Ist die Zusammenfassung genau?', 'faq.summarize.a2': 'KI-Zusammenfassungen bieten einen nützlichen Überblick, sollten aber mit dem Originaldokument überprüft werden.',
+  'faq.summarize.q3': 'Wird mein Dokument an einen Server gesendet?', 'faq.summarize.a3': 'Dokumentmetadaten werden an den KI-Dienst gesendet. Der eigentliche Inhalt bleibt in Ihrem Browser.',
+  'faq.summarize.q4': 'Kann ich große Dokumente zusammenfassen?', 'faq.summarize.a4': 'Ja, Dokumente jeder Größe können zusammengefasst werden.',
+  'faq.qa.q1': 'Wie funktioniert KI-Q&A?', 'faq.qa.a1': 'Laden Sie ein PDF hoch und stellen Sie eine beliebige Frage. Die KI analysiert den Kontext und liefert relevante Antworten.',
+  'faq.qa.q2': 'Kann ich Folgefragen stellen?', 'faq.qa.a2': 'Ja! Der Chat behält den Gesprächsverlauf bei.',
+  'faq.qa.q3': 'Wie genau sind die Antworten?', 'faq.qa.a3': 'KI-Antworten basieren auf der Dokumentanalyse. Für kritische Entscheidungen überprüfen Sie mit dem Original.',
+  'faq.qa.q4': 'Gibt es ein Fragelimit?', 'faq.qa.a4': 'Sie können so viele Fragen stellen, wie Sie möchten. Es gibt großzügige kostenlose Nutzungslimits.',
+  'faq.translate.q1': 'Welche Sprachen werden unterstützt?', 'faq.translate.a1': 'Wir unterstützen über 15 Sprachen einschließlich Spanisch, Französisch, Deutsch, Chinesisch, Japanisch, Arabisch und mehr.',
+  'faq.translate.q2': 'Wie genau ist die Übersetzung?', 'faq.translate.a2': 'Die KI liefert hochwertige Übersetzungen. Für offizielle Dokumente empfehlen wir professionelle Übersetzung.',
+  'faq.translate.q3': 'Kann ich das gesamte PDF übersetzen?', 'faq.translate.a3': 'Die KI analysiert das Dokument und übersetzt die Inhaltsstruktur. Für vollständige Übersetzung kopieren Sie den Text.',
+  'faq.translate.q4': 'Ist das kostenlos?', 'faq.translate.a4': 'Ja, KI-Übersetzung ist kostenlos mit großzügigen Nutzungslimits.',
 };
 
 const zh: T = {

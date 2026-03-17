@@ -313,22 +313,22 @@ const Index = () => {
                 className="flex transition-transform duration-300"
                 style={{ transform: `translateX(-${testimonialIdx * (100 / visibleCount)}%)` }}
               >
-                {testimonials.map((t, i) => (
+                {testimonialKeys.map((tk, i) => (
                   <div key={i} className="w-full sm:w-1/3 flex-shrink-0 px-3">
                     <div className="rounded-2xl border border-border bg-card p-6 h-full">
                       <div className="flex gap-0.5 mb-3">
-                        {Array.from({ length: t.rating }).map((_, s) => (
+                        {Array.from({ length: tk.rating }).map((_, s) => (
                           <Star key={s} className="h-4 w-4 fill-tool-amber text-tool-amber" />
                         ))}
                       </div>
-                      <p className="text-sm text-muted-foreground leading-relaxed">"{t.quote}"</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">"{t(tk.quoteKey)}"</p>
                       <div className="mt-4 flex items-center gap-3">
                         <div className="flex h-9 w-9 items-center justify-center rounded-full gradient-bg text-sm font-bold text-primary-foreground">
-                          {t.name.charAt(0)}
+                          {t(tk.nameKey).charAt(0)}
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-foreground">{t.name}</p>
-                          <p className="text-xs text-muted-foreground">{t.role}</p>
+                          <p className="text-sm font-semibold text-foreground">{t(tk.nameKey)}</p>
+                          <p className="text-xs text-muted-foreground">{t(tk.roleKey)}</p>
                         </div>
                       </div>
                     </div>

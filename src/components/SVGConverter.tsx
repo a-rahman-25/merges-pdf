@@ -136,7 +136,7 @@ const SVGConverter = () => {
     if (!resultUrl || !svgFile) return;
     const a = document.createElement('a');
     a.href = resultUrl;
-    a.download = svgFile.name.replace(/\.svg$/i, '') + '.' + format;
+    a.download = svgFile.name.replace(/\.svg$/i, '') + '.' + (format === 'ico' ? 'ico' : format);
     a.click();
   }, [resultUrl, svgFile, format]);
 

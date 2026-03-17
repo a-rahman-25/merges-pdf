@@ -134,7 +134,7 @@ const Header = () => {
             <ThemeToggle />
             <Button asChild size="sm" className="rounded-xl gradient-bg border-0 font-semibold">
               <Link to="/ai-document-tools" className="flex items-center gap-1.5">
-                <Code className="h-3.5 w-3.5" /> {t('nav.api')}
+                <Brain className="h-3.5 w-3.5" /> ✨ AI Tools
               </Link>
             </Button>
           </div>

@@ -384,6 +384,7 @@ const ja: T = {
   'cta.title': '準備はいいですか？登録不要。無料。', 'cta.subtitle': '何百万人ものユーザーに参加。', 'cta.button': '今すぐ開始 — 無料',
   'footer.desc': 'プライバシーファーストPDFスイート。', 'footer.pdftools': 'PDFツール', 'footer.aitools': 'AIツール', 'footer.company': '会社',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'すべてのファイルはローカルで処理されます。',
+  'footer.privacy': 'プライバシーポリシー', 'footer.terms': '利用規約',
   'cat.pdftools': 'PDFツール', 'cat.converters': 'コンバーター', 'cat.aitools': 'AIツール',
   'step.upload': 'アップロード', 'step.upload.desc': 'ファイルをドラッグまたは選択。', 'step.process': '処理', 'step.process.desc': 'ブラウザで即座に処理。', 'step.download': 'ダウンロード', 'step.download.desc': '数秒で結果を取得。',
 };

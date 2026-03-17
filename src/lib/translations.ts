@@ -594,6 +594,7 @@ const sw: T = {
   'cta.title': 'Uko tayari? Bila kusajili. Bila ada. Zana zenye nguvu za PDF.', 'cta.subtitle': 'Jiunge na mamilioni ya watumiaji.', 'cta.button': 'Anza sasa — Bure',
   'footer.desc': 'PDF suite ya faragha kwanza.', 'footer.pdftools': 'Zana za PDF', 'footer.aitools': 'Zana za AI', 'footer.company': 'Kampuni',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Faili zote zinachakatwa ndani ya kifaa.',
+  'footer.privacy': 'Sera ya Faragha', 'footer.terms': 'Masharti ya Huduma',
   'cat.pdftools': 'Zana za PDF', 'cat.converters': 'Vibadilishaji', 'cat.aitools': 'Zana za AI',
   'step.upload': 'Pakia', 'step.upload.desc': 'Buruta au chagua faili.', 'step.process': 'Chakata', 'step.process.desc': 'Inachakatwa mara moja kwenye kivinjari.', 'step.download': 'Pakua', 'step.download.desc': 'Pata matokeo kwa sekunde.',
 };

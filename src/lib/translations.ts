@@ -321,6 +321,7 @@ const fr: T = {
   'cta.title': 'Prêt ? Sans inscription. Sans frais. Des outils PDF puissants.', 'cta.subtitle': 'Rejoignez des millions d\'utilisateurs.', 'cta.button': 'Commencer — C\'est gratuit',
   'footer.desc': 'Suite PDF confidentialité d\'abord.', 'footer.pdftools': 'Outils PDF', 'footer.aitools': 'Outils IA', 'footer.company': 'Entreprise',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tous les fichiers sont traités localement.',
+  'footer.privacy': 'Politique de confidentialité', 'footer.terms': 'Conditions d\'utilisation',
   'cat.pdftools': 'Outils PDF', 'cat.converters': 'Convertisseurs', 'cat.aitools': 'Outils IA',
   'step.upload': 'Envoyer', 'step.upload.desc': 'Glissez-déposez vos fichiers.', 'step.process': 'Traiter', 'step.process.desc': 'Traitement instantané dans le navigateur.', 'step.download': 'Télécharger', 'step.download.desc': 'Obtenez le résultat en secondes.',
 };

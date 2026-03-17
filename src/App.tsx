@@ -95,6 +95,7 @@ const AnimatedRoutes = () => {
         <Route path="/crop-pages" element={<CropPages />} />
         <Route path="/pdf-metadata" element={<PdfMetadata />} />
         <Route path="/merge-images" element={<MergeImages />} />
+        <Route path="/ocr-pdf" element={<OcrPdf />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

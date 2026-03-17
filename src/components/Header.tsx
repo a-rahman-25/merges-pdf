@@ -22,6 +22,9 @@ const toolGroups = [
       { to: '/add-watermark', label: 'Add Watermark', icon: Droplets },
       { to: '/encrypt', label: 'Encrypt PDF', icon: Lock },
       { to: '/pdf-signature', label: 'Sign PDF', icon: PenTool },
+      { to: '/pdf-to-images', label: 'PDF to Images', icon: ImageIcon },
+      { to: '/pdf-form-filler', label: 'Fill Forms', icon: FormInput },
+      { to: '/pdf-redact', label: 'Redact PDF', icon: EyeOff },
     ],
   },
   {

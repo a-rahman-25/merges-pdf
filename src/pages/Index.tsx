@@ -359,13 +359,13 @@ const Index = () => {
           </p>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {trustBadges.map((badge) => (
-              <div key={badge.title} className="flex gap-4 rounded-2xl border border-border bg-card p-5 transition-shadow hover:shadow-md">
+              <div key={badge.titleKey} className="flex gap-4 rounded-2xl border border-border bg-card p-5 transition-shadow hover:shadow-md">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent">
                   <badge.icon className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">{badge.title}</h3>
-                  <p className="mt-0.5 text-sm text-muted-foreground">{badge.desc}</p>
+                  <h3 className="font-semibold text-foreground">{t(badge.titleKey)}</h3>
+                  <p className="mt-0.5 text-sm text-muted-foreground">{t(badge.descKey)}</p>
                 </div>
               </div>
             ))}

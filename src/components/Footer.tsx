@@ -93,7 +93,7 @@ const Footer = () => {
               {companyLinks.map((link) => (
                 <li key={link.to}>
                   <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                    {'labelKey' in link ? t(link.labelKey) : link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}

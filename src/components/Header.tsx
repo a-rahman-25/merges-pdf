@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Code } from 'lucide-react';
+import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileText, Shield, Zap, Globe, Lock, Layers, Code, Droplets, Trash2, FileOutput, Brain, Languages, MessageSquare, ChevronDown, Palette, Hash, Unlock } from 'lucide-react';
+import { Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser, FileText, Shield, Zap, Globe, Lock, Layers, Code, Droplets, Trash2, FileOutput, Brain, Languages, MessageSquare, ChevronDown, Palette, Hash, Unlock, ImageIcon, FormInput, EyeOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';

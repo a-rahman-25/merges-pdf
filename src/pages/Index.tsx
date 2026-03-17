@@ -6,7 +6,7 @@ import {
   Upload, Cpu, Download, Shield, Zap, Globe, Lock, Layers, FileText,
   ChevronRight, Star, Brain, Languages, Droplets, Trash2, FileOutput,
   Hash, Unlock, Palette, MessageSquare, ChevronLeft, Eye, Recycle,
-  Code, Sparkles, PenTool, ScanLine
+  Code, Sparkles, PenTool, ScanLine, Type
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';

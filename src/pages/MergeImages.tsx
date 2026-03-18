@@ -5,9 +5,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What image formats can I merge into a PDF?', a: 'You can combine JPG, JPEG, PNG, and WEBP images into a single PDF document.' },
-  { q: 'Can I reorder the images before merging?', a: 'Yes! Simply drag and drop the image thumbnails to arrange them in your preferred order before converting.' },
   { q: 'Is there a limit on the number of images?', a: 'There is no hard limit. You can add as many images as you need, though very large batches may take a moment to process.' },
   { q: 'Are my images uploaded to a server?', a: 'No. All processing happens entirely in your browser. Your images never leave your device.' },
   { q: 'What determines the PDF page size?', a: 'Each page in the output PDF matches the original dimensions of the corresponding image, so quality is preserved.' },

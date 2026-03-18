@@ -6,11 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What restrictions can this tool remove?', a: 'It removes print, copy, and edit restrictions (owner password). It cannot bypass open-password protection.' },
-  { q: 'Is unlocking PDFs free?', a: 'Yes, completely free. No sign-up or limits.' },
-  { q: 'Is this legal?', a: 'Removing restrictions from PDFs you own or have permission to modify is legal. Do not use this tool on documents you don\'t have the right to unlock.' },
-];
 
 const UnlockPdf = () => {
   const { lang } = useI18n();

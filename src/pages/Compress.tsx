@@ -27,7 +27,7 @@ const Compress = () => {
           </p>
         </div>
         <PDFCompressor />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="compress" />
       </motion.div>
     </ToolPageLayout>
   );

@@ -6,9 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What does converting to grayscale do?', a: 'It rebuilds your PDF without color data, resulting in a black-and-white document that is often smaller in file size.' },
-  { q: 'Will this reduce my file size?', a: 'In many cases yes, especially for PDFs with color images or graphics. The reduction depends on the original content.' },
   { q: 'Is the conversion done locally?', a: 'Yes, 100%. Your file never leaves your browser — everything is processed on your device.' },
   { q: 'Will text quality be affected?', a: 'No. Text remains sharp and fully selectable. Only colors are converted to shades of gray.' },
 ];

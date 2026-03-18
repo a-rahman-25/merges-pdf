@@ -27,7 +27,7 @@ const Split = () => {
           </p>
         </div>
         <PDFSplitter />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="split" />
       </motion.div>
     </ToolPageLayout>
   );

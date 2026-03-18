@@ -27,7 +27,7 @@ const AddWatermark = () => {
           </p>
         </div>
         <PDFWatermarkAdder />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="watermark" />
       </motion.div>
     </ToolPageLayout>
   );

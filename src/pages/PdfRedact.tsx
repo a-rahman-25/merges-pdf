@@ -6,9 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'How does PDF redaction work?', a: 'Upload a PDF and draw black rectangles over sensitive areas on each page. The redacted PDF will have those areas permanently blacked out.' },
-  { q: 'Is the redaction permanent?', a: 'Yes — black rectangles are drawn directly onto the PDF content. The original text underneath is covered but the original file is not modified.' },
   { q: 'Can I redact multiple pages?', a: 'Yes! Navigate between pages and draw redaction rectangles on any page. All redactions are applied when you download.' },
   { q: 'Is this truly private?', a: 'Absolutely. Everything happens in your browser. Your PDF never leaves your device.' },
 ];

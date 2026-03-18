@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What image formats can I convert SVG to?', a: 'You can convert to PNG, JPG, WEBP, and BMP — all processed in your browser.' },
-  { q: 'Will I lose quality?', a: 'SVGs are vector-based so they scale perfectly. Choose a higher scale (2x–4x) for crisp high-resolution output.' },
-  { q: 'Is my SVG uploaded to a server?', a: 'No. Everything runs 100% in your browser. Your files never leave your device.' },
-  { q: 'Can I convert SVGs with transparency?', a: 'Yes! PNG and WEBP preserve transparency. JPG and BMP will have a white background.' },
-];
 
 const SvgToImage = () => {
   const { lang } = useI18n();

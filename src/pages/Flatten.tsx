@@ -27,7 +27,7 @@ const Flatten = () => {
           </p>
         </div>
         <PDFFlattener />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="flatten" />
       </motion.div>
     </ToolPageLayout>
   );

@@ -27,7 +27,7 @@ const DeletePages = () => {
           </p>
         </div>
         <PDFPageDeleter />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="deletePages" />
       </motion.div>
     </ToolPageLayout>
   );

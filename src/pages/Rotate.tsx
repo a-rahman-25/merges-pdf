@@ -27,7 +27,7 @@ const Rotate = () => {
           </p>
         </div>
         <PDFRotator />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="rotate" />
       </motion.div>
     </ToolPageLayout>
   );

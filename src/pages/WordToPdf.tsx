@@ -27,7 +27,7 @@ const WordToPdf = () => {
           </p>
         </div>
         <WordToPDF />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="wordToPdf" />
       </motion.div>
     </ToolPageLayout>
   );

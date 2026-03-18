@@ -27,7 +27,7 @@ const EncryptPage = () => {
           </p>
         </div>
         <PDFEncryptor />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="encrypt" />
       </motion.div>
     </ToolPageLayout>
   );

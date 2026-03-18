@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What batch operations are available?', a: 'You can batch merge (combine all PDFs into one) or batch compress (compress each PDF individually) with progress tracking.' },
-  { q: 'How many files can I process at once?', a: 'There is no artificial limit. Process as many files as your browser can handle.' },
-  { q: 'Is there a progress indicator?', a: 'Yes! A progress bar shows the status of each file being processed, so you always know how far along the batch is.' },
-  { q: 'Are all files processed locally?', a: 'Yes. All batch processing happens in your browser. No files are uploaded to any server.' },
-];
 
 const Batch = () => {
   const { lang } = useI18n();

@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'How does the PDF form filler work?', a: 'Upload a PDF with form fields, and the tool automatically detects all fillable fields. Enter your values and download the completed PDF.' },
-  { q: 'What types of form fields are supported?', a: 'Text fields are fully supported. The tool detects all PDF form field types including text inputs, checkboxes, and dropdowns.' },
-  { q: 'Will the form data be embedded in the PDF?', a: 'Yes — the form is flattened after filling, so the data becomes part of the PDF content and cannot be easily edited.' },
-  { q: 'What if my PDF has no form fields?', a: 'The tool will let you know if no fillable fields are detected. Only PDFs with interactive form fields (like fillable tax forms) will work.' },
-];
 
 const PdfFormFillerPage = () => {
   const { lang } = useI18n();

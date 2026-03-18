@@ -27,7 +27,7 @@ const Merge = () => {
           </p>
         </div>
         <PDFMerger />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="merge" />
       </motion.div>
     </ToolPageLayout>
   );

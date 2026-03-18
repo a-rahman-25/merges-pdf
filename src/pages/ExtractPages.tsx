@@ -27,7 +27,7 @@ const ExtractPages = () => {
           </p>
         </div>
         <PDFPageExtractor />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="extractPages" />
       </motion.div>
     </ToolPageLayout>
   );

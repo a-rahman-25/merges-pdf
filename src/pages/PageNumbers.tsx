@@ -6,9 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'How do I add page numbers to a PDF?', a: 'Upload your PDF, choose top or bottom position, then click "Add Page Numbers". The tool adds sequential numbers to every page.' },
-  { q: 'Is adding page numbers free?', a: 'Yes, completely free with no limits, no watermarks, and no account required.' },
   { q: 'Can I choose where page numbers appear?', a: 'Yes, you can place them at the top or bottom center of each page.' },
 ];
 

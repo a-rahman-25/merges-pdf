@@ -5,10 +5,11 @@ import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
-
+import { getTranslatedFaqs } from '@/lib/faq-translations';
 
 const Merge = () => {
   const { lang } = useI18n();
+  const faqs = getTranslatedFaqs('merge', lang);
   return (
     <ToolPageLayout activeTab="merge">
       <SEOHead

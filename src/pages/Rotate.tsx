@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'How do I rotate PDF pages?', a: 'Upload a PDF, select the rotation angle (90°, 180°, or 270°), and click Rotate. The rotated PDF will download instantly.' },
-  { q: 'Can I rotate specific pages only?', a: 'Currently, rotation applies to all pages in the PDF. For selective page rotation, split the PDF first, rotate individual pages, then merge them back.' },
-  { q: 'Does rotation change the content?', a: 'No, rotation only changes the page orientation. All text, images, and formatting remain exactly the same.' },
-  { q: 'Can I undo a rotation?', a: 'Yes — simply rotate the PDF again. For example, if you rotated 90° clockwise, rotate 270° to return to the original orientation.' },
-];
 
 const Rotate = () => {
   const { lang } = useI18n();
@@ -33,7 +27,7 @@ const Rotate = () => {
           </p>
         </div>
         <PDFRotator />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="rotate" />
       </motion.div>
     </ToolPageLayout>
   );

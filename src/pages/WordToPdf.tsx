@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What Word formats are supported?', a: 'We support .doc and .docx files. For best results, use .docx format.' },
-  { q: 'Is formatting preserved?', a: 'The converter extracts text content and renders it into a well-formatted PDF. Complex formatting (tables, images) may not be fully preserved in the browser-based conversion.' },
-  { q: 'What about images in the Word file?', a: 'Currently, text content is extracted and converted. Embedded images in Word documents may not appear in the output PDF.' },
-  { q: 'Is there a file size limit?', a: 'No hard limit, but very large documents may take longer to process since everything runs in your browser.' },
-];
 
 const WordToPdf = () => {
   const { lang } = useI18n();
@@ -33,7 +27,7 @@ const WordToPdf = () => {
           </p>
         </div>
         <WordToPDF />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="wordToPdf" />
       </motion.div>
     </ToolPageLayout>
   );

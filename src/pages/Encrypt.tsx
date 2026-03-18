@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'How does PDF encryption work?', a: 'Enter a password and we rebuild the PDF with protection metadata. For maximum security, use a desktop tool like Adobe Acrobat with the password you set here.' },
-  { q: 'Can I remove the password later?', a: 'You can re-open the protected PDF with your password in any PDF reader. To remove the password, open it in a PDF editor and save without protection.' },
-  { q: 'Is the encryption strong?', a: 'Browser-based encryption has limitations compared to desktop tools. For highly sensitive documents, we recommend using the password with a professional PDF encryption tool.' },
-  { q: 'Will recipients need a password?', a: 'Yes, anyone who wants to open the encrypted PDF will need the password you set.' },
-];
 
 const EncryptPage = () => {
   const { lang } = useI18n();
@@ -33,7 +27,7 @@ const EncryptPage = () => {
           </p>
         </div>
         <PDFEncryptor />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="encrypt" />
       </motion.div>
     </ToolPageLayout>
   );

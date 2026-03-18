@@ -5,13 +5,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What can I do with the PDF Editor?', a: 'Add text, highlights, freehand drawings, lines, arrows, rectangles, circles, sticky notes, and images to any PDF page.' },
-  { q: 'Is editing done locally?', a: 'Yes! All rendering and editing happens in your browser. Your PDF never leaves your device.' },
-  { q: 'Can I undo my changes?', a: 'Yes — use Ctrl+Z to undo and Ctrl+Y to redo. The editor maintains a full undo/redo history.' },
-  { q: 'Will my annotations be part of the PDF?', a: 'Yes. When you save, all annotations are permanently embedded into the PDF as proper PDF elements.' },
-  { q: 'Can I edit text already in the PDF?', a: 'The editor focuses on adding annotations over the PDF. To edit existing text, you may need a desktop tool like LibreOffice.' },
-];
 
 const PdfEditorPage = () => {
   const { lang } = useI18n();

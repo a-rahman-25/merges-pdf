@@ -6,11 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What does flattening a PDF do?', a: 'Flattening removes form fields, annotations, layers, and interactive elements, producing a static, non-editable PDF.' },
-  { q: 'Is PDF flattening free?', a: 'Yes, completely free with no limits or sign-up required.' },
-  { q: 'Will flattening reduce file size?', a: 'It can. By removing interactive elements and rebuilding the structure, the file often becomes smaller.' },
-];
 
 const Flatten = () => {
   const { lang } = useI18n();
@@ -32,7 +27,7 @@ const Flatten = () => {
           </p>
         </div>
         <PDFFlattener />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="flatten" />
       </motion.div>
     </ToolPageLayout>
   );

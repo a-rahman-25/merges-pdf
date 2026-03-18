@@ -6,13 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'How does PDF compression work?', a: 'Our compressor strips unnecessary metadata, rebuilds the document structure, and removes unused objects to reduce file size without affecting visible content.' },
-  { q: 'Will compression reduce quality?', a: 'The compression technique we use focuses on metadata removal and structure optimization. The visible content and page quality remain unchanged.' },
-  { q: 'How much can I reduce the file size?', a: 'Results vary by document. PDFs with lots of metadata, unused fonts, or duplicated objects can see 10-60% size reduction. Already-optimized PDFs will see smaller gains.' },
-  { q: 'Is there a file size limit?', a: 'There is no hard limit, but very large files (100MB+) may be slower to process since everything runs in your browser.' },
-  { q: 'Can I compress multiple PDFs at once?', a: 'Yes! Use the Batch Processing tool to compress multiple PDFs simultaneously with progress tracking.' },
-];
 
 const Compress = () => {
   const { lang } = useI18n();
@@ -34,7 +27,7 @@ const Compress = () => {
           </p>
         </div>
         <PDFCompressor />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="compress" />
       </motion.div>
     </ToolPageLayout>
   );

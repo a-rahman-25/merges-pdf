@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'How does PDF to Word conversion work?', a: 'We extract the document structure from your PDF and create a Word (.docx) file. The conversion preserves page structure and basic formatting.' },
-  { q: 'Will all text be preserved?', a: 'Browser-based conversion has limitations. For complex PDFs with embedded fonts or advanced layouts, a desktop tool may produce better results.' },
-  { q: 'What format is the output?', a: 'The output is a Microsoft Word .docx file that can be opened in Word, Google Docs, LibreOffice, and most word processors.' },
-  { q: 'Is my PDF uploaded anywhere?', a: 'No. Everything is processed in your browser. Your file never leaves your device.' },
-];
 
 const PdfToWord = () => {
   const { lang } = useI18n();
@@ -33,7 +27,7 @@ const PdfToWord = () => {
           </p>
         </div>
         <PDFToWord />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="pdfToWord" />
       </motion.div>
     </ToolPageLayout>
   );

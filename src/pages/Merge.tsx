@@ -5,18 +5,11 @@ import SEOHead from '@/components/SEOHead';
 import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
-
-const faqs = [
-  { q: 'How do I merge PDF files?', a: 'Simply drag and drop your PDF files into the upload area, reorder them as needed, and click "Merge & Download". The combined PDF will be downloaded instantly.' },
-  { q: 'Is there a limit on the number of files?', a: 'No, you can merge as many PDF files as your browser can handle. There is no artificial limit on file count or size.' },
-  { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your files never leave your device — we have zero access to your documents.' },
-  { q: 'Can I reorder pages before merging?', a: 'Yes! After uploading your files, you can drag and drop them into any order before merging.' },
-  { q: 'Does merging reduce quality?', a: 'No. The merge process preserves the original quality of every page in your PDFs. No compression or modification is applied.' },
-  { q: 'Do I need to sign up?', a: 'No. MergePDF is completely free with no sign-up, no login, and no email required. Just upload and merge.' },
-];
+import { getTranslatedFaqs } from '@/lib/faq-translations';
 
 const Merge = () => {
   const { lang } = useI18n();
+  const faqs = getTranslatedFaqs('merge', lang);
   return (
     <ToolPageLayout activeTab="merge">
       <SEOHead
@@ -35,7 +28,7 @@ const Merge = () => {
           </p>
         </div>
         <PDFMerger />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="merge" />
       </motion.div>
     </ToolPageLayout>
   );

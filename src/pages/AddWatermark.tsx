@@ -6,12 +6,6 @@ import ToolFAQ from '@/components/ToolFAQ';
 import { useI18n } from '@/hooks/useI18n';
 import { tt } from '@/lib/tool-translations';
 
-const faqs = [
-  { q: 'What kind of watermarks can I add?', a: 'You can add text watermarks with customizable font size, opacity, and rotation. The watermark is applied diagonally across every page.' },
-  { q: 'Can I add an image watermark?', a: 'Currently only text watermarks are supported. Image watermark support is coming soon.' },
-  { q: 'Can I control the watermark position?', a: 'The watermark is centered and rotated at 45° for maximum coverage. You can adjust opacity and font size to control its prominence.' },
-  { q: 'Is the watermark removable?', a: 'The watermark is embedded directly into the PDF. It cannot be easily removed without specialized tools, making it effective for document protection.' },
-];
 
 const AddWatermark = () => {
   const { lang } = useI18n();

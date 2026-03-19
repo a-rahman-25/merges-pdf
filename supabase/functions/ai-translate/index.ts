@@ -9,9 +9,19 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { filename, pageCount, targetLanguage } = await req.json();
+    const { filename, pageCount, targetLanguage, documentText } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
+    const hasText = documentText && documentText.trim().length > 50;
+
+    const systemPrompt = hasText
+      ? `You are a professional document translator. Translate the following document text into ${targetLanguage}. Preserve the original structure, paragraphs, and formatting. Output ONLY the translated text, nothing else.`
+      : `You are a professional document translator. The user has uploaded a PDF that appears to be a scanned/image document with no extractable text. Provide a helpful message explaining that the document text could not be extracted, and suggest using the OCR tool first. Respond in ${targetLanguage}.`;
+
+    const userContent = hasText
+      ? `Translate the following document text into ${targetLanguage}:\n\n${documentText}`
+      : `The PDF "${filename}" (${pageCount} pages) contains no extractable text. It may be a scanned document or image-based PDF.`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -22,14 +32,8 @@ serve(async (req) => {
       body: JSON.stringify({
         model: "google/gemini-3-flash-preview",
         messages: [
-          {
-            role: "system",
-            content: `You are a professional document translator. Translate the document description and provide a translated overview in ${targetLanguage}. Maintain the document's structure and meaning.`,
-          },
-          {
-            role: "user",
-            content: `Please translate information about this PDF document into ${targetLanguage}:\n\nFilename: ${filename}\nPages: ${pageCount}\n\nProvide a comprehensive translation of the document overview, key sections, and any relevant metadata in ${targetLanguage}.`,
-          },
+          { role: "system", content: systemPrompt },
+          { role: "user", content: userContent },
         ],
         stream: true,
       }),

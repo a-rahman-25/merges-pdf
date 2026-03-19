@@ -6,8 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
+import * as pdfjsLib from 'pdfjs-dist';
 import { streamAI } from '@/lib/stream-ai';
 import { useI18n } from '@/hooks/useI18n';
+
+// @ts-ignore
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;
 
 const languages = [
   { value: 'es', label: 'Spanish' }, { value: 'fr', label: 'French' }, { value: 'de', label: 'German' },
@@ -17,11 +21,25 @@ const languages = [
   { value: 'nl', label: 'Dutch' }, { value: 'sv', label: 'Swedish' }, { value: 'pl', label: 'Polish' },
 ];
 
+async function extractPdfText(file: File, maxChars = 12000): Promise<string> {
+  const buffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+  let fullText = '';
+  for (let i = 1; i <= pdf.numPages && fullText.length < maxChars; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    const pageText = content.items.map((item: any) => item.str).join(' ');
+    fullText += `\n--- Page ${i} ---\n${pageText}`;
+  }
+  return fullText.slice(0, maxChars);
+}
+
 const AITranslator = () => {
   const { t } = useI18n();
-  const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
+  const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number; text?: string } | null>(null);
   const [targetLang, setTargetLang] = useState('es');
   const [processing, setProcessing] = useState(false);
+  const [extracting, setExtracting] = useState(false);
   const [translation, setTranslation] = useState('');
   const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -31,12 +49,19 @@ const AITranslator = () => {
     if (!f) return;
     if (f.type !== 'application/pdf') { toast.error('Please select a PDF file.'); return; }
     try {
+      setExtracting(true);
       const buffer = await f.arrayBuffer();
       const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
-      setFile({ file: f, name: f.name, size: f.size, pageCount: pdf.getPageCount() });
+      const pageCount = pdf.getPageCount();
+      
+      // Extract actual text from the PDF
+      const text = await extractPdfText(f);
+      
+      setFile({ file: f, name: f.name, size: f.size, pageCount, text });
       setTranslation('');
-      toast.success(`Selected: ${f.name}`);
+      toast.success(`Selected: ${f.name} (${text.length > 50 ? 'text extracted' : 'scanned/image PDF'})`);
     } catch { toast.error('Could not read PDF file.'); }
+    finally { setExtracting(false); }
     e.target.value = '';
   }, []);
 
@@ -49,7 +74,12 @@ const AITranslator = () => {
       let accumulated = '';
       await streamAI({
         functionName: 'ai-translate',
-        body: { filename: file.name, pageCount: file.pageCount, targetLanguage: langLabel },
+        body: { 
+          filename: file.name, 
+          pageCount: file.pageCount, 
+          targetLanguage: langLabel,
+          documentText: file.text || '',
+        },
         onDelta: (chunk) => { accumulated += chunk; setTranslation(accumulated); },
         onDone: () => { toast.success('Translation complete!'); },
       });
@@ -75,14 +105,18 @@ const AITranslator = () => {
       {!file ? (
         <motion.div
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          onClick={() => inputRef.current?.click()}
+          onClick={() => !extracting && inputRef.current?.click()}
           className="cursor-pointer rounded-2xl border-2 border-dashed border-border p-12 text-center hover:border-primary/50 hover:bg-accent/50 transition-all"
         >
           <input ref={inputRef} type="file" accept=".pdf" onChange={handleFile} className="hidden" />
           <div className="flex flex-col items-center gap-4">
-            <div className="rounded-xl bg-primary/10 p-4"><Languages className="h-8 w-8 text-primary" /></div>
+            <div className="rounded-xl bg-primary/10 p-4">
+              {extracting ? <Loader2 className="h-8 w-8 text-primary animate-spin" /> : <Languages className="h-8 w-8 text-primary" />}
+            </div>
             <div>
-              <p className="text-lg font-display font-semibold text-foreground">{t('ai.upload.translate')}</p>
+              <p className="text-lg font-display font-semibold text-foreground">
+                {extracting ? 'Extracting text…' : t('ai.upload.translate')}
+              </p>
               <p className="mt-1 text-sm text-muted-foreground">{t('ai.upload.translate.desc')}</p>
             </div>
           </div>
@@ -101,7 +135,10 @@ const AITranslator = () => {
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} {t('ai.pages')}</p>
+              <p className="text-xs text-muted-foreground">
+                {formatFileSize(file.size)} · {file.pageCount} {t('ai.pages')}
+                {file.text && file.text.length > 50 && ` · ${file.text.length.toLocaleString()} chars extracted`}
+              </p>
             </div>
           </div>
 

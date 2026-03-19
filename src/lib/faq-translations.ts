@@ -956,6 +956,66 @@ const faqData: Record<string, FaqsByLang> = {
       { q: '¿Puedo convertir varios archivos HEIC a la vez?', a: '¡Sí! Puedes seleccionar múltiples archivos HEIC/HEIF y convertirlos todos a la vez.' },
     ],
   },
+  repairPdf: {
+    en: [
+      { q: 'What types of PDF damage can be repaired?', a: 'This tool can fix corrupted cross-reference tables, broken page trees, damaged metadata, and re-index pages for a clean structure.' },
+      { q: 'Will repairing change my PDF content?', a: 'No. The repair process preserves all existing page content. It only fixes the internal structure and metadata.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All repair processing happens 100% in your browser. Your files never leave your device.' },
+      { q: 'What if my PDF is too damaged to repair?', a: 'Severely corrupted files (e.g., truncated or encrypted with unknown passwords) may not be recoverable. The tool will let you know.' },
+    ],
+    ar: [
+      { q: 'ما أنواع تلف PDF التي يمكن إصلاحها؟', a: 'يمكن لهذه الأداة إصلاح جداول المراجع التالفة وأشجار الصفحات المعطلة والبيانات الوصفية التالفة.' },
+      { q: 'هل سيغير الإصلاح محتوى PDF؟', a: 'لا. عملية الإصلاح تحافظ على جميع محتويات الصفحات. إنها تصلح فقط الهيكل الداخلي.' },
+      { q: 'هل يتم رفع ملفاتي إلى خادم؟', a: 'لا. تتم جميع عمليات الإصلاح بنسبة 100% في متصفحك.' },
+      { q: 'ماذا لو كان PDF تالفاً جداً للإصلاح؟', a: 'الملفات التالفة بشدة قد لا تكون قابلة للاسترداد. ستعلمك الأداة بذلك.' },
+    ],
+    es: [
+      { q: '¿Qué tipos de daños de PDF se pueden reparar?', a: 'Esta herramienta puede reparar tablas de referencias cruzadas corruptas, árboles de páginas rotos y metadatos dañados.' },
+      { q: '¿Cambiará la reparación el contenido de mi PDF?', a: 'No. El proceso de reparación preserva todo el contenido existente.' },
+      { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
+      { q: '¿Qué pasa si mi PDF está demasiado dañado?', a: 'Los archivos severamente corruptos pueden no ser recuperables. La herramienta te lo informará.' },
+    ],
+  },
+  pdfBookmarks: {
+    en: [
+      { q: 'What are PDF bookmarks?', a: 'PDF bookmarks are a table of contents that appears as a sidebar in PDF readers, allowing quick navigation to specific sections or pages.' },
+      { q: 'Can I add multiple bookmarks?', a: 'Yes! You can add as many bookmarks as you need, each pointing to a different page in your PDF document.' },
+      { q: 'Will this modify my PDF content?', a: 'No. Adding bookmarks only adds navigation metadata — your actual page content remains completely unchanged.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your files never leave your device.' },
+    ],
+    ar: [
+      { q: 'ما هي إشارات PDF المرجعية؟', a: 'إشارات PDF المرجعية هي فهرس محتويات يظهر كشريط جانبي في قارئات PDF، مما يسمح بالتنقل السريع.' },
+      { q: 'هل يمكنني إضافة عدة إشارات مرجعية؟', a: 'نعم! يمكنك إضافة أي عدد من الإشارات المرجعية، كل منها يشير إلى صفحة مختلفة.' },
+      { q: 'هل سيغير هذا محتوى PDF؟', a: 'لا. إضافة الإشارات المرجعية تضيف فقط بيانات التنقل — يبقى محتوى الصفحات بدون تغيير.' },
+      { q: 'هل يتم رفع ملفاتي إلى خادم؟', a: 'لا. تتم جميع العمليات بنسبة 100% في متصفحك.' },
+    ],
+    es: [
+      { q: '¿Qué son los marcadores de PDF?', a: 'Los marcadores de PDF son una tabla de contenidos que aparece como barra lateral en los lectores de PDF.' },
+      { q: '¿Puedo añadir varios marcadores?', a: '¡Sí! Puedes añadir tantos marcadores como necesites, cada uno apuntando a una página diferente.' },
+      { q: '¿Esto modificará el contenido de mi PDF?', a: 'No. Añadir marcadores solo agrega metadatos de navegación.' },
+      { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
+    ],
+  },
+  pageSize: {
+    en: [
+      { q: 'What page sizes are supported?', a: 'We support A4, A3, A5, Letter, Legal, Tabloid, B5, and Executive sizes. Content is automatically scaled and centered.' },
+      { q: 'Will resizing distort my content?', a: 'No. Content is proportionally scaled to fit the new page size while maintaining its aspect ratio, then centered on the page.' },
+      { q: 'Can I resize individual pages?', a: 'Currently, the tool resizes all pages to the same target size. For individual page sizing, use the Crop tool.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your files never leave your device.' },
+    ],
+    ar: [
+      { q: 'ما أحجام الصفحات المدعومة؟', a: 'ندعم A4 و A3 و A5 و Letter و Legal و Tabloid و B5 و Executive. يتم تغيير حجم المحتوى تلقائياً وتوسيطه.' },
+      { q: 'هل سيؤدي تغيير الحجم إلى تشويه المحتوى؟', a: 'لا. يتم تغيير حجم المحتوى بشكل متناسب مع الحفاظ على نسبة العرض إلى الارتفاع.' },
+      { q: 'هل يمكنني تغيير حجم صفحات فردية؟', a: 'حالياً، تقوم الأداة بتغيير حجم جميع الصفحات إلى نفس الحجم المستهدف.' },
+      { q: 'هل يتم رفع ملفاتي إلى خادم؟', a: 'لا. تتم جميع العمليات بنسبة 100% في متصفحك.' },
+    ],
+    es: [
+      { q: '¿Qué tamaños de página se admiten?', a: 'Admitimos A4, A3, A5, Letter, Legal, Tabloid, B5 y Executive. El contenido se escala y centra automáticamente.' },
+      { q: '¿Redimensionar distorsionará mi contenido?', a: 'No. El contenido se escala proporcionalmente manteniendo su relación de aspecto.' },
+      { q: '¿Puedo redimensionar páginas individuales?', a: 'Actualmente, la herramienta redimensiona todas las páginas al mismo tamaño objetivo.' },
+      { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
+    ],
+  },
 };
 
 export function getTranslatedFaqs(toolId: string, lang: string): FaqItem[] {

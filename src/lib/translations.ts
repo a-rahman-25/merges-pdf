@@ -1805,7 +1805,7 @@ const sw: T = {
   'security.title': 'Usalama na Faragha', 'security.subtitle': 'Faili zako, kifaa chako, faragha yako.',
   'faq.title': 'Maswali yanayoulizwa mara kwa mara',
   'cta.title': 'Uko tayari? Bila kusajili. Bila ada. Zana zenye nguvu za PDF.', 'cta.subtitle': 'Jiunge na mamilioni ya watumiaji.', 'cta.button': 'Anza sasa — Bure',
-  'footer.desc': 'PDF suite ya faragha kwanza.', 'footer.pdftools': 'Zana za PDF', 'footer.aitools': 'Zana za AI', 'footer.company': 'Kampuni',
+  'footer.desc': 'PDF suite ya faragha kwanza.', 'footer.pdftools': 'Zana za PDF', 'footer.converters': 'Vibadilishaji', 'footer.aitools': 'Zana za AI', 'footer.company': 'Kampuni',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Faili zote zinachakatwa ndani ya kifaa.',
   'footer.privacy': 'Sera ya Faragha', 'footer.terms': 'Masharti ya Huduma',
   'cat.pdftools': 'Zana za PDF', 'cat.converters': 'Vibadilishaji', 'cat.aitools': 'Zana za AI',

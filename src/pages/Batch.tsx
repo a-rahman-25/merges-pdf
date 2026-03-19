@@ -15,7 +15,6 @@ const Batch = () => {
         title="Batch PDF Processing — Free | MergePDF"
         description="Process multiple PDF files at once — batch merge, compress, and convert. Free and private."
         path="/batch"
-        faqs={faqs}
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

@@ -40,6 +40,9 @@ const toolCategories = [
       { icon: ImageIcon, titleKey: 'tool.pdfToImages', descKey: 'tool.pdfToImages.desc', path: '/pdf-to-images', color: 'bg-tool-cyan/15 text-tool-cyan' },
       { icon: FormInput, titleKey: 'tool.formFiller', descKey: 'tool.formFiller.desc', path: '/pdf-form-filler', color: 'bg-tool-violet/15 text-tool-violet' },
       { icon: EyeOff, titleKey: 'tool.redact', descKey: 'tool.redact.desc', path: '/pdf-redact', color: 'bg-tool-rose/15 text-tool-rose' },
+      { icon: Wrench, titleKey: 'tool.repair', descKey: 'tool.repair.desc', path: '/repair-pdf', color: 'bg-tool-amber/15 text-tool-amber' },
+      { icon: BookOpen, titleKey: 'tool.bookmarks', descKey: 'tool.bookmarks.desc', path: '/pdf-bookmarks', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: Maximize2, titleKey: 'tool.pageSize', descKey: 'tool.pageSize.desc', path: '/page-size', color: 'bg-tool-cyan/15 text-tool-cyan' },
     ],
   },
   {

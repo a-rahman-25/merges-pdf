@@ -118,6 +118,9 @@ const AnimatedRoutes = () => {
         <Route path="/pptx-to-pdf" element={<PowerPointToPdf />} />
         <Route path="/webpage-to-pdf" element={<WebpageToPdf />} />
         <Route path="/heic-to-pdf" element={<HeicToPdf />} />
+        <Route path="/repair-pdf" element={<RepairPdf />} />
+        <Route path="/pdf-bookmarks" element={<PdfBookmarks />} />
+        <Route path="/page-size" element={<PageSize />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

@@ -47,7 +47,7 @@ const toolGroups = [
       { to: '/scan-to-pdf', label: 'Scan to PDF', icon: Camera },
       { to: '/pdf-a', label: 'PDF/A Converter', icon: Shield },
       { to: '/heic-to-pdf', label: 'HEIC to PDF', icon: ImageIcon },
-      
+      { to: '/merge-images', label: 'Merge Images', icon: Combine },
       { to: '/bg-remover', label: 'Remove Background', icon: Eraser },
       { to: '/svg-to-image', label: 'SVG to Image', icon: Code },
       { to: '/html-to-pdf', label: 'HTML to PDF', icon: Code },

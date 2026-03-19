@@ -43,7 +43,7 @@ const ReorderPages = lazy(() => import("./pages/ReorderPages"));
 const PdfSignature = lazy(() => import("./pages/PdfSignature"));
 const CropPages = lazy(() => import("./pages/CropPages"));
 const PdfMetadata = lazy(() => import("./pages/PdfMetadata"));
-
+const MergeImages = lazy(() => import("./pages/MergeImages"));
 const OcrPdf = lazy(() => import("./pages/OcrPdf"));
 const PdfEditor = lazy(() => import("./pages/PdfEditor"));
 const SvgToImage = lazy(() => import("./pages/SvgToImage"));
@@ -116,7 +116,7 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-signature" element={<PdfSignature />} />
         <Route path="/crop-pages" element={<CropPages />} />
         <Route path="/pdf-metadata" element={<PdfMetadata />} />
-        <Route path="/merge-images" element={<ImageToPdf />} />
+        <Route path="/merge-images" element={<MergeImages />} />
         <Route path="/ocr-pdf" element={<OcrPdf />} />
         <Route path="/pdf-editor" element={<PdfEditor />} />
         <Route path="/svg-to-image" element={<SvgToImage />} />

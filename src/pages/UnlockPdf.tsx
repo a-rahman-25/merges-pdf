@@ -26,7 +26,7 @@ const UnlockPdf = () => {
           </p>
         </div>
         <PDFUnlocker />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="unlock" />
       </motion.div>
     </ToolPageLayout>
   );

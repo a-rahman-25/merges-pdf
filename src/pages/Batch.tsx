@@ -26,7 +26,7 @@ const Batch = () => {
           </p>
         </div>
         <BatchProcessor />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="batch" />
       </motion.div>
     </ToolPageLayout>
   );

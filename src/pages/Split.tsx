@@ -15,7 +15,7 @@ const Split = () => {
         title="Split PDF Pages Online — Free, Private | MergePDF"
         description="Split PDF into individual pages or extract a custom range. 100% free and private — processed locally in your browser."
         path="/split"
-        faqs={faqs}
+        
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

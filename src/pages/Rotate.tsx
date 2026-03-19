@@ -15,7 +15,7 @@ const Rotate = () => {
         title="Rotate PDF Pages Online — Free, No Upload | MergePDF"
         description="Rotate all PDF pages by 90°, 180°, or 270° with one click. Free, private — processed locally in your browser."
         path="/rotate"
-        faqs={faqs}
+        
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

@@ -15,7 +15,7 @@ const Flatten = () => {
         title="Flatten PDF Free Online — Remove Form Fields | MergesPDF"
         description="Flatten PDF files for free. Remove form fields, annotations, and layers to create a static PDF. No sign-up, browser-based processing."
         path="/flatten"
-        faqs={faqs}
+        
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

@@ -22,7 +22,7 @@ const OcrPdf = () => {
         <p className="mt-2 text-muted-foreground">{tt('page.ocrPdf.sub', lang)}</p>
       </div>
       <OCRTool />
-      <ToolFAQ faqs={faqs} />
+      <ToolFAQ toolId="ocrPdf" />
     </ToolPageLayout>
   );
 };

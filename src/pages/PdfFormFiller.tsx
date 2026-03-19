@@ -26,7 +26,7 @@ const PdfFormFillerPage = () => {
           </p>
         </div>
         <PDFFormFiller />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="formFiller" />
       </motion.div>
     </ToolPageLayout>
   );

@@ -15,7 +15,7 @@ const EncryptPage = () => {
         title="Encrypt PDF with Password — Free Online Tool | MergePDF"
         description="Add password protection to your PDF files for free. 100% private — everything runs in your browser with no uploads."
         path="/encrypt"
-        faqs={faqs}
+        
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

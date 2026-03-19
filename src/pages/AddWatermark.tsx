@@ -15,7 +15,7 @@ const AddWatermark = () => {
         title="Add Watermark to PDF Online — Free, Private | MergePDF"
         description="Add text watermarks to your PDF files. 100% free and private — processed locally in your browser."
         path="/add-watermark"
-        faqs={faqs}
+        
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

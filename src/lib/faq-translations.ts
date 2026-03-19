@@ -876,6 +876,86 @@ const faqData: Record<string, FaqsByLang> = {
       { q: '可以转换带透明度的SVG吗？', a: '可以！PNG和WEBP保留透明度。JPG和BMP将有白色背景。' },
     ],
   },
+  excelToPdf: {
+    en: [
+      { q: 'What file formats are supported?', a: 'You can convert .xlsx, .xls, and .csv files to PDF.' },
+      { q: 'Are my spreadsheets uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your files never leave your device.' },
+      { q: 'Does it preserve formatting?', a: 'The converter renders table data with gridlines and headers. Complex Excel formatting like charts may not be preserved.' },
+      { q: 'Is there a file size limit?', a: 'No artificial limit — it depends on your browser\'s memory capacity.' },
+    ],
+    ar: [
+      { q: 'ما هي صيغ الملفات المدعومة؟', a: 'يمكنك تحويل ملفات .xlsx و .xls و .csv إلى PDF.' },
+      { q: 'هل يتم رفع جداولي إلى خادم؟', a: 'لا. تتم جميع العمليات بنسبة 100% في متصفحك.' },
+      { q: 'هل يحافظ على التنسيق؟', a: 'يعرض المحول بيانات الجدول مع خطوط الشبكة والرؤوس.' },
+      { q: 'هل هناك حد لحجم الملف؟', a: 'لا حد مصطنع — يعتمد على سعة ذاكرة متصفحك.' },
+    ],
+    es: [
+      { q: '¿Qué formatos de archivo son compatibles?', a: 'Puedes convertir archivos .xlsx, .xls y .csv a PDF.' },
+      { q: '¿Se suben mis hojas de cálculo a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
+      { q: '¿Preserva el formato?', a: 'El convertidor renderiza datos de tabla con líneas de cuadrícula y encabezados.' },
+      { q: '¿Hay un límite de tamaño de archivo?', a: 'No hay límite artificial — depende de la capacidad de memoria de tu navegador.' },
+    ],
+  },
+  pptxToPdf: {
+    en: [
+      { q: 'What PowerPoint formats are supported?', a: 'Currently .pptx files are supported. Older .ppt files need to be saved as .pptx first.' },
+      { q: 'Are my presentations uploaded to a server?', a: 'No. Everything is processed 100% in your browser. Your files never leave your device.' },
+      { q: 'Does it preserve images and animations?', a: 'The converter extracts text content and layout. Complex animations and embedded media may not be fully rendered.' },
+      { q: 'Do I need to sign up?', a: 'No. This tool is completely free with no sign-up required.' },
+    ],
+    ar: [
+      { q: 'ما صيغ PowerPoint المدعومة؟', a: 'حالياً يتم دعم ملفات .pptx. يجب حفظ ملفات .ppt القديمة كـ .pptx أولاً.' },
+      { q: 'هل يتم رفع عروضي التقديمية إلى خادم؟', a: 'لا. يتم معالجة كل شيء بنسبة 100% في متصفحك.' },
+      { q: 'هل يحافظ على الصور والرسوم المتحركة؟', a: 'يستخرج المحول محتوى النص والتخطيط.' },
+      { q: 'هل أحتاج إلى التسجيل؟', a: 'لا. هذه الأداة مجانية تماماً بدون تسجيل.' },
+    ],
+    es: [
+      { q: '¿Qué formatos de PowerPoint son compatibles?', a: 'Actualmente se admiten archivos .pptx. Los archivos .ppt antiguos deben guardarse como .pptx primero.' },
+      { q: '¿Se suben mis presentaciones a un servidor?', a: 'No. Todo se procesa 100% en tu navegador.' },
+      { q: '¿Preserva las imágenes y animaciones?', a: 'El convertidor extrae el contenido de texto y el diseño.' },
+      { q: '¿Necesito registrarme?', a: 'No. Esta herramienta es completamente gratuita sin registro.' },
+    ],
+  },
+  webpageToPdf: {
+    en: [
+      { q: 'How do I convert HTML to PDF?', a: 'Paste your HTML code or upload an HTML file, then click "Convert to PDF". The PDF will be generated instantly.' },
+      { q: 'Can I convert a live webpage?', a: 'You can save a webpage as HTML (Ctrl+S / Cmd+S) and then upload the file to convert it to PDF.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your data never leaves your device.' },
+      { q: 'Does it preserve CSS styling?', a: 'The converter extracts structured text content (headings, paragraphs, lists). Complex CSS layouts may be simplified.' },
+    ],
+    ar: [
+      { q: 'كيف أحول HTML إلى PDF؟', a: 'الصق كود HTML أو ارفع ملف HTML ثم انقر "تحويل إلى PDF".' },
+      { q: 'هل يمكنني تحويل صفحة ويب مباشرة؟', a: 'يمكنك حفظ صفحة الويب كـ HTML ثم رفع الملف.' },
+      { q: 'هل يتم رفع ملفاتي إلى خادم؟', a: 'لا. تتم جميع العمليات بنسبة 100% في متصفحك.' },
+      { q: 'هل يحافظ على تنسيق CSS؟', a: 'يستخرج المحول المحتوى النصي المهيكل. قد يتم تبسيط تخطيطات CSS المعقدة.' },
+    ],
+    es: [
+      { q: '¿Cómo convierto HTML a PDF?', a: 'Pega tu código HTML o sube un archivo HTML, luego haz clic en "Convertir a PDF".' },
+      { q: '¿Puedo convertir una página web en vivo?', a: 'Puedes guardar una página web como HTML (Ctrl+S) y luego subir el archivo.' },
+      { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
+      { q: '¿Preserva el estilo CSS?', a: 'El convertidor extrae contenido de texto estructurado. Los diseños CSS complejos pueden simplificarse.' },
+    ],
+  },
+  heicToPdf: {
+    en: [
+      { q: 'What is HEIC format?', a: 'HEIC (High Efficiency Image Container) is Apple\'s default photo format on iPhone and iPad. It offers better compression than JPEG while maintaining quality.' },
+      { q: 'What can I convert HEIC to?', a: 'You can convert HEIC/HEIF images to JPG, PNG, or combine them into a single PDF document.' },
+      { q: 'Are my photos uploaded to a server?', a: 'No. All conversion happens 100% in your browser. Your photos never leave your device.' },
+      { q: 'Can I convert multiple HEIC files at once?', a: 'Yes! You can select multiple HEIC/HEIF files and convert them all at once.' },
+    ],
+    ar: [
+      { q: 'ما هو تنسيق HEIC؟', a: 'HEIC هو تنسيق الصور الافتراضي من Apple على iPhone و iPad. يوفر ضغطاً أفضل من JPEG.' },
+      { q: 'إلى ماذا يمكنني تحويل HEIC؟', a: 'يمكنك تحويل صور HEIC/HEIF إلى JPG أو PNG أو دمجها في مستند PDF واحد.' },
+      { q: 'هل يتم رفع صوري إلى خادم؟', a: 'لا. يتم التحويل بنسبة 100% في متصفحك.' },
+      { q: 'هل يمكنني تحويل عدة ملفات HEIC مرة واحدة؟', a: 'نعم! يمكنك تحديد عدة ملفات HEIC/HEIF وتحويلها جميعاً مرة واحدة.' },
+    ],
+    es: [
+      { q: '¿Qué es el formato HEIC?', a: 'HEIC es el formato de fotos predeterminado de Apple en iPhone y iPad. Ofrece mejor compresión que JPEG.' },
+      { q: '¿A qué puedo convertir HEIC?', a: 'Puedes convertir imágenes HEIC/HEIF a JPG, PNG o combinarlas en un solo documento PDF.' },
+      { q: '¿Se suben mis fotos a un servidor?', a: 'No. Toda la conversión ocurre 100% en tu navegador.' },
+      { q: '¿Puedo convertir varios archivos HEIC a la vez?', a: '¡Sí! Puedes seleccionar múltiples archivos HEIC/HEIF y convertirlos todos a la vez.' },
+    ],
+  },
 };
 
 export function getTranslatedFaqs(toolId: string, lang: string): FaqItem[] {

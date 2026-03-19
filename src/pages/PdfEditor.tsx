@@ -22,7 +22,7 @@ const PdfEditorPage = () => {
         <p className="mt-2 text-muted-foreground">{tt('page.pdfEditor.sub', lang)}</p>
       </div>
       <PDFEditor />
-      <ToolFAQ faqs={faqs} />
+      <ToolFAQ toolId="pdfEditor" />
     </ToolPageLayout>
   );
 };

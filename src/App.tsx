@@ -50,6 +50,10 @@ const SvgToImage = lazy(() => import("./pages/SvgToImage"));
 const PdfToImages = lazy(() => import("./pages/PdfToImages"));
 const PdfFormFiller = lazy(() => import("./pages/PdfFormFiller"));
 const PdfRedact = lazy(() => import("./pages/PdfRedact"));
+const ExcelToPdf = lazy(() => import("./pages/ExcelToPdf"));
+const PowerPointToPdf = lazy(() => import("./pages/PowerPointToPdf"));
+const WebpageToPdf = lazy(() => import("./pages/WebpageToPdf"));
+const HeicToPdf = lazy(() => import("./pages/HeicToPdf"));
 
 const queryClient = new QueryClient();
 
@@ -107,6 +111,10 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-to-images" element={<PdfToImages />} />
         <Route path="/pdf-form-filler" element={<PdfFormFiller />} />
         <Route path="/pdf-redact" element={<PdfRedact />} />
+        <Route path="/excel-to-pdf" element={<ExcelToPdf />} />
+        <Route path="/pptx-to-pdf" element={<PowerPointToPdf />} />
+        <Route path="/webpage-to-pdf" element={<WebpageToPdf />} />
+        <Route path="/heic-to-pdf" element={<HeicToPdf />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

@@ -15,7 +15,7 @@ const Compress = () => {
         title="Compress PDF Online — Reduce File Size Free | MergePDF"
         description="Compress PDF files to reduce size by stripping metadata. Free, private, no upload — everything runs in your browser."
         path="/compress"
-        faqs={faqs}
+        
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

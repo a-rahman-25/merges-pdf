@@ -15,7 +15,6 @@ const UnlockPdf = () => {
         title="Unlock PDF Free Online — Remove PDF Restrictions | MergesPDF"
         description="Remove PDF restrictions (print, copy, edit) for free. Unlock PDF files online without sign-up. Browser-based, private processing."
         path="/unlock-pdf"
-        faqs={faqs}
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">
@@ -27,7 +26,7 @@ const UnlockPdf = () => {
           </p>
         </div>
         <PDFUnlocker />
-        <ToolFAQ faqs={faqs} />
+        <ToolFAQ toolId="unlock" />
       </motion.div>
     </ToolPageLayout>
   );

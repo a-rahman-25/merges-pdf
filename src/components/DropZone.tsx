@@ -58,7 +58,7 @@ const DropZone = ({ onFiles, disabled, accept = '.pdf', label, sublabel }: DropZ
       <input
         ref={inputRef}
         type="file"
-        accept=".pdf"
+        accept={accept}
         multiple
         onChange={handleChange}
         className="hidden"

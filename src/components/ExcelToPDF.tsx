@@ -2,7 +2,7 @@ import { useState, useCallback, useRef } from 'react';
 import { Loader2, RotateCcw, FileSpreadsheet } from 'lucide-react';
 import { toast } from 'sonner';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import { Button } from '@/components/ui/button';
 import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
@@ -38,8 +38,20 @@ const ExcelToPDF = () => {
     setProcessing(true);
     try {
       const buf = await file.arrayBuffer();
-      const wb = XLSX.read(buf, { type: 'array' });
-      
+      const workbook = new ExcelJS.Workbook();
+
+      if (/\.csv$/i.test(file.name)) {
+        // For CSV, read as text and parse manually
+        const text = new TextDecoder().decode(buf);
+        const csvRows = text.split('\n').map(line =>
+          line.split(',').map(cell => cell.replace(/^"|"$/g, '').trim())
+        );
+        const sheet = workbook.addWorksheet('Sheet1');
+        csvRows.forEach(row => sheet.addRow(row));
+      } else {
+        await workbook.xlsx.load(buf);
+      }
+
       const pdf = await PDFDocument.create();
       const font = await pdf.embedFont(StandardFonts.Helvetica);
       const boldFont = await pdf.embedFont(StandardFonts.HelveticaBold);
@@ -48,21 +60,26 @@ const ExcelToPDF = () => {
       const rowHeight = 16;
       const cellPadding = 4;
 
-      for (const sheetName of wb.SheetNames) {
-        const sheet = wb.Sheets[sheetName];
-        const data: string[][] = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: '' });
-        if (data.length === 0) continue;
+      workbook.eachSheet((sheet) => {
+        const data: string[][] = [];
+        sheet.eachRow((row) => {
+          const rowValues: string[] = [];
+          row.eachCell({ includeEmpty: true }, (cell) => {
+            rowValues.push(String(cell.value ?? ''));
+          });
+          data.push(rowValues);
+        });
+        if (data.length === 0) return;
 
-        const colCount = Math.max(...data.map(r => r.length));
+        const colCount = Math.max(...data.map(r => r.length), 1);
         const pageWidth = Math.max(595, margin * 2 + colCount * 80);
         const pageHeight = 842;
         const colWidth = (pageWidth - margin * 2) / colCount;
-        
+
         let page = pdf.addPage([pageWidth, pageHeight]);
         let y = pageHeight - margin;
 
-        // Sheet title
-        page.drawText(sheetName, { x: margin, y, font: boldFont, size: 12, color: rgb(0.1, 0.1, 0.1) });
+        page.drawText(sheet.name, { x: margin, y, font: boldFont, size: 12, color: rgb(0.1, 0.1, 0.1) });
         y -= 24;
 
         for (let r = 0; r < data.length; r++) {
@@ -74,7 +91,6 @@ const ExcelToPDF = () => {
           const isHeader = r === 0;
           const currentFont = isHeader ? boldFont : font;
 
-          // Draw row background for header
           if (isHeader) {
             page.drawRectangle({
               x: margin, y: y - rowHeight + 4, width: pageWidth - margin * 2, height: rowHeight,
@@ -82,19 +98,16 @@ const ExcelToPDF = () => {
             });
           }
 
-          // Draw cells
           for (let c = 0; c < colCount; c++) {
             const cellText = String(data[r][c] ?? '').substring(0, 30);
             const x = margin + c * colWidth + cellPadding;
             page.drawText(cellText, { x, y: y - rowHeight + 8, font: currentFont, size: fontSize, color: rgb(0.15, 0.15, 0.15) });
-            // Draw vertical gridline
             page.drawLine({ start: { x: margin + c * colWidth, y: y + 4 }, end: { x: margin + c * colWidth, y: y - rowHeight + 4 }, thickness: 0.5, color: rgb(0.8, 0.8, 0.8) });
           }
-          // Horizontal gridline
           page.drawLine({ start: { x: margin, y: y - rowHeight + 4 }, end: { x: pageWidth - margin, y: y - rowHeight + 4 }, thickness: 0.5, color: rgb(0.8, 0.8, 0.8) });
           y -= rowHeight;
         }
-      }
+      });
 
       const pdfBytes = await pdf.save();
       setResult({ data: pdfBytes, pageCount: pdf.getPageCount() });

@@ -10,8 +10,8 @@ const toolLinks = [
   { to: '/pdf-signature', key: 'tool.sign' },
   { to: '/encrypt', key: 'tool.encrypt' },
   { to: '/pdf-overlay', key: 'tool.pdfOverlay' },
-  { to: '/pdf-bookmarks', key: 'tool.pdfBookmarks' },
-  { to: '/repair-pdf', key: 'tool.repairPdf' },
+  { to: '/pdf-bookmarks', key: 'tool.bookmarks' },
+  { to: '/repair-pdf', key: 'tool.repair' },
   { to: '/page-size', key: 'tool.pageSize' },
   { to: '/pdf-redact', key: 'tool.redact' },
 ];

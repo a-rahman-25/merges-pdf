@@ -8,7 +8,7 @@ import { tt } from '@/lib/tool-translations';
 const PdfComparison = () => {
   const { lang } = useI18n();
   return (
-    <ToolPageLayout activeTab="pdf">
+    <ToolPageLayout activeTab="merge">
       <SEOHead
         title="Compare PDFs — Free Online PDF Comparison | MergesPDF"
         description="Compare two PDF files side by side and see text differences. 100% in-browser, private, no uploads."

@@ -139,7 +139,7 @@ ${result.slides.map((s) => `
                 )}
               </div>
             </div>
-            <Button onClick={triggerDownload} size="lg" className="w-full gap-2 text-base font-semibold h-14 rounded-xl">
+            <Button onClick={() => triggerDownload()} size="lg" className="w-full gap-2 text-base font-semibold h-14 rounded-xl">
               <Download className="h-5 w-5" /> Download Presentation
             </Button>
             <Button onClick={reset} variant="outline" size="lg" className="w-full gap-2 rounded-xl">

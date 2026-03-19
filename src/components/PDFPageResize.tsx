@@ -96,7 +96,7 @@ const PDFPageResize = () => {
       <AnimatePresence mode="wait">
         {!file ? (
           <motion.div key="drop" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            <DropZone onFiles={addFile} accept=".pdf" label="Drop a PDF to resize pages" subLabel="or click to browse" />
+            <DropZone onFiles={addFile} />
           </motion.div>
         ) : !result ? (
           <motion.div key="options" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">

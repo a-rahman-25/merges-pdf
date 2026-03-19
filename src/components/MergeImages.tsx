@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import DropZone from '@/components/DropZone';
 
 type Layout = 'horizontal' | 'vertical' | 'grid';
+type OutputFormat = 'png' | 'jpeg' | 'webp';
 
 interface ImageItem {
   id: string;
@@ -32,6 +33,8 @@ const MergeImagesComponent = () => {
   const [layout, setLayout] = useState<Layout>('horizontal');
   const [gap, setGap] = useState(0);
   const [bgColor, setBgColor] = useState('#ffffff');
+  const [outputFormat, setOutputFormat] = useState<OutputFormat>('png');
+  const [quality, setQuality] = useState(92);
   const [processing, setProcessing] = useState(false);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const dragItem = useRef<number | null>(null);
@@ -123,7 +126,9 @@ const MergeImagesComponent = () => {
         ctx.drawImage(img, dx, dy, dw, dh);
       });
 
-      const blob = await new Promise<Blob>((res, rej) => canvas.toBlob(b => b ? res(b) : rej('Failed'), 'image/png'));
+      const mimeType = `image/${outputFormat}`;
+      const q = outputFormat === 'png' ? undefined : quality / 100;
+      const blob = await new Promise<Blob>((res, rej) => canvas.toBlob(b => b ? res(b) : rej('Failed'), mimeType, q));
       const url = URL.createObjectURL(blob);
       setResultUrl(url);
       toast.success('Images merged!');
@@ -135,11 +140,13 @@ const MergeImagesComponent = () => {
     }
   };
 
+  const ext = outputFormat === 'jpeg' ? 'jpg' : outputFormat;
+
   const downloadResult = () => {
     if (!resultUrl) return;
     const a = document.createElement('a');
     a.href = resultUrl;
-    a.download = 'merged-image.png';
+    a.download = `merged-image.${ext}`;
     a.click();
     toast.success('Downloaded!');
   };
@@ -204,9 +211,24 @@ const MergeImagesComponent = () => {
                     <label className="text-sm font-medium text-foreground">Background</label>
                     <div className="flex items-center gap-2">
                       <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="h-10 w-10 cursor-pointer rounded-lg border border-input" />
-                    </div>
                   </div>
-                </div>
+                  <div className="space-y-1.5">
+                    <label className="text-sm font-medium text-foreground">Format</label>
+                    <Select value={outputFormat} onValueChange={(v) => setOutputFormat(v as OutputFormat)}>
+                      <SelectTrigger className="w-[120px]"><SelectValue /></SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="png">PNG</SelectItem>
+                        <SelectItem value="jpeg">JPG</SelectItem>
+                        <SelectItem value="webp">WEBP</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  {outputFormat !== 'png' && (
+                    <div className="space-y-1.5">
+                      <label className="text-sm font-medium text-foreground">Quality ({quality}%)</label>
+                      <Input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} className="w-[120px] h-10" />
+                    </div>
+                  )}
 
                 <Button onClick={handleMerge} disabled={processing || images.length < 2} size="lg" className="w-full gap-2 text-base font-semibold h-14 rounded-xl">
                   {processing ? <><Loader2 className="h-5 w-5 animate-spin" /> Merging…</> : <><Combine className="h-5 w-5" /> Merge {images.length} Images</>}
@@ -226,7 +248,7 @@ const MergeImagesComponent = () => {
               </div>
             </div>
             <Button onClick={downloadResult} size="lg" className="w-full gap-2 text-base font-semibold h-14 rounded-xl">
-              <Download className="h-5 w-5" /> Download PNG
+              <Download className="h-5 w-5" /> Download {ext.toUpperCase()}
             </Button>
             <Button onClick={reset} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
               <RotateCcw className="h-4 w-4" /> Merge More Images

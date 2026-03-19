@@ -58,6 +58,7 @@ const toolCategories = [
       { icon: Combine, titleKey: 'tool.mergeImages', descKey: 'tool.mergeImages.desc', path: '/merge-images', color: 'bg-tool-amber/15 text-tool-amber' },
       { icon: ArrowRightLeft, titleKey: 'tool.svgToImage', descKey: 'tool.svgToImage.desc', path: '/svg-to-image', color: 'bg-tool-lime/15 text-tool-lime' },
       { icon: FileSpreadsheet, titleKey: 'tool.excelToPdf', descKey: 'tool.excelToPdf.desc', path: '/excel-to-pdf', color: 'bg-tool-emerald/15 text-tool-emerald' },
+      { icon: FileSpreadsheet, titleKey: 'tool.pdfToExcel', descKey: 'tool.pdfToExcel.desc', path: '/pdf-to-excel', color: 'bg-tool-teal/15 text-tool-teal' },
       { icon: Presentation, titleKey: 'tool.pptxToPdf', descKey: 'tool.pptxToPdf.desc', path: '/pptx-to-pdf', color: 'bg-tool-blue/15 text-tool-blue' },
       { icon: Globe, titleKey: 'tool.webpageToPdf', descKey: 'tool.webpageToPdf.desc', path: '/webpage-to-pdf', color: 'bg-tool-indigo/15 text-tool-indigo' },
       { icon: Image, titleKey: 'tool.heicToPdf', descKey: 'tool.heicToPdf.desc', path: '/heic-to-pdf', color: 'bg-tool-rose/15 text-tool-rose' },

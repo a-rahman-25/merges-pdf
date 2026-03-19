@@ -57,6 +57,7 @@ const HeicToPdf = lazy(() => import("./pages/HeicToPdf"));
 const RepairPdf = lazy(() => import("./pages/RepairPdf"));
 const PdfBookmarks = lazy(() => import("./pages/PdfBookmarks"));
 const PageSize = lazy(() => import("./pages/PageSize"));
+const PdfToExcel = lazy(() => import("./pages/PdfToExcel"));
 
 const queryClient = new QueryClient();
 
@@ -115,6 +116,7 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-form-filler" element={<PdfFormFiller />} />
         <Route path="/pdf-redact" element={<PdfRedact />} />
         <Route path="/excel-to-pdf" element={<ExcelToPdf />} />
+        <Route path="/pdf-to-excel" element={<PdfToExcel />} />
         <Route path="/pptx-to-pdf" element={<PowerPointToPdf />} />
         <Route path="/webpage-to-pdf" element={<WebpageToPdf />} />
         <Route path="/heic-to-pdf" element={<HeicToPdf />} />

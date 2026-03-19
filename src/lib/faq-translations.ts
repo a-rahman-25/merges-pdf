@@ -1016,6 +1016,26 @@ const faqData: Record<string, FaqsByLang> = {
       { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
     ],
   },
+  pdfToExcel: {
+    en: [
+      { q: 'How does PDF to Excel extraction work?', a: 'The tool reads each page of your PDF, groups text by position into rows and columns, and exports the structured data as an Excel spreadsheet or CSV file.' },
+      { q: 'Will it work with scanned PDFs?', a: 'This tool extracts text-based content. For scanned/image PDFs, use the OCR tool first to make text extractable, then convert to Excel.' },
+      { q: 'What formats can I download?', a: 'You can download the extracted data as an .xlsx (Excel) file or a .csv file for maximum compatibility.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your files never leave your device.' },
+    ],
+    ar: [
+      { q: 'كيف يعمل استخراج PDF إلى Excel؟', a: 'تقرأ الأداة كل صفحة من PDF وتجمع النص حسب الموقع في صفوف وأعمدة وتصدر البيانات كملف Excel.' },
+      { q: 'هل يعمل مع ملفات PDF الممسوحة ضوئياً؟', a: 'تستخرج هذه الأداة المحتوى النصي. للملفات الممسوحة ضوئياً، استخدم أداة OCR أولاً.' },
+      { q: 'ما الصيغ المتاحة للتنزيل؟', a: 'يمكنك تنزيل البيانات كملف Excel (.xlsx) أو ملف CSV.' },
+      { q: 'هل يتم رفع ملفاتي إلى خادم؟', a: 'لا. تتم جميع العمليات بنسبة 100% في متصفحك.' },
+    ],
+    es: [
+      { q: '¿Cómo funciona la extracción de PDF a Excel?', a: 'La herramienta lee cada página del PDF, agrupa el texto por posición en filas y columnas, y exporta los datos como archivo Excel.' },
+      { q: '¿Funciona con PDFs escaneados?', a: 'Esta herramienta extrae contenido basado en texto. Para PDFs escaneados, usa primero la herramienta OCR.' },
+      { q: '¿En qué formatos puedo descargar?', a: 'Puedes descargar los datos extraídos como archivo .xlsx (Excel) o .csv.' },
+      { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
+    ],
+  },
 };
 
 export function getTranslatedFaqs(toolId: string, lang: string): FaqItem[] {

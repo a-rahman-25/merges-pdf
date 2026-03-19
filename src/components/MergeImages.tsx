@@ -211,6 +211,7 @@ const MergeImagesComponent = () => {
                     <label className="text-sm font-medium text-foreground">Background</label>
                     <div className="flex items-center gap-2">
                       <input type="color" value={bgColor} onChange={e => setBgColor(e.target.value)} className="h-10 w-10 cursor-pointer rounded-lg border border-input" />
+                    </div>
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-sm font-medium text-foreground">Format</label>
@@ -229,6 +230,7 @@ const MergeImagesComponent = () => {
                       <Input type="range" min={10} max={100} value={quality} onChange={e => setQuality(Number(e.target.value))} className="w-[120px] h-10" />
                     </div>
                   )}
+                </div>
 
                 <Button onClick={handleMerge} disabled={processing || images.length < 2} size="lg" className="w-full gap-2 text-base font-semibold h-14 rounded-xl">
                   {processing ? <><Loader2 className="h-5 w-5 animate-spin" /> Merging…</> : <><Combine className="h-5 w-5" /> Merge {images.length} Images</>}

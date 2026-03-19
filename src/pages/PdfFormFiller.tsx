@@ -15,7 +15,6 @@ const PdfFormFillerPage = () => {
         title="Fill PDF Forms Online — Free PDF Form Filler | MergePDF"
         description="Fill in PDF form fields directly in your browser. Free, private — no uploads, no sign-up required."
         path="/pdf-form-filler"
-        faqs={faqs}
       />
       <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.15 }}>
         <div className="mb-10 text-center">

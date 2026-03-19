@@ -605,7 +605,7 @@ const es: T = {
   'security.title': 'Seguridad y privacidad', 'security.subtitle': 'Tus archivos, tu dispositivo, tu privacidad.',
   'faq.title': 'Preguntas frecuentes',
   'cta.title': '¿Listo? Sin registro. Sin tarifas. Herramientas PDF poderosas.', 'cta.subtitle': 'Únete a millones de usuarios.', 'cta.button': 'Empezar — Es gratis',
-  'footer.desc': 'Suite PDF con privacidad primero.', 'footer.pdftools': 'Herramientas PDF', 'footer.aitools': 'Herramientas IA', 'footer.company': 'Empresa',
+  'footer.desc': 'Suite PDF con privacidad primero.', 'footer.pdftools': 'Herramientas PDF', 'footer.converters': 'Convertidores', 'footer.aitools': 'Herramientas IA', 'footer.company': 'Empresa',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Todos los archivos se procesan localmente.',
   'footer.privacy': 'Política de privacidad', 'footer.terms': 'Términos de servicio',
   'cat.pdftools': 'Herramientas PDF', 'cat.converters': 'Convertidores', 'cat.aitools': 'Herramientas IA',

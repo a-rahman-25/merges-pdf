@@ -124,6 +124,7 @@ const en: T = {
   'tool.mergeImages': 'Merge Images', 'tool.mergeImages.desc': 'Merge multiple images into one PDF.',
   'tool.svgToImage': 'SVG to Image', 'tool.svgToImage.desc': 'Convert SVG to PNG, JPG, WEBP or BMP.',
   'tool.excelToPdf': 'Excel to PDF', 'tool.excelToPdf.desc': 'Convert Excel spreadsheets to PDF.',
+  'tool.pdfToExcel': 'PDF to Excel', 'tool.pdfToExcel.desc': 'Extract tables from PDF to Excel.',
   'tool.pptxToPdf': 'PowerPoint to PDF', 'tool.pptxToPdf.desc': 'Convert PPTX presentations to PDF.',
   'tool.webpageToPdf': 'Webpage to PDF', 'tool.webpageToPdf.desc': 'Convert HTML pages to PDF documents.',
   'tool.heicToPdf': 'HEIC Converter', 'tool.heicToPdf.desc': 'Convert HEIC/HEIF to JPG, PNG, or PDF.',

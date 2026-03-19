@@ -2,90 +2,18 @@ import { Link } from 'react-router-dom';
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState, useCallback } from 'react';
 import {
-  Combine, Scissors, Minimize2, ArrowRightLeft, RotateCw, Eraser,
-  Upload, Cpu, Download, Shield, Zap, Globe, Lock, Layers, FileText,
-  ChevronRight, Star, Brain, Languages, Droplets, Trash2, FileOutput,
-  Hash, Unlock, Palette, MessageSquare, ChevronLeft, Eye, Recycle,
-  Code, Sparkles, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
-  FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
-  BookMarked, Camera, GitCompare, FileCode, Search
+  Upload, Cpu, Download, Shield, Zap, Globe, Lock, FileText,
+  ChevronRight, Star, ChevronLeft, Eye, Recycle,
+  Sparkles, Search, Heart,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/useI18n';
+import { allTools, categories, getFavorites, toggleFavorite, getRecent, addRecent } from '@/lib/tools-data';
 
 /* ──────────────────────── data ──────────────────────── */
-
-const toolCategories = [
-  {
-    labelKey: 'cat.pdftools',
-    tools: [
-      { icon: Combine, titleKey: 'tool.merge', descKey: 'tool.merge.desc', path: '/merge', color: 'bg-tool-blue/15 text-tool-blue' },
-      { icon: Scissors, titleKey: 'tool.split', descKey: 'tool.split.desc', path: '/split', color: 'bg-tool-rose/15 text-tool-rose' },
-      { icon: Minimize2, titleKey: 'tool.compress', descKey: 'tool.compress.desc', path: '/compress', color: 'bg-tool-emerald/15 text-tool-emerald' },
-      { icon: Palette, titleKey: 'tool.grayscale', descKey: 'tool.grayscale.desc', path: '/grayscale', color: 'bg-tool-cyan/15 text-tool-cyan' },
-      { icon: RotateCw, titleKey: 'tool.rotate', descKey: 'tool.rotate.desc', path: '/rotate', color: 'bg-tool-amber/15 text-tool-amber' },
-      { icon: Trash2, titleKey: 'tool.deletePages', descKey: 'tool.deletePages.desc', path: '/delete-pages', color: 'bg-tool-rose/15 text-tool-rose' },
-      { icon: FileOutput, titleKey: 'tool.extractPages', descKey: 'tool.extractPages.desc', path: '/extract-pages', color: 'bg-tool-pink/15 text-tool-pink' },
-      { icon: Droplets, titleKey: 'tool.watermark', descKey: 'tool.watermark.desc', path: '/add-watermark', color: 'bg-tool-teal/15 text-tool-teal' },
-      { icon: Lock, titleKey: 'tool.encrypt', descKey: 'tool.encrypt.desc', path: '/encrypt', color: 'bg-tool-indigo/15 text-tool-indigo' },
-      { icon: Unlock, titleKey: 'tool.unlock', descKey: 'tool.unlock.desc', path: '/unlock-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
-      { icon: Hash, titleKey: 'tool.pageNumbers', descKey: 'tool.pageNumbers.desc', path: '/page-numbers', color: 'bg-tool-amber/15 text-tool-amber' },
-      { icon: Layers, titleKey: 'tool.flatten', descKey: 'tool.flatten.desc', path: '/flatten', color: 'bg-tool-teal/15 text-tool-teal' },
-      { icon: Layers, titleKey: 'tool.reorder', descKey: 'tool.reorder.desc', path: '/reorder-pages', color: 'bg-tool-violet/15 text-tool-violet' },
-      { icon: PenTool, titleKey: 'tool.sign', descKey: 'tool.sign.desc', path: '/pdf-signature', color: 'bg-tool-indigo/15 text-tool-indigo' },
-      { icon: Layers, titleKey: 'tool.crop', descKey: 'tool.crop.desc', path: '/crop-pages', color: 'bg-tool-cyan/15 text-tool-cyan' },
-      { icon: FileText, titleKey: 'tool.metadata', descKey: 'tool.metadata.desc', path: '/pdf-metadata', color: 'bg-tool-emerald/15 text-tool-emerald' },
-      { icon: ImageIcon, titleKey: 'tool.pdfToImages', descKey: 'tool.pdfToImages.desc', path: '/pdf-to-images', color: 'bg-tool-cyan/15 text-tool-cyan' },
-      { icon: FormInput, titleKey: 'tool.formFiller', descKey: 'tool.formFiller.desc', path: '/pdf-form-filler', color: 'bg-tool-violet/15 text-tool-violet' },
-      { icon: EyeOff, titleKey: 'tool.redact', descKey: 'tool.redact.desc', path: '/pdf-redact', color: 'bg-tool-rose/15 text-tool-rose' },
-      { icon: Wrench, titleKey: 'tool.repair', descKey: 'tool.repair.desc', path: '/repair-pdf', color: 'bg-tool-amber/15 text-tool-amber' },
-      { icon: BookOpen, titleKey: 'tool.bookmarks', descKey: 'tool.bookmarks.desc', path: '/pdf-bookmarks', color: 'bg-tool-violet/15 text-tool-violet' },
-      { icon: Maximize2, titleKey: 'tool.pageSize', descKey: 'tool.pageSize.desc', path: '/page-size', color: 'bg-tool-cyan/15 text-tool-cyan' },
-    ],
-  },
-  {
-    labelKey: 'cat.converters',
-    tools: [
-      { icon: ArrowRightLeft, titleKey: 'tool.convert', descKey: 'tool.convert.desc', path: '/convert', color: 'bg-tool-violet/15 text-tool-violet' },
-      { icon: ArrowRightLeft, titleKey: 'tool.pdfToWord', descKey: 'tool.pdfToWord.desc', path: '/pdf-to-word', color: 'bg-tool-blue/15 text-tool-blue' },
-      { icon: ArrowRightLeft, titleKey: 'tool.wordToPdf', descKey: 'tool.wordToPdf.desc', path: '/word-to-pdf', color: 'bg-tool-indigo/15 text-tool-indigo' },
-      { icon: Code, titleKey: 'tool.xmlToPdf', descKey: 'tool.xmlToPdf.desc', path: '/convert', color: 'bg-tool-lime/15 text-tool-lime' },
-      { icon: Eraser, titleKey: 'tool.bgRemove', descKey: 'tool.bgRemove.desc', path: '/bg-remover', color: 'bg-tool-cyan/15 text-tool-cyan' },
-      { icon: Droplets, titleKey: 'tool.wmRemove', descKey: 'tool.wmRemove.desc', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
-      { icon: ArrowRightLeft, titleKey: 'tool.imageToPdf', descKey: 'tool.imageToPdf.desc', path: '/image-to-pdf', color: 'bg-tool-pink/15 text-tool-pink' },
-      { icon: Combine, titleKey: 'tool.mergeImages', descKey: 'tool.mergeImages.desc', path: '/merge-images', color: 'bg-tool-amber/15 text-tool-amber' },
-      { icon: ArrowRightLeft, titleKey: 'tool.svgToImage', descKey: 'tool.svgToImage.desc', path: '/svg-to-image', color: 'bg-tool-lime/15 text-tool-lime' },
-      { icon: FileSpreadsheet, titleKey: 'tool.excelToPdf', descKey: 'tool.excelToPdf.desc', path: '/excel-to-pdf', color: 'bg-tool-emerald/15 text-tool-emerald' },
-      { icon: FileSpreadsheet, titleKey: 'tool.pdfToExcel', descKey: 'tool.pdfToExcel.desc', path: '/pdf-to-excel', color: 'bg-tool-teal/15 text-tool-teal' },
-      { icon: Presentation, titleKey: 'tool.pptxToPdf', descKey: 'tool.pptxToPdf.desc', path: '/pptx-to-pdf', color: 'bg-tool-blue/15 text-tool-blue' },
-      { icon: Globe, titleKey: 'tool.webpageToPdf', descKey: 'tool.webpageToPdf.desc', path: '/webpage-to-pdf', color: 'bg-tool-indigo/15 text-tool-indigo' },
-      { icon: Image, titleKey: 'tool.heicToPdf', descKey: 'tool.heicToPdf.desc', path: '/heic-to-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
-      { icon: BookMarked, titleKey: 'tool.epubToPdf', descKey: 'tool.epubToPdf.desc', path: '/epub-to-pdf', color: 'bg-tool-violet/15 text-tool-violet' },
-      { icon: Code, titleKey: 'tool.htmlToPdf', descKey: 'tool.htmlToPdf.desc', path: '/html-to-pdf', color: 'bg-tool-lime/15 text-tool-lime' },
-      { icon: Shield, titleKey: 'tool.pdfA', descKey: 'tool.pdfA.desc', path: '/pdf-a', color: 'bg-tool-blue/15 text-tool-blue' },
-      { icon: Camera, titleKey: 'tool.scanToPdf', descKey: 'tool.scanToPdf.desc', path: '/scan-to-pdf', color: 'bg-tool-amber/15 text-tool-amber' },
-      { icon: Layers, titleKey: 'tool.pdfOverlay', descKey: 'tool.pdfOverlay.desc', path: '/pdf-overlay', color: 'bg-tool-indigo/15 text-tool-indigo' },
-      { icon: GitCompare, titleKey: 'tool.comparePdf', descKey: 'tool.comparePdf.desc', path: '/compare-pdf', color: 'bg-tool-violet/15 text-tool-violet' },
-      { icon: Presentation, titleKey: 'tool.pdfToPpt', descKey: 'tool.pdfToPpt.desc', path: '/pdf-to-powerpoint', color: 'bg-tool-blue/15 text-tool-blue' },
-      { icon: FileCode, titleKey: 'tool.markdownToPdf', descKey: 'tool.markdownToPdf.desc', path: '/markdown-to-pdf', color: 'bg-tool-emerald/15 text-tool-emerald' },
-    ],
-  },
-  {
-    labelKey: 'cat.aitools',
-    tools: [
-      { icon: Brain, titleKey: 'tool.aiSummarize', descKey: 'tool.aiSummarize.desc', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet' },
-      { icon: Languages, titleKey: 'tool.aiTranslate', descKey: 'tool.aiTranslate.desc', path: '/ai-translate', color: 'bg-tool-emerald/15 text-tool-emerald' },
-      { icon: MessageSquare, titleKey: 'tool.aiQa', descKey: 'tool.aiQa.desc', path: '/ai-qa', color: 'bg-tool-blue/15 text-tool-blue' },
-      { icon: Brain, titleKey: 'tool.aiTools', descKey: 'tool.aiTools.desc', path: '/ai-document-tools', color: 'bg-tool-pink/15 text-tool-pink' },
-      { icon: Layers, titleKey: 'tool.batch', descKey: 'tool.batch.desc', path: '/batch', color: 'bg-tool-amber/15 text-tool-amber' },
-      { icon: ScanLine, titleKey: 'tool.ocr', descKey: 'tool.ocr.desc', path: '/ocr-pdf', color: 'bg-tool-teal/15 text-tool-teal' },
-      { icon: Type, titleKey: 'tool.editor', descKey: 'tool.editor.desc', path: '/pdf-editor', color: 'bg-tool-rose/15 text-tool-rose' },
-    ],
-  },
-];
 
 const testimonialKeys = [
   { nameKey: 'testimonial.1.name', roleKey: 'testimonial.1.role', quoteKey: 'testimonial.1.quote', rating: 5 },
@@ -159,11 +87,20 @@ function StatItem({ stat }: { stat: typeof statsConfig[0] }) {
 const Index = () => {
   const [testimonialIdx, setTestimonialIdx] = useState(0);
   const [toolSearch, setToolSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState<'all' | 'pdftools' | 'converters' | 'aitools'>('all');
+  const [favorites, setFavorites] = useState<string[]>(getFavorites());
+  const recent = getRecent();
   const visibleCount = 3;
   const maxIdx = testimonialKeys.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);
   const prev = useCallback(() => setTestimonialIdx(i => Math.max(i - 1, 0)), []);
   const { t } = useI18n();
+
+  const handleToggleFav = (path: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setFavorites(toggleFavorite(path));
+  };
 
   const trustBadges = [
     { icon: Lock, titleKey: 'badge.noUploads', descKey: 'badge.noUploads.desc' },
@@ -179,6 +116,19 @@ const Index = () => {
     { icon: Cpu, title: t('step.process'), desc: t('step.process.desc') },
     { icon: Download, title: t('step.download'), desc: t('step.download.desc') },
   ];
+
+  // Filter tools
+  const filtered = allTools.filter(tool => {
+    const matchesCategory = activeCategory === 'all' || tool.category === activeCategory;
+    if (!toolSearch.trim()) return matchesCategory;
+    const q = toolSearch.toLowerCase();
+    return matchesCategory && (t(tool.titleKey).toLowerCase().includes(q) || t(tool.descKey).toLowerCase().includes(q));
+  });
+
+  // Favorite and recent tools for top section
+  const favTools = allTools.filter(t => favorites.includes(t.path));
+  const recentTools = allTools.filter(t => recent.includes(t.path) && !favorites.includes(t.path)).slice(0, 6);
+  const showPersonalized = (favTools.length > 0 || recentTools.length > 0) && !toolSearch.trim() && activeCategory === 'all';
 
   return (
     <div className="min-h-screen bg-background">
@@ -222,7 +172,6 @@ const Index = () => {
               </Button>
             </div>
 
-            {/* Mini trust bar */}
             <div className="mt-10 flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
               {[t('trust.private'), t('trust.instant'), t('trust.free'), t('trust.nosignup')].map((txt) => (
                 <span key={txt} className="flex items-center gap-1">{txt}</span>
@@ -252,56 +201,92 @@ const Index = () => {
               {t('tools.subtitle')}
             </p>
           </motion.div>
-          {/* Search bar */}
-          <div className="mx-auto mt-8 max-w-md relative">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              value={toolSearch}
-              onChange={(e) => setToolSearch(e.target.value)}
-              placeholder={t('tools.search') || 'Search tools...'}
-              className="w-full rounded-xl border border-border bg-card pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
-            />
+
+          {/* Search + Category Tabs */}
+          <div className="mt-8 space-y-4">
+            <div className="mx-auto max-w-md relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <input
+                type="text"
+                value={toolSearch}
+                onChange={(e) => setToolSearch(e.target.value)}
+                placeholder={t('tools.search') || 'Search tools... (⌘K)'}
+                className="w-full rounded-xl border border-border bg-card pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+              />
+            </div>
+
+            {/* Category Tabs */}
+            <div className="flex justify-center">
+              <div className="inline-flex rounded-xl border border-border bg-card p-1 gap-1">
+                {categories.map(cat => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${
+                      activeCategory === cat.id
+                        ? 'bg-primary text-primary-foreground shadow-sm'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                    }`}
+                  >
+                    {t(cat.labelKey)}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="mt-14 space-y-14">
-            {toolCategories.map((category) => {
-              const filtered = category.tools.filter(tool => {
-                if (!toolSearch.trim()) return true;
-                const q = toolSearch.toLowerCase();
-                return t(tool.titleKey).toLowerCase().includes(q) || t(tool.descKey).toLowerCase().includes(q);
-              });
-              if (filtered.length === 0) return null;
-              return (
-                <div key={category.labelKey}>
-                  <h3 className="text-xl font-bold text-foreground mb-6">{t(category.labelKey)}</h3>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    {filtered.map((tool, i) => (
-                      <motion.div
-                        key={tool.titleKey}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.35, delay: i * 0.04 }}
-                      >
-                        <Link
-                          to={tool.path}
-                          className="group flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
-                        >
-                          <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${tool.color}`}>
-                            <tool.icon className="h-5 w-5" />
-                          </div>
-                          <h3 className="font-semibold text-foreground">{t(tool.titleKey)}</h3>
-                          <p className="mt-1 flex-1 text-sm text-muted-foreground">{t(tool.descKey)}</p>
-                          <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                            {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
-                          </span>
-                        </Link>
-                      </motion.div>
+
+          {/* Favorites & Recent */}
+          {showPersonalized && (
+            <div className="mt-10 space-y-8">
+              {favTools.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                    <Star className="h-4 w-4 fill-tool-amber text-tool-amber" /> {t('tools.favorites') || 'Your Favorites'}
+                  </h3>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    {favTools.map(tool => (
+                      <ToolCard key={tool.path} tool={tool} isFav={true} onToggleFav={handleToggleFav} t={t} />
                     ))}
                   </div>
                 </div>
-              );
-            })}
+              )}
+              {recentTools.length > 0 && (
+                <div>
+                  <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-primary" /> {t('tools.recent') || 'Recently Used'}
+                  </h3>
+                  <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                    {recentTools.map(tool => (
+                      <ToolCard key={tool.path} tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
+                    ))}
+                  </div>
+                </div>
+              )}
+              <div className="border-t border-border" />
+            </div>
+          )}
+
+          {/* All tools */}
+          <div className="mt-10">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {filtered.map((tool, i) => (
+                <motion.div
+                  key={tool.path + tool.titleKey}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.3, delay: Math.min(i * 0.03, 0.3) }}
+                >
+                  <ToolCard tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
+                </motion.div>
+              ))}
+            </div>
+            {filtered.length === 0 && (
+              <div className="text-center py-12 text-muted-foreground">
+                <Search className="mx-auto h-8 w-8 mb-3 text-muted-foreground/50" />
+                <p>{t('tools.noResults') || 'No tools found. Try a different search.'}</p>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -453,5 +438,38 @@ const Index = () => {
     </div>
   );
 };
+
+/* ──────────────────── Tool Card ──────────────────── */
+
+interface ToolCardProps {
+  tool: typeof allTools[0];
+  isFav: boolean;
+  onToggleFav: (path: string, e: React.MouseEvent) => void;
+  t: (key: string) => string;
+}
+
+const ToolCard = ({ tool, isFav, onToggleFav, t }: ToolCardProps) => (
+  <Link
+    to={tool.path}
+    onClick={() => addRecent(tool.path)}
+    className="group relative flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+  >
+    <button
+      onClick={(e) => onToggleFav(tool.path, e)}
+      className="absolute top-3 right-3 p-1.5 rounded-lg opacity-0 group-hover:opacity-100 hover:bg-accent transition-all"
+      title={isFav ? 'Remove from favorites' : 'Add to favorites'}
+    >
+      <Heart className={`h-4 w-4 ${isFav ? 'fill-tool-rose text-tool-rose' : 'text-muted-foreground'}`} />
+    </button>
+    <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${tool.color}`}>
+      <tool.icon className="h-5 w-5" />
+    </div>
+    <h3 className="font-semibold text-foreground">{t(tool.titleKey)}</h3>
+    <p className="mt-1 flex-1 text-sm text-muted-foreground">{t(tool.descKey)}</p>
+    <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+      {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
+    </span>
+  </Link>
+);
 
 export default Index;

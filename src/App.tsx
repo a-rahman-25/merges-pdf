@@ -188,6 +188,7 @@ const AnimatedRoutes = () => {
 };
 
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
+const CommandPalette = lazy(() => import("./components/CommandPalette"));
 
 const App = () => (
   <I18nProvider>
@@ -201,6 +202,9 @@ const App = () => (
           </Suspense>
           <Suspense fallback={null}>
             <PWAInstallPrompt />
+          </Suspense>
+          <Suspense fallback={null}>
+            <CommandPalette />
           </Suspense>
         </BrowserRouter>
       </TooltipProvider>

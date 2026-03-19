@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code, ImageIcon, FormInput, EyeOff, Layers, BookOpen, Camera, Shield, Wrench, Bookmark, Ruler, FileSpreadsheet, FileOutput, Table2 } from 'lucide-react';
+import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code, ImageIcon, FormInput, EyeOff, Layers, BookOpen, Camera, Shield, Wrench, Bookmark, Ruler, FileSpreadsheet, FileOutput, Table2, Search } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
@@ -203,6 +203,14 @@ const Header = () => {
           ))}
 
           <div className="ml-2 flex items-center gap-2">
+            <button
+              onClick={() => window.dispatchEvent(new KeyboardEvent('keydown', { key: 'k', metaKey: true }))}
+              className="hidden lg:flex items-center gap-2 rounded-lg border border-border bg-card px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground hover:bg-accent transition-colors"
+            >
+              <Search className="h-3.5 w-3.5" />
+              <span>Search...</span>
+              <kbd className="rounded border border-border bg-muted px-1 text-[10px]">⌘K</kbd>
+            </button>
             <LanguageSwitcher />
             <ThemeToggle />
             <Button asChild size="sm" className="rounded-xl gradient-bg border-0 font-semibold">

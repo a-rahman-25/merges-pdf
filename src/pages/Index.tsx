@@ -252,10 +252,26 @@ const Index = () => {
               {t('tools.subtitle')}
             </p>
           </motion.div>
+          {/* Search bar */}
+          <div className="mx-auto mt-8 max-w-md relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <input
+              type="text"
+              value={toolSearch}
+              onChange={(e) => setToolSearch(e.target.value)}
+              placeholder={t('tools.search') || 'Search tools...'}
+              className="w-full rounded-xl border border-border bg-card pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+            />
+          </div>
           <div className="mt-14 space-y-14">
-            {toolCategories.map((category) => (
-              <div key={category.labelKey}>
-                <h3 className="text-xl font-bold text-foreground mb-6">{t(category.labelKey)}</h3>
+            {toolCategories.map((category) => {
+              const filtered = category.tools.filter(tool => {
+                if (!toolSearch.trim()) return true;
+                const q = toolSearch.toLowerCase();
+                return t(tool.titleKey).toLowerCase().includes(q) || t(tool.descKey).toLowerCase().includes(q);
+              });
+              if (filtered.length === 0) return null;
+              return (
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   {category.tools.map((tool, i) => (
                     <motion.div

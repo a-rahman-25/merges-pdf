@@ -50,6 +50,10 @@ const SvgToImage = lazy(() => import("./pages/SvgToImage"));
 const PdfToImages = lazy(() => import("./pages/PdfToImages"));
 const PdfFormFiller = lazy(() => import("./pages/PdfFormFiller"));
 const PdfRedact = lazy(() => import("./pages/PdfRedact"));
+const ExcelToPdf = lazy(() => import("./pages/ExcelToPdf"));
+const PowerPointToPdf = lazy(() => import("./pages/PowerPointToPdf"));
+const WebpageToPdf = lazy(() => import("./pages/WebpageToPdf"));
+const HeicToPdf = lazy(() => import("./pages/HeicToPdf"));
 
 const queryClient = new QueryClient();
 

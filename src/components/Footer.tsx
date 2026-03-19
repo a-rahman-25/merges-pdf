@@ -21,7 +21,7 @@ const converterLinks = [
   { to: '/word-to-pdf', key: 'tool.wordToPdf' },
   { to: '/pdf-to-excel', key: 'tool.pdfToExcel' },
   { to: '/excel-to-pdf', key: 'tool.excelToPdf' },
-  { to: '/powerpoint-to-pdf', key: 'tool.pptToPdf' },
+  { to: '/powerpoint-to-pdf', key: 'tool.pptxToPdf' },
   { to: '/image-to-pdf', key: 'tool.imageToPdf' },
   { to: '/epub-to-pdf', key: 'tool.epubToPdf' },
   { to: '/scan-to-pdf', key: 'tool.scanToPdf' },

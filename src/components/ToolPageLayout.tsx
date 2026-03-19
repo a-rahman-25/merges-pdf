@@ -7,7 +7,7 @@ import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
 import { useI18n } from '@/hooks/useI18n';
 
-type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages' | 'pdf-signature' | 'crop-pages' | 'pdf-metadata' | 'merge-images' | 'pdf-to-images' | 'form-filler' | 'redact' | 'repair-pdf' | 'pdf-bookmarks' | 'page-size';
+type TabId = 'merge' | 'split' | 'compress' | 'convert' | 'rotate' | 'bg-remover' | 'watermark-remover' | 'encrypt' | 'delete-pages' | 'extract-pages' | 'add-watermark' | 'pdf-to-word' | 'word-to-pdf' | 'ai-summarize' | 'ai-translate' | 'ai-qa' | 'batch' | 'grayscale' | 'page-numbers' | 'flatten' | 'unlock' | 'image-to-pdf' | 'reorder-pages' | 'pdf-signature' | 'crop-pages' | 'pdf-metadata' | 'merge-images' | 'pdf-to-images' | 'form-filler' | 'redact' | 'repair-pdf' | 'pdf-bookmarks' | 'page-size' | 'epub-to-pdf' | 'html-to-pdf' | 'pdf-a' | 'scan-to-pdf' | 'pdf-overlay';
 
 interface TabItem {
   id: TabId;

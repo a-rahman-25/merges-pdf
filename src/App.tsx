@@ -58,6 +58,11 @@ const RepairPdf = lazy(() => import("./pages/RepairPdf"));
 const PdfBookmarks = lazy(() => import("./pages/PdfBookmarks"));
 const PageSize = lazy(() => import("./pages/PageSize"));
 const PdfToExcel = lazy(() => import("./pages/PdfToExcel"));
+const EpubToPdf = lazy(() => import("./pages/EpubToPdf"));
+const HtmlToPdf = lazy(() => import("./pages/HtmlToPdf"));
+const PdfA = lazy(() => import("./pages/PdfA"));
+const ScanToPdf = lazy(() => import("./pages/ScanToPdf"));
+const PdfOverlay = lazy(() => import("./pages/PdfOverlay"));
 
 const queryClient = new QueryClient();
 
@@ -123,6 +128,11 @@ const AnimatedRoutes = () => {
         <Route path="/repair-pdf" element={<RepairPdf />} />
         <Route path="/pdf-bookmarks" element={<PdfBookmarks />} />
         <Route path="/page-size" element={<PageSize />} />
+        <Route path="/epub-to-pdf" element={<EpubToPdf />} />
+        <Route path="/html-to-pdf" element={<HtmlToPdf />} />
+        <Route path="/pdf-a" element={<PdfA />} />
+        <Route path="/scan-to-pdf" element={<ScanToPdf />} />
+        <Route path="/pdf-overlay" element={<PdfOverlay />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

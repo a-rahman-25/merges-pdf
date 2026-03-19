@@ -1036,6 +1036,40 @@ const faqData: Record<string, FaqsByLang> = {
       { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
     ],
   },
+  epubToPdf: {
+    en: [
+      { q: 'What is an EPUB file?', a: 'EPUB is a popular e-book format used by most e-readers (except Kindle). This tool converts EPUB files to PDF while preserving chapters and reading order.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your files never leave your device.' },
+      { q: 'Will images from the EPUB be included?', a: 'Currently the tool extracts and renders text content. Complex layouts and embedded images may be simplified.' },
+    ],
+  },
+  htmlToPdf: {
+    en: [
+      { q: 'How do I convert HTML to PDF?', a: 'Paste your HTML code or upload an HTML file, then click "Convert to PDF". The tool renders the structured content into a PDF document.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser.' },
+    ],
+  },
+  pdfA: {
+    en: [
+      { q: 'What is PDF/A?', a: 'PDF/A is an ISO-standardized version of PDF designed for long-term digital preservation of documents. It ensures the document can be reproduced exactly the same way in the future.' },
+      { q: 'What changes does the conversion make?', a: 'The tool adds required metadata (title, author, dates), embeds fonts, and sets PDF/A identification markers for archival compliance.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser.' },
+    ],
+  },
+  scanToPdf: {
+    en: [
+      { q: 'Can I use my phone camera?', a: 'Yes! On mobile devices, the "Take Photo" button opens your camera directly. You can also upload existing images from your gallery.' },
+      { q: 'What image formats are supported?', a: 'JPG and PNG images are supported. Each image becomes one page in the resulting PDF, scaled to fit A4 size.' },
+      { q: 'Are my photos uploaded to a server?', a: 'No. All processing happens 100% in your browser. Your photos never leave your device.' },
+    ],
+  },
+  pdfOverlay: {
+    en: [
+      { q: 'What is PDF overlay?', a: 'PDF overlay places one PDF on top of another — useful for adding letterheads, stamps, watermarks, or backgrounds to existing documents.' },
+      { q: 'What is the difference between foreground and background?', a: 'Foreground places the overlay on top of the base PDF. Background places it behind, useful for adding letterhead templates.' },
+      { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser.' },
+    ],
+  },
 };
 
 export function getTranslatedFaqs(toolId: string, lang: string): FaqItem[] {

@@ -7,7 +7,8 @@ import {
   ChevronRight, Star, Brain, Languages, Droplets, Trash2, FileOutput,
   Hash, Unlock, Palette, MessageSquare, ChevronLeft, Eye, Recycle,
   Code, Sparkles, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
-  FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2
+  FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
+  BookMarked, Camera
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
@@ -62,6 +63,11 @@ const toolCategories = [
       { icon: Presentation, titleKey: 'tool.pptxToPdf', descKey: 'tool.pptxToPdf.desc', path: '/pptx-to-pdf', color: 'bg-tool-blue/15 text-tool-blue' },
       { icon: Globe, titleKey: 'tool.webpageToPdf', descKey: 'tool.webpageToPdf.desc', path: '/webpage-to-pdf', color: 'bg-tool-indigo/15 text-tool-indigo' },
       { icon: Image, titleKey: 'tool.heicToPdf', descKey: 'tool.heicToPdf.desc', path: '/heic-to-pdf', color: 'bg-tool-rose/15 text-tool-rose' },
+      { icon: BookMarked, titleKey: 'tool.epubToPdf', descKey: 'tool.epubToPdf.desc', path: '/epub-to-pdf', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: Code, titleKey: 'tool.htmlToPdf', descKey: 'tool.htmlToPdf.desc', path: '/html-to-pdf', color: 'bg-tool-lime/15 text-tool-lime' },
+      { icon: Shield, titleKey: 'tool.pdfA', descKey: 'tool.pdfA.desc', path: '/pdf-a', color: 'bg-tool-blue/15 text-tool-blue' },
+      { icon: Camera, titleKey: 'tool.scanToPdf', descKey: 'tool.scanToPdf.desc', path: '/scan-to-pdf', color: 'bg-tool-amber/15 text-tool-amber' },
+      { icon: Layers, titleKey: 'tool.pdfOverlay', descKey: 'tool.pdfOverlay.desc', path: '/pdf-overlay', color: 'bg-tool-indigo/15 text-tool-indigo' },
     ],
   },
   {

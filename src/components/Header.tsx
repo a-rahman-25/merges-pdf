@@ -220,9 +220,9 @@ const Header = () => {
                 <Menu className="h-5 w-5 text-foreground" />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 pt-12">
+            <SheetContent side="right" className="w-72 pt-12 overflow-y-auto">
               <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-              <nav className="flex flex-col gap-1">
+              <nav className="flex flex-col gap-1 pb-6">
                 {navLinks.map((link) => (
                   <Link
                     key={link.to}

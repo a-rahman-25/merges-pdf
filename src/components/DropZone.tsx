@@ -10,7 +10,7 @@ interface DropZoneProps {
   sublabel?: string;
 }
 
-const DropZone = ({ onFiles, disabled }: DropZoneProps) => {
+const DropZone = ({ onFiles, disabled, accept = '.pdf', label, sublabel }: DropZoneProps) => {
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 

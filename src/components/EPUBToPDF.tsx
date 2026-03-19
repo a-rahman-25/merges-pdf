@@ -168,7 +168,7 @@ const EPUBToPDF = () => {
       <AnimatePresence mode="wait">
         {!file ? (
           <motion.div key="drop" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            <DropZone onFiles={addFile} />
+            <DropZone onFiles={addFile} accept=".epub" label="Drag & drop EPUB files here" sublabel="or click to browse · .epub files supported" />
           </motion.div>
         ) : !result ? (
           <motion.div key="process" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">

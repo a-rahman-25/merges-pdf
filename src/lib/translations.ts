@@ -1645,7 +1645,7 @@ const vi: T = {
   'security.title': 'Bảo mật & Quyền riêng tư', 'security.subtitle': 'Tệp của bạn, thiết bị của bạn, quyền riêng tư của bạn.',
   'faq.title': 'Câu hỏi thường gặp',
   'cta.title': 'Sẵn sàng? Không đăng ký. Không phí. Công cụ PDF mạnh mẽ.', 'cta.subtitle': 'Tham gia hàng triệu người dùng.', 'cta.button': 'Bắt đầu — Miễn phí',
-  'footer.desc': 'Bộ PDF ưu tiên quyền riêng tư.', 'footer.pdftools': 'Công cụ PDF', 'footer.aitools': 'Công cụ AI', 'footer.company': 'Công ty',
+  'footer.desc': 'Bộ PDF ưu tiên quyền riêng tư.', 'footer.pdftools': 'Công cụ PDF', 'footer.converters': 'Bộ chuyển đổi', 'footer.aitools': 'Công cụ AI', 'footer.company': 'Công ty',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tất cả tệp được xử lý cục bộ.',
   'footer.privacy': 'Chính sách bảo mật', 'footer.terms': 'Điều khoản dịch vụ',
   'cat.pdftools': 'Công cụ PDF', 'cat.converters': 'Chuyển đổi', 'cat.aitools': 'Công cụ AI',

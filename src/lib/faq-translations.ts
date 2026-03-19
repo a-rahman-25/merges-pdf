@@ -1016,7 +1016,6 @@ const faqData: Record<string, FaqsByLang> = {
       { q: '¿Se suben mis archivos a un servidor?', a: 'No. Todo el procesamiento ocurre 100% en tu navegador.' },
     ],
   },
-};
   pdfToExcel: {
     en: [
       { q: 'How does PDF to Excel extraction work?', a: 'The tool reads each page of your PDF, groups text by position into rows and columns, and exports the structured data as an Excel spreadsheet or CSV file.' },

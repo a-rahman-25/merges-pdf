@@ -86,6 +86,7 @@ const en: T = {
   'footer.privacy': 'Privacy Policy',
   'footer.terms': 'Terms of Service',
   // Tool categories
+  'cat.all': 'All Tools',
   'cat.pdftools': 'PDF Tools',
   'cat.converters': 'Converters',
   'cat.aitools': 'AI Tools',

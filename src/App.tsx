@@ -58,6 +58,11 @@ const RepairPdf = lazy(() => import("./pages/RepairPdf"));
 const PdfBookmarks = lazy(() => import("./pages/PdfBookmarks"));
 const PageSize = lazy(() => import("./pages/PageSize"));
 const PdfToExcel = lazy(() => import("./pages/PdfToExcel"));
+const EpubToPdf = lazy(() => import("./pages/EpubToPdf"));
+const HtmlToPdf = lazy(() => import("./pages/HtmlToPdf"));
+const PdfA = lazy(() => import("./pages/PdfA"));
+const ScanToPdf = lazy(() => import("./pages/ScanToPdf"));
+const PdfOverlay = lazy(() => import("./pages/PdfOverlay"));
 
 const queryClient = new QueryClient();
 

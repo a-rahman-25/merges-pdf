@@ -158,6 +158,7 @@ function StatItem({ stat }: { stat: typeof statsConfig[0] }) {
 
 const Index = () => {
   const [testimonialIdx, setTestimonialIdx] = useState(0);
+  const [toolSearch, setToolSearch] = useState('');
   const visibleCount = 3;
   const maxIdx = testimonialKeys.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);

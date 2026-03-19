@@ -74,7 +74,7 @@ const ToolSidebar = () => {
           const hasActive = tools.some(t => location.pathname === t.path);
 
           return (
-            <SidebarGroup key={cat.id} defaultOpen={hasActive}>
+            <SidebarGroup key={cat.id}>
               <SidebarGroupLabel className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {!collapsed && t(cat.labelKey)}
               </SidebarGroupLabel>

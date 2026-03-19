@@ -114,7 +114,7 @@ const PDFRepair = () => {
             </div>
             <PDFPreviewDownload
               pdfData={result.data}
-              filename={file.name.replace(/\.pdf$/i, '_repaired.pdf')}
+              defaultFilename={file.name.replace(/\.pdf$/i, '_repaired.pdf')}
               onDownload={triggerDownload}
             />
             <Button onClick={reset} variant="outline" size="lg" className="w-full gap-2 rounded-xl">

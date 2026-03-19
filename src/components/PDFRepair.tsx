@@ -76,7 +76,7 @@ const PDFRepair = () => {
       <AnimatePresence mode="wait">
         {!file ? (
           <motion.div key="drop" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}>
-            <DropZone onFiles={addFile} accept=".pdf" label="Drop a corrupted PDF here" subLabel="or click to browse" />
+            <DropZone onFiles={addFile} />
           </motion.div>
         ) : !result ? (
           <motion.div key="process" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">

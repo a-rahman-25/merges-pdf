@@ -140,11 +140,13 @@ const MergeImagesComponent = () => {
     }
   };
 
+  const ext = outputFormat === 'jpeg' ? 'jpg' : outputFormat;
+
   const downloadResult = () => {
     if (!resultUrl) return;
     const a = document.createElement('a');
     a.href = resultUrl;
-    a.download = 'merged-image.png';
+    a.download = `merged-image.${ext}`;
     a.click();
     toast.success('Downloaded!');
   };

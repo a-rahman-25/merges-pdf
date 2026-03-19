@@ -77,6 +77,7 @@ const en: T = {
   // Footer
   'footer.desc': 'The privacy-first PDF suite. Every tool runs in your browser — files never leave your device.',
   'footer.pdftools': 'PDF Tools',
+  'footer.converters': 'Converters',
   'footer.aitools': 'AI Tools',
   'footer.company': 'Company',
   'footer.copyright': '© {year} MergesPDF · Privacy Policy · GDPR · Open Source',

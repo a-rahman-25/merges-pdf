@@ -19,8 +19,9 @@ const DropZone = ({ onFiles, disabled, accept = '.pdf', label, sublabel }: DropZ
       e.preventDefault();
       setDragOver(false);
       if (disabled) return;
+      const extensions = accept.split(',').map(a => a.trim().toLowerCase());
       const files = Array.from(e.dataTransfer.files).filter(
-        (f) => f.type === 'application/pdf'
+        (f) => extensions.some(ext => f.name.toLowerCase().endsWith(ext) || ext === '*')
       );
       if (files.length) onFiles(files);
     },

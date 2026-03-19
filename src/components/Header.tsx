@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code, ImageIcon, FormInput, EyeOff } from 'lucide-react';
+import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code, ImageIcon, FormInput, EyeOff, Layers, BookOpen, Camera, Shield, Wrench, Bookmark, Ruler, FileSpreadsheet, FileOutput, Table2 } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
@@ -25,6 +25,10 @@ const toolGroups = [
       { to: '/pdf-to-images', label: 'PDF to Images', icon: ImageIcon },
       { to: '/pdf-form-filler', label: 'Fill Forms', icon: FormInput },
       { to: '/pdf-redact', label: 'Redact PDF', icon: EyeOff },
+      { to: '/pdf-overlay', label: 'PDF Overlay', icon: Layers },
+      { to: '/pdf-bookmarks', label: 'Bookmarks', icon: Bookmark },
+      { to: '/repair-pdf', label: 'Repair PDF', icon: Wrench },
+      { to: '/page-size', label: 'Page Size', icon: Ruler },
     ],
   },
   {
@@ -35,10 +39,18 @@ const toolGroups = [
       { to: '/convert', label: 'Convert Files', icon: ArrowRightLeft },
       { to: '/pdf-to-word', label: 'PDF to Word', icon: FileText },
       { to: '/word-to-pdf', label: 'Word to PDF', icon: FileText },
+      { to: '/pdf-to-excel', label: 'PDF to Excel', icon: Table2 },
+      { to: '/excel-to-pdf', label: 'Excel to PDF', icon: FileSpreadsheet },
+      { to: '/powerpoint-to-pdf', label: 'PowerPoint to PDF', icon: FileOutput },
       { to: '/image-to-pdf', label: 'Image to PDF', icon: Image },
+      { to: '/epub-to-pdf', label: 'EPUB to PDF', icon: BookOpen },
+      { to: '/scan-to-pdf', label: 'Scan to PDF', icon: Camera },
+      { to: '/pdf-a', label: 'PDF/A Converter', icon: Shield },
+      { to: '/heic-to-pdf', label: 'HEIC to PDF', icon: ImageIcon },
       { to: '/merge-images', label: 'Merge Images', icon: Combine },
       { to: '/bg-remover', label: 'Remove Background', icon: Eraser },
       { to: '/svg-to-image', label: 'SVG to Image', icon: Code },
+      { to: '/html-to-pdf', label: 'HTML to PDF', icon: Code },
     ],
   },
 ];
@@ -115,7 +127,7 @@ const Header = () => {
             </button>
 
             {toolsOpen && (
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[580px] rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[640px] max-h-[70vh] overflow-y-auto rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                 <div className="flex">
                   {toolGroups.map((group) => (
                     <div key={group.labelKey} className="flex-1 p-3">

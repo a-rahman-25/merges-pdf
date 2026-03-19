@@ -9,9 +9,25 @@ const toolLinks = [
   { to: '/rotate', key: 'tool.rotate' },
   { to: '/pdf-signature', key: 'tool.sign' },
   { to: '/encrypt', key: 'tool.encrypt' },
+  { to: '/pdf-overlay', key: 'tool.pdfOverlay' },
+  { to: '/pdf-bookmarks', key: 'tool.bookmarks' },
+  { to: '/repair-pdf', key: 'tool.repair' },
+  { to: '/page-size', key: 'tool.pageSize' },
+  { to: '/pdf-redact', key: 'tool.redact' },
+];
+
+const converterLinks = [
   { to: '/pdf-to-word', key: 'tool.pdfToWord' },
   { to: '/word-to-pdf', key: 'tool.wordToPdf' },
+  { to: '/pdf-to-excel', key: 'tool.pdfToExcel' },
+  { to: '/excel-to-pdf', key: 'tool.excelToPdf' },
+  { to: '/powerpoint-to-pdf', key: 'tool.pptxToPdf' },
   { to: '/image-to-pdf', key: 'tool.imageToPdf' },
+  { to: '/epub-to-pdf', key: 'tool.epubToPdf' },
+  { to: '/scan-to-pdf', key: 'tool.scanToPdf' },
+  { to: '/pdf-a', key: 'tool.pdfA' },
+  { to: '/heic-to-pdf', key: 'tool.heicToPdf' },
+  { to: '/html-to-pdf', key: 'tool.htmlToPdf' },
   { to: '/bg-remover', key: 'tool.bgRemove' },
 ];
 
@@ -36,7 +52,7 @@ const Footer = () => {
   return (
     <footer className="border-t border-border/60 bg-card/50">
       <div className="mx-auto max-w-6xl px-6 py-12">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div>
             <Link to="/" className="flex items-center gap-2.5">
@@ -71,6 +87,21 @@ const Footer = () => {
               ))}
             </ul>
           </div>
+
+          {/* Converters */}
+          <div>
+            <h4 className="text-sm font-semibold text-foreground mb-3">{t('footer.converters')}</h4>
+            <ul className="space-y-2">
+              {converterLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {t(link.key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
 
           {/* AI Tools */}
           <div>

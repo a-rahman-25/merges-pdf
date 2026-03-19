@@ -9,9 +9,25 @@ const toolLinks = [
   { to: '/rotate', key: 'tool.rotate' },
   { to: '/pdf-signature', key: 'tool.sign' },
   { to: '/encrypt', key: 'tool.encrypt' },
+  { to: '/pdf-overlay', key: 'tool.pdfOverlay' },
+  { to: '/pdf-bookmarks', key: 'tool.pdfBookmarks' },
+  { to: '/repair-pdf', key: 'tool.repairPdf' },
+  { to: '/page-size', key: 'tool.pageSize' },
+  { to: '/pdf-redact', key: 'tool.redact' },
+];
+
+const converterLinks = [
   { to: '/pdf-to-word', key: 'tool.pdfToWord' },
   { to: '/word-to-pdf', key: 'tool.wordToPdf' },
+  { to: '/pdf-to-excel', key: 'tool.pdfToExcel' },
+  { to: '/excel-to-pdf', key: 'tool.excelToPdf' },
+  { to: '/powerpoint-to-pdf', key: 'tool.pptToPdf' },
   { to: '/image-to-pdf', key: 'tool.imageToPdf' },
+  { to: '/epub-to-pdf', key: 'tool.epubToPdf' },
+  { to: '/scan-to-pdf', key: 'tool.scanToPdf' },
+  { to: '/pdf-a', key: 'tool.pdfA' },
+  { to: '/heic-to-pdf', key: 'tool.heicToPdf' },
+  { to: '/html-to-pdf', key: 'tool.htmlToPdf' },
   { to: '/bg-remover', key: 'tool.bgRemove' },
 ];
 

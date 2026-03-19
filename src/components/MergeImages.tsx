@@ -33,6 +33,8 @@ const MergeImagesComponent = () => {
   const [layout, setLayout] = useState<Layout>('horizontal');
   const [gap, setGap] = useState(0);
   const [bgColor, setBgColor] = useState('#ffffff');
+  const [outputFormat, setOutputFormat] = useState<OutputFormat>('png');
+  const [quality, setQuality] = useState(92);
   const [processing, setProcessing] = useState(false);
   const [resultUrl, setResultUrl] = useState<string | null>(null);
   const dragItem = useRef<number | null>(null);

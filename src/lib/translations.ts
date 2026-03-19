@@ -63,6 +63,7 @@ const en: T = {
   'tools.title': 'All the PDF tools you need',
   'tools.subtitle': 'Every tool works instantly in your browser — no file ever touches a server.',
   'tools.trynow': 'Try now',
+  'tools.search': 'Search tools...',
   'howit.title': 'How it works',
   'howit.subtitle': 'Three simple steps — your files never leave your device.',
   'howit.step': 'Step',

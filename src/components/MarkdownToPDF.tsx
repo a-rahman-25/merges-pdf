@@ -92,7 +92,7 @@ const MarkdownToPDF = () => {
           // numbered list - keep as is
         } else if (trimmed.startsWith('> ')) {
           color = rgb(0.4, 0.4, 0.4);
-          text = `  │  ${trimmed.slice(2)}`;
+          text = `  |  ${trimmed.slice(2)}`;
         } else if (trimmed === '---' || trimmed === '***') {
           if (y < margin + 20) { page = pdf.addPage([pageW, pageH]); y = pageH - margin; }
           y -= 10;

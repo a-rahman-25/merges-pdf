@@ -63,6 +63,9 @@ const HtmlToPdf = lazy(() => import("./pages/HtmlToPdf"));
 const PdfA = lazy(() => import("./pages/PdfA"));
 const ScanToPdf = lazy(() => import("./pages/ScanToPdf"));
 const PdfOverlay = lazy(() => import("./pages/PdfOverlay"));
+const PdfComparison = lazy(() => import("./pages/PdfComparison"));
+const PdfToPowerPoint = lazy(() => import("./pages/PdfToPowerPoint"));
+const MarkdownToPdf = lazy(() => import("./pages/MarkdownToPdf"));
 
 const queryClient = new QueryClient();
 

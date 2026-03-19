@@ -51,6 +51,9 @@ const toolGroups = [
       { to: '/bg-remover', label: 'Remove Background', icon: Eraser },
       { to: '/svg-to-image', label: 'SVG to Image', icon: Code },
       { to: '/html-to-pdf', label: 'HTML to PDF', icon: Code },
+      { to: '/compare-pdf', label: 'Compare PDFs', icon: ArrowLeftRight },
+      { to: '/pdf-to-powerpoint', label: 'PDF to PowerPoint', icon: FileOutput },
+      { to: '/markdown-to-pdf', label: 'Markdown to PDF', icon: Code },
     ],
   },
 ];

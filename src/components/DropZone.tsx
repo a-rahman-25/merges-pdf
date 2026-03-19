@@ -76,10 +76,10 @@ const DropZone = ({ onFiles, disabled, accept = '.pdf', label, sublabel }: DropZ
           </div>
           <div>
             <p className="text-lg font-display font-semibold text-foreground">
-              {dragOver ? 'Drop your PDFs here' : 'Drag & drop PDFs here'}
+              {dragOver ? (label ? `Drop your files here` : 'Drop your PDFs here') : (label || 'Drag & drop PDFs here')}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              or click to browse · multiple files supported
+              {sublabel || 'or click to browse · multiple files supported'}
             </p>
           </div>
         </motion.div>

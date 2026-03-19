@@ -88,6 +88,21 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Converters */}
+          <div>
+            <h4 className="text-sm font-semibold text-foreground mb-3">{t('footer.converters')}</h4>
+            <ul className="space-y-2">
+              {converterLinks.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                    {t(link.key)}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+
           {/* AI Tools */}
           <div>
             <h4 className="text-sm font-semibold text-foreground mb-3">{t('footer.aitools')}</h4>

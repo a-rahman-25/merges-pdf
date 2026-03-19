@@ -138,7 +138,7 @@ const PDFPageResize = () => {
           <motion.div key="result" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="space-y-4">
             <PDFPreviewDownload
               pdfData={result}
-              filename={file.name.replace(/\.pdf$/i, `_${targetSize}.pdf`)}
+              defaultFilename={file.name.replace(/\.pdf$/i, `_${targetSize}.pdf`)}
               onDownload={triggerDownload}
             />
             <Button onClick={reset} variant="outline" size="lg" className="w-full gap-2 rounded-xl">

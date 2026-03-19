@@ -445,7 +445,7 @@ const ur: T = {
   'security.title': 'سیکیورٹی اور رازداری', 'security.subtitle': 'آپ کی فائلیں، آپ کا آلہ، آپ کی رازداری۔',
   'faq.title': 'اکثر پوچھے گئے سوالات',
   'cta.title': 'تیار ہیں؟ سائن اپ نہیں۔ فیس نہیں۔ طاقتور PDF ٹولز۔', 'cta.subtitle': 'لاکھوں صارفین سے جڑیں۔', 'cta.button': 'ابھی شروع کریں — مفت',
-  'footer.desc': 'پرائیویسی فرسٹ PDF سویٹ۔', 'footer.pdftools': 'PDF ٹولز', 'footer.aitools': 'AI ٹولز', 'footer.company': 'کمپنی',
+  'footer.desc': 'پرائیویسی فرسٹ PDF سویٹ۔', 'footer.pdftools': 'PDF ٹولز', 'footer.converters': 'کنورٹرز', 'footer.aitools': 'AI ٹولز', 'footer.company': 'کمپنی',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'تمام فائلیں مقامی طور پر پروسیس ہوتی ہیں۔',
   'footer.privacy': 'رازداری کی پالیسی', 'footer.terms': 'سروس کی شرائط',
   'cat.pdftools': 'PDF ٹولز', 'cat.converters': 'کنورٹرز', 'cat.aitools': 'AI ٹولز',

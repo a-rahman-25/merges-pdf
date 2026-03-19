@@ -116,7 +116,7 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-signature" element={<PdfSignature />} />
         <Route path="/crop-pages" element={<CropPages />} />
         <Route path="/pdf-metadata" element={<PdfMetadata />} />
-        <Route path="/merge-images" element={<MergeImages />} />
+        <Route path="/merge-images" element={<ImageToPdf />} />
         <Route path="/ocr-pdf" element={<OcrPdf />} />
         <Route path="/pdf-editor" element={<PdfEditor />} />
         <Route path="/svg-to-image" element={<SvgToImage />} />

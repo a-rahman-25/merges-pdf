@@ -1485,7 +1485,7 @@ const id: T = {
   'security.title': 'Keamanan & Privasi', 'security.subtitle': 'File Anda, perangkat Anda, privasi Anda.',
   'faq.title': 'Pertanyaan yang sering diajukan',
   'cta.title': 'Siap? Tanpa daftar. Tanpa biaya. Alat PDF yang kuat.', 'cta.subtitle': 'Bergabung jutaan pengguna.', 'cta.button': 'Mulai — Gratis',
-  'footer.desc': 'Suite PDF privasi utama.', 'footer.pdftools': 'Alat PDF', 'footer.aitools': 'Alat AI', 'footer.company': 'Perusahaan',
+  'footer.desc': 'Suite PDF privasi utama.', 'footer.pdftools': 'Alat PDF', 'footer.converters': 'Konverter', 'footer.aitools': 'Alat AI', 'footer.company': 'Perusahaan',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Semua file diproses secara lokal.',
   'footer.privacy': 'Kebijakan Privasi', 'footer.terms': 'Ketentuan Layanan',
   'cat.pdftools': 'Alat PDF', 'cat.converters': 'Konverter', 'cat.aitools': 'Alat AI',

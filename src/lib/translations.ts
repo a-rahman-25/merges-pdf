@@ -1725,7 +1725,7 @@ const bn: T = {
   'security.title': 'নিরাপত্তা ও গোপনীয়তা', 'security.subtitle': 'আপনার ফাইল, আপনার ডিভাইস, আপনার গোপনীয়তা।',
   'faq.title': 'সচরাচর জিজ্ঞাসা',
   'cta.title': 'প্রস্তুত? সাইন-আপ নেই। ফি নেই। শক্তিশালী PDF টুল।', 'cta.subtitle': 'লক্ষ লক্ষ ব্যবহারকারীদের সাথে যোগ দিন।', 'cta.button': 'এখনই শুরু করুন — বিনামূল্যে',
-  'footer.desc': 'গোপনীয়তা-প্রথম PDF স্যুট।', 'footer.pdftools': 'PDF টুলস', 'footer.aitools': 'AI টুলস', 'footer.company': 'কোম্পানি',
+  'footer.desc': 'গোপনীয়তা-প্রথম PDF স্যুট।', 'footer.pdftools': 'PDF টুলস', 'footer.converters': 'কনভার্টার', 'footer.aitools': 'AI টুলস', 'footer.company': 'কোম্পানি',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'সব ফাইল স্থানীয়ভাবে প্রক্রিয়াকৃত।',
   'footer.privacy': 'গোপনীয়তা নীতি', 'footer.terms': 'সেবার শর্তাবলী',
   'cat.pdftools': 'PDF টুলস', 'cat.converters': 'কনভার্টার', 'cat.aitools': 'AI টুলস',

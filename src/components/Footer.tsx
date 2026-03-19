@@ -29,6 +29,9 @@ const converterLinks = [
   { to: '/heic-to-pdf', key: 'tool.heicToPdf' },
   { to: '/html-to-pdf', key: 'tool.htmlToPdf' },
   { to: '/bg-remover', key: 'tool.bgRemove' },
+  { to: '/compare-pdf', key: 'tool.comparePdf' },
+  { to: '/pdf-to-powerpoint', key: 'tool.pdfToPpt' },
+  { to: '/markdown-to-pdf', key: 'tool.markdownToPdf' },
 ];
 
 const companyLinks = [

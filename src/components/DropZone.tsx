@@ -5,9 +5,12 @@ import { FileUp } from 'lucide-react';
 interface DropZoneProps {
   onFiles: (files: File[]) => void;
   disabled?: boolean;
+  accept?: string;
+  label?: string;
+  sublabel?: string;
 }
 
-const DropZone = ({ onFiles, disabled }: DropZoneProps) => {
+const DropZone = ({ onFiles, disabled, accept = '.pdf', label, sublabel }: DropZoneProps) => {
   const [dragOver, setDragOver] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -16,8 +19,9 @@ const DropZone = ({ onFiles, disabled }: DropZoneProps) => {
       e.preventDefault();
       setDragOver(false);
       if (disabled) return;
+      const extensions = accept.split(',').map(a => a.trim().toLowerCase());
       const files = Array.from(e.dataTransfer.files).filter(
-        (f) => f.type === 'application/pdf'
+        (f) => extensions.some(ext => f.name.toLowerCase().endsWith(ext) || ext === '*')
       );
       if (files.length) onFiles(files);
     },
@@ -54,7 +58,7 @@ const DropZone = ({ onFiles, disabled }: DropZoneProps) => {
       <input
         ref={inputRef}
         type="file"
-        accept=".pdf"
+        accept={accept}
         multiple
         onChange={handleChange}
         className="hidden"
@@ -72,10 +76,10 @@ const DropZone = ({ onFiles, disabled }: DropZoneProps) => {
           </div>
           <div>
             <p className="text-lg font-display font-semibold text-foreground">
-              {dragOver ? 'Drop your PDFs here' : 'Drag & drop PDFs here'}
+              {dragOver ? (label ? `Drop your files here` : 'Drop your PDFs here') : (label || 'Drag & drop PDFs here')}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
-              or click to browse · multiple files supported
+              {sublabel || 'or click to browse · multiple files supported'}
             </p>
           </div>
         </motion.div>

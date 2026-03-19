@@ -44,10 +44,10 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
           <ToolSidebar />
 
           <div className="flex-1 flex flex-col min-w-0">
-            {/* Sidebar trigger */}
-            <div className="flex items-center border-b border-border/40 px-4 py-2 md:hidden">
+            {/* Sidebar trigger — always visible */}
+            <div className="flex items-center border-b border-border/40 px-4 py-2">
               <SidebarTrigger />
-              <span className="ml-2 text-sm text-muted-foreground">Tools</span>
+              <span className="ml-2 text-sm text-muted-foreground md:hidden">Tools</span>
             </div>
 
             <main className="flex-1 mx-auto w-full max-w-4xl px-6 py-12 md:py-20">

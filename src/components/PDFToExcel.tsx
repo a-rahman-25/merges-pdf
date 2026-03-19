@@ -6,7 +6,7 @@ import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { formatFileSize, getPageCount } from '@/lib/pdf-utils';
 import * as pdfjsLib from 'pdfjs-dist';
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 
 // @ts-ignore
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;
@@ -40,17 +40,14 @@ const PDFToExcel = () => {
         const page = await pdf.getPage(p);
         const content = await page.getTextContent();
         
-        // Group text items by Y position to detect rows
         const yMap = new Map<number, { x: number; str: string }[]>();
         for (const item of content.items as any[]) {
           if (!item.str?.trim()) continue;
-          // Round Y to cluster nearby items into same row (tolerance ~3pt)
           const y = Math.round(item.transform[5] / 3) * 3;
           if (!yMap.has(y)) yMap.set(y, []);
           yMap.get(y)!.push({ x: item.transform[4], str: item.str.trim() });
         }
 
-        // Sort rows top-to-bottom, cells left-to-right
         const sortedYs = [...yMap.keys()].sort((a, b) => b - a);
         for (const y of sortedYs) {
           const cells = yMap.get(y)!.sort((a, b) => a.x - b.x);
@@ -72,9 +69,8 @@ const PDFToExcel = () => {
     }
   };
 
-  const handleDownload = (format: 'xlsx' | 'csv') => {
+  const handleDownload = async (format: 'xlsx' | 'csv') => {
     if (rows.length === 0) return;
-    // Normalize column count
     const maxCols = Math.max(...rows.map(r => r.length));
     const normalized = rows.map(r => {
       const padded = [...r];
@@ -82,15 +78,29 @@ const PDFToExcel = () => {
       return padded;
     });
 
-    const ws = XLSX.utils.aoa_to_sheet(normalized);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Extracted Data');
-
     const baseName = file?.name.replace(/\.pdf$/i, '') || 'extracted';
+
     if (format === 'xlsx') {
-      XLSX.writeFile(wb, `${baseName}.xlsx`);
+      const workbook = new ExcelJS.Workbook();
+      const sheet = workbook.addWorksheet('Extracted Data');
+      normalized.forEach(row => sheet.addRow(row));
+      const buffer = await workbook.xlsx.writeBuffer();
+      const blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${baseName}.xlsx`;
+      a.click();
+      URL.revokeObjectURL(url);
     } else {
-      XLSX.writeFile(wb, `${baseName}.csv`, { bookType: 'csv' });
+      const csvContent = normalized.map(row => row.map(cell => `"${cell.replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${baseName}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
     }
     toast.success(`Downloaded as ${format.toUpperCase()}!`);
   };

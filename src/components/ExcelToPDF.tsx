@@ -135,7 +135,7 @@ const ExcelToPDF = () => {
         </div>
       ) : (
         <>
-          <PDFPreviewDownload pdfBytes={result.data} pageCount={result.pageCount} defaultFilename="spreadsheet.pdf" onDownload={triggerDownload} onReset={reset} />
+          <PDFPreviewDownload pdfData={result.data} defaultFilename="spreadsheet.pdf" onDownload={triggerDownload} />
           <ReviewDialog open={showReview} onSubmit={handleSubmit} onSkip={handleSkip} toolName="Excel to PDF" />
         </>
       )}

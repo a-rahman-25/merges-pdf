@@ -129,7 +129,7 @@ const HeicConverter = () => {
         </div>
       ) : result ? (
         <>
-          <PDFPreviewDownload pdfBytes={result.data} pageCount={result.pageCount} defaultFilename="heic-converted.pdf" onDownload={triggerDownload} onReset={reset} />
+          <PDFPreviewDownload pdfData={result.data} defaultFilename="heic-converted.pdf" onDownload={triggerDownload} />
           <ReviewDialog open={showReview} onSubmit={handleSubmit} onSkip={handleSkip} toolName="HEIC Converter" />
         </>
       ) : (

@@ -127,7 +127,7 @@ const Header = () => {
             </button>
 
             {toolsOpen && (
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[580px] rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[640px] max-h-[70vh] overflow-y-auto rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                 <div className="flex">
                   {toolGroups.map((group) => (
                     <div key={group.labelKey} className="flex-1 p-3">

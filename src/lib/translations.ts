@@ -525,7 +525,7 @@ const hi: T = {
   'security.title': 'सुरक्षा और गोपनीयता', 'security.subtitle': 'आपकी फ़ाइलें, आपका डिवाइस, आपकी गोपनीयता।',
   'faq.title': 'अक्सर पूछे जाने वाले प्रश्न',
   'cta.title': 'तैयार हैं? साइन-अप नहीं। शुल्क नहीं। शक्तिशाली PDF टूल्स।', 'cta.subtitle': 'लाखों उपयोगकर्ताओं से जुड़ें।', 'cta.button': 'अभी शुरू करें — मुफ्त',
-  'footer.desc': 'प्राइवेसी-फर्स्ट PDF सूट।', 'footer.pdftools': 'PDF टूल्स', 'footer.aitools': 'AI टूल्स', 'footer.company': 'कंपनी',
+  'footer.desc': 'प्राइवेसी-फर्स्ट PDF सूट।', 'footer.pdftools': 'PDF टूल्स', 'footer.converters': 'कन्वर्टर्स', 'footer.aitools': 'AI टूल्स', 'footer.company': 'कंपनी',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'सभी फ़ाइलें स्थानीय रूप से प्रोसेस होती हैं।',
   'footer.privacy': 'गोपनीयता नीति', 'footer.terms': 'सेवा की शर्तें',
   'cat.pdftools': 'PDF टूल्स', 'cat.converters': 'कनवर्टर', 'cat.aitools': 'AI टूल्स',

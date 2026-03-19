@@ -284,7 +284,7 @@ const ar: T = {
   'security.title': 'الأمان والخصوصية', 'security.subtitle': 'ملفاتك، جهازك، خصوصيتك. دائماً.',
   'faq.title': 'الأسئلة الشائعة',
   'cta.title': 'مستعد؟ بدون تسجيل. بدون رسوم. أدوات PDF قوية.', 'cta.subtitle': 'انضم لملايين المستخدمين.', 'cta.button': 'ابدأ الآن — مجاناً',
-  'footer.desc': 'مجموعة PDF التي تضع الخصوصية أولاً.', 'footer.pdftools': 'أدوات PDF', 'footer.aitools': 'أدوات الذكاء الاصطناعي', 'footer.company': 'الشركة',
+  'footer.desc': 'مجموعة PDF التي تضع الخصوصية أولاً.', 'footer.pdftools': 'أدوات PDF', 'footer.converters': 'محولات', 'footer.aitools': 'أدوات الذكاء الاصطناعي', 'footer.company': 'الشركة',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'جميع الملفات تُعالج محلياً وتُحذف تلقائياً.',
   'footer.privacy': 'سياسة الخصوصية', 'footer.terms': 'شروط الخدمة',
   'cat.pdftools': 'أدوات PDF', 'cat.converters': 'المحولات', 'cat.aitools': 'أدوات الذكاء الاصطناعي',

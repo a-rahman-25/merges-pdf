@@ -55,7 +55,7 @@ const tabGroups: TabGroup[] = [
       { id: 'bg-remover', labelKey: 'tool.bgRemove', icon: Eraser, path: '/bg-remover' },
       { id: 'watermark-remover', labelKey: 'tool.wmRemove', icon: Layers, path: '/watermark-remover' },
       { id: 'image-to-pdf', labelKey: 'tool.imageToPdf', icon: ArrowRightLeft, path: '/image-to-pdf' },
-      { id: 'merge-images', labelKey: 'tool.mergeImages', icon: Combine, path: '/merge-images' },
+      
     ],
   },
   {

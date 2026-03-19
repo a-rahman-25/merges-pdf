@@ -123,7 +123,7 @@ const en: T = {
   'tool.bgRemove': 'Remove Background', 'tool.bgRemove.desc': 'AI-powered background removal.',
   'tool.wmRemove': 'Remove Watermark', 'tool.wmRemove.desc': 'Strip watermarks from PDF files.',
   'tool.imageToPdf': 'Image to PDF', 'tool.imageToPdf.desc': 'Convert images into a single PDF.',
-  'tool.mergeImages': 'Merge Images', 'tool.mergeImages.desc': 'Merge multiple images into one PDF.',
+  'tool.mergeImages': 'Merge Images', 'tool.mergeImages.desc': 'Combine multiple images into one single image.',
   'tool.svgToImage': 'SVG to Image', 'tool.svgToImage.desc': 'Convert SVG to PNG, JPG, WEBP or BMP.',
   'tool.excelToPdf': 'Excel to PDF', 'tool.excelToPdf.desc': 'Convert Excel spreadsheets to PDF.',
   'tool.pdfToExcel': 'PDF to Excel', 'tool.pdfToExcel.desc': 'Extract tables from PDF to Excel.',

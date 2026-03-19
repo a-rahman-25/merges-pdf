@@ -248,7 +248,7 @@ const MergeImagesComponent = () => {
               </div>
             </div>
             <Button onClick={downloadResult} size="lg" className="w-full gap-2 text-base font-semibold h-14 rounded-xl">
-              <Download className="h-5 w-5" /> Download PNG
+              <Download className="h-5 w-5" /> Download {ext.toUpperCase()}
             </Button>
             <Button onClick={reset} variant="outline" size="lg" className="w-full gap-2 rounded-xl">
               <RotateCcw className="h-4 w-4" /> Merge More Images

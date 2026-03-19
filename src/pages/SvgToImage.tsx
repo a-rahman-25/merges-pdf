@@ -15,7 +15,6 @@ const SvgToImage = () => {
         title="SVG to Image Converter — Free Online PNG, JPG, WEBP | MergesPDF"
         description="Convert SVG files to PNG, JPG, WEBP or BMP instantly in your browser. Choose scale, format, and download — 100% private, no uploads."
         path="/svg-to-image"
-        faqs={faqs}
       />
       <Header />
       <main className="mx-auto max-w-3xl px-6 py-12">

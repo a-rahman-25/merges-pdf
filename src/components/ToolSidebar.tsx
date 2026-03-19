@@ -42,7 +42,7 @@ const ToolSidebar = () => {
       <SidebarContent className="pt-2">
         {/* Favorites section */}
         {favTools.length > 0 && (
-          <SidebarGroup defaultOpen>
+          <SidebarGroup>
             <SidebarGroupLabel className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
               {!collapsed && '★ Favorites'}
             </SidebarGroupLabel>

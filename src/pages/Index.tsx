@@ -7,7 +7,8 @@ import {
   ChevronRight, Star, Brain, Languages, Droplets, Trash2, FileOutput,
   Hash, Unlock, Palette, MessageSquare, ChevronLeft, Eye, Recycle,
   Code, Sparkles, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
-  FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2
+  FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
+  BookMarked, Camera
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';

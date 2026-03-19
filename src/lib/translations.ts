@@ -1085,7 +1085,7 @@ const ko: T = {
   'security.title': '보안 및 개인정보', 'security.subtitle': '당신의 파일, 당신의 기기, 당신의 프라이버시.',
   'faq.title': '자주 묻는 질문',
   'cta.title': '준비되셨나요? 가입 불필요. 무료. 강력한 PDF 도구.', 'cta.subtitle': '수백만 사용자와 함께하세요.', 'cta.button': '지금 시작 — 무료',
-  'footer.desc': '프라이버시 퍼스트 PDF 도구.', 'footer.pdftools': 'PDF 도구', 'footer.aitools': 'AI 도구', 'footer.company': '회사',
+  'footer.desc': '프라이버시 퍼스트 PDF 도구.', 'footer.pdftools': 'PDF 도구', 'footer.converters': '변환기', 'footer.aitools': 'AI 도구', 'footer.company': '회사',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': '모든 파일은 로컬에서 처리됩니다.',
   'footer.privacy': '개인정보 처리방침', 'footer.terms': '이용약관',
   'cat.pdftools': 'PDF 도구', 'cat.converters': '변환기', 'cat.aitools': 'AI 도구',

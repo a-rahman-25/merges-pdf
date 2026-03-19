@@ -1165,7 +1165,7 @@ const tr: T = {
   'security.title': 'Güvenlik ve Gizlilik', 'security.subtitle': 'Dosyalarınız, cihazınız, gizliliğiniz.',
   'faq.title': 'Sık sorulan sorular',
   'cta.title': 'Hazır mısınız? Kayıt yok. Ücret yok. Güçlü PDF araçları.', 'cta.subtitle': 'Milyonlarca kullanıcıya katılın.', 'cta.button': 'Şimdi başla — Ücretsiz',
-  'footer.desc': 'Gizlilik öncelikli PDF paketi.', 'footer.pdftools': 'PDF Araçları', 'footer.aitools': 'AI Araçları', 'footer.company': 'Şirket',
+  'footer.desc': 'Gizlilik öncelikli PDF paketi.', 'footer.pdftools': 'PDF Araçları', 'footer.converters': 'Dönüştürücüler', 'footer.aitools': 'AI Araçları', 'footer.company': 'Şirket',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tüm dosyalar yerel olarak işlenir.',
   'footer.privacy': 'Gizlilik Politikası', 'footer.terms': 'Kullanım Şartları',
   'cat.pdftools': 'PDF Araçları', 'cat.converters': 'Dönüştürücüler', 'cat.aitools': 'AI Araçları',

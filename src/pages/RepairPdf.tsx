@@ -8,7 +8,7 @@ import { tt } from '@/lib/tool-translations';
 const RepairPdf = () => {
   const { lang } = useI18n();
   return (
-    <ToolPageLayout activeTab="pdf-tools">
+    <ToolPageLayout activeTab="repair-pdf">
       <SEOHead
         title="Repair PDF — Fix Corrupted PDF Files Free | MergesPDF"
         description="Repair damaged or corrupted PDF files for free. Re-index pages, clean metadata, rebuild cross-references — 100% in-browser."

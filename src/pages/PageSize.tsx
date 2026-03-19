@@ -8,7 +8,7 @@ import { tt } from '@/lib/tool-translations';
 const PageSize = () => {
   const { lang } = useI18n();
   return (
-    <ToolPageLayout activeTab="pdf-tools">
+    <ToolPageLayout activeTab="page-size">
       <SEOHead
         title="Change PDF Page Size — Resize Pages Free | MergesPDF"
         description="Resize PDF pages to A4, Letter, A3, Legal, and more. 100% in-browser, private, no uploads."

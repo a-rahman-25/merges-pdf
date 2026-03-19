@@ -8,7 +8,7 @@ import { tt } from '@/lib/tool-translations';
 const PdfBookmarks = () => {
   const { lang } = useI18n();
   return (
-    <ToolPageLayout activeTab="pdf-tools">
+    <ToolPageLayout activeTab="pdf-bookmarks">
       <SEOHead
         title="PDF Bookmarks — Add Table of Contents Free | MergesPDF"
         description="Add bookmarks and table of contents to PDF files for free. 100% in-browser, private, no uploads."

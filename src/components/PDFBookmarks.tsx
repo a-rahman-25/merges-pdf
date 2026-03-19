@@ -162,7 +162,7 @@ const PDFBookmarks = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <ReviewDialog open={showReview} onSubmit={handleSubmit} onSkip={handleSkip} />
+      <ReviewDialog open={showReview} onSubmit={handleSubmit} onSkip={handleSkip} toolName="PDF Bookmarks" />
     </div>
   );
 };

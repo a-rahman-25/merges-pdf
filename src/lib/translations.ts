@@ -1325,7 +1325,7 @@ const it: T = {
   'security.title': 'Sicurezza e privacy', 'security.subtitle': 'I tuoi file, il tuo dispositivo, la tua privacy.',
   'faq.title': 'Domande frequenti',
   'cta.title': 'Pronto? Senza registrazione. Senza costi. Strumenti PDF potenti.', 'cta.subtitle': 'Unisciti a milioni di utenti.', 'cta.button': 'Inizia — È gratuito',
-  'footer.desc': 'Suite PDF privacy-first.', 'footer.pdftools': 'Strumenti PDF', 'footer.aitools': 'Strumenti AI', 'footer.company': 'Azienda',
+  'footer.desc': 'Suite PDF privacy-first.', 'footer.pdftools': 'Strumenti PDF', 'footer.converters': 'Convertitori', 'footer.aitools': 'Strumenti AI', 'footer.company': 'Azienda',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Tutti i file vengono elaborati localmente.',
   'footer.privacy': 'Informativa sulla privacy', 'footer.terms': 'Termini di servizio',
   'cat.pdftools': 'Strumenti PDF', 'cat.converters': 'Convertitori', 'cat.aitools': 'Strumenti AI',

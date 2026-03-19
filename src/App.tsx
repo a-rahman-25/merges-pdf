@@ -57,6 +57,7 @@ const HeicToPdf = lazy(() => import("./pages/HeicToPdf"));
 const RepairPdf = lazy(() => import("./pages/RepairPdf"));
 const PdfBookmarks = lazy(() => import("./pages/PdfBookmarks"));
 const PageSize = lazy(() => import("./pages/PageSize"));
+const PdfToExcel = lazy(() => import("./pages/PdfToExcel"));
 
 const queryClient = new QueryClient();
 

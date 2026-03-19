@@ -8,7 +8,7 @@ import {
   Hash, Unlock, Palette, MessageSquare, ChevronLeft, Eye, Recycle,
   Code, Sparkles, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
-  BookMarked, Camera
+  BookMarked, Camera, GitCompare, FileCode, Search
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';
@@ -68,6 +68,9 @@ const toolCategories = [
       { icon: Shield, titleKey: 'tool.pdfA', descKey: 'tool.pdfA.desc', path: '/pdf-a', color: 'bg-tool-blue/15 text-tool-blue' },
       { icon: Camera, titleKey: 'tool.scanToPdf', descKey: 'tool.scanToPdf.desc', path: '/scan-to-pdf', color: 'bg-tool-amber/15 text-tool-amber' },
       { icon: Layers, titleKey: 'tool.pdfOverlay', descKey: 'tool.pdfOverlay.desc', path: '/pdf-overlay', color: 'bg-tool-indigo/15 text-tool-indigo' },
+      { icon: GitCompare, titleKey: 'tool.comparePdf', descKey: 'tool.comparePdf.desc', path: '/compare-pdf', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: Presentation, titleKey: 'tool.pdfToPpt', descKey: 'tool.pdfToPpt.desc', path: '/pdf-to-powerpoint', color: 'bg-tool-blue/15 text-tool-blue' },
+      { icon: FileCode, titleKey: 'tool.markdownToPdf', descKey: 'tool.markdownToPdf.desc', path: '/markdown-to-pdf', color: 'bg-tool-emerald/15 text-tool-emerald' },
     ],
   },
   {
@@ -155,6 +158,7 @@ function StatItem({ stat }: { stat: typeof statsConfig[0] }) {
 
 const Index = () => {
   const [testimonialIdx, setTestimonialIdx] = useState(0);
+  const [toolSearch, setToolSearch] = useState('');
   const visibleCount = 3;
   const maxIdx = testimonialKeys.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);
@@ -248,37 +252,56 @@ const Index = () => {
               {t('tools.subtitle')}
             </p>
           </motion.div>
+          {/* Search bar */}
+          <div className="mx-auto mt-8 max-w-md relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <input
+              type="text"
+              value={toolSearch}
+              onChange={(e) => setToolSearch(e.target.value)}
+              placeholder={t('tools.search') || 'Search tools...'}
+              className="w-full rounded-xl border border-border bg-card pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
+            />
+          </div>
           <div className="mt-14 space-y-14">
-            {toolCategories.map((category) => (
-              <div key={category.labelKey}>
-                <h3 className="text-xl font-bold text-foreground mb-6">{t(category.labelKey)}</h3>
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  {category.tools.map((tool, i) => (
-                    <motion.div
-                      key={tool.titleKey}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.35, delay: i * 0.04 }}
-                    >
-                      <Link
-                        to={tool.path}
-                        className="group flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+            {toolCategories.map((category) => {
+              const filtered = category.tools.filter(tool => {
+                if (!toolSearch.trim()) return true;
+                const q = toolSearch.toLowerCase();
+                return t(tool.titleKey).toLowerCase().includes(q) || t(tool.descKey).toLowerCase().includes(q);
+              });
+              if (filtered.length === 0) return null;
+              return (
+                <div key={category.labelKey}>
+                  <h3 className="text-xl font-bold text-foreground mb-6">{t(category.labelKey)}</h3>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {filtered.map((tool, i) => (
+                      <motion.div
+                        key={tool.titleKey}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.35, delay: i * 0.04 }}
                       >
-                        <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${tool.color}`}>
-                          <tool.icon className="h-5 w-5" />
-                        </div>
-                        <h3 className="font-semibold text-foreground">{t(tool.titleKey)}</h3>
-                        <p className="mt-1 flex-1 text-sm text-muted-foreground">{t(tool.descKey)}</p>
-                        <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                          {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
-                        </span>
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link
+                          to={tool.path}
+                          className="group flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                        >
+                          <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${tool.color}`}>
+                            <tool.icon className="h-5 w-5" />
+                          </div>
+                          <h3 className="font-semibold text-foreground">{t(tool.titleKey)}</h3>
+                          <p className="mt-1 flex-1 text-sm text-muted-foreground">{t(tool.descKey)}</p>
+                          <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                            {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
+                          </span>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

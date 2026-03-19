@@ -63,6 +63,9 @@ const HtmlToPdf = lazy(() => import("./pages/HtmlToPdf"));
 const PdfA = lazy(() => import("./pages/PdfA"));
 const ScanToPdf = lazy(() => import("./pages/ScanToPdf"));
 const PdfOverlay = lazy(() => import("./pages/PdfOverlay"));
+const PdfComparison = lazy(() => import("./pages/PdfComparison"));
+const PdfToPowerPoint = lazy(() => import("./pages/PdfToPowerPoint"));
+const MarkdownToPdf = lazy(() => import("./pages/MarkdownToPdf"));
 
 const queryClient = new QueryClient();
 
@@ -133,6 +136,9 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-a" element={<PdfA />} />
         <Route path="/scan-to-pdf" element={<ScanToPdf />} />
         <Route path="/pdf-overlay" element={<PdfOverlay />} />
+        <Route path="/compare-pdf" element={<PdfComparison />} />
+        <Route path="/pdf-to-powerpoint" element={<PdfToPowerPoint />} />
+        <Route path="/markdown-to-pdf" element={<MarkdownToPdf />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

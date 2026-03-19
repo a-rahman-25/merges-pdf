@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import DropZone from '@/components/DropZone';
 
 type Layout = 'horizontal' | 'vertical' | 'grid';
+type OutputFormat = 'png' | 'jpeg' | 'webp';
 
 interface ImageItem {
   id: string;

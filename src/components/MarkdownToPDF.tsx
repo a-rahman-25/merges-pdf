@@ -87,7 +87,7 @@ const MarkdownToPDF = () => {
           currentFont = monoFont; fontSize = 9; color = rgb(0.3, 0.3, 0.3);
           text = trimmed.startsWith('```') ? trimmed.slice(3) : trimmed;
         } else if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
-          text = `  •  ${trimmed.slice(2)}`;
+          text = `  -  ${trimmed.slice(2)}`;
         } else if (/^\d+\.\s/.test(trimmed)) {
           // numbered list - keep as is
         } else if (trimmed.startsWith('> ')) {

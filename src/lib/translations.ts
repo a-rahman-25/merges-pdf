@@ -320,7 +320,7 @@ const ar: T = {
   'tool.bgRemove': 'إزالة الخلفية', 'tool.bgRemove.desc': 'إزالة الخلفية بالذكاء الاصطناعي.',
   'tool.wmRemove': 'إزالة العلامة المائية', 'tool.wmRemove.desc': 'إزالة العلامات المائية من ملفات PDF.',
   'tool.imageToPdf': 'صورة إلى PDF', 'tool.imageToPdf.desc': 'تحويل الصور إلى PDF واحد.',
-  'tool.mergeImages': 'دمج الصور', 'tool.mergeImages.desc': 'دمج عدة صور في PDF واحد.',
+  'tool.mergeImages': 'دمج الصور', 'tool.mergeImages.desc': 'دمج عدة صور في صورة واحدة.',
   'tool.svgToImage': 'SVG إلى صورة', 'tool.svgToImage.desc': 'تحويل SVG إلى PNG أو JPG أو WEBP أو BMP.',
   'tool.aiSummarize': 'ملخص AI', 'tool.aiSummarize.desc': 'الحصول على ملخصات فورية بالذكاء الاصطناعي.',
   'tool.aiTranslate': 'مترجم AI', 'tool.aiTranslate.desc': 'ترجمة المستندات بالذكاء الاصطناعي.',

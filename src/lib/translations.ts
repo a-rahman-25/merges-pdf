@@ -1405,7 +1405,7 @@ const nl: T = {
   'security.title': 'Veiligheid & Privacy', 'security.subtitle': 'Jouw bestanden, jouw apparaat, jouw privacy.',
   'faq.title': 'Veelgestelde vragen',
   'cta.title': 'Klaar? Geen registratie. Geen kosten. Krachtige PDF-tools.', 'cta.subtitle': 'Sluit je aan bij miljoenen gebruikers.', 'cta.button': 'Nu starten — Gratis',
-  'footer.desc': 'Privacy-first PDF suite.', 'footer.pdftools': 'PDF Tools', 'footer.aitools': 'AI Tools', 'footer.company': 'Bedrijf',
+  'footer.desc': 'Privacy-first PDF suite.', 'footer.pdftools': 'PDF Tools', 'footer.converters': 'Converters', 'footer.aitools': 'AI Tools', 'footer.company': 'Bedrijf',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Alle bestanden worden lokaal verwerkt.',
   'footer.privacy': 'Privacybeleid', 'footer.terms': 'Servicevoorwaarden',
   'cat.pdftools': 'PDF Tools', 'cat.converters': 'Converters', 'cat.aitools': 'AI Tools',

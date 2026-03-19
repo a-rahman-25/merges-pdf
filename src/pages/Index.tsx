@@ -56,7 +56,7 @@ const toolCategories = [
       { icon: Eraser, titleKey: 'tool.bgRemove', descKey: 'tool.bgRemove.desc', path: '/bg-remover', color: 'bg-tool-cyan/15 text-tool-cyan' },
       { icon: Droplets, titleKey: 'tool.wmRemove', descKey: 'tool.wmRemove.desc', path: '/watermark-remover', color: 'bg-tool-teal/15 text-tool-teal' },
       { icon: ArrowRightLeft, titleKey: 'tool.imageToPdf', descKey: 'tool.imageToPdf.desc', path: '/image-to-pdf', color: 'bg-tool-pink/15 text-tool-pink' },
-      
+      { icon: Combine, titleKey: 'tool.mergeImages', descKey: 'tool.mergeImages.desc', path: '/merge-images', color: 'bg-tool-amber/15 text-tool-amber' },
       { icon: ArrowRightLeft, titleKey: 'tool.svgToImage', descKey: 'tool.svgToImage.desc', path: '/svg-to-image', color: 'bg-tool-lime/15 text-tool-lime' },
       { icon: FileSpreadsheet, titleKey: 'tool.excelToPdf', descKey: 'tool.excelToPdf.desc', path: '/excel-to-pdf', color: 'bg-tool-emerald/15 text-tool-emerald' },
       { icon: FileSpreadsheet, titleKey: 'tool.pdfToExcel', descKey: 'tool.pdfToExcel.desc', path: '/pdf-to-excel', color: 'bg-tool-teal/15 text-tool-teal' },

@@ -5,6 +5,9 @@ import { FileUp } from 'lucide-react';
 interface DropZoneProps {
   onFiles: (files: File[]) => void;
   disabled?: boolean;
+  accept?: string;
+  label?: string;
+  sublabel?: string;
 }
 
 const DropZone = ({ onFiles, disabled }: DropZoneProps) => {

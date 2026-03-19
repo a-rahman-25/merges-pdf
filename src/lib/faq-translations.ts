@@ -1070,6 +1070,27 @@ const faqData: Record<string, FaqsByLang> = {
       { q: 'Are my files uploaded to a server?', a: 'No. All processing happens 100% in your browser.' },
     ],
   },
+  comparePdf: {
+    en: [
+      { q: 'How does PDF comparison work?', a: 'We extract text from both PDFs page by page and compare them to find differences. The similarity score shows how much text overlaps.' },
+      { q: 'Can I compare scanned PDFs?', a: 'Only if the scanned PDF has a text layer (OCR). Image-only scans cannot be compared for text differences.' },
+      { q: 'Are my files uploaded?', a: 'No. All comparison happens 100% in your browser. Your files never leave your device.' },
+    ],
+  },
+  pdfToPpt: {
+    en: [
+      { q: 'What format is the output?', a: 'The output is an HTML presentation file that can be opened in any browser and printed. Each PDF page becomes one slide.' },
+      { q: 'Does it preserve images?', a: 'Currently, text content is extracted from each page. For image-heavy PDFs, consider using PDF to Images instead.' },
+      { q: 'Are my files uploaded?', a: 'No. All processing happens 100% in your browser.' },
+    ],
+  },
+  markdownToPdf: {
+    en: [
+      { q: 'What Markdown features are supported?', a: 'Headings (H1-H3), bullet lists, numbered lists, blockquotes, code blocks, horizontal rules, bold, italic, and links are all supported.' },
+      { q: 'Can I upload a .md file?', a: 'Yes! Click "Load .md File" to import a Markdown file, or paste your text directly into the editor.' },
+      { q: 'Are my files uploaded?', a: 'No. All conversion happens 100% in your browser.' },
+    ],
+  },
 };
 
 export function getTranslatedFaqs(toolId: string, lang: string): FaqItem[] {

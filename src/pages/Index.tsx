@@ -68,6 +68,9 @@ const toolCategories = [
       { icon: Shield, titleKey: 'tool.pdfA', descKey: 'tool.pdfA.desc', path: '/pdf-a', color: 'bg-tool-blue/15 text-tool-blue' },
       { icon: Camera, titleKey: 'tool.scanToPdf', descKey: 'tool.scanToPdf.desc', path: '/scan-to-pdf', color: 'bg-tool-amber/15 text-tool-amber' },
       { icon: Layers, titleKey: 'tool.pdfOverlay', descKey: 'tool.pdfOverlay.desc', path: '/pdf-overlay', color: 'bg-tool-indigo/15 text-tool-indigo' },
+      { icon: GitCompare, titleKey: 'tool.comparePdf', descKey: 'tool.comparePdf.desc', path: '/compare-pdf', color: 'bg-tool-violet/15 text-tool-violet' },
+      { icon: Presentation, titleKey: 'tool.pdfToPpt', descKey: 'tool.pdfToPpt.desc', path: '/pdf-to-powerpoint', color: 'bg-tool-blue/15 text-tool-blue' },
+      { icon: FileCode, titleKey: 'tool.markdownToPdf', descKey: 'tool.markdownToPdf.desc', path: '/markdown-to-pdf', color: 'bg-tool-emerald/15 text-tool-emerald' },
     ],
   },
   {

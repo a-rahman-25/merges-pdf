@@ -126,7 +126,9 @@ const MergeImagesComponent = () => {
         ctx.drawImage(img, dx, dy, dw, dh);
       });
 
-      const blob = await new Promise<Blob>((res, rej) => canvas.toBlob(b => b ? res(b) : rej('Failed'), 'image/png'));
+      const mimeType = `image/${outputFormat}`;
+      const q = outputFormat === 'png' ? undefined : quality / 100;
+      const blob = await new Promise<Blob>((res, rej) => canvas.toBlob(b => b ? res(b) : rej('Failed'), mimeType, q));
       const url = URL.createObjectURL(blob);
       setResultUrl(url);
       toast.success('Images merged!');

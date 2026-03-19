@@ -272,33 +272,36 @@ const Index = () => {
               });
               if (filtered.length === 0) return null;
               return (
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  {category.tools.map((tool, i) => (
-                    <motion.div
-                      key={tool.titleKey}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.35, delay: i * 0.04 }}
-                    >
-                      <Link
-                        to={tool.path}
-                        className="group flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                <div key={category.labelKey}>
+                  <h3 className="text-xl font-bold text-foreground mb-6">{t(category.labelKey)}</h3>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {filtered.map((tool, i) => (
+                      <motion.div
+                        key={tool.titleKey}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.35, delay: i * 0.04 }}
                       >
-                        <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${tool.color}`}>
-                          <tool.icon className="h-5 w-5" />
-                        </div>
-                        <h3 className="font-semibold text-foreground">{t(tool.titleKey)}</h3>
-                        <p className="mt-1 flex-1 text-sm text-muted-foreground">{t(tool.descKey)}</p>
-                        <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                          {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
-                        </span>
-                      </Link>
-                    </motion.div>
-                  ))}
+                        <Link
+                          to={tool.path}
+                          className="group flex h-full flex-col rounded-2xl border border-border bg-card p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5"
+                        >
+                          <div className={`mb-3 flex h-11 w-11 items-center justify-center rounded-xl ${tool.color}`}>
+                            <tool.icon className="h-5 w-5" />
+                          </div>
+                          <h3 className="font-semibold text-foreground">{t(tool.titleKey)}</h3>
+                          <p className="mt-1 flex-1 text-sm text-muted-foreground">{t(tool.descKey)}</p>
+                          <span className="mt-3 inline-flex items-center text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                            {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
+                          </span>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

@@ -1245,7 +1245,7 @@ const ru: T = {
   'security.title': 'Безопасность и конфиденциальность', 'security.subtitle': 'Ваши файлы, ваше устройство, ваша конфиденциальность.',
   'faq.title': 'Часто задаваемые вопросы',
   'cta.title': 'Готовы? Без регистрации. Без оплаты. Мощные PDF инструменты.', 'cta.subtitle': 'Присоединяйтесь к миллионам.', 'cta.button': 'Начать — Бесплатно',
-  'footer.desc': 'PDF набор с приоритетом конфиденциальности.', 'footer.pdftools': 'PDF инструменты', 'footer.aitools': 'AI инструменты', 'footer.company': 'Компания',
+  'footer.desc': 'PDF набор с приоритетом конфиденциальности.', 'footer.pdftools': 'PDF инструменты', 'footer.converters': 'Конвертеры', 'footer.aitools': 'AI инструменты', 'footer.company': 'Компания',
   'footer.copyright': '© {year} MergesPDF', 'footer.notice': 'Все файлы обрабатываются локально.',
   'footer.privacy': 'Политика конфиденциальности', 'footer.terms': 'Условия использования',
   'cat.pdftools': 'PDF инструменты', 'cat.converters': 'Конвертеры', 'cat.aitools': 'AI инструменты',

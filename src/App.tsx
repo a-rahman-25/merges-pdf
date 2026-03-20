@@ -69,6 +69,8 @@ const PdfComparison = lazy(() => import("./pages/PdfComparison"));
 const PdfToPowerPoint = lazy(() => import("./pages/PdfToPowerPoint"));
 const MarkdownToPdf = lazy(() => import("./pages/MarkdownToPdf"));
 
+const queryClient = new QueryClient();
+
 const AnimatedRoutes = () => {
   const location = useLocation();
   usePageTracking();

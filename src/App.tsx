@@ -5,10 +5,12 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import { I18nProvider } from "./hooks/useI18n";
-import Index from "./pages/Index";
 import usePageTracking from "./hooks/usePageTracking";
 import NotFound from "./pages/NotFound";
+import HomeSkeleton from "./components/HomeSkeleton";
+import ToolPageSkeleton from "./components/ToolPageSkeleton";
 
+const Index = lazy(() => import("./pages/Index"));
 const Merge = lazy(() => import("./pages/Merge"));
 const Split = lazy(() => import("./pages/Split"));
 const Compress = lazy(() => import("./pages/Compress"));
@@ -68,12 +70,6 @@ const PdfToPowerPoint = lazy(() => import("./pages/PdfToPowerPoint"));
 const MarkdownToPdf = lazy(() => import("./pages/MarkdownToPdf"));
 
 const queryClient = new QueryClient();
-
-const Loading = () => (
-  <div className="flex min-h-screen items-center justify-center">
-    <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent" />
-  </div>
-);
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -197,7 +193,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<HomeSkeleton />}>
             <AnimatedRoutes />
           </Suspense>
           <Suspense fallback={null}>

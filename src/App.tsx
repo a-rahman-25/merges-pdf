@@ -191,7 +191,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<HomeSkeleton />}>
             <AnimatedRoutes />
           </Suspense>
           <Suspense fallback={null}>

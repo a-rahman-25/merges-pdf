@@ -68,6 +68,8 @@ const PdfOverlay = lazy(() => import("./pages/PdfOverlay"));
 const PdfComparison = lazy(() => import("./pages/PdfComparison"));
 const PdfToPowerPoint = lazy(() => import("./pages/PdfToPowerPoint"));
 const MarkdownToPdf = lazy(() => import("./pages/MarkdownToPdf"));
+const AiTableExtract = lazy(() => import("./pages/AiTableExtract"));
+const AiClassify = lazy(() => import("./pages/AiClassify"));
 
 const queryClient = new QueryClient();
 

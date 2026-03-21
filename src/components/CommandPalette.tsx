@@ -103,7 +103,7 @@ const CommandPalette = () => {
 
           {showSections && favTools.length > 0 && (
             <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-              <Star className="h-3 w-3" /> {t('cmd.favorites') || 'Favorites'}
+              <Star className="h-3 w-3" /> Favorites
             </div>
           )}
 

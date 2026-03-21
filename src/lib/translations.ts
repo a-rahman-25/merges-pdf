@@ -332,6 +332,8 @@ const ar: T = {
   'tool.batch': 'معالجة دفعية', 'tool.batch.desc': 'معالجة عدة ملفات PDF دفعة واحدة.',
   'tool.ocr': 'OCR PDF', 'tool.ocr.desc': 'استخراج النص من PDF الممسوحة ضوئياً.',
   'tool.editor': 'محرر PDF', 'tool.editor.desc': 'التعليق والرسم وتحرير PDF.',
+  'tool.aiTableExtract': 'استخراج الجداول بالذكاء الاصطناعي', 'tool.aiTableExtract.desc': 'استخراج الجداول من PDF كـ CSV.',
+  'tool.aiClassify': 'تصنيف AI', 'tool.aiClassify.desc': 'تصنيف المستندات تلقائياً حسب النوع.',
   'layout.allTools': 'كل ما تحتاجه لملفات PDF',
   'feat.merge': 'دمج PDF', 'feat.merge.desc': 'دمج ملفات PDF متعددة في مستند واحد. اسحب لإعادة ترتيب الصفحات.',
   'feat.split': 'تقسيم واستخراج', 'feat.split.desc': 'تقسيم PDF إلى صفحات فردية أو استخراج نطاق مخصص.',

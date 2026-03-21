@@ -80,7 +80,7 @@ const CommandPalette = () => {
             autoFocus
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder={t('cmd.placeholder') || 'Search tools...'}
+            placeholder="Search tools..."
             className="flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           <kbd className="hidden sm:inline-flex items-center gap-1 rounded-md border border-border bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">

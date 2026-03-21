@@ -17,3 +17,9 @@ verify_jwt = false
 
 [functions.send-review-email]
 verify_jwt = false
+
+[functions.ai-table-extract]
+verify_jwt = false
+
+[functions.ai-classify]
+verify_jwt = false

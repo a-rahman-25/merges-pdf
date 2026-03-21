@@ -113,7 +113,7 @@ const CommandPalette = () => {
               <div key={tool.path + i}>
                 {isFavSection && (
                   <div className="px-2 py-1.5 mt-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                    <Clock className="h-3 w-3" /> {t('cmd.recent') || 'Recent'}
+                    <Clock className="h-3 w-3" /> Recent
                   </div>
                 )}
                 <button

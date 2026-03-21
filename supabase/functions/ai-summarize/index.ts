@@ -9,9 +9,14 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { text, filename, pageCount } = await req.json();
+    const { text, textContent, filename, pageCount } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
+    const hasRealText = textContent && textContent.trim().length > 50;
+    const userContent = hasRealText
+      ? `Please summarize this PDF document:\n\nFilename: ${filename}\nPages: ${pageCount}\n\nExtracted text content:\n${textContent}`
+      : `Please summarize this PDF document:\n\nFilename: ${filename}\nPages: ${pageCount}\nContent description: ${text}`;
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
@@ -24,12 +29,9 @@ serve(async (req) => {
         messages: [
           {
             role: "system",
-            content: "You are a document summarizer. Given information about a PDF document, provide a comprehensive, well-structured summary. Use bullet points for key topics. Be concise but thorough.",
+            content: "You are a document summarizer. Given the actual extracted text from a PDF document, provide a comprehensive, well-structured summary. Use bullet points for key topics. Be concise but thorough. Highlight the most important findings and conclusions.",
           },
-          {
-            role: "user",
-            content: `Please summarize this PDF document:\n\nFilename: ${filename}\nPages: ${pageCount}\nContent description: ${text}`,
-          },
+          { role: "user", content: userContent },
         ],
         stream: true,
       }),

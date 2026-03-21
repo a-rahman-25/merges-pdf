@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
+import { extractPdfText } from '@/lib/pdf-text-extract';
 import { streamAI } from '@/lib/stream-ai';
 import { useI18n } from '@/hooks/useI18n';
 
@@ -16,10 +17,11 @@ interface Message {
 
 const AIQandA = () => {
   const { t } = useI18n();
-  const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
+  const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number; text: string } | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
   const [question, setQuestion] = useState('');
   const [loading, setLoading] = useState(false);
+  const [extracting, setExtracting] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleFile = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,12 +29,16 @@ const AIQandA = () => {
     if (!f) return;
     if (f.type !== 'application/pdf') { toast.error('Please select a PDF file.'); return; }
     try {
+      setExtracting(true);
       const buffer = await f.arrayBuffer();
       const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
-      setFile({ file: f, name: f.name, size: f.size, pageCount: pdf.getPageCount() });
+      const pageCount = pdf.getPageCount();
+      const text = await extractPdfText(f);
+      setFile({ file: f, name: f.name, size: f.size, pageCount, text });
       setMessages([]);
-      toast.success(`Selected: ${f.name}`);
+      toast.success(`Loaded ${f.name} — ${text.length > 100 ? 'text extracted' : 'ready'}`);
     } catch { toast.error('Could not read PDF file.'); }
+    finally { setExtracting(false); }
     e.target.value = '';
   }, []);
 
@@ -52,6 +58,7 @@ const AIQandA = () => {
         body: {
           filename: file.name,
           pageCount: file.pageCount,
+          textContent: file.text,
           question: userMsg.content,
           history: messages.slice(-6),
         },
@@ -84,14 +91,18 @@ const AIQandA = () => {
       {!file ? (
         <motion.div
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-          onClick={() => inputRef.current?.click()}
+          onClick={() => !extracting && inputRef.current?.click()}
           className="cursor-pointer rounded-2xl border-2 border-dashed border-border p-12 text-center hover:border-primary/50 hover:bg-accent/50 transition-all"
         >
           <input ref={inputRef} type="file" accept=".pdf" onChange={handleFile} className="hidden" />
           <div className="flex flex-col items-center gap-4">
-            <div className="rounded-xl bg-primary/10 p-4"><MessageSquare className="h-8 w-8 text-primary" /></div>
+            <div className="rounded-xl bg-primary/10 p-4">
+              {extracting ? <Loader2 className="h-8 w-8 text-primary animate-spin" /> : <MessageSquare className="h-8 w-8 text-primary" />}
+            </div>
             <div>
-              <p className="text-lg font-display font-semibold text-foreground">{t('ai.upload.qa')}</p>
+              <p className="text-lg font-display font-semibold text-foreground">
+                {extracting ? 'Extracting text from PDF...' : t('ai.upload.qa')}
+              </p>
               <p className="mt-1 text-sm text-muted-foreground">{t('ai.upload.qa.desc')}</p>
             </div>
           </div>
@@ -110,7 +121,7 @@ const AIQandA = () => {
             </div>
             <div className="min-w-0 flex-1">
               <p className="truncate text-sm font-medium text-foreground">{file.name}</p>
-              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} {t('ai.pages')}</p>
+              <p className="text-xs text-muted-foreground">{formatFileSize(file.size)} · {file.pageCount} {t('ai.pages')} · Text extracted ✓</p>
             </div>
           </div>
 

@@ -80,7 +80,7 @@ const CommandPalette = () => {
             autoFocus
             value={query}
             onChange={e => setQuery(e.target.value)}
-            placeholder={t('cmd.placeholder') || 'Search tools...'}
+            placeholder="Search tools..."
             className="flex-1 bg-transparent text-base text-foreground placeholder:text-muted-foreground focus:outline-none"
           />
           <kbd className="hidden sm:inline-flex items-center gap-1 rounded-md border border-border bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
@@ -92,10 +92,10 @@ const CommandPalette = () => {
         <div className="max-h-[60vh] overflow-y-auto p-2">
           {displayItems.length === 0 && (
             <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-              {query.trim() ? t('cmd.noResults') || 'No tools found.' : (
+              {query.trim() ? 'No tools found.' : (
                 <div className="space-y-2">
                   <Command className="mx-auto h-8 w-8 text-muted-foreground/50" />
-                  <p>{t('cmd.hint') || 'Type to search tools, or press ⌘K anytime.'}</p>
+                  <p>Type to search tools, or press ⌘K anytime.</p>
                 </div>
               )}
             </div>
@@ -103,7 +103,7 @@ const CommandPalette = () => {
 
           {showSections && favTools.length > 0 && (
             <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-              <Star className="h-3 w-3" /> {t('cmd.favorites') || 'Favorites'}
+              <Star className="h-3 w-3" /> Favorites
             </div>
           )}
 
@@ -113,7 +113,7 @@ const CommandPalette = () => {
               <div key={tool.path + i}>
                 {isFavSection && (
                   <div className="px-2 py-1.5 mt-1 text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
-                    <Clock className="h-3 w-3" /> {t('cmd.recent') || 'Recent'}
+                    <Clock className="h-3 w-3" /> Recent
                   </div>
                 )}
                 <button

@@ -149,6 +149,8 @@ const en: T = {
   'tool.batch': 'Batch Process', 'tool.batch.desc': 'Process multiple PDFs at once.',
   'tool.ocr': 'OCR PDF', 'tool.ocr.desc': 'Extract text from scanned PDFs.',
   'tool.editor': 'PDF Editor', 'tool.editor.desc': 'Annotate, draw & edit PDFs.',
+  'tool.aiTableExtract': 'AI Table Extraction', 'tool.aiTableExtract.desc': 'Extract tables from PDFs as CSV.',
+  'tool.aiClassify': 'AI Classify', 'tool.aiClassify.desc': 'Auto-categorize documents by type.',
   // ToolPageLayout
   'layout.allTools': 'Everything you need for PDFs',
   // Feature cards

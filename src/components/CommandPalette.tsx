@@ -92,10 +92,10 @@ const CommandPalette = () => {
         <div className="max-h-[60vh] overflow-y-auto p-2">
           {displayItems.length === 0 && (
             <div className="px-4 py-8 text-center text-sm text-muted-foreground">
-              {query.trim() ? t('cmd.noResults') || 'No tools found.' : (
+              {query.trim() ? 'No tools found.' : (
                 <div className="space-y-2">
                   <Command className="mx-auto h-8 w-8 text-muted-foreground/50" />
-                  <p>{t('cmd.hint') || 'Type to search tools, or press ⌘K anytime.'}</p>
+                  <p>Type to search tools, or press ⌘K anytime.</p>
                 </div>
               )}
             </div>

@@ -149,6 +149,8 @@ const en: T = {
   'tool.batch': 'Batch Process', 'tool.batch.desc': 'Process multiple PDFs at once.',
   'tool.ocr': 'OCR PDF', 'tool.ocr.desc': 'Extract text from scanned PDFs.',
   'tool.editor': 'PDF Editor', 'tool.editor.desc': 'Annotate, draw & edit PDFs.',
+  'tool.aiTableExtract': 'AI Table Extraction', 'tool.aiTableExtract.desc': 'Extract tables from PDFs as CSV.',
+  'tool.aiClassify': 'AI Classify', 'tool.aiClassify.desc': 'Auto-categorize documents by type.',
   // ToolPageLayout
   'layout.allTools': 'Everything you need for PDFs',
   // Feature cards
@@ -330,6 +332,8 @@ const ar: T = {
   'tool.batch': 'معالجة دفعية', 'tool.batch.desc': 'معالجة عدة ملفات PDF دفعة واحدة.',
   'tool.ocr': 'OCR PDF', 'tool.ocr.desc': 'استخراج النص من PDF الممسوحة ضوئياً.',
   'tool.editor': 'محرر PDF', 'tool.editor.desc': 'التعليق والرسم وتحرير PDF.',
+  'tool.aiTableExtract': 'استخراج الجداول بالذكاء الاصطناعي', 'tool.aiTableExtract.desc': 'استخراج الجداول من PDF كـ CSV.',
+  'tool.aiClassify': 'تصنيف AI', 'tool.aiClassify.desc': 'تصنيف المستندات تلقائياً حسب النوع.',
   'layout.allTools': 'كل ما تحتاجه لملفات PDF',
   'feat.merge': 'دمج PDF', 'feat.merge.desc': 'دمج ملفات PDF متعددة في مستند واحد. اسحب لإعادة ترتيب الصفحات.',
   'feat.split': 'تقسيم واستخراج', 'feat.split.desc': 'تقسيم PDF إلى صفحات فردية أو استخراج نطاق مخصص.',

@@ -4,6 +4,7 @@ import {
   Hash, Unlock, Palette, MessageSquare, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
   BookMarked, Camera, GitCompare, FileCode, Code, Globe, Shield,
+  TableProperties, FolderSearch,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -72,6 +73,8 @@ export const allTools: ToolItem[] = [
   { icon: Layers, titleKey: 'tool.batch', descKey: 'tool.batch.desc', path: '/batch', color: 'bg-tool-amber/15 text-tool-amber', category: 'aitools' },
   { icon: ScanLine, titleKey: 'tool.ocr', descKey: 'tool.ocr.desc', path: '/ocr-pdf', color: 'bg-tool-teal/15 text-tool-teal', category: 'aitools' },
   { icon: Type, titleKey: 'tool.editor', descKey: 'tool.editor.desc', path: '/pdf-editor', color: 'bg-tool-rose/15 text-tool-rose', category: 'aitools' },
+  { icon: TableProperties, titleKey: 'tool.aiTableExtract', descKey: 'tool.aiTableExtract.desc', path: '/ai-table-extract', color: 'bg-tool-emerald/15 text-tool-emerald', category: 'aitools' },
+  { icon: FolderSearch, titleKey: 'tool.aiClassify', descKey: 'tool.aiClassify.desc', path: '/ai-classify', color: 'bg-tool-indigo/15 text-tool-indigo', category: 'aitools' },
 ];
 
 export const categories = [

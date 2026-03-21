@@ -9,15 +9,18 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { filename, pageCount, question, history } = await req.json();
+    const { filename, pageCount, textContent, question, history } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
+    const hasText = textContent && textContent.trim().length > 50;
+
+    const systemContent = hasText
+      ? `You are a helpful document assistant. The user uploaded a PDF called "${filename}" (${pageCount} pages). Here is the extracted text content:\n\n${textContent}\n\nAnswer the user's questions based on this content. Be accurate, cite specific sections when possible, and be concise.`
+      : `You are a helpful document assistant. The user has uploaded a PDF called "${filename}" with ${pageCount} pages. Answer questions about the document based on context. Be concise and helpful.`;
+
     const messages: Array<{ role: string; content: string }> = [
-      {
-        role: "system",
-        content: `You are a helpful document assistant. The user has uploaded a PDF called "${filename}" with ${pageCount} pages. Answer questions about the document based on context. Be concise and helpful.`,
-      },
+      { role: "system", content: systemContent },
     ];
 
     if (history && Array.isArray(history)) {

@@ -64,6 +64,9 @@ export const allTools: ToolItem[] = [
   { icon: GitCompare, titleKey: 'tool.comparePdf', descKey: 'tool.comparePdf.desc', path: '/compare-pdf', color: 'bg-tool-violet/15 text-tool-violet', category: 'converters' },
   { icon: Presentation, titleKey: 'tool.pdfToPpt', descKey: 'tool.pdfToPpt.desc', path: '/pdf-to-powerpoint', color: 'bg-tool-blue/15 text-tool-blue', category: 'converters' },
   { icon: FileCode, titleKey: 'tool.markdownToPdf', descKey: 'tool.markdownToPdf.desc', path: '/markdown-to-pdf', color: 'bg-tool-emerald/15 text-tool-emerald', category: 'converters' },
+  { icon: Code, titleKey: 'tool.pdfToHtml', descKey: 'tool.pdfToHtml.desc', path: '/pdf-to-html', color: 'bg-tool-lime/15 text-tool-lime', category: 'converters' },
+  { icon: FileCode, titleKey: 'tool.pdfToMarkdown', descKey: 'tool.pdfToMarkdown.desc', path: '/pdf-to-markdown', color: 'bg-tool-teal/15 text-tool-teal', category: 'converters' },
+  { icon: Braces, titleKey: 'tool.pdfToJson', descKey: 'tool.pdfToJson.desc', path: '/pdf-to-json', color: 'bg-tool-cyan/15 text-tool-cyan', category: 'converters' },
 
   // AI Tools
   { icon: Brain, titleKey: 'tool.aiSummarize', descKey: 'tool.aiSummarize.desc', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },

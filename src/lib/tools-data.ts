@@ -4,7 +4,7 @@ import {
   Hash, Unlock, Palette, MessageSquare, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
   BookMarked, Camera, GitCompare, FileCode, Code, Globe, Shield,
-  TableProperties, FolderSearch,
+  TableProperties, FolderSearch, Braces,
   type LucideIcon,
 } from 'lucide-react';
 

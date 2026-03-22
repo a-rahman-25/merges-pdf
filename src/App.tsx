@@ -70,6 +70,9 @@ const PdfToPowerPoint = lazy(() => import("./pages/PdfToPowerPoint"));
 const MarkdownToPdf = lazy(() => import("./pages/MarkdownToPdf"));
 const AiTableExtract = lazy(() => import("./pages/AiTableExtract"));
 const AiClassify = lazy(() => import("./pages/AiClassify"));
+const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
+const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
+const PdfToJson = lazy(() => import("./pages/PdfToJson"));
 
 const queryClient = new QueryClient();
 

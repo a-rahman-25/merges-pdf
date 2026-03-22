@@ -142,6 +142,9 @@ const AnimatedRoutes = () => {
         <Route path="/markdown-to-pdf" element={<MarkdownToPdf />} />
         <Route path="/ai-table-extract" element={<AiTableExtract />} />
         <Route path="/ai-classify" element={<AiClassify />} />
+        <Route path="/pdf-to-html" element={<PdfToHtml />} />
+        <Route path="/pdf-to-markdown" element={<PdfToMarkdown />} />
+        <Route path="/pdf-to-json" element={<PdfToJson />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

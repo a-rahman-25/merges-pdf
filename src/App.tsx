@@ -70,6 +70,9 @@ const PdfToPowerPoint = lazy(() => import("./pages/PdfToPowerPoint"));
 const MarkdownToPdf = lazy(() => import("./pages/MarkdownToPdf"));
 const AiTableExtract = lazy(() => import("./pages/AiTableExtract"));
 const AiClassify = lazy(() => import("./pages/AiClassify"));
+const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
+const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
+const PdfToJson = lazy(() => import("./pages/PdfToJson"));
 
 const queryClient = new QueryClient();
 
@@ -139,6 +142,9 @@ const AnimatedRoutes = () => {
         <Route path="/markdown-to-pdf" element={<MarkdownToPdf />} />
         <Route path="/ai-table-extract" element={<AiTableExtract />} />
         <Route path="/ai-classify" element={<AiClassify />} />
+        <Route path="/pdf-to-html" element={<PdfToHtml />} />
+        <Route path="/pdf-to-markdown" element={<PdfToMarkdown />} />
+        <Route path="/pdf-to-json" element={<PdfToJson />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />
@@ -189,6 +195,7 @@ const AnimatedRoutes = () => {
 
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
 const CommandPalette = lazy(() => import("./components/CommandPalette"));
+const UserSurvey = lazy(() => import("./components/UserSurvey"));
 
 const App = () => (
   <I18nProvider>
@@ -205,6 +212,9 @@ const App = () => (
           </Suspense>
           <Suspense fallback={null}>
             <CommandPalette />
+          </Suspense>
+          <Suspense fallback={null}>
+            <UserSurvey />
           </Suspense>
         </BrowserRouter>
       </TooltipProvider>

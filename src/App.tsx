@@ -213,6 +213,9 @@ const App = () => (
           <Suspense fallback={null}>
             <CommandPalette />
           </Suspense>
+          <Suspense fallback={null}>
+            <UserSurvey />
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

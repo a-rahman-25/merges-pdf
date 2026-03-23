@@ -196,6 +196,8 @@ const AnimatedRoutes = () => {
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
 const CommandPalette = lazy(() => import("./components/CommandPalette"));
 const UserSurvey = lazy(() => import("./components/UserSurvey"));
+const KeyboardShortcuts = lazy(() => import("./components/KeyboardShortcuts"));
+const ProcessingHistory = lazy(() => import("./components/ProcessingHistory"));
 
 const App = () => (
   <I18nProvider>

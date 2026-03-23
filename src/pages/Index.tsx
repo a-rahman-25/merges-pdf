@@ -231,6 +231,13 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ─── Inline Survey (top announcement) ─── */}
+      <section className="py-6 sm:py-8 bg-accent/30 border-b border-border/60" aria-label="User survey">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <UserSurvey inline />
+        </div>
+      </section>
+
       {/* ─── Animated Stats ─── */}
       <section className="gradient-bg py-10 sm:py-14" aria-label="Statistics">
         <RevealSection>
@@ -433,14 +440,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Inline Survey ─── */}
-      <section className="py-8 sm:py-10" aria-label="User survey">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <RevealSection>
-            <UserSurvey inline />
-          </RevealSection>
-        </div>
-      </section>
 
       {/* ─── Trust Badges ─── */}
       <section className="border-t border-border/60 bg-card/50 py-16 sm:py-20" aria-labelledby="security-title">

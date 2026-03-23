@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, MessageCircle } from 'lucide-react';
+import { X, MessageCircle, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { supabase } from '@/integrations/supabase/client';
 
 const SURVEY_KEY = 'mergespdf_survey_dismissed';
-const SURVEY_DELAY = 30000; // show after 30s
 
-const UserSurvey = () => {
+interface UserSurveyProps {
+  inline?: boolean;
+}
+
+const UserSurvey = ({ inline = false }: UserSurveyProps) => {
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -16,9 +19,13 @@ const UserSurvey = () => {
   useEffect(() => {
     const dismissed = localStorage.getItem(SURVEY_KEY);
     if (dismissed) return;
-    const timer = setTimeout(() => setVisible(true), SURVEY_DELAY);
-    return () => clearTimeout(timer);
-  }, []);
+    if (inline) {
+      setVisible(true);
+    } else {
+      const timer = setTimeout(() => setVisible(true), 30000);
+      return () => clearTimeout(timer);
+    }
+  }, [inline]);
 
   const dismiss = () => {
     setVisible(false);
@@ -35,9 +42,13 @@ const UserSurvey = () => {
         email: 'survey@mergespdf.com',
         message: `Monetization preference: ${selected}`,
       });
+      // Send email notification
+      await supabase.functions.invoke('send-survey-email', {
+        body: { preference: selected },
+      });
     } catch { /* silent */ }
     toast.success('Thank you for your feedback!');
-    setTimeout(() => setVisible(false), 2000);
+    if (!inline) setTimeout(() => setVisible(false), 2000);
   };
 
   const options = [
@@ -47,6 +58,74 @@ const UserSurvey = () => {
     { id: 'no-ads-donate', label: '❤️ No ads, donations', desc: 'Ad-free experience, support via donations' },
   ];
 
+  if (!visible) return null;
+
+  // Inline banner version for homepage
+  if (inline) {
+    return (
+      <AnimatePresence>
+        {!submitted ? (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="relative rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-card to-accent/30 p-6 sm:p-8"
+          >
+            <button onClick={dismiss} className="absolute top-3 right-3 text-muted-foreground hover:text-foreground transition-colors" aria-label="Dismiss survey">
+              <X className="h-4 w-4" />
+            </button>
+            <div className="flex items-start gap-3 mb-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10">
+                <MessageCircle className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="font-display font-bold text-foreground text-lg">Help shape MergesPDF's future</h3>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  We'd love your input! How would you prefer MergesPDF to sustain itself?
+                </p>
+              </div>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {options.map(opt => (
+                <button
+                  key={opt.id}
+                  onClick={() => setSelected(opt.id)}
+                  className={`w-full text-left rounded-xl border p-3 sm:p-4 transition-all ${
+                    selected === opt.id
+                      ? 'border-primary bg-primary/10 shadow-sm'
+                      : 'border-border hover:border-primary/30 hover:bg-accent/50'
+                  }`}
+                >
+                  <p className="text-sm font-semibold text-foreground">{opt.label}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">{opt.desc}</p>
+                </button>
+              ))}
+            </div>
+            <Button
+              onClick={handleSubmit}
+              disabled={!selected}
+              size="sm"
+              className="mt-4 rounded-xl gap-2"
+            >
+              <Send className="h-4 w-4" /> Submit Feedback
+            </Button>
+          </motion.div>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-card to-accent/30 p-8 text-center"
+          >
+            <p className="text-3xl mb-2">🙏</p>
+            <p className="font-display font-bold text-foreground text-lg">Thanks for your feedback!</p>
+            <p className="text-sm text-muted-foreground mt-1">Your input helps shape the future of MergesPDF.</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    );
+  }
+
+  // Floating popup fallback (for non-homepage pages)
   return (
     <AnimatePresence>
       {visible && (

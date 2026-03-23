@@ -433,6 +433,15 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ─── Inline Survey ─── */}
+      <section className="py-8 sm:py-10" aria-label="User survey">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <RevealSection>
+            <UserSurvey inline />
+          </RevealSection>
+        </div>
+      </section>
+
       {/* ─── Trust Badges ─── */}
       <section className="border-t border-border/60 bg-card/50 py-16 sm:py-20" aria-labelledby="security-title">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">

@@ -12,6 +12,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/useI18n';
 import { allTools, categories, getFavorites, toggleFavorite, getRecent, addRecent } from '@/lib/tools-data';
+import UserSurvey from '@/components/UserSurvey';
 
 /* ──────────────────────── scroll reveal ──────────────────────── */
 
@@ -428,6 +429,15 @@ const Index = () => {
                 </button>
               </div>
             </div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* ─── Inline Survey ─── */}
+      <section className="py-8 sm:py-10" aria-label="User survey">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <RevealSection>
+            <UserSurvey inline />
           </RevealSection>
         </div>
       </section>

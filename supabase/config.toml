@@ -23,3 +23,6 @@ verify_jwt = false
 
 [functions.ai-classify]
 verify_jwt = false
+
+[functions.send-survey-email]
+verify_jwt = false

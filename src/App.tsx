@@ -218,6 +218,12 @@ const App = () => (
           <Suspense fallback={null}>
             <UserSurvey />
           </Suspense>
+          <Suspense fallback={null}>
+            <KeyboardShortcuts />
+          </Suspense>
+          <Suspense fallback={null}>
+            <ProcessingHistory />
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

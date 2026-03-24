@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Scissors, Loader2, Download, RotateCcw, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 import { trackToolUsage } from '@/lib/analytics';
+import { addHistory } from '@/lib/processing-history';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -68,6 +69,7 @@ const PDFSplitter = () => {
         setSplitDone(true);
         trackToolUsage('pdf_splitter', 'split_all', { page_count: pages.length });
         toast.success(`Split into ${pages.length} pages!`);
+        addHistory({ toolName: 'PDF Splitter', toolPath: '/split', fileName: file.name, outputName: `${pages.length} pages`, fileSize: file.size });
       } catch (err) {
         toast.error(`Failed to split PDF. Contact ${SUPPORT_EMAIL} for help.`);
         console.error(err);
@@ -85,6 +87,7 @@ const PDFSplitter = () => {
         setSplitDone(true);
         trackToolUsage('pdf_splitter', 'extract_range', { page_count: indices.length });
         toast.success(`Extracted ${indices.length} page${indices.length > 1 ? 's' : ''}!`);
+        addHistory({ toolName: 'PDF Splitter', toolPath: '/split', fileName: file.name, outputName: `extracted_${indices.length}_pages.pdf`, fileSize: data.length });
       } catch (err) {
         toast.error(`Failed to extract pages. Contact ${SUPPORT_EMAIL} for help.`);
         console.error(err);

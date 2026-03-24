@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { getPageCount, compressPDF, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
+import { addHistory } from '@/lib/processing-history';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
@@ -41,6 +42,7 @@ const PDFCompressor = () => {
       setResult({ data, originalSize: file.size, newSize: data.length });
       const savings = ((1 - data.length / file.size) * 100).toFixed(1);
       toast.success(`Compressed! Reduced by ${savings}%`);
+      addHistory({ toolName: 'PDF Compressor', toolPath: '/compress', fileName: file.name, outputName: file.name.replace(/\.pdf$/i, '_compressed.pdf'), fileSize: data.length });
     } catch (err) {
       toast.error(`Failed to compress PDF. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

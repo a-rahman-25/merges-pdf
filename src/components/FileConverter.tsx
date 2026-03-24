@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRightLeft, Loader2, RotateCcw, FileText, Image as ImageIcon, Code } from 'lucide-react';
 import { toast } from 'sonner';
 import { trackToolUsage, trackFileProcess } from '@/lib/analytics';
+import { addHistory } from '@/lib/processing-history';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
@@ -161,6 +162,8 @@ const FileConverter = () => {
       }
 
       setResult({ blobs, summaryItems });
+      const totalSize = blobs.reduce((s, b) => s + b.blob.size, 0);
+      addHistory({ toolName: 'File Converter', toolPath: '/convert', fileName: files.map(f => f.name).join(', '), outputName: blobs[0]?.filename || 'converted', fileSize: totalSize });
       toast.success('Conversion complete! Review below before downloading.');
     } catch (err) {
       toast.error(`Conversion failed. Contact ${SUPPORT_EMAIL} for help.`);

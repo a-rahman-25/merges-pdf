@@ -7,6 +7,7 @@ import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { PDFFileItem, getPageCount, mergePDFs, compressPDF, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
+import { addHistory } from '@/lib/processing-history';
 
 type BatchMode = 'merge' | 'compress';
 
@@ -67,6 +68,7 @@ const BatchProcessor = () => {
         const result = await mergePDFs(files.map(f => f.file));
         downloadBlob(result, 'batch_merged.pdf');
         setProgress(100);
+        addHistory({ toolName: 'Batch Merge', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_merged.pdf', fileSize: result.byteLength });
         toast.success('Batch merge complete!');
       } else {
         // Compress all and bundle into ZIP
@@ -83,6 +85,7 @@ const BatchProcessor = () => {
         const zipBlob = await zip.generateAsync({ type: 'uint8array' });
         downloadBlob(zipBlob, 'batch_compressed.zip');
         setProgress(100);
+        addHistory({ toolName: 'Batch Compress', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_compressed.zip', fileSize: zipBlob.byteLength });
         toast.success(`Compressed ${files.length} files into ZIP!`);
       }
       setDone(true);

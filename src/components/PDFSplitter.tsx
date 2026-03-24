@@ -87,6 +87,7 @@ const PDFSplitter = () => {
         setSplitDone(true);
         trackToolUsage('pdf_splitter', 'extract_range', { page_count: indices.length });
         toast.success(`Extracted ${indices.length} page${indices.length > 1 ? 's' : ''}!`);
+        addHistory({ toolName: 'PDF Splitter', toolPath: '/split', fileName: file.name, outputName: `extracted_${indices.length}_pages.pdf`, fileSize: data.length });
       } catch (err) {
         toast.error(`Failed to extract pages. Contact ${SUPPORT_EMAIL} for help.`);
         console.error(err);

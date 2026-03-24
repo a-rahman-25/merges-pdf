@@ -67,6 +67,7 @@ const PDFMerger = () => {
       trackToolUsage('pdf_merger', 'merge_complete', { file_count: files.length });
       trackFileProcess('pdf_merger', files.length, Math.round(totalSizeMB * 100) / 100);
       toast.success('PDFs merged! Review the preview below.');
+      addHistory({ toolName: 'PDF Merger', toolPath: '/merge', fileName: files.map(f => f.name).join(', '), outputName: 'merged.pdf', fileSize: result.byteLength });
     } catch (err) {
       toast.error('Failed to merge PDFs. Contact merge.pdf.st@gmail.com for help.');
       console.error(err);

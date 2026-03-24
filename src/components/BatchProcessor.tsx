@@ -85,6 +85,7 @@ const BatchProcessor = () => {
         const zipBlob = await zip.generateAsync({ type: 'uint8array' });
         downloadBlob(zipBlob, 'batch_compressed.zip');
         setProgress(100);
+        addHistory({ toolName: 'Batch Compress', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_compressed.zip', fileSize: zipBlob.byteLength });
         toast.success(`Compressed ${files.length} files into ZIP!`);
       }
       setDone(true);

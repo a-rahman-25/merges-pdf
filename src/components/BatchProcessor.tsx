@@ -68,6 +68,7 @@ const BatchProcessor = () => {
         const result = await mergePDFs(files.map(f => f.file));
         downloadBlob(result, 'batch_merged.pdf');
         setProgress(100);
+        addHistory({ toolName: 'Batch Merge', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_merged.pdf', fileSize: result.byteLength });
         toast.success('Batch merge complete!');
       } else {
         // Compress all and bundle into ZIP

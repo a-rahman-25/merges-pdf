@@ -162,6 +162,8 @@ const FileConverter = () => {
       }
 
       setResult({ blobs, summaryItems });
+      const totalSize = blobs.reduce((s, b) => s + b.blob.size, 0);
+      addHistory({ toolName: 'File Converter', toolPath: '/convert', fileName: files.map(f => f.name).join(', '), outputName: blobs[0]?.filename || 'converted', fileSize: totalSize });
       toast.success('Conversion complete! Review below before downloading.');
     } catch (err) {
       toast.error(`Conversion failed. Contact ${SUPPORT_EMAIL} for help.`);

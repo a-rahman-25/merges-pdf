@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layers, Loader2, Download, RotateCcw, FileText, Combine, Minimize2 } from 'lucide-react';
+import { Layers, Loader2, Download, RotateCcw, FileText, Combine, Minimize2, GripVertical, Archive } from 'lucide-react';
 import { toast } from 'sonner';
+import JSZip from 'jszip';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -16,6 +17,8 @@ const BatchProcessor = () => {
   const [progress, setProgress] = useState(0);
   const [currentFile, setCurrentFile] = useState('');
   const [done, setDone] = useState(false);
+  const [dragIdx, setDragIdx] = useState<number | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
 
   const addFiles = useCallback(async (newFiles: File[]) => {
     const items: PDFFileItem[] = [];
@@ -34,6 +37,25 @@ const BatchProcessor = () => {
     setDone(false);
   }, []);
 
+  // Drag-to-reorder handlers
+  const handleDragStart = (idx: number) => setDragIdx(idx);
+  const handleDragOver = (e: React.DragEvent, idx: number) => {
+    e.preventDefault();
+    setDragOverIdx(idx);
+  };
+  const handleDrop = (idx: number) => {
+    if (dragIdx === null || dragIdx === idx) { setDragIdx(null); setDragOverIdx(null); return; }
+    setFiles(prev => {
+      const next = [...prev];
+      const [moved] = next.splice(dragIdx, 1);
+      next.splice(idx, 0, moved);
+      return next;
+    });
+    setDragIdx(null);
+    setDragOverIdx(null);
+  };
+  const handleDragEnd = () => { setDragIdx(null); setDragOverIdx(null); };
+
   const handleProcess = async () => {
     if (files.length < 1) return;
     setProcessing(true);
@@ -47,15 +69,21 @@ const BatchProcessor = () => {
         setProgress(100);
         toast.success('Batch merge complete!');
       } else {
+        // Compress all and bundle into ZIP
+        const zip = new JSZip();
         for (let i = 0; i < files.length; i++) {
           setCurrentFile(`Compressing: ${files[i].name}`);
           setProgress(Math.round(((i) / files.length) * 100));
           const result = await compressPDF(files[i].file);
           const baseName = files[i].name.replace(/\.pdf$/i, '');
-          downloadBlob(result, `${baseName}_compressed.pdf`);
+          zip.file(`${baseName}_compressed.pdf`, result);
         }
+        setCurrentFile('Creating ZIP archive...');
+        setProgress(95);
+        const zipBlob = await zip.generateAsync({ type: 'uint8array' });
+        downloadBlob(zipBlob, 'batch_compressed.zip');
         setProgress(100);
-        toast.success(`Compressed ${files.length} files!`);
+        toast.success(`Compressed ${files.length} files into ZIP!`);
       }
       setDone(true);
     } catch (err) {
@@ -104,14 +132,28 @@ const BatchProcessor = () => {
             </div>
 
             <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
-              {files.map(item => (
-                <div key={item.id} className="flex items-center gap-3 rounded-xl bg-card p-3 pr-4 border border-border">
+              {files.map((item, idx) => (
+                <div
+                  key={item.id}
+                  draggable
+                  onDragStart={() => handleDragStart(idx)}
+                  onDragOver={(e) => handleDragOver(e, idx)}
+                  onDrop={() => handleDrop(idx)}
+                  onDragEnd={handleDragEnd}
+                  className={`flex items-center gap-3 rounded-xl bg-card p-3 pr-4 border transition-all cursor-grab active:cursor-grabbing ${
+                    dragOverIdx === idx ? 'border-primary bg-primary/5' : 'border-border'
+                  } ${dragIdx === idx ? 'opacity-50' : ''}`}
+                >
+                  <GripVertical className="h-4 w-4 shrink-0 text-muted-foreground/50" />
                   <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
                     <FileText className="h-4 w-4 text-primary" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm text-foreground">{item.name}</p>
-                    <p className="text-xs text-muted-foreground">{formatFileSize(item.size)}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatFileSize(item.size)}
+                      {item.pageCount ? ` · ${item.pageCount} pages` : ''}
+                    </p>
                   </div>
                   <button onClick={() => removeFile(item.id)} className="text-xs text-muted-foreground hover:text-destructive">✕</button>
                 </div>
@@ -127,13 +169,22 @@ const BatchProcessor = () => {
 
             {!done && (
               <Button onClick={handleProcess} disabled={processing || (mode === 'merge' && files.length < 2)} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-                {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Processing…</>) : (<><Layers className="h-5 w-5" />{mode === 'merge' ? 'Merge All' : 'Compress All'}</>)}
+                {processing ? (
+                  <><Loader2 className="h-5 w-5 animate-spin" />Processing…</>
+                ) : (
+                  <>
+                    {mode === 'merge' ? <Layers className="h-5 w-5" /> : <Archive className="h-5 w-5" />}
+                    {mode === 'merge' ? 'Merge All' : 'Compress All → ZIP'}
+                  </>
+                )}
               </Button>
             )}
 
             {done && (
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl bg-accent/50 p-4 border border-border text-center">
-                <p className="text-sm font-medium text-foreground">✓ Batch processing complete — files downloaded</p>
+                <p className="text-sm font-medium text-foreground">
+                  ✓ Batch processing complete — {mode === 'compress' ? 'ZIP archive' : 'file'} downloaded
+                </p>
               </motion.div>
             )}
           </motion.div>

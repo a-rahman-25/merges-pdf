@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRightLeft, Loader2, RotateCcw, FileText, Image as ImageIcon, Code } from 'lucide-react';
 import { toast } from 'sonner';
 import { trackToolUsage, trackFileProcess } from '@/lib/analytics';
+import { addHistory } from '@/lib/processing-history';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import PreDownloadSummary from '@/components/PreDownloadSummary';

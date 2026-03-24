@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { getPageCount, compressPDF, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
+import { addHistory } from '@/lib/processing-history';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';

@@ -7,6 +7,7 @@ import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { PDFFileItem, getPageCount, mergePDFs, compressPDF, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
+import { addHistory } from '@/lib/processing-history';
 
 type BatchMode = 'merge' | 'compress';
 

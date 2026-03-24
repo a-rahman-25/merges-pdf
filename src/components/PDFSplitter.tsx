@@ -69,6 +69,7 @@ const PDFSplitter = () => {
         setSplitDone(true);
         trackToolUsage('pdf_splitter', 'split_all', { page_count: pages.length });
         toast.success(`Split into ${pages.length} pages!`);
+        addHistory({ toolName: 'PDF Splitter', toolPath: '/split', fileName: file.name, outputName: `${pages.length} pages`, fileSize: file.size });
       } catch (err) {
         toast.error(`Failed to split PDF. Contact ${SUPPORT_EMAIL} for help.`);
         console.error(err);

@@ -215,9 +215,8 @@ const App = () => (
           <Suspense fallback={null}>
             <CommandPalette />
           </Suspense>
-          <Suspense fallback={null}>
-            <UserSurvey />
-          </Suspense>
+
+
           <Suspense fallback={null}>
             <KeyboardShortcuts />
           </Suspense>

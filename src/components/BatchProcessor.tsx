@@ -1,15 +1,16 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Layers, Loader2, Download, RotateCcw, FileText, Combine, Minimize2, GripVertical, Archive } from 'lucide-react';
+import { Layers, Loader2, RotateCcw, FileText, Combine, Minimize2, GripVertical, Archive, ImageIcon, FileType } from 'lucide-react';
 import { toast } from 'sonner';
 import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { PDFFileItem, getPageCount, mergePDFs, compressPDF, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import { addHistory } from '@/lib/processing-history';
 
-type BatchMode = 'merge' | 'compress';
+type BatchMode = 'merge' | 'compress' | 'to-images' | 'to-word';
 
 const BatchProcessor = () => {
   const [files, setFiles] = useState<PDFFileItem[]>([]);
@@ -38,7 +39,6 @@ const BatchProcessor = () => {
     setDone(false);
   }, []);
 
-  // Drag-to-reorder handlers
   const handleDragStart = (idx: number) => setDragIdx(idx);
   const handleDragOver = (e: React.DragEvent, idx: number) => {
     e.preventDefault();
@@ -57,6 +57,54 @@ const BatchProcessor = () => {
   };
   const handleDragEnd = () => { setDragIdx(null); setDragOverIdx(null); };
 
+  const convertPdfToImages = async (file: File, baseName: string): Promise<{ name: string; data: Uint8Array }[]> => {
+    const pdfjsLib = await import('pdfjs-dist');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
+    const buffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+    const results: { name: string; data: Uint8Array }[] = [];
+
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const page = await pdf.getPage(i);
+      const viewport = page.getViewport({ scale: 2 });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d')!;
+      await page.render({ canvasContext: ctx, viewport, canvas } as any).promise;
+
+      const blob = await new Promise<Blob>((resolve) =>
+        canvas.toBlob((b) => resolve(b!), 'image/png')
+      );
+      const arr = new Uint8Array(await blob.arrayBuffer());
+      results.push({ name: `${baseName}_page_${i}.png`, data: arr });
+    }
+    return results;
+  };
+
+  const convertPdfToWord = async (file: File, baseName: string): Promise<Uint8Array> => {
+    const { PDFDocument } = await import('pdf-lib');
+    const { Document, Packer, Paragraph, TextRun } = await import('docx');
+    const buffer = await file.arrayBuffer();
+    const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
+    const pages = pdf.getPages();
+
+    const paragraphs: InstanceType<typeof Paragraph>[] = [
+      new Paragraph({ children: [new TextRun({ text: `Converted from: ${file.name}`, bold: true, size: 28 })], spacing: { after: 300 } }),
+    ];
+
+    for (let i = 0; i < pages.length; i++) {
+      paragraphs.push(
+        new Paragraph({ children: [new TextRun({ text: `— Page ${i + 1} —`, bold: true, size: 24 })], spacing: { before: 400, after: 200 } }),
+        new Paragraph({ children: [new TextRun({ text: `[Page ${i + 1} — ${Math.round(pages[i].getWidth())} × ${Math.round(pages[i].getHeight())} pts]`, size: 22 })], spacing: { after: 200 } })
+      );
+    }
+
+    const doc = new Document({ sections: [{ children: paragraphs }] });
+    const blob = await Packer.toBlob(doc);
+    return new Uint8Array(await blob.arrayBuffer());
+  };
+
   const handleProcess = async () => {
     if (files.length < 1) return;
     setProcessing(true);
@@ -70,8 +118,7 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch Merge', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_merged.pdf', fileSize: result.byteLength });
         toast.success('Batch merge complete!');
-      } else {
-        // Compress all and bundle into ZIP
+      } else if (mode === 'compress') {
         const zip = new JSZip();
         for (let i = 0; i < files.length; i++) {
           setCurrentFile(`Compressing: ${files[i].name}`);
@@ -87,6 +134,41 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch Compress', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_compressed.zip', fileSize: zipBlob.byteLength });
         toast.success(`Compressed ${files.length} files into ZIP!`);
+      } else if (mode === 'to-images') {
+        const zip = new JSZip();
+        for (let i = 0; i < files.length; i++) {
+          const baseName = files[i].name.replace(/\.pdf$/i, '');
+          setCurrentFile(`Converting to images: ${files[i].name}`);
+          setProgress(Math.round(((i) / files.length) * 100));
+          const images = await convertPdfToImages(files[i].file, baseName);
+          const folder = zip.folder(baseName)!;
+          for (const img of images) {
+            folder.file(img.name, img.data);
+          }
+        }
+        setCurrentFile('Creating ZIP archive...');
+        setProgress(95);
+        const zipBlob = await zip.generateAsync({ type: 'uint8array' });
+        saveAs(new Blob([zipBlob.buffer as ArrayBuffer]), 'batch_images.zip');
+        setProgress(100);
+        addHistory({ toolName: 'Batch to Images', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_images.zip', fileSize: zipBlob.byteLength });
+        toast.success(`Converted ${files.length} PDFs to images!`);
+      } else if (mode === 'to-word') {
+        const zip = new JSZip();
+        for (let i = 0; i < files.length; i++) {
+          const baseName = files[i].name.replace(/\.pdf$/i, '');
+          setCurrentFile(`Converting to Word: ${files[i].name}`);
+          setProgress(Math.round(((i) / files.length) * 100));
+          const docxData = await convertPdfToWord(files[i].file, baseName);
+          zip.file(`${baseName}.docx`, docxData);
+        }
+        setCurrentFile('Creating ZIP archive...');
+        setProgress(95);
+        const zipBlob = await zip.generateAsync({ type: 'uint8array' });
+        saveAs(new Blob([zipBlob.buffer as ArrayBuffer]), 'batch_word.zip');
+        setProgress(100);
+        addHistory({ toolName: 'Batch to Word', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_word.zip', fileSize: zipBlob.byteLength });
+        toast.success(`Converted ${files.length} PDFs to Word!`);
       }
       setDone(true);
     } catch (err) {
@@ -100,23 +182,57 @@ const BatchProcessor = () => {
 
   const reset = () => { setFiles([]); setDone(false); setProgress(0); };
 
+  const modeConfig = {
+    merge: { icon: Combine, label: 'Batch Merge' },
+    compress: { icon: Minimize2, label: 'Batch Compress' },
+    'to-images': { icon: ImageIcon, label: 'To Images' },
+    'to-word': { icon: FileType, label: 'To Word' },
+  };
+
+  const getActionLabel = () => {
+    switch (mode) {
+      case 'merge': return 'Merge All';
+      case 'compress': return 'Compress All → ZIP';
+      case 'to-images': return 'Convert All → Images ZIP';
+      case 'to-word': return 'Convert All → Word ZIP';
+    }
+  };
+
+  const getActionIcon = () => {
+    switch (mode) {
+      case 'merge': return <Layers className="h-5 w-5" />;
+      case 'compress': return <Archive className="h-5 w-5" />;
+      case 'to-images': return <ImageIcon className="h-5 w-5" />;
+      case 'to-word': return <FileType className="h-5 w-5" />;
+    }
+  };
+
+  const getDoneLabel = () => {
+    switch (mode) {
+      case 'merge': return 'file';
+      case 'compress': return 'ZIP archive';
+      case 'to-images': return 'images ZIP';
+      case 'to-word': return 'Word ZIP';
+    }
+  };
+
   return (
     <div className="mx-auto w-full max-w-2xl space-y-6">
       {/* Mode selector */}
       <div className="flex justify-center">
-        <div className="inline-flex rounded-lg border border-border bg-card p-0.5 gap-0.5">
-          <button
-            onClick={() => { setMode('merge'); setDone(false); }}
-            className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-all ${mode === 'merge' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
-          >
-            <Combine className="h-4 w-4" /> Batch Merge
-          </button>
-          <button
-            onClick={() => { setMode('compress'); setDone(false); }}
-            className={`flex items-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition-all ${mode === 'compress' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
-          >
-            <Minimize2 className="h-4 w-4" /> Batch Compress
-          </button>
+        <div className="inline-flex flex-wrap justify-center rounded-lg border border-border bg-card p-0.5 gap-0.5">
+          {(Object.keys(modeConfig) as BatchMode[]).map((m) => {
+            const Icon = modeConfig[m].icon;
+            return (
+              <button
+                key={m}
+                onClick={() => { setMode(m); setDone(false); }}
+                className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm font-semibold transition-all ${mode === m ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                <Icon className="h-4 w-4" /> {modeConfig[m].label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
@@ -175,10 +291,7 @@ const BatchProcessor = () => {
                 {processing ? (
                   <><Loader2 className="h-5 w-5 animate-spin" />Processing…</>
                 ) : (
-                  <>
-                    {mode === 'merge' ? <Layers className="h-5 w-5" /> : <Archive className="h-5 w-5" />}
-                    {mode === 'merge' ? 'Merge All' : 'Compress All → ZIP'}
-                  </>
+                  <>{getActionIcon()} {getActionLabel()}</>
                 )}
               </Button>
             )}
@@ -186,7 +299,7 @@ const BatchProcessor = () => {
             {done && (
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="rounded-xl bg-accent/50 p-4 border border-border text-center">
                 <p className="text-sm font-medium text-foreground">
-                  ✓ Batch processing complete — {mode === 'compress' ? 'ZIP archive' : 'file'} downloaded
+                  ✓ Batch processing complete — {getDoneLabel()} downloaded
                 </p>
               </motion.div>
             )}

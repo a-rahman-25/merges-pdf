@@ -165,7 +165,7 @@ const BatchProcessor = () => {
         setCurrentFile('Creating ZIP archive...');
         setProgress(95);
         const zipBlob = await zip.generateAsync({ type: 'uint8array' });
-        saveAs(new Blob([zipBlob]), 'batch_word.zip');
+        saveAs(new Blob([zipBlob.buffer as ArrayBuffer]), 'batch_word.zip');
         setProgress(100);
         addHistory({ toolName: 'Batch to Word', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_word.zip', fileSize: zipBlob.byteLength });
         toast.success(`Converted ${files.length} PDFs to Word!`);

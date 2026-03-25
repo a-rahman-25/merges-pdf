@@ -149,7 +149,7 @@ const BatchProcessor = () => {
         setCurrentFile('Creating ZIP archive...');
         setProgress(95);
         const zipBlob = await zip.generateAsync({ type: 'uint8array' });
-        saveAs(new Blob([zipBlob]), 'batch_images.zip');
+        saveAs(new Blob([zipBlob.buffer as ArrayBuffer]), 'batch_images.zip');
         setProgress(100);
         addHistory({ toolName: 'Batch to Images', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_images.zip', fileSize: zipBlob.byteLength });
         toast.success(`Converted ${files.length} PDFs to images!`);

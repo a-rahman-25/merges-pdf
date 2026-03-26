@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button';
 import { useI18n } from '@/hooks/useI18n';
 import { allTools, categories, getFavorites, toggleFavorite, getRecent, addRecent } from '@/lib/tools-data';
 import UserSurvey from '@/components/UserSurvey';
+import AdUnit from '@/components/AdUnit';
 
 /* ──────────────────────── scroll reveal ──────────────────────── */
 

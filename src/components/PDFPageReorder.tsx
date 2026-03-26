@@ -8,6 +8,7 @@ import { getPageCount, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 interface PageItem {
   index: number;
@@ -69,6 +70,7 @@ const PDFPageReorder = () => {
       const pdfBytes = await newDoc.save();
       setResult(pdfBytes);
       toast.success('Pages reordered successfully!');
+      logToolUsage('Page Reorder', '/reorder-pages');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to reorder pages');
     } finally {

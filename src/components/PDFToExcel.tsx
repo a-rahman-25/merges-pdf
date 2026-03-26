@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { formatFileSize, getPageCount } from '@/lib/pdf-utils';
 import * as pdfjsLib from 'pdfjs-dist';
 import ExcelJS from 'exceljs';
+import { logToolUsage } from '@/lib/analytics';
 
 // @ts-ignore
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;
@@ -103,6 +104,7 @@ const PDFToExcel = () => {
       URL.revokeObjectURL(url);
     }
     toast.success(`Downloaded as ${format.toUpperCase()}!`);
+    logToolUsage('PDF to Excel', '/pdf-to-excel');
   };
 
   const reset = () => { setFile(null); setRows([]); };

@@ -10,6 +10,7 @@ import { getPageCount, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFPageCrop = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
@@ -64,6 +65,7 @@ const PDFPageCrop = () => {
       const pdfBytes = await pdf.save();
       setResult(pdfBytes);
       toast.success('Pages cropped!');
+      logToolUsage('Page Crop', '/crop-pages');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to crop pages');
     } finally {

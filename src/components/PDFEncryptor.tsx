@@ -10,6 +10,7 @@ import { formatFileSize } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFEncryptor = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -66,6 +67,7 @@ const PDFEncryptor = () => {
       setResult(blob);
       setProgress(100);
       toast.success('PDF processed successfully!');
+      logToolUsage('PDF Encryptor', '/encrypt');
     } catch (err) {
       console.error(err);
       toast.error('Failed to process PDF.');

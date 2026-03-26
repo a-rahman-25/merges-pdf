@@ -8,6 +8,7 @@ import { getPageCount, flattenPDF, downloadBlob, formatFileSize, SUPPORT_EMAIL }
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFFlattener = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -39,6 +40,7 @@ const PDFFlattener = () => {
       const data = await flattenPDF(file.file);
       setResult({ data, originalSize: file.size });
       toast.success('PDF flattened!');
+      logToolUsage('PDF Flattener', '/flatten');
     } catch (err) {
       toast.error(`Failed to flatten PDF. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

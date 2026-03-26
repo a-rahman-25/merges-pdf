@@ -9,6 +9,7 @@ import { getPageCount, extractPages, downloadBlob, formatFileSize, SUPPORT_EMAIL
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFPageExtractor = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -57,6 +58,7 @@ const PDFPageExtractor = () => {
       const data = await extractPages(file.file, indices);
       setResult({ data, extractedCount: indices.length });
       toast.success(`Extracted ${indices.length} page${indices.length > 1 ? 's' : ''}!`);
+      logToolUsage('PDF Page Extractor', '/extract-pages');
     } catch (err) {
       toast.error(`Failed to extract pages. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

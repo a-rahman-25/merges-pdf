@@ -9,6 +9,7 @@ import { Progress } from '@/components/ui/progress';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
+import { logToolUsage } from '@/lib/analytics';
 
 const LANGUAGES = [
   { code: 'eng', name: 'English' },
@@ -162,6 +163,7 @@ const OCRTool = () => {
       setProgress(100);
       setProgressMsg('Complete!');
       toast.success('OCR complete!');
+      logToolUsage('OCR Tool', '/ocr-pdf');
     } catch (err: any) {
       toast.error(err?.message || 'OCR failed');
       console.error(err);

@@ -8,6 +8,7 @@ import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 interface ImageFile {
   file: File;
@@ -90,6 +91,7 @@ const ImageToPDF = () => {
       const pdfBytes = await pdf.save();
       setResult({ data: pdfBytes, pageCount: images.length });
       toast.success(`Created PDF with ${images.length} page(s)`);
+      logToolUsage('Image to PDF', '/image-to-pdf');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to create PDF');
     } finally {

@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { PDFDocument } from 'pdf-lib';
+import { logToolUsage } from '@/lib/analytics';
 
 const WatermarkRemover = () => {
   const [file, setFile] = useState<File | null>(null);
@@ -75,6 +76,7 @@ const WatermarkRemover = () => {
       setStats({ before: file.size, after: blob.size });
       setProgress(100);
       toast.success('Watermark removal attempted successfully!');
+      logToolUsage('Watermark Remover', '/watermark-remover');
     } catch (err) {
       console.error(err);
       toast.error('Failed to process PDF. The file may be corrupted or encrypted.');

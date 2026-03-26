@@ -8,6 +8,7 @@ import { downloadBlob } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 const ScanToPDF = () => {
   const [images, setImages] = useState<{ data: string; name: string }[]>([]);
@@ -84,6 +85,7 @@ const ScanToPDF = () => {
       const saved = await pdf.save();
       setResult(saved);
       toast.success(`Created PDF with ${images.length} page(s)!`);
+      logToolUsage('Scan to PDF', '/scan-to-pdf');
     } catch (err) {
       console.error(err);
       toast.error('Failed to create PDF from scans.');

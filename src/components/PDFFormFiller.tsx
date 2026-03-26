@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { getPageCount, formatFileSize, downloadBlob, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
+import { logToolUsage } from '@/lib/analytics';
 
 interface FormField {
   name: string;
@@ -90,6 +91,7 @@ const PDFFormFiller = () => {
       const data = await pdf.save();
       downloadBlob(data, file.name.replace(/\.pdf$/i, '_filled.pdf'));
       toast.success('Filled PDF downloaded!');
+      logToolUsage('Form Filler', '/pdf-form-filler');
     } catch (err) {
       toast.error(`Failed to save. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

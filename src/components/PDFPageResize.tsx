@@ -10,6 +10,7 @@ import { downloadBlob, formatFileSize, getPageCount } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 const PAGE_SIZES: Record<string, [number, number]> = {
   'A4': [595.28, 841.89],
@@ -81,6 +82,7 @@ const PDFPageResize = () => {
       const saved = await newPdf.save();
       setResult(saved);
       toast.success(`Resized ${srcPages.length} pages to ${targetSize}!`);
+      logToolUsage('Page Resize', '/page-size');
     } catch (err) {
       console.error(err);
       toast.error('Failed to resize PDF pages.');

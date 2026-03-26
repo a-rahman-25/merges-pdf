@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFToWord = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
@@ -59,6 +60,7 @@ const PDFToWord = () => {
       const blob = await Packer.toBlob(doc);
       setResult({ blob, pageCount: pages.length });
       toast.success('Converted to Word!');
+      logToolUsage('PDF to Word', '/pdf-to-word');
     } catch (err) {
       toast.error('Failed to convert PDF to Word.');
       console.error(err);

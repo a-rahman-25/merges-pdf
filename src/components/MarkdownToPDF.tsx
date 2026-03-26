@@ -9,6 +9,7 @@ import { downloadBlob } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 function wrapText(text: string, font: any, fontSize: number, maxWidth: number): string[] {
   const words = text.split(/\s+/);
@@ -118,6 +119,7 @@ const MarkdownToPDF = () => {
       const saved = await pdf.save();
       setResult(saved);
       toast.success('Markdown converted to PDF!');
+      logToolUsage('Markdown to PDF', '/markdown-to-pdf');
     } catch (err) {
       console.error(err);
       toast.error('Failed to convert Markdown.');

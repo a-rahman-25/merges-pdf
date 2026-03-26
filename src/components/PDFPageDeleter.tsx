@@ -9,6 +9,7 @@ import { getPageCount, deletePages, downloadBlob, formatFileSize, SUPPORT_EMAIL 
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFPageDeleter = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -58,6 +59,7 @@ const PDFPageDeleter = () => {
       const data = await deletePages(file.file, indices);
       setResult({ data, deletedCount: indices.length });
       toast.success(`Deleted ${indices.length} page${indices.length > 1 ? 's' : ''}!`);
+      logToolUsage('PDF Page Deleter', '/delete-pages');
     } catch (err) {
       toast.error(`Failed to delete pages. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

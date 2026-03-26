@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { formatFileSize, downloadBlob } from '@/lib/pdf-utils';
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib';
 import mammoth from 'mammoth';
+import { logToolUsage } from '@/lib/analytics';
 
 const WordToPDF = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
@@ -82,6 +83,7 @@ const WordToPDF = () => {
       downloadBlob(data, `${baseName}.pdf`);
       setDone(true);
       toast.success('Converted to PDF and downloaded!');
+      logToolUsage('Word to PDF', '/word-to-pdf');
     } catch (err) {
       toast.error('Failed to convert Word to PDF.');
       console.error(err);

@@ -9,6 +9,7 @@ import { getPageCount, addTextWatermark, downloadBlob, formatFileSize, SUPPORT_E
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFWatermarkAdder = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -46,6 +47,7 @@ const PDFWatermarkAdder = () => {
       const data = await addTextWatermark(file.file, watermarkText, { fontSize, opacity: opacity / 100, rotation: -45 });
       setResult(data);
       toast.success('Watermark added!');
+      logToolUsage('Watermark Adder', '/add-watermark');
     } catch (err) {
       toast.error(`Failed to add watermark. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

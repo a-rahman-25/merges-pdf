@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Combine, Loader2, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
-import { trackToolUsage, trackFileProcess } from '@/lib/analytics';
+import { trackToolUsage, trackFileProcess, logToolUsage } from '@/lib/analytics';
 import { addHistory } from '@/lib/processing-history';
 import DropZone from '@/components/DropZone';
 import FileListItem from '@/components/FileListItem';

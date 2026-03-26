@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import { logToolUsage } from '@/lib/analytics';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';

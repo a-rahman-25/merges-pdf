@@ -156,6 +156,7 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch to Images', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_images.zip', fileSize: zipBlob.byteLength });
         toast.success(`Converted ${files.length} PDFs to images!`);
+        logToolUsage('Batch to Images', '/batch', files.length);
       } else if (mode === 'to-word') {
         const zip = new JSZip();
         for (let i = 0; i < files.length; i++) {

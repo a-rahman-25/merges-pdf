@@ -56,6 +56,11 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
 
               <PrivacyNotice />
 
+              {/* Ad Unit: Below tool, above features grid */}
+              <div className="mt-12 flex justify-center">
+                <AdUnit format="auto" className="w-full" />
+              </div>
+
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

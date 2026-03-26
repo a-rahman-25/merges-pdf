@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
 import ToolSidebar from '@/components/ToolSidebar';
+import AdUnit from '@/components/AdUnit';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { useI18n } from '@/hooks/useI18n';
 import {

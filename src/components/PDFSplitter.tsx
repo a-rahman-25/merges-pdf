@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Scissors, Loader2, Download, RotateCcw, FileText } from 'lucide-react';
 import { toast } from 'sonner';
-import { trackToolUsage } from '@/lib/analytics';
+import { trackToolUsage, logToolUsage } from '@/lib/analytics';
 import { addHistory } from '@/lib/processing-history';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';

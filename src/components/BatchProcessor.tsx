@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { PDFFileItem, getPageCount, mergePDFs, compressPDF, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import { addHistory } from '@/lib/processing-history';
+import { logToolUsage } from '@/lib/analytics';
 
 type BatchMode = 'merge' | 'compress' | 'to-images' | 'to-word';
 

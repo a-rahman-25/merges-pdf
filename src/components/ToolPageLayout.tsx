@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import PrivacyNotice from '@/components/PrivacyNotice';
 import Footer from '@/components/Footer';
 import ToolSidebar from '@/components/ToolSidebar';
+import AdUnit from '@/components/AdUnit';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { useI18n } from '@/hooks/useI18n';
 import {
@@ -54,6 +55,11 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
               {children}
 
               <PrivacyNotice />
+
+              {/* Ad Unit: Below tool, above features grid */}
+              <div className="mt-12 flex justify-center">
+                <AdUnit format="auto" className="w-full" />
+              </div>
 
               <motion.div
                 initial={{ opacity: 0 }}

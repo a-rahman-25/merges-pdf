@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import { logToolUsage } from '@/lib/analytics';
 import { toast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -155,6 +156,7 @@ const SingleConverter = () => {
       const url = URL.createObjectURL(blob);
       setResultUrl(url);
       toast({ title: 'Converted!', description: `SVG → ${ext.toUpperCase()} at ${dimensions}` });
+      logToolUsage('SVG Converter', '/svg-to-image');
     } catch (err: any) {
       toast({ title: 'Conversion failed', description: err.message, variant: 'destructive' });
     } finally {

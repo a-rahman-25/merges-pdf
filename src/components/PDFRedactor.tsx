@@ -6,6 +6,7 @@ import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { getPageCount, formatFileSize, downloadBlob, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { PDFDocument, rgb } from 'pdf-lib';
+import { logToolUsage } from '@/lib/analytics';
 
 interface RedactRect {
   page: number;
@@ -148,6 +149,7 @@ const PDFRedactor = () => {
       const data = await pdf.save();
       downloadBlob(data, file.name.replace(/\.pdf$/i, '_redacted.pdf'));
       toast.success('Redacted PDF downloaded!');
+      logToolUsage('PDF Redactor', '/pdf-redact');
     } catch (err) {
       toast.error(`Failed to save. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
 import DropZone from '@/components/DropZone';
+import { logToolUsage } from '@/lib/analytics';
 
 type Layout = 'horizontal' | 'vertical' | 'grid';
 type OutputFormat = 'png' | 'jpeg' | 'webp';
@@ -132,6 +133,7 @@ const MergeImagesComponent = () => {
       const url = URL.createObjectURL(blob);
       setResultUrl(url);
       toast.success('Images merged!');
+      logToolUsage('Merge Images', '/merge-images');
     } catch (err) {
       console.error(err);
       toast.error('Failed to merge images.');

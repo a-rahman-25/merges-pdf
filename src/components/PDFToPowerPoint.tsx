@@ -8,6 +8,7 @@ import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import { formatFileSize, getPageCount } from '@/lib/pdf-utils';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).toString();
 
@@ -80,6 +81,7 @@ ${result.slides.map((s) => `
 
       setResult({ slides });
       toast.success(`Extracted ${slides.length} slide(s)!`);
+      logToolUsage('PDF to PowerPoint', '/pdf-to-powerpoint');
     } catch (err) {
       console.error(err);
       toast.error('Failed to convert PDF to presentation.');

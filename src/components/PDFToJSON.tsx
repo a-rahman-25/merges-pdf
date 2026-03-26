@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFToJSON = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
@@ -65,6 +66,7 @@ const PDFToJSON = () => {
       const blob = new Blob([jsonStr], { type: 'application/json' });
       setResult({ blob, pageCount, preview: jsonStr.slice(0, 1200) });
       toast.success('Converted to JSON!');
+      logToolUsage('PDF to JSON', '/pdf-to-json');
     } catch (err) {
       toast.error('Failed to convert PDF to JSON.');
       console.error(err);

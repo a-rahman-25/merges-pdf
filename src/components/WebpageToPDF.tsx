@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Loader2, RotateCcw, Globe } from 'lucide-react';
 import { toast } from 'sonner';
+import { logToolUsage } from '@/lib/analytics';
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -97,6 +98,7 @@ const WebpageToPDF = () => {
 
       const pdfBytes = await pdf.save();
       downloadBlob(pdfBytes, outputName);
+      logToolUsage('Webpage to PDF', '/webpage-to-pdf');
       toast.success('Downloaded!');
     } catch (err) {
       console.error(err);

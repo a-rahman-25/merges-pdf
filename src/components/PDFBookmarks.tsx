@@ -10,6 +10,7 @@ import { downloadBlob, formatFileSize, getPageCount } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 type Bookmark = { title: string; page: number };
 
@@ -83,6 +84,7 @@ const PDFBookmarks = () => {
       const saved = await pdf.save();
       setResult(saved);
       toast.success(`${valid.length} bookmark(s) added!`);
+      logToolUsage('PDF Bookmarks', '/pdf-bookmarks');
     } catch (err) {
       console.error(err);
       toast.error('Failed to add bookmarks.');

@@ -9,6 +9,7 @@ import { getPageCount, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 interface Metadata {
   title: string;
@@ -70,6 +71,7 @@ const PDFMetadataEditor = () => {
       const pdfBytes = await pdf.save();
       setResult(pdfBytes);
       toast.success('Metadata updated!');
+      logToolUsage('Metadata Editor', '/pdf-metadata');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to update metadata');
     } finally {

@@ -8,6 +8,7 @@ import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 type OutputFormat = 'pdf' | 'jpg' | 'png';
 
@@ -76,6 +77,7 @@ const HeicConverter = () => {
       } else {
         setJpgResults(convertedImages);
         toast.success(`Converted ${convertedImages.length} image(s)!`);
+        logToolUsage('HEIC Converter', '/heic-to-pdf');
       }
     } catch (err) {
       console.error(err);

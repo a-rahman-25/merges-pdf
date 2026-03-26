@@ -10,6 +10,7 @@ import { PDFDocument } from 'pdf-lib';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFToHTML = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
@@ -74,6 +75,7 @@ ${htmlPages}
       const blob = new Blob([html], { type: 'text/html' });
       setResult({ blob, pageCount });
       toast.success('Converted to HTML!');
+      logToolUsage('PDF to HTML', '/pdf-to-html');
     } catch (err) {
       toast.error('Failed to convert PDF to HTML.');
       console.error(err);

@@ -10,6 +10,7 @@ import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 function stripHtml(html: string): string {
   const div = document.createElement('div');
@@ -153,6 +154,7 @@ const EPUBToPDF = () => {
       const saved = await pdf.save();
       setResult(saved);
       toast.success(`Converted ${chapters.length} chapter(s) to PDF!`);
+      logToolUsage('EPUB to PDF', '/epub-to-pdf');
     } catch (err) {
       console.error(err);
       toast.error('Failed to convert EPUB to PDF.');

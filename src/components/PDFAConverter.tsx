@@ -9,6 +9,7 @@ import { downloadBlob, formatFileSize, getPageCount } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFAConverter = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
@@ -71,6 +72,7 @@ const PDFAConverter = () => {
       const saved = await pdf.save();
       setResult({ data: saved, changes });
       toast.success('PDF/A conversion complete!');
+      logToolUsage('PDF/A Converter', '/pdf-a');
     } catch (err) {
       console.error(err);
       toast.error('Failed to convert to PDF/A.');

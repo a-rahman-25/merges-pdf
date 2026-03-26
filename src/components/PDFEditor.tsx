@@ -15,6 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 type AnnotationType = 'text' | 'highlight' | 'draw' | 'line' | 'arrow' | 'rect' | 'circle' | 'note' | 'image';
 
@@ -381,6 +382,7 @@ const PDFEditor = () => {
       const pdfBytes = await pdf.save();
       setResult(pdfBytes);
       toast.success('PDF saved!');
+      logToolUsage('PDF Editor', '/pdf-editor');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to save PDF');
       console.error(err);

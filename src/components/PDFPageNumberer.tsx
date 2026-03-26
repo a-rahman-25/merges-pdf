@@ -8,6 +8,7 @@ import { getPageCount, addPageNumbers, downloadBlob, formatFileSize, SUPPORT_EMA
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFPageNumberer = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -40,6 +41,7 @@ const PDFPageNumberer = () => {
       const data = await addPageNumbers(file.file, { position });
       setResult(data);
       toast.success('Page numbers added!');
+      logToolUsage('Page Numberer', '/page-numbers');
     } catch (err) {
       toast.error(`Failed to add page numbers. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

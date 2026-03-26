@@ -4,6 +4,7 @@ import { Eraser, Loader2, Download, RotateCcw, ImageIcon } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
+import { logToolUsage } from '@/lib/analytics';
 // Dynamically imported to avoid blocking initial load
 
 const BackgroundRemover = () => {
@@ -45,6 +46,7 @@ const BackgroundRemover = () => {
       setResult(url);
       setProgress(100);
       toast.success('Background removed successfully!');
+      logToolUsage('Background Remover', '/bg-remover');
     } catch (err) {
       console.error(err);
       toast.error('Background removal failed. Try a different image.');

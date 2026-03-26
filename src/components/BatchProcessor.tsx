@@ -136,6 +136,7 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch Compress', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_compressed.zip', fileSize: zipBlob.byteLength });
         toast.success(`Compressed ${files.length} files into ZIP!`);
+        logToolUsage('Batch Compress', '/batch', files.length);
       } else if (mode === 'to-images') {
         const zip = new JSZip();
         for (let i = 0; i < files.length; i++) {
@@ -155,6 +156,7 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch to Images', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_images.zip', fileSize: zipBlob.byteLength });
         toast.success(`Converted ${files.length} PDFs to images!`);
+        logToolUsage('Batch to Images', '/batch', files.length);
       } else if (mode === 'to-word') {
         const zip = new JSZip();
         for (let i = 0; i < files.length; i++) {
@@ -171,6 +173,7 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch to Word', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_word.zip', fileSize: zipBlob.byteLength });
         toast.success(`Converted ${files.length} PDFs to Word!`);
+        logToolUsage('Batch to Word', '/batch', files.length);
       }
       setDone(true);
     } catch (err) {

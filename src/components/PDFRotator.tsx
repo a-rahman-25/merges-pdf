@@ -8,6 +8,7 @@ import { getPageCount, rotatePDFPages, downloadBlob, formatFileSize, SUPPORT_EMA
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const rotations = [
   { value: 90 as const, label: '90°' },
@@ -46,6 +47,7 @@ const PDFRotator = () => {
       const data = await rotatePDFPages(file.file, rotation);
       setResult(data);
       toast.success(`Rotated all pages by ${rotation}°!`);
+      logToolUsage('PDF Rotator', '/rotate');
     } catch (err) {
       toast.error(`Failed to rotate PDF. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

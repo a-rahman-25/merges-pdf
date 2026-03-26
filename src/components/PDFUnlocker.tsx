@@ -9,6 +9,7 @@ import { PDFDocument } from 'pdf-lib';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFUnlocker = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number; pageCount: number | null } | null>(null);
@@ -47,6 +48,7 @@ const PDFUnlocker = () => {
       const data = await newDoc.save();
       setResult(data);
       toast.success('PDF unlocked! Restrictions removed.');
+      logToolUsage('PDF Unlocker', '/unlock-pdf');
     } catch (err) {
       toast.error(`Failed to unlock PDF. The file may have strong encryption. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

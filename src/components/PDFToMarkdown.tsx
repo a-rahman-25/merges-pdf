@@ -10,6 +10,7 @@ import { saveAs } from 'file-saver';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFToMarkdown = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
@@ -55,6 +56,7 @@ const PDFToMarkdown = () => {
       const blob = new Blob([md], { type: 'text/markdown' });
       setResult({ blob, pageCount, preview: md.slice(0, 1000) });
       toast.success('Converted to Markdown!');
+      logToolUsage('PDF to Markdown', '/pdf-to-markdown');
     } catch (err) {
       toast.error('Failed to convert PDF to Markdown.');
       console.error(err);

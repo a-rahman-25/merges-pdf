@@ -12,6 +12,7 @@ import { getPageCount, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 const FONTS = [
   { name: 'Dancing Script', style: "'Dancing Script', cursive" },
@@ -228,6 +229,7 @@ const PDFSignature = () => {
       setResult(pdfBytes);
       setStep(4);
       toast.success('Signatures applied!');
+      logToolUsage('PDF Signature', '/pdf-signature');
     } catch (err: any) {
       toast.error(err?.message || 'Failed to apply signatures');
       console.error(err);

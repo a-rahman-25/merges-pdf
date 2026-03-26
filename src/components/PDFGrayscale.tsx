@@ -6,7 +6,7 @@ import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { getPageCount, downloadBlob, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import { PDFDocument, grayscale } from 'pdf-lib';
-import { trackToolUsage, trackFileProcess } from '@/lib/analytics';
+import { trackToolUsage, trackFileProcess, logToolUsage } from '@/lib/analytics';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
@@ -56,6 +56,7 @@ const PDFGrayscale = () => {
       trackToolUsage('pdf_grayscale', 'convert_complete');
       trackFileProcess('pdf_grayscale', 1, file.size / (1024 * 1024));
       toast.success('Converted to grayscale!');
+      logToolUsage('PDF Grayscale', '/grayscale');
     } catch (err) {
       toast.error(`Failed to convert. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

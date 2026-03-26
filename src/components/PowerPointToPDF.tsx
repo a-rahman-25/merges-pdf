@@ -8,6 +8,7 @@ import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
+import { logToolUsage } from '@/lib/analytics';
 
 interface SlideContent {
   title: string;
@@ -128,6 +129,7 @@ const PowerPointToPDF = () => {
       const pdfBytes = await pdf.save();
       setResult({ data: pdfBytes, pageCount: pdf.getPageCount() });
       toast.success('Converted successfully!');
+      logToolUsage('PowerPoint to PDF', '/pptx-to-pdf');
     } catch (err) {
       console.error(err);
       toast.error('Conversion failed. Ensure this is a valid .pptx file.');

@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { getPageCount, formatFileSize, SUPPORT_EMAIL } from '@/lib/pdf-utils';
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
+import { logToolUsage } from '@/lib/analytics';
 
 type ImageFormat = 'png' | 'jpg';
 
@@ -80,6 +81,7 @@ const PDFToImages = () => {
     const blob = await zip.generateAsync({ type: 'blob' });
     saveAs(blob, `${file!.name.replace(/\.pdf$/i, '')}_images.zip`);
     toast.success('Downloaded ZIP!');
+    logToolUsage('PDF to Images', '/pdf-to-images');
   };
 
   const downloadSingle = (img: { data: string; name: string }) => {

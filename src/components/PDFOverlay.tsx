@@ -10,6 +10,7 @@ import { downloadBlob, formatFileSize, getPageCount } from '@/lib/pdf-utils';
 import PDFPreviewDownload from '@/components/PDFPreviewDownload';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
+import { logToolUsage } from '@/lib/analytics';
 
 const PDFOverlay = () => {
   const [baseFile, setBaseFile] = useState<{ file: File; name: string; size: number; pageCount: number } | null>(null);
@@ -88,6 +89,7 @@ const PDFOverlay = () => {
       const saved = await resultPdf.save();
       setResult(saved);
       toast.success('Overlay applied successfully!');
+      logToolUsage('PDF Overlay', '/pdf-overlay');
     } catch (err) {
       console.error(err);
       toast.error('Failed to overlay PDFs.');

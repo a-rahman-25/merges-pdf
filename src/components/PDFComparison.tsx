@@ -6,6 +6,7 @@ import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 import { formatFileSize, getPageCount } from '@/lib/pdf-utils';
+import { logToolUsage } from '@/lib/analytics';
 
 GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).toString();
 
@@ -94,6 +95,7 @@ const PDFComparison = () => {
         similarity,
       });
       toast.success('Comparison complete!');
+      logToolUsage('PDF Comparison', '/compare-pdf');
     } catch (err) {
       console.error(err);
       toast.error('Failed to compare PDFs.');

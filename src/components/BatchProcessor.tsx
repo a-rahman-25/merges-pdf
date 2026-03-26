@@ -136,6 +136,7 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch Compress', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_compressed.zip', fileSize: zipBlob.byteLength });
         toast.success(`Compressed ${files.length} files into ZIP!`);
+        logToolUsage('Batch Compress', '/batch', files.length);
       } else if (mode === 'to-images') {
         const zip = new JSZip();
         for (let i = 0; i < files.length; i++) {

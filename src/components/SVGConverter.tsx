@@ -156,6 +156,7 @@ const SingleConverter = () => {
       const url = URL.createObjectURL(blob);
       setResultUrl(url);
       toast({ title: 'Converted!', description: `SVG → ${ext.toUpperCase()} at ${dimensions}` });
+      logToolUsage('SVG Converter', '/svg-to-image');
     } catch (err: any) {
       toast({ title: 'Conversion failed', description: err.message, variant: 'destructive' });
     } finally {

@@ -98,6 +98,7 @@ const WebpageToPDF = () => {
 
       const pdfBytes = await pdf.save();
       downloadBlob(pdfBytes, outputName);
+      logToolUsage('Webpage to PDF', '/webpage-to-pdf');
       toast.success('Downloaded!');
     } catch (err) {
       console.error(err);

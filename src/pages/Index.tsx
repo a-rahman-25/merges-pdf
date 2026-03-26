@@ -350,6 +350,11 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ─── Ad Unit: Between Tools & How It Works ─── */}
+      <div className="py-6 sm:py-8 flex justify-center px-4">
+        <AdUnit format="auto" className="max-w-4xl w-full" />
+      </div>
+
       {/* ─── How It Works ─── */}
       <section className="border-t border-border/60 bg-card/50 py-16 sm:py-20" aria-labelledby="howit-title">
         <div className="mx-auto max-w-4xl px-4 sm:px-6">

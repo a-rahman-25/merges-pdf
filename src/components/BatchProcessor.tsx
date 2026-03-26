@@ -173,6 +173,7 @@ const BatchProcessor = () => {
         setProgress(100);
         addHistory({ toolName: 'Batch to Word', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_word.zip', fileSize: zipBlob.byteLength });
         toast.success(`Converted ${files.length} PDFs to Word!`);
+        logToolUsage('Batch to Word', '/batch', files.length);
       }
       setDone(true);
     } catch (err) {

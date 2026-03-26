@@ -118,6 +118,7 @@ const BatchProcessor = () => {
         downloadBlob(result, 'batch_merged.pdf');
         setProgress(100);
         addHistory({ toolName: 'Batch Merge', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_merged.pdf', fileSize: result.byteLength });
+        logToolUsage('Batch Merge', '/batch', files.length);
         toast.success('Batch merge complete!');
       } else if (mode === 'compress') {
         const zip = new JSZip();

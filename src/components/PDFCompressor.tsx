@@ -44,6 +44,7 @@ const PDFCompressor = () => {
       const savings = ((1 - data.length / file.size) * 100).toFixed(1);
       toast.success(`Compressed! Reduced by ${savings}%`);
       addHistory({ toolName: 'PDF Compressor', toolPath: '/compress', fileName: file.name, outputName: file.name.replace(/\.pdf$/i, '_compressed.pdf'), fileSize: data.length });
+      logToolUsage('PDF Compressor', '/compress');
     } catch (err) {
       toast.error(`Failed to compress PDF. Contact ${SUPPORT_EMAIL} for help.`);
       console.error(err);

@@ -73,6 +73,8 @@ const AiClassify = lazy(() => import("./pages/AiClassify"));
 const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
 const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 const queryClient = new QueryClient();
 

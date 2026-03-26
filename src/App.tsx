@@ -73,6 +73,8 @@ const AiClassify = lazy(() => import("./pages/AiClassify"));
 const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
 const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 
 const queryClient = new QueryClient();
 
@@ -187,6 +189,8 @@ const AnimatedRoutes = () => {
         <Route path="/ai-document-similarity" element={<AIToolPage />} />
         <Route path="/ai-contract-analyzer" element={<AIToolPage />} />
         <Route path="/ai-citation-extractor" element={<AIToolPage />} />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route path="/admin" element={<AdminDashboard />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

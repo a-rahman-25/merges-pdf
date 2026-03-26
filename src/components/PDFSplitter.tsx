@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Scissors, Loader2, Download, RotateCcw, FileText } from 'lucide-react';
 import { toast } from 'sonner';
-import { trackToolUsage } from '@/lib/analytics';
+import { trackToolUsage, logToolUsage } from '@/lib/analytics';
 import { addHistory } from '@/lib/processing-history';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
@@ -70,6 +70,7 @@ const PDFSplitter = () => {
         trackToolUsage('pdf_splitter', 'split_all', { page_count: pages.length });
         toast.success(`Split into ${pages.length} pages!`);
         addHistory({ toolName: 'PDF Splitter', toolPath: '/split', fileName: file.name, outputName: `${pages.length} pages`, fileSize: file.size });
+        logToolUsage('PDF Splitter', '/split');
       } catch (err) {
         toast.error(`Failed to split PDF. Contact ${SUPPORT_EMAIL} for help.`);
         console.error(err);

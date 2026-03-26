@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Combine, Loader2, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
-import { trackToolUsage, trackFileProcess } from '@/lib/analytics';
+import { trackToolUsage, trackFileProcess, logToolUsage } from '@/lib/analytics';
 import { addHistory } from '@/lib/processing-history';
 import DropZone from '@/components/DropZone';
 import FileListItem from '@/components/FileListItem';
@@ -68,6 +68,7 @@ const PDFMerger = () => {
       trackFileProcess('pdf_merger', files.length, Math.round(totalSizeMB * 100) / 100);
       toast.success('PDFs merged! Review the preview below.');
       addHistory({ toolName: 'PDF Merger', toolPath: '/merge', fileName: files.map(f => f.name).join(', '), outputName: 'merged.pdf', fileSize: result.byteLength });
+      logToolUsage('PDF Merger', '/merge', files.length);
     } catch (err) {
       toast.error('Failed to merge PDFs. Contact merge.pdf.st@gmail.com for help.');
       console.error(err);

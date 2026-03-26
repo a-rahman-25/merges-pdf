@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { PDFFileItem, getPageCount, mergePDFs, compressPDF, downloadBlob, formatFileSize } from '@/lib/pdf-utils';
 import { addHistory } from '@/lib/processing-history';
+import { logToolUsage } from '@/lib/analytics';
 
 type BatchMode = 'merge' | 'compress' | 'to-images' | 'to-word';
 
@@ -117,6 +118,7 @@ const BatchProcessor = () => {
         downloadBlob(result, 'batch_merged.pdf');
         setProgress(100);
         addHistory({ toolName: 'Batch Merge', toolPath: '/batch', fileName: `${files.length} files`, outputName: 'batch_merged.pdf', fileSize: result.byteLength });
+        logToolUsage('Batch Merge', '/batch', files.length);
         toast.success('Batch merge complete!');
       } else if (mode === 'compress') {
         const zip = new JSZip();

@@ -75,6 +75,10 @@ const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AiContractAnalyzer = lazy(() => import("./pages/AiContractAnalyzer"));
+const AiGrammarCheck = lazy(() => import("./pages/AiGrammarCheck"));
+const AiPdfAutoFill = lazy(() => import("./pages/AiPdfAutoFill"));
+const AiPdfGenerator = lazy(() => import("./pages/AiPdfGenerator"));
 
 const queryClient = new QueryClient();
 

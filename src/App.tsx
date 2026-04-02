@@ -75,6 +75,10 @@ const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const AiContractAnalyzer = lazy(() => import("./pages/AiContractAnalyzer"));
+const AiGrammarCheck = lazy(() => import("./pages/AiGrammarCheck"));
+const AiPdfAutoFill = lazy(() => import("./pages/AiPdfAutoFill"));
+const AiPdfGenerator = lazy(() => import("./pages/AiPdfGenerator"));
 
 const queryClient = new QueryClient();
 
@@ -191,6 +195,10 @@ const AnimatedRoutes = () => {
         <Route path="/ai-citation-extractor" element={<AIToolPage />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/ai-contract-analyzer" element={<AiContractAnalyzer />} />
+        <Route path="/ai-grammar-check" element={<AiGrammarCheck />} />
+        <Route path="/ai-pdf-autofill" element={<AiPdfAutoFill />} />
+        <Route path="/ai-pdf-generator" element={<AiPdfGenerator />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

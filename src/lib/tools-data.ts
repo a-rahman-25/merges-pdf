@@ -4,7 +4,7 @@ import {
   Hash, Unlock, Palette, MessageSquare, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
   BookMarked, Camera, GitCompare, FileCode, Code, Globe, Shield,
-  TableProperties, FolderSearch, Braces,
+  TableProperties, FolderSearch, Braces, SpellCheck, Wand2,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -78,6 +78,10 @@ export const allTools: ToolItem[] = [
   { icon: Type, titleKey: 'tool.editor', descKey: 'tool.editor.desc', path: '/pdf-editor', color: 'bg-tool-rose/15 text-tool-rose', category: 'aitools' },
   { icon: TableProperties, titleKey: 'tool.aiTableExtract', descKey: 'tool.aiTableExtract.desc', path: '/ai-table-extract', color: 'bg-tool-emerald/15 text-tool-emerald', category: 'aitools' },
   { icon: FolderSearch, titleKey: 'tool.aiClassify', descKey: 'tool.aiClassify.desc', path: '/ai-classify', color: 'bg-tool-indigo/15 text-tool-indigo', category: 'aitools' },
+  { icon: Shield, titleKey: 'tool.aiContractAnalyzer', descKey: 'tool.aiContractAnalyzer.desc', path: '/ai-contract-analyzer', color: 'bg-tool-rose/15 text-tool-rose', category: 'aitools' },
+  { icon: SpellCheck, titleKey: 'tool.aiGrammarCheck', descKey: 'tool.aiGrammarCheck.desc', path: '/ai-grammar-check', color: 'bg-tool-cyan/15 text-tool-cyan', category: 'aitools' },
+  { icon: FormInput, titleKey: 'tool.aiPdfAutoFill', descKey: 'tool.aiPdfAutoFill.desc', path: '/ai-pdf-autofill', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },
+  { icon: Wand2, titleKey: 'tool.aiPdfGenerator', descKey: 'tool.aiPdfGenerator.desc', path: '/ai-pdf-generator', color: 'bg-tool-pink/15 text-tool-pink', category: 'aitools' },
 ];
 
 export const categories = [

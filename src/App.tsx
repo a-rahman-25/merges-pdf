@@ -195,6 +195,10 @@ const AnimatedRoutes = () => {
         <Route path="/ai-citation-extractor" element={<AIToolPage />} />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/ai-contract-analyzer" element={<AiContractAnalyzer />} />
+        <Route path="/ai-grammar-check" element={<AiGrammarCheck />} />
+        <Route path="/ai-pdf-autofill" element={<AiPdfAutoFill />} />
+        <Route path="/ai-pdf-generator" element={<AiPdfGenerator />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

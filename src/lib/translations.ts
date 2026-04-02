@@ -154,6 +154,10 @@ const en: T = {
   'tool.editor': 'PDF Editor', 'tool.editor.desc': 'Annotate, draw & edit PDFs.',
   'tool.aiTableExtract': 'AI Table Extraction', 'tool.aiTableExtract.desc': 'Extract tables from PDFs as CSV.',
   'tool.aiClassify': 'AI Classify', 'tool.aiClassify.desc': 'Auto-categorize documents by type.',
+  'tool.aiContractAnalyzer': 'AI Contract Analyzer', 'tool.aiContractAnalyzer.desc': 'Detect clauses, risks & obligations.',
+  'tool.aiGrammarCheck': 'AI Grammar Checker', 'tool.aiGrammarCheck.desc': 'Check grammar, style & readability.',
+  'tool.aiPdfAutoFill': 'AI PDF Auto-Fill', 'tool.aiPdfAutoFill.desc': 'Fill PDF forms with AI suggestions.',
+  'tool.aiPdfGenerator': 'AI PDF Generator', 'tool.aiPdfGenerator.desc': 'Create documents from text prompts.',
   // ToolPageLayout
   'layout.allTools': 'Everything you need for PDFs',
   // Feature cards

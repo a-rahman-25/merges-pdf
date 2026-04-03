@@ -533,6 +533,18 @@ const ur: T = {
   'privacy.notice.local': 'تمام پروسیسنگ مقامی طور پر آپ کے براؤزر میں ہوتی ہے',
   'privacy.notice.noStore': 'کوئی فائل محفوظ یا لاگ نہیں ہوتی',
   'privacy.notice.noSignup': 'سائن اپ نہیں، ٹریکنگ نہیں، تیسرے فریق کی رسائی نہیں',
+  'tool.aiContractAnalyzer': 'AI معاہدہ تجزیہ کار',
+  'tool.aiContractAnalyzer.desc': 'شقیں، خطرات اور ذمہ داریاں دریافت کریں۔',
+  'tool.aiGrammarCheck': 'AI گرامر چیکر',
+  'tool.aiGrammarCheck.desc': 'گرامر، اسلوب اور پڑھنے کی آسانی جانچیں۔',
+  'tool.aiPdfAutoFill': 'AI خودکار بھرائی',
+  'tool.aiPdfAutoFill.desc': 'AI تجاویز سے PDF فارم بھریں۔',
+  'tool.aiPdfGenerator': 'AI PDF جنریٹر',
+  'tool.aiPdfGenerator.desc': 'متن سے دستاویزات بنائیں۔',
+  'tool.aiPdfChat': 'AI PDF چیٹ',
+  'tool.aiPdfChat.desc': 'اپنے PDF دستاویزات سے بات کریں۔',
+  'tool.aiRewriter': 'AI دوبارہ لکھنا',
+  'tool.aiRewriter.desc': 'کسی بھی انداز میں دستاویزات دوبارہ لکھیں۔',
 };
 
 const hi: T = {
@@ -613,6 +625,18 @@ const hi: T = {
   'privacy.notice.local': 'सारी प्रोसेसिंग स्थानीय रूप से आपके ब्राउज़र में होती है',
   'privacy.notice.noStore': 'कोई फ़ाइल स्टोर या लॉग नहीं होती',
   'privacy.notice.noSignup': 'साइन-अप नहीं, ट्रैकिंग नहीं, तीसरे पक्ष की पहुँच नहीं',
+  'tool.aiContractAnalyzer': 'AI अनुबंध विश्लेषक',
+  'tool.aiContractAnalyzer.desc': 'खंड, जोखिम और दायित्व खोजें।',
+  'tool.aiGrammarCheck': 'AI व्याकरण जांच',
+  'tool.aiGrammarCheck.desc': 'व्याकरण, शैली और पठनीयता जांचें।',
+  'tool.aiPdfAutoFill': 'AI ऑटो-फिल',
+  'tool.aiPdfAutoFill.desc': 'AI सुझावों से PDF फॉर्म भरें।',
+  'tool.aiPdfGenerator': 'AI PDF जनरेटर',
+  'tool.aiPdfGenerator.desc': 'टेक्स्ट से दस्तावेज़ बनाएं।',
+  'tool.aiPdfChat': 'AI PDF चैट',
+  'tool.aiPdfChat.desc': 'अपने PDF दस्तावेज़ों से बात करें।',
+  'tool.aiRewriter': 'AI पुनर्लेखक',
+  'tool.aiRewriter.desc': 'किसी भी शैली में दस्तावेज़ दोबारा लिखें।',
 };
 
 const es: T = {
@@ -693,6 +717,18 @@ const es: T = {
   'privacy.notice.local': 'Todo se procesa localmente en tu navegador',
   'privacy.notice.noStore': 'No se almacenan ni registran archivos',
   'privacy.notice.noSignup': 'Sin registro, sin rastreo, sin acceso de terceros',
+  'tool.aiContractAnalyzer': 'Analizador de Contratos AI',
+  'tool.aiContractAnalyzer.desc': 'Detectar cláusulas, riesgos y obligaciones.',
+  'tool.aiGrammarCheck': 'Corrector Gramatical AI',
+  'tool.aiGrammarCheck.desc': 'Revisar gramática, estilo y legibilidad.',
+  'tool.aiPdfAutoFill': 'Auto-relleno AI',
+  'tool.aiPdfAutoFill.desc': 'Rellenar formularios PDF con sugerencias AI.',
+  'tool.aiPdfGenerator': 'Generador PDF AI',
+  'tool.aiPdfGenerator.desc': 'Crear documentos desde texto.',
+  'tool.aiPdfChat': 'Chat PDF AI',
+  'tool.aiPdfChat.desc': 'Conversa con tus documentos PDF.',
+  'tool.aiRewriter': 'Reescritor AI',
+  'tool.aiRewriter.desc': 'Reescribir documentos en cualquier tono.',
 };
 
 const ptBR: T = {
@@ -773,6 +809,18 @@ const ptBR: T = {
   'privacy.notice.local': 'Todo processamento acontece localmente no seu navegador',
   'privacy.notice.noStore': 'Nenhum arquivo é armazenado ou registrado',
   'privacy.notice.noSignup': 'Sem cadastro, sem rastreamento, sem acesso de terceiros',
+  'tool.aiContractAnalyzer': 'Analisador de Contratos AI',
+  'tool.aiContractAnalyzer.desc': 'Detectar cláusulas, riscos e obrigações.',
+  'tool.aiGrammarCheck': 'Corretor Gramatical AI',
+  'tool.aiGrammarCheck.desc': 'Verificar gramática, estilo e legibilidade.',
+  'tool.aiPdfAutoFill': 'Preenchimento Automático AI',
+  'tool.aiPdfAutoFill.desc': 'Preencher formulários PDF com sugestões AI.',
+  'tool.aiPdfGenerator': 'Gerador de PDF AI',
+  'tool.aiPdfGenerator.desc': 'Criar documentos a partir de texto.',
+  'tool.aiPdfChat': 'Chat PDF AI',
+  'tool.aiPdfChat.desc': 'Converse com seus documentos PDF.',
+  'tool.aiRewriter': 'Reescritor AI',
+  'tool.aiRewriter.desc': 'Reescrever documentos em qualquer tom.',
 };
 
 const fr: T = {
@@ -853,6 +901,18 @@ const fr: T = {
   'privacy.notice.local': 'Tout le traitement se fait localement dans votre navigateur',
   'privacy.notice.noStore': 'Aucun fichier n\'est stocké ou enregistré',
   'privacy.notice.noSignup': 'Pas d\'inscription, pas de suivi, pas d\'accès tiers',
+  'tool.aiContractAnalyzer': 'Analyseur de Contrats AI',
+  'tool.aiContractAnalyzer.desc': 'Détecter les clauses, risques et obligations.',
+  'tool.aiGrammarCheck': 'Correcteur Grammatical AI',
+  'tool.aiGrammarCheck.desc': 'Vérifier grammaire, style et lisibilité.',
+  'tool.aiPdfAutoFill': 'Remplissage Auto AI',
+  'tool.aiPdfAutoFill.desc': 'Remplir les formulaires PDF avec des suggestions AI.',
+  'tool.aiPdfGenerator': 'Générateur PDF AI',
+  'tool.aiPdfGenerator.desc': 'Créer des documents à partir de texte.',
+  'tool.aiPdfChat': 'Chat PDF AI',
+  'tool.aiPdfChat.desc': 'Discutez avec vos documents PDF.',
+  'tool.aiRewriter': 'Réécrivain AI',
+  'tool.aiRewriter.desc': 'Réécrire des documents dans n\'importe quel ton.',
 };
 
 const de: T = {
@@ -933,6 +993,18 @@ const de: T = {
   'privacy.notice.local': 'Alle Verarbeitung erfolgt lokal in Ihrem Browser',
   'privacy.notice.noStore': 'Keine Dateien werden gespeichert oder protokolliert',
   'privacy.notice.noSignup': 'Keine Anmeldung, kein Tracking, kein Drittanbieterzugang',
+  'tool.aiContractAnalyzer': 'AI Vertragsanalyse',
+  'tool.aiContractAnalyzer.desc': 'Klauseln, Risiken und Pflichten erkennen.',
+  'tool.aiGrammarCheck': 'AI Grammatikprüfung',
+  'tool.aiGrammarCheck.desc': 'Grammatik, Stil und Lesbarkeit prüfen.',
+  'tool.aiPdfAutoFill': 'AI Auto-Ausfüllung',
+  'tool.aiPdfAutoFill.desc': 'PDF-Formulare mit AI-Vorschlägen ausfüllen.',
+  'tool.aiPdfGenerator': 'AI PDF Generator',
+  'tool.aiPdfGenerator.desc': 'Dokumente aus Text erstellen.',
+  'tool.aiPdfChat': 'AI PDF Chat',
+  'tool.aiPdfChat.desc': 'Chatten Sie mit Ihren PDF-Dokumenten.',
+  'tool.aiRewriter': 'AI Umschreiber',
+  'tool.aiRewriter.desc': 'Dokumente in jedem Stil umschreiben.',
 };
 
 const zh: T = {
@@ -1013,6 +1085,18 @@ const zh: T = {
   'privacy.notice.local': '所有处理在浏览器本地完成',
   'privacy.notice.noStore': '不存储或记录任何文件',
   'privacy.notice.noSignup': '无需注册、无追踪、无第三方访问',
+  'tool.aiContractAnalyzer': 'AI合同分析器',
+  'tool.aiContractAnalyzer.desc': '检测条款、风险和义务。',
+  'tool.aiGrammarCheck': 'AI语法检查',
+  'tool.aiGrammarCheck.desc': '检查语法、风格和可读性。',
+  'tool.aiPdfAutoFill': 'AI自动填充',
+  'tool.aiPdfAutoFill.desc': '用AI建议填写PDF表单。',
+  'tool.aiPdfGenerator': 'AI PDF生成器',
+  'tool.aiPdfGenerator.desc': '从文本创建文档。',
+  'tool.aiPdfChat': 'AI PDF聊天',
+  'tool.aiPdfChat.desc': '与您的PDF文档对话。',
+  'tool.aiRewriter': 'AI重写工具',
+  'tool.aiRewriter.desc': '以任何风格重写文档。',
 };
 
 const ja: T = {
@@ -1093,6 +1177,18 @@ const ja: T = {
   'privacy.notice.local': 'すべての処理はブラウザ内でローカルに行われます',
   'privacy.notice.noStore': 'ファイルは保存・記録されません',
   'privacy.notice.noSignup': '登録不要、追跡なし、第三者のアクセスなし',
+  'tool.aiContractAnalyzer': 'AI契約分析',
+  'tool.aiContractAnalyzer.desc': '条項、リスク、義務を検出。',
+  'tool.aiGrammarCheck': 'AI文法チェック',
+  'tool.aiGrammarCheck.desc': '文法、スタイル、読みやすさをチェック。',
+  'tool.aiPdfAutoFill': 'AI自動入力',
+  'tool.aiPdfAutoFill.desc': 'AIの提案でPDFフォームを入力。',
+  'tool.aiPdfGenerator': 'AI PDFジェネレーター',
+  'tool.aiPdfGenerator.desc': 'テキストからドキュメントを作成。',
+  'tool.aiPdfChat': 'AI PDFチャット',
+  'tool.aiPdfChat.desc': 'PDFドキュメントとチャット。',
+  'tool.aiRewriter': 'AIリライター',
+  'tool.aiRewriter.desc': 'どんなトーンでもドキュメントを書き直し。',
 };
 
 const ko: T = {
@@ -1173,6 +1269,18 @@ const ko: T = {
   'privacy.notice.local': '모든 처리는 브라우저에서 로컬로 수행됩니다',
   'privacy.notice.noStore': '파일이 저장되거나 기록되지 않습니다',
   'privacy.notice.noSignup': '가입 불필요, 추적 없음, 제3자 접근 없음',
+  'tool.aiContractAnalyzer': 'AI 계약 분석기',
+  'tool.aiContractAnalyzer.desc': '조항, 위험 및 의무를 감지합니다.',
+  'tool.aiGrammarCheck': 'AI 문법 검사기',
+  'tool.aiGrammarCheck.desc': '문법, 스타일 및 가독성을 검사합니다.',
+  'tool.aiPdfAutoFill': 'AI 자동 입력',
+  'tool.aiPdfAutoFill.desc': 'AI 제안으로 PDF 양식을 채웁니다.',
+  'tool.aiPdfGenerator': 'AI PDF 생성기',
+  'tool.aiPdfGenerator.desc': '텍스트에서 문서를 생성합니다.',
+  'tool.aiPdfChat': 'AI PDF 채팅',
+  'tool.aiPdfChat.desc': 'PDF 문서와 대화하세요.',
+  'tool.aiRewriter': 'AI 리라이터',
+  'tool.aiRewriter.desc': '어떤 톤으로든 문서를 다시 작성합니다.',
 };
 
 const tr: T = {
@@ -1253,6 +1361,18 @@ const tr: T = {
   'privacy.notice.local': 'Tüm işlemler tarayıcınızda yerel olarak yapılır',
   'privacy.notice.noStore': 'Dosyalar kaydedilmez veya günlüğe alınmaz',
   'privacy.notice.noSignup': 'Kayıt yok, izleme yok, üçüncü taraf erişimi yok',
+  'tool.aiContractAnalyzer': 'AI Sözleşme Analizi',
+  'tool.aiContractAnalyzer.desc': 'Maddeler, riskler ve yükümlülükleri tespit edin.',
+  'tool.aiGrammarCheck': 'AI Dilbilgisi Kontrolü',
+  'tool.aiGrammarCheck.desc': 'Dilbilgisi, stil ve okunabilirliği kontrol edin.',
+  'tool.aiPdfAutoFill': 'AI Otomatik Doldurma',
+  'tool.aiPdfAutoFill.desc': 'PDF formlarını AI önerileriyle doldurun.',
+  'tool.aiPdfGenerator': 'AI PDF Oluşturucu',
+  'tool.aiPdfGenerator.desc': 'Metinden belge oluşturun.',
+  'tool.aiPdfChat': 'AI PDF Sohbet',
+  'tool.aiPdfChat.desc': 'PDF belgelerinizle sohbet edin.',
+  'tool.aiRewriter': 'AI Yeniden Yazıcı',
+  'tool.aiRewriter.desc': 'Belgeleri herhangi bir tonda yeniden yazın.',
 };
 
 const ru: T = {
@@ -1333,6 +1453,18 @@ const ru: T = {
   'privacy.notice.local': 'Вся обработка происходит локально в вашем браузере',
   'privacy.notice.noStore': 'Файлы не сохраняются и не регистрируются',
   'privacy.notice.noSignup': 'Без регистрации, без отслеживания, без доступа третьих лиц',
+  'tool.aiContractAnalyzer': 'AI Анализ контрактов',
+  'tool.aiContractAnalyzer.desc': 'Обнаружение пунктов, рисков и обязательств.',
+  'tool.aiGrammarCheck': 'AI Проверка грамматики',
+  'tool.aiGrammarCheck.desc': 'Проверка грамматики, стиля и читаемости.',
+  'tool.aiPdfAutoFill': 'AI Автозаполнение',
+  'tool.aiPdfAutoFill.desc': 'Заполнение PDF-форм с подсказками AI.',
+  'tool.aiPdfGenerator': 'AI Генератор PDF',
+  'tool.aiPdfGenerator.desc': 'Создание документов из текста.',
+  'tool.aiPdfChat': 'AI PDF Чат',
+  'tool.aiPdfChat.desc': 'Общайтесь с вашими PDF-документами.',
+  'tool.aiRewriter': 'AI Рерайтер',
+  'tool.aiRewriter.desc': 'Перепишите документы в любом стиле.',
 };
 
 const it: T = {
@@ -1413,6 +1545,18 @@ const it: T = {
   'privacy.notice.local': 'Tutta l\'elaborazione avviene localmente nel tuo browser',
   'privacy.notice.noStore': 'Nessun file viene archiviato o registrato',
   'privacy.notice.noSignup': 'Nessuna registrazione, nessun tracciamento, nessun accesso di terzi',
+  'tool.aiContractAnalyzer': 'Analizzatore Contratti AI',
+  'tool.aiContractAnalyzer.desc': 'Rileva clausole, rischi e obblighi.',
+  'tool.aiGrammarCheck': 'Correttore Grammaticale AI',
+  'tool.aiGrammarCheck.desc': 'Controlla grammatica, stile e leggibilità.',
+  'tool.aiPdfAutoFill': 'Compilazione Auto AI',
+  'tool.aiPdfAutoFill.desc': 'Compila moduli PDF con suggerimenti AI.',
+  'tool.aiPdfGenerator': 'Generatore PDF AI',
+  'tool.aiPdfGenerator.desc': 'Crea documenti dal testo.',
+  'tool.aiPdfChat': 'Chat PDF AI',
+  'tool.aiPdfChat.desc': 'Chatta con i tuoi documenti PDF.',
+  'tool.aiRewriter': 'Riscrittore AI',
+  'tool.aiRewriter.desc': 'Riscrivi documenti in qualsiasi tono.',
 };
 
 const nl: T = {
@@ -1493,6 +1637,18 @@ const nl: T = {
   'privacy.notice.local': 'Alle verwerking gebeurt lokaal in uw browser',
   'privacy.notice.noStore': 'Geen bestanden worden opgeslagen of gelogd',
   'privacy.notice.noSignup': 'Geen registratie, geen tracking, geen toegang van derden',
+  'tool.aiContractAnalyzer': 'AI Contractanalyse',
+  'tool.aiContractAnalyzer.desc': 'Detecteer clausules, risico\'s en verplichtingen.',
+  'tool.aiGrammarCheck': 'AI Grammaticacontrole',
+  'tool.aiGrammarCheck.desc': 'Controleer grammatica, stijl en leesbaarheid.',
+  'tool.aiPdfAutoFill': 'AI Auto-invullen',
+  'tool.aiPdfAutoFill.desc': 'Vul PDF-formulieren in met AI-suggesties.',
+  'tool.aiPdfGenerator': 'AI PDF Generator',
+  'tool.aiPdfGenerator.desc': 'Maak documenten van tekst.',
+  'tool.aiPdfChat': 'AI PDF Chat',
+  'tool.aiPdfChat.desc': 'Chat met uw PDF-documenten.',
+  'tool.aiRewriter': 'AI Herschrijver',
+  'tool.aiRewriter.desc': 'Herschrijf documenten in elke toon.',
 };
 
 const id: T = {
@@ -1573,6 +1729,18 @@ const id: T = {
   'privacy.notice.local': 'Semua pemrosesan terjadi secara lokal di browser Anda',
   'privacy.notice.noStore': 'Tidak ada file yang disimpan atau dicatat',
   'privacy.notice.noSignup': 'Tanpa pendaftaran, tanpa pelacakan, tanpa akses pihak ketiga',
+  'tool.aiContractAnalyzer': 'Penganalisis Kontrak AI',
+  'tool.aiContractAnalyzer.desc': 'Deteksi klausul, risiko, dan kewajiban.',
+  'tool.aiGrammarCheck': 'Pemeriksa Tata Bahasa AI',
+  'tool.aiGrammarCheck.desc': 'Periksa tata bahasa, gaya, dan keterbacaan.',
+  'tool.aiPdfAutoFill': 'Pengisian Otomatis AI',
+  'tool.aiPdfAutoFill.desc': 'Isi formulir PDF dengan saran AI.',
+  'tool.aiPdfGenerator': 'Generator PDF AI',
+  'tool.aiPdfGenerator.desc': 'Buat dokumen dari teks.',
+  'tool.aiPdfChat': 'Obrolan PDF AI',
+  'tool.aiPdfChat.desc': 'Ngobrol dengan dokumen PDF Anda.',
+  'tool.aiRewriter': 'Penulis Ulang AI',
+  'tool.aiRewriter.desc': 'Tulis ulang dokumen dalam gaya apa pun.',
 };
 
 const th: T = {
@@ -1653,6 +1821,18 @@ const th: T = {
   'privacy.notice.local': 'การประมวลผลทั้งหมดเกิดขึ้นในเบราว์เซอร์ของคุณ',
   'privacy.notice.noStore': 'ไม่มีไฟล์ถูกจัดเก็บหรือบันทึก',
   'privacy.notice.noSignup': 'ไม่ต้องสมัคร ไม่มีการติดตาม ไม่มีการเข้าถึงของบุคคลที่สาม',
+  'tool.aiContractAnalyzer': 'AI วิเคราะห์สัญญา',
+  'tool.aiContractAnalyzer.desc': 'ตรวจจับข้อกำหนด ความเสี่ยง และภาระผูกพัน',
+  'tool.aiGrammarCheck': 'AI ตรวจไวยากรณ์',
+  'tool.aiGrammarCheck.desc': 'ตรวจไวยากรณ์ สไตล์ และความอ่านง่าย',
+  'tool.aiPdfAutoFill': 'AI กรอกอัตโนมัติ',
+  'tool.aiPdfAutoFill.desc': 'กรอกแบบฟอร์ม PDF ด้วยคำแนะนำ AI',
+  'tool.aiPdfGenerator': 'AI สร้าง PDF',
+  'tool.aiPdfGenerator.desc': 'สร้างเอกสารจากข้อความ',
+  'tool.aiPdfChat': 'AI แชท PDF',
+  'tool.aiPdfChat.desc': 'แชทกับเอกสาร PDF ของคุณ',
+  'tool.aiRewriter': 'AI เขียนใหม่',
+  'tool.aiRewriter.desc': 'เขียนเอกสารใหม่ในโทนใดก็ได้',
 };
 
 const vi: T = {
@@ -1733,6 +1913,18 @@ const vi: T = {
   'privacy.notice.local': 'Tất cả xử lý diễn ra cục bộ trong trình duyệt',
   'privacy.notice.noStore': 'Không tệp nào được lưu trữ hay ghi nhật ký',
   'privacy.notice.noSignup': 'Không đăng ký, không theo dõi, không truy cập bên thứ ba',
+  'tool.aiContractAnalyzer': 'AI Phân tích Hợp đồng',
+  'tool.aiContractAnalyzer.desc': 'Phát hiện điều khoản, rủi ro và nghĩa vụ.',
+  'tool.aiGrammarCheck': 'AI Kiểm tra Ngữ pháp',
+  'tool.aiGrammarCheck.desc': 'Kiểm tra ngữ pháp, phong cách và độ dễ đọc.',
+  'tool.aiPdfAutoFill': 'AI Tự động Điền',
+  'tool.aiPdfAutoFill.desc': 'Điền biểu mẫu PDF với gợi ý AI.',
+  'tool.aiPdfGenerator': 'AI Tạo PDF',
+  'tool.aiPdfGenerator.desc': 'Tạo tài liệu từ văn bản.',
+  'tool.aiPdfChat': 'AI Trò chuyện PDF',
+  'tool.aiPdfChat.desc': 'Trò chuyện với tài liệu PDF của bạn.',
+  'tool.aiRewriter': 'AI Viết lại',
+  'tool.aiRewriter.desc': 'Viết lại tài liệu theo bất kỳ phong cách nào.',
 };
 
 const bn: T = {
@@ -1813,6 +2005,18 @@ const bn: T = {
   'privacy.notice.local': 'সমস্ত প্রক্রিয়া স্থানীয়ভাবে আপনার ব্রাউজারে হয়',
   'privacy.notice.noStore': 'কোনো ফাইল সংরক্ষণ বা লগ করা হয় না',
   'privacy.notice.noSignup': 'সাইন-আপ নেই, ট্র্যাকিং নেই, তৃতীয় পক্ষের অ্যাক্সেস নেই',
+  'tool.aiContractAnalyzer': 'AI চুক্তি বিশ্লেষক',
+  'tool.aiContractAnalyzer.desc': 'ধারা, ঝুঁকি এবং দায়িত্ব সনাক্ত করুন।',
+  'tool.aiGrammarCheck': 'AI ব্যাকরণ পরীক্ষক',
+  'tool.aiGrammarCheck.desc': 'ব্যাকরণ, শৈলী এবং পাঠযোগ্যতা পরীক্ষা করুন।',
+  'tool.aiPdfAutoFill': 'AI স্বয়ংক্রিয় পূরণ',
+  'tool.aiPdfAutoFill.desc': 'AI পরামর্শ দিয়ে PDF ফর্ম পূরণ করুন।',
+  'tool.aiPdfGenerator': 'AI PDF জেনারেটর',
+  'tool.aiPdfGenerator.desc': 'টেক্সট থেকে ডকুমেন্ট তৈরি করুন।',
+  'tool.aiPdfChat': 'AI PDF চ্যাট',
+  'tool.aiPdfChat.desc': 'আপনার PDF ডকুমেন্টের সাথে কথা বলুন।',
+  'tool.aiRewriter': 'AI পুনর্লেখক',
+  'tool.aiRewriter.desc': 'যেকোনো স্টাইলে ডকুমেন্ট আবার লিখুন।',
 };
 
 const sw: T = {
@@ -1893,6 +2097,18 @@ const sw: T = {
   'privacy.notice.local': 'Uchakataji wote hufanyika ndani ya kivinjari chako',
   'privacy.notice.noStore': 'Hakuna faili zinazohifadhiwa au kurekodiwa',
   'privacy.notice.noSignup': 'Bila usajili, bila ufuatiliaji, bila upatikanaji wa mtu wa tatu',
+  'tool.aiContractAnalyzer': 'AI Uchambuzi wa Mikataba',
+  'tool.aiContractAnalyzer.desc': 'Gundua vifungu, hatari na wajibu.',
+  'tool.aiGrammarCheck': 'AI Ukaguzi wa Sarufi',
+  'tool.aiGrammarCheck.desc': 'Kagua sarufi, mtindo na usomaji.',
+  'tool.aiPdfAutoFill': 'AI Kujaza Otomatiki',
+  'tool.aiPdfAutoFill.desc': 'Jaza fomu za PDF na mapendekezo ya AI.',
+  'tool.aiPdfGenerator': 'AI Kizalishaji PDF',
+  'tool.aiPdfGenerator.desc': 'Tengeneza hati kutoka kwa maandishi.',
+  'tool.aiPdfChat': 'AI Mazungumzo PDF',
+  'tool.aiPdfChat.desc': 'Zungumza na hati zako za PDF.',
+  'tool.aiRewriter': 'AI Mwandishi Upya',
+  'tool.aiRewriter.desc': 'Andika upya hati kwa mtindo wowote.',
 };
 
 export const translations: Record<Lang, T> = {

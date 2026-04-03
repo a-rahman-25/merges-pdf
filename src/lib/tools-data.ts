@@ -82,6 +82,8 @@ export const allTools: ToolItem[] = [
   { icon: SpellCheck, titleKey: 'tool.aiGrammarCheck', descKey: 'tool.aiGrammarCheck.desc', path: '/ai-grammar-check', color: 'bg-tool-cyan/15 text-tool-cyan', category: 'aitools' },
   { icon: FormInput, titleKey: 'tool.aiPdfAutoFill', descKey: 'tool.aiPdfAutoFill.desc', path: '/ai-pdf-autofill', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },
   { icon: Wand2, titleKey: 'tool.aiPdfGenerator', descKey: 'tool.aiPdfGenerator.desc', path: '/ai-pdf-generator', color: 'bg-tool-pink/15 text-tool-pink', category: 'aitools' },
+  { icon: MessageSquare, titleKey: 'tool.aiPdfChat', descKey: 'tool.aiPdfChat.desc', path: '/ai-pdf-chat', color: 'bg-tool-blue/15 text-tool-blue', category: 'aitools' },
+  { icon: ArrowRightLeft, titleKey: 'tool.aiRewriter', descKey: 'tool.aiRewriter.desc', path: '/ai-rewriter', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },
 ];
 
 export const categories = [

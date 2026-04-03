@@ -158,6 +158,8 @@ const en: T = {
   'tool.aiGrammarCheck': 'AI Grammar Checker', 'tool.aiGrammarCheck.desc': 'Check grammar, style & readability.',
   'tool.aiPdfAutoFill': 'AI PDF Auto-Fill', 'tool.aiPdfAutoFill.desc': 'Fill PDF forms with AI suggestions.',
   'tool.aiPdfGenerator': 'AI PDF Generator', 'tool.aiPdfGenerator.desc': 'Create documents from text prompts.',
+  'tool.aiPdfChat': 'AI PDF Chat', 'tool.aiPdfChat.desc': 'Chat with your PDF documents.',
+  'tool.aiRewriter': 'AI PDF Rewriter', 'tool.aiRewriter.desc': 'Rewrite documents in any tone or style.',
   // ToolPageLayout
   'layout.allTools': 'Everything you need for PDFs',
   // Feature cards
@@ -341,6 +343,12 @@ const ar: T = {
   'tool.editor': 'محرر PDF', 'tool.editor.desc': 'التعليق والرسم وتحرير PDF.',
   'tool.aiTableExtract': 'استخراج الجداول بالذكاء الاصطناعي', 'tool.aiTableExtract.desc': 'استخراج الجداول من PDF كـ CSV.',
   'tool.aiClassify': 'تصنيف AI', 'tool.aiClassify.desc': 'تصنيف المستندات تلقائياً حسب النوع.',
+  'tool.aiContractAnalyzer': 'محلل العقود AI', 'tool.aiContractAnalyzer.desc': 'كشف البنود والمخاطر والالتزامات.',
+  'tool.aiGrammarCheck': 'مدقق القواعد AI', 'tool.aiGrammarCheck.desc': 'تدقيق القواعد والأسلوب وسهولة القراءة.',
+  'tool.aiPdfAutoFill': 'ملء تلقائي AI', 'tool.aiPdfAutoFill.desc': 'ملء نماذج PDF باقتراحات AI.',
+  'tool.aiPdfGenerator': 'مولد PDF AI', 'tool.aiPdfGenerator.desc': 'إنشاء مستندات من أوامر نصية.',
+  'tool.aiPdfChat': 'دردشة PDF AI', 'tool.aiPdfChat.desc': 'تحدث مع مستندات PDF الخاصة بك.',
+  'tool.aiRewriter': 'إعادة كتابة AI', 'tool.aiRewriter.desc': 'إعادة كتابة المستندات بأي نبرة أو أسلوب.',
   'layout.allTools': 'كل ما تحتاجه لملفات PDF',
   'feat.merge': 'دمج PDF', 'feat.merge.desc': 'دمج ملفات PDF متعددة في مستند واحد. اسحب لإعادة ترتيب الصفحات.',
   'feat.split': 'تقسيم واستخراج', 'feat.split.desc': 'تقسيم PDF إلى صفحات فردية أو استخراج نطاق مخصص.',

@@ -79,6 +79,8 @@ const AiContractAnalyzer = lazy(() => import("./pages/AiContractAnalyzer"));
 const AiGrammarCheck = lazy(() => import("./pages/AiGrammarCheck"));
 const AiPdfAutoFill = lazy(() => import("./pages/AiPdfAutoFill"));
 const AiPdfGenerator = lazy(() => import("./pages/AiPdfGenerator"));
+const AiPdfChat = lazy(() => import("./pages/AiPdfChat"));
+const AiRewriter = lazy(() => import("./pages/AiRewriter"));
 
 const queryClient = new QueryClient();
 

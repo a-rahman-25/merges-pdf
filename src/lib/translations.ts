@@ -158,6 +158,8 @@ const en: T = {
   'tool.aiGrammarCheck': 'AI Grammar Checker', 'tool.aiGrammarCheck.desc': 'Check grammar, style & readability.',
   'tool.aiPdfAutoFill': 'AI PDF Auto-Fill', 'tool.aiPdfAutoFill.desc': 'Fill PDF forms with AI suggestions.',
   'tool.aiPdfGenerator': 'AI PDF Generator', 'tool.aiPdfGenerator.desc': 'Create documents from text prompts.',
+  'tool.aiPdfChat': 'AI PDF Chat', 'tool.aiPdfChat.desc': 'Chat with your PDF documents.',
+  'tool.aiRewriter': 'AI PDF Rewriter', 'tool.aiRewriter.desc': 'Rewrite documents in any tone or style.',
   // ToolPageLayout
   'layout.allTools': 'Everything you need for PDFs',
   // Feature cards

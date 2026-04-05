@@ -81,6 +81,9 @@ const AiPdfAutoFill = lazy(() => import("./pages/AiPdfAutoFill"));
 const AiPdfGenerator = lazy(() => import("./pages/AiPdfGenerator"));
 const AiPdfChat = lazy(() => import("./pages/AiPdfChat"));
 const AiRewriter = lazy(() => import("./pages/AiRewriter"));
+const AiHighlighter = lazy(() => import("./pages/AiHighlighter"));
+const AiCitationExtractor = lazy(() => import("./pages/AiCitationExtractor"));
+const AiInvoiceParser = lazy(() => import("./pages/AiInvoiceParser"));
 
 const queryClient = new QueryClient();
 

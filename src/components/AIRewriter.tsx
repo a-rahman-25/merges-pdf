@@ -156,7 +156,11 @@ const AIRewriter = () => {
                     <Loader2 className="h-4 w-4 animate-spin text-primary" /> Rewriting document...
                   </div>
                 )}
-                {result && <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">{result}</p>}
+                {result && (
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-muted-foreground leading-relaxed">
+                    <ReactMarkdown>{result}</ReactMarkdown>
+                  </div>
+                )}
                 {processing && result && <Loader2 className="h-3.5 w-3.5 animate-spin text-primary mt-2" />}
               </div>
               {!processing && (

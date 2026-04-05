@@ -205,6 +205,9 @@ const AnimatedRoutes = () => {
         <Route path="/ai-pdf-generator" element={<AiPdfGenerator />} />
         <Route path="/ai-pdf-chat" element={<AiPdfChat />} />
         <Route path="/ai-rewriter" element={<AiRewriter />} />
+        <Route path="/ai-highlighter" element={<AiHighlighter />} />
+        <Route path="/ai-citation-extractor" element={<AiCitationExtractor />} />
+        <Route path="/ai-invoice-parser" element={<AiInvoiceParser />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

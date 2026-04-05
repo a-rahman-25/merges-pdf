@@ -160,6 +160,9 @@ const en: T = {
   'tool.aiPdfGenerator': 'AI PDF Generator', 'tool.aiPdfGenerator.desc': 'Create documents from text prompts.',
   'tool.aiPdfChat': 'AI PDF Chat', 'tool.aiPdfChat.desc': 'Chat with your PDF documents.',
   'tool.aiRewriter': 'AI PDF Rewriter', 'tool.aiRewriter.desc': 'Rewrite documents in any tone or style.',
+  'tool.aiHighlighter': 'AI PDF Highlighter', 'tool.aiHighlighter.desc': 'Auto-highlight key sentences & entities.',
+  'tool.aiCitationExtractor': 'AI Citation Extractor', 'tool.aiCitationExtractor.desc': 'Extract references, DOIs & bibliography.',
+  'tool.aiInvoiceParser': 'AI Invoice Parser', 'tool.aiInvoiceParser.desc': 'Extract line items, totals & vendor info.',
   // ToolPageLayout
   'layout.allTools': 'Everything you need for PDFs',
   // Feature cards

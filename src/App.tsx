@@ -81,6 +81,9 @@ const AiPdfAutoFill = lazy(() => import("./pages/AiPdfAutoFill"));
 const AiPdfGenerator = lazy(() => import("./pages/AiPdfGenerator"));
 const AiPdfChat = lazy(() => import("./pages/AiPdfChat"));
 const AiRewriter = lazy(() => import("./pages/AiRewriter"));
+const AiHighlighter = lazy(() => import("./pages/AiHighlighter"));
+const AiCitationExtractor = lazy(() => import("./pages/AiCitationExtractor"));
+const AiInvoiceParser = lazy(() => import("./pages/AiInvoiceParser"));
 
 const queryClient = new QueryClient();
 
@@ -193,7 +196,7 @@ const AnimatedRoutes = () => {
         <Route path="/ai-highlight-important-parts" element={<AIToolPage />} />
         <Route path="/ai-topic-detector" element={<AIToolPage />} />
         <Route path="/ai-document-similarity" element={<AIToolPage />} />
-        <Route path="/ai-citation-extractor" element={<AIToolPage />} />
+        
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/ai-contract-analyzer" element={<AiContractAnalyzer />} />
@@ -202,6 +205,9 @@ const AnimatedRoutes = () => {
         <Route path="/ai-pdf-generator" element={<AiPdfGenerator />} />
         <Route path="/ai-pdf-chat" element={<AiPdfChat />} />
         <Route path="/ai-rewriter" element={<AiRewriter />} />
+        <Route path="/ai-highlighter" element={<AiHighlighter />} />
+        <Route path="/ai-citation-extractor" element={<AiCitationExtractor />} />
+        <Route path="/ai-invoice-parser" element={<AiInvoiceParser />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

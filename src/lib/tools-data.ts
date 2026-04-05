@@ -4,7 +4,7 @@ import {
   Hash, Unlock, Palette, MessageSquare, PenTool, ScanLine, Type, ImageIcon, FormInput, EyeOff,
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
   BookMarked, Camera, GitCompare, FileCode, Code, Globe, Shield,
-  TableProperties, FolderSearch, Braces, SpellCheck, Wand2,
+  TableProperties, FolderSearch, Braces, SpellCheck, Wand2, Highlighter, Receipt,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -84,6 +84,9 @@ export const allTools: ToolItem[] = [
   { icon: Wand2, titleKey: 'tool.aiPdfGenerator', descKey: 'tool.aiPdfGenerator.desc', path: '/ai-pdf-generator', color: 'bg-tool-pink/15 text-tool-pink', category: 'aitools' },
   { icon: MessageSquare, titleKey: 'tool.aiPdfChat', descKey: 'tool.aiPdfChat.desc', path: '/ai-pdf-chat', color: 'bg-tool-blue/15 text-tool-blue', category: 'aitools' },
   { icon: ArrowRightLeft, titleKey: 'tool.aiRewriter', descKey: 'tool.aiRewriter.desc', path: '/ai-rewriter', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },
+  { icon: Highlighter, titleKey: 'tool.aiHighlighter', descKey: 'tool.aiHighlighter.desc', path: '/ai-highlighter', color: 'bg-tool-amber/15 text-tool-amber', category: 'aitools' },
+  { icon: BookOpen, titleKey: 'tool.aiCitationExtractor', descKey: 'tool.aiCitationExtractor.desc', path: '/ai-citation-extractor', color: 'bg-tool-emerald/15 text-tool-emerald', category: 'aitools' },
+  { icon: Receipt, titleKey: 'tool.aiInvoiceParser', descKey: 'tool.aiInvoiceParser.desc', path: '/ai-invoice-parser', color: 'bg-tool-rose/15 text-tool-rose', category: 'aitools' },
 ];
 
 export const categories = [

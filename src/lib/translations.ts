@@ -160,6 +160,10 @@ const en: T = {
   'tool.aiPdfGenerator': 'AI PDF Generator', 'tool.aiPdfGenerator.desc': 'Create documents from text prompts.',
   'tool.aiPdfChat': 'AI PDF Chat', 'tool.aiPdfChat.desc': 'Chat with your PDF documents.',
   'tool.aiRewriter': 'AI PDF Rewriter', 'tool.aiRewriter.desc': 'Rewrite documents in any tone or style.',
+
+  'tool.aiHighlighter': 'AI PDF Highlighter', 'tool.aiHighlighter.desc': 'Auto-highlight key sentences & entities.',
+  'tool.aiCitationExtractor': 'AI Citation Extractor', 'tool.aiCitationExtractor.desc': 'Extract references, DOIs & bibliography.',
+  'tool.aiInvoiceParser': 'AI Invoice Parser', 'tool.aiInvoiceParser.desc': 'Extract line items, totals & vendor info.',
   'tool.aiHighlighter': 'AI PDF Highlighter', 'tool.aiHighlighter.desc': 'Auto-highlight key sentences & entities.',
   'tool.aiCitationExtractor': 'AI Citation Extractor', 'tool.aiCitationExtractor.desc': 'Extract references, DOIs & bibliography.',
   'tool.aiInvoiceParser': 'AI Invoice Parser', 'tool.aiInvoiceParser.desc': 'Extract line items, totals & vendor info.',
@@ -352,6 +356,10 @@ const ar: T = {
   'tool.aiPdfGenerator': 'مولد PDF AI', 'tool.aiPdfGenerator.desc': 'إنشاء مستندات من أوامر نصية.',
   'tool.aiPdfChat': 'دردشة PDF AI', 'tool.aiPdfChat.desc': 'تحدث مع مستندات PDF الخاصة بك.',
   'tool.aiRewriter': 'إعادة كتابة AI', 'tool.aiRewriter.desc': 'إعادة كتابة المستندات بأي نبرة أو أسلوب.',
+
+  'tool.aiHighlighter': 'تمييز PDF AI', 'tool.aiHighlighter.desc': 'تمييز الجمل الرئيسية والكيانات تلقائيًا.',
+  'tool.aiCitationExtractor': 'مستخرج الاقتباسات AI', 'tool.aiCitationExtractor.desc': 'استخراج المراجع وDOI والمصادر.',
+  'tool.aiInvoiceParser': 'محلل الفواتير AI', 'tool.aiInvoiceParser.desc': 'استخراج البنود والمبالغ ومعلومات البائع.',
   'layout.allTools': 'كل ما تحتاجه لملفات PDF',
   'feat.merge': 'دمج PDF', 'feat.merge.desc': 'دمج ملفات PDF متعددة في مستند واحد. اسحب لإعادة ترتيب الصفحات.',
   'feat.split': 'تقسيم واستخراج', 'feat.split.desc': 'تقسيم PDF إلى صفحات فردية أو استخراج نطاق مخصص.',
@@ -548,6 +556,13 @@ const ur: T = {
   'tool.aiPdfChat.desc': 'اپنے PDF دستاویزات سے بات کریں۔',
   'tool.aiRewriter': 'AI دوبارہ لکھنا',
   'tool.aiRewriter.desc': 'کسی بھی انداز میں دستاویزات دوبارہ لکھیں۔',
+
+  'tool.aiHighlighter': 'AI ہائی لائٹر',
+  'tool.aiHighlighter.desc': 'اہم جملوں اور ہستیوں کو خودکار طور پر نمایاں کریں۔',
+  'tool.aiCitationExtractor': 'AI حوالہ نکالنے والا',
+  'tool.aiCitationExtractor.desc': 'حوالہ جات، DOI اور کتابیات نکالیں۔',
+  'tool.aiInvoiceParser': 'AI انوائس پارسر',
+  'tool.aiInvoiceParser.desc': 'لائن آئٹمز، کل رقم اور وینڈر کی معلومات نکالیں۔',
 };
 
 const hi: T = {
@@ -640,6 +655,13 @@ const hi: T = {
   'tool.aiPdfChat.desc': 'अपने PDF दस्तावेज़ों से बात करें।',
   'tool.aiRewriter': 'AI पुनर्लेखक',
   'tool.aiRewriter.desc': 'किसी भी शैली में दस्तावेज़ दोबारा लिखें।',
+
+  'tool.aiHighlighter': 'AI हाइलाइटर',
+  'tool.aiHighlighter.desc': 'मुख्य वाक्यों और संस्थाओं को स्वचालित हाइलाइट करें।',
+  'tool.aiCitationExtractor': 'AI उद्धरण निकालने वाला',
+  'tool.aiCitationExtractor.desc': 'संदर्भ, DOI और ग्रंथ सूची निकालें।',
+  'tool.aiInvoiceParser': 'AI इनवॉइस पार्सर',
+  'tool.aiInvoiceParser.desc': 'लाइन आइटम, कुल और विक्रेता जानकारी निकालें।',
 };
 
 const es: T = {
@@ -732,6 +754,10 @@ const es: T = {
   'tool.aiPdfChat.desc': 'Conversa con tus documentos PDF.',
   'tool.aiRewriter': 'Reescritor AI',
   'tool.aiRewriter.desc': 'Reescribir documentos en cualquier tono.',
+
+  'tool.aiHighlighter': 'Resaltador AI', 'tool.aiHighlighter.desc': 'Resaltar automáticamente oraciones clave y entidades.',
+  'tool.aiCitationExtractor': 'Extractor de Citas AI', 'tool.aiCitationExtractor.desc': 'Extraer referencias, DOIs y bibliografía.',
+  'tool.aiInvoiceParser': 'Analizador de Facturas AI', 'tool.aiInvoiceParser.desc': 'Extraer partidas, totales e info del proveedor.',
 };
 
 const ptBR: T = {
@@ -824,6 +850,10 @@ const ptBR: T = {
   'tool.aiPdfChat.desc': 'Converse com seus documentos PDF.',
   'tool.aiRewriter': 'Reescritor AI',
   'tool.aiRewriter.desc': 'Reescrever documentos em qualquer tom.',
+
+  'tool.aiHighlighter': 'Marcador AI', 'tool.aiHighlighter.desc': 'Destacar automaticamente frases-chave e entidades.',
+  'tool.aiCitationExtractor': 'Extrator de Citações AI', 'tool.aiCitationExtractor.desc': 'Extrair referências, DOIs e bibliografia.',
+  'tool.aiInvoiceParser': 'Analisador de Faturas AI', 'tool.aiInvoiceParser.desc': 'Extrair itens, totais e info do fornecedor.',
 };
 
 const fr: T = {
@@ -916,6 +946,10 @@ const fr: T = {
   'tool.aiPdfChat.desc': 'Discutez avec vos documents PDF.',
   'tool.aiRewriter': 'Réécrivain AI',
   'tool.aiRewriter.desc': 'Réécrire des documents dans n\'importe quel ton.',
+
+  'tool.aiHighlighter': 'Surligneur AI', 'tool.aiHighlighter.desc': 'Surligner automatiquement les phrases clés et entités.',
+  'tool.aiCitationExtractor': 'Extracteur de Citations AI', 'tool.aiCitationExtractor.desc': 'Extraire références, DOIs et bibliographie.',
+  'tool.aiInvoiceParser': 'Analyseur de Factures AI', 'tool.aiInvoiceParser.desc': 'Extraire les articles, totaux et infos fournisseur.',
 };
 
 const de: T = {
@@ -1008,6 +1042,10 @@ const de: T = {
   'tool.aiPdfChat.desc': 'Chatten Sie mit Ihren PDF-Dokumenten.',
   'tool.aiRewriter': 'AI Umschreiber',
   'tool.aiRewriter.desc': 'Dokumente in jedem Stil umschreiben.',
+
+  'tool.aiHighlighter': 'AI Textmarker', 'tool.aiHighlighter.desc': 'Schlüsselsätze und Entitäten automatisch hervorheben.',
+  'tool.aiCitationExtractor': 'AI Zitat-Extraktor', 'tool.aiCitationExtractor.desc': 'Referenzen, DOIs und Bibliografie extrahieren.',
+  'tool.aiInvoiceParser': 'AI Rechnungsparser', 'tool.aiInvoiceParser.desc': 'Positionen, Beträge und Lieferanteninfo extrahieren.',
 };
 
 const zh: T = {
@@ -1100,6 +1138,10 @@ const zh: T = {
   'tool.aiPdfChat.desc': '与您的PDF文档对话。',
   'tool.aiRewriter': 'AI重写工具',
   'tool.aiRewriter.desc': '以任何风格重写文档。',
+
+  'tool.aiHighlighter': 'AI高亮工具', 'tool.aiHighlighter.desc': '自动高亮关键句子和实体。',
+  'tool.aiCitationExtractor': 'AI引用提取器', 'tool.aiCitationExtractor.desc': '提取参考文献、DOI和书目。',
+  'tool.aiInvoiceParser': 'AI发票解析器', 'tool.aiInvoiceParser.desc': '提取明细、总额和供应商信息。',
 };
 
 const ja: T = {
@@ -1192,6 +1234,10 @@ const ja: T = {
   'tool.aiPdfChat.desc': 'PDFドキュメントとチャット。',
   'tool.aiRewriter': 'AIリライター',
   'tool.aiRewriter.desc': 'どんなトーンでもドキュメントを書き直し。',
+
+  'tool.aiHighlighter': 'AIハイライター', 'tool.aiHighlighter.desc': '重要な文章とエンティティを自動ハイライト。',
+  'tool.aiCitationExtractor': 'AI引用抽出ツール', 'tool.aiCitationExtractor.desc': '参考文献、DOI、書誌を抽出。',
+  'tool.aiInvoiceParser': 'AI請求書パーサー', 'tool.aiInvoiceParser.desc': '明細、合計、取引先情報を抽出。',
 };
 
 const ko: T = {
@@ -1284,6 +1330,10 @@ const ko: T = {
   'tool.aiPdfChat.desc': 'PDF 문서와 대화하세요.',
   'tool.aiRewriter': 'AI 리라이터',
   'tool.aiRewriter.desc': '어떤 톤으로든 문서를 다시 작성합니다.',
+
+  'tool.aiHighlighter': 'AI 하이라이터', 'tool.aiHighlighter.desc': '핵심 문장과 개체를 자동 강조합니다.',
+  'tool.aiCitationExtractor': 'AI 인용 추출기', 'tool.aiCitationExtractor.desc': '참고문헌, DOI 및 서지를 추출합니다.',
+  'tool.aiInvoiceParser': 'AI 송장 파서', 'tool.aiInvoiceParser.desc': '항목, 합계 및 공급업체 정보를 추출합니다.',
 };
 
 const tr: T = {
@@ -1376,6 +1426,10 @@ const tr: T = {
   'tool.aiPdfChat.desc': 'PDF belgelerinizle sohbet edin.',
   'tool.aiRewriter': 'AI Yeniden Yazıcı',
   'tool.aiRewriter.desc': 'Belgeleri herhangi bir tonda yeniden yazın.',
+
+  'tool.aiHighlighter': 'AI Vurgulayıcı', 'tool.aiHighlighter.desc': 'Anahtar cümleleri ve varlıkları otomatik vurgulayın.',
+  'tool.aiCitationExtractor': 'AI Atıf Çıkarıcı', 'tool.aiCitationExtractor.desc': 'Referansları, DOI\'ları ve kaynakçayı çıkarın.',
+  'tool.aiInvoiceParser': 'AI Fatura Ayrıştırıcı', 'tool.aiInvoiceParser.desc': 'Kalemleri, toplamları ve tedarikçi bilgilerini çıkarın.',
 };
 
 const ru: T = {
@@ -1468,6 +1522,10 @@ const ru: T = {
   'tool.aiPdfChat.desc': 'Общайтесь с вашими PDF-документами.',
   'tool.aiRewriter': 'AI Рерайтер',
   'tool.aiRewriter.desc': 'Перепишите документы в любом стиле.',
+
+  'tool.aiHighlighter': 'AI Маркер', 'tool.aiHighlighter.desc': 'Автоматическое выделение ключевых предложений и сущностей.',
+  'tool.aiCitationExtractor': 'AI Извлечение цитат', 'tool.aiCitationExtractor.desc': 'Извлечение ссылок, DOI и библиографии.',
+  'tool.aiInvoiceParser': 'AI Парсер счетов', 'tool.aiInvoiceParser.desc': 'Извлечение позиций, итогов и данных поставщика.',
 };
 
 const it: T = {
@@ -1560,6 +1618,10 @@ const it: T = {
   'tool.aiPdfChat.desc': 'Chatta con i tuoi documenti PDF.',
   'tool.aiRewriter': 'Riscrittore AI',
   'tool.aiRewriter.desc': 'Riscrivi documenti in qualsiasi tono.',
+
+  'tool.aiHighlighter': 'Evidenziatore AI', 'tool.aiHighlighter.desc': 'Evidenzia automaticamente frasi chiave ed entità.',
+  'tool.aiCitationExtractor': 'Estrattore Citazioni AI', 'tool.aiCitationExtractor.desc': 'Estrarre riferimenti, DOI e bibliografia.',
+  'tool.aiInvoiceParser': 'Parser Fatture AI', 'tool.aiInvoiceParser.desc': 'Estrarre voci, totali e info fornitore.',
 };
 
 const nl: T = {
@@ -1652,6 +1714,10 @@ const nl: T = {
   'tool.aiPdfChat.desc': 'Chat met uw PDF-documenten.',
   'tool.aiRewriter': 'AI Herschrijver',
   'tool.aiRewriter.desc': 'Herschrijf documenten in elke toon.',
+
+  'tool.aiHighlighter': 'AI Markeerstift', 'tool.aiHighlighter.desc': 'Automatisch belangrijke zinnen en entiteiten markeren.',
+  'tool.aiCitationExtractor': 'AI Citaat Extractor', 'tool.aiCitationExtractor.desc': 'Referenties, DOI\'s en bibliografie extraheren.',
+  'tool.aiInvoiceParser': 'AI Factuur Parser', 'tool.aiInvoiceParser.desc': 'Regelitems, totalen en leveranciersinfo extraheren.',
 };
 
 const id: T = {
@@ -1744,6 +1810,10 @@ const id: T = {
   'tool.aiPdfChat.desc': 'Ngobrol dengan dokumen PDF Anda.',
   'tool.aiRewriter': 'Penulis Ulang AI',
   'tool.aiRewriter.desc': 'Tulis ulang dokumen dalam gaya apa pun.',
+
+  'tool.aiHighlighter': 'AI Penyorot', 'tool.aiHighlighter.desc': 'Sorot otomatis kalimat kunci dan entitas.',
+  'tool.aiCitationExtractor': 'AI Ekstraktor Kutipan', 'tool.aiCitationExtractor.desc': 'Ekstrak referensi, DOI dan bibliografi.',
+  'tool.aiInvoiceParser': 'AI Parser Faktur', 'tool.aiInvoiceParser.desc': 'Ekstrak item, total dan info vendor.',
 };
 
 const th: T = {
@@ -1836,6 +1906,10 @@ const th: T = {
   'tool.aiPdfChat.desc': 'แชทกับเอกสาร PDF ของคุณ',
   'tool.aiRewriter': 'AI เขียนใหม่',
   'tool.aiRewriter.desc': 'เขียนเอกสารใหม่ในโทนใดก็ได้',
+
+  'tool.aiHighlighter': 'AI เน้นข้อความ', 'tool.aiHighlighter.desc': 'เน้นประโยคสำคัญและเอนทิตีอัตโนมัติ',
+  'tool.aiCitationExtractor': 'AI สกัดการอ้างอิง', 'tool.aiCitationExtractor.desc': 'สกัดเอกสารอ้างอิง DOI และบรรณานุกรม',
+  'tool.aiInvoiceParser': 'AI วิเคราะห์ใบแจ้งหนี้', 'tool.aiInvoiceParser.desc': 'สกัดรายการ ยอดรวม และข้อมูลผู้ขาย',
 };
 
 const vi: T = {
@@ -1928,6 +2002,10 @@ const vi: T = {
   'tool.aiPdfChat.desc': 'Trò chuyện với tài liệu PDF của bạn.',
   'tool.aiRewriter': 'AI Viết lại',
   'tool.aiRewriter.desc': 'Viết lại tài liệu theo bất kỳ phong cách nào.',
+
+  'tool.aiHighlighter': 'AI Đánh dấu', 'tool.aiHighlighter.desc': 'Tự động đánh dấu câu quan trọng và thực thể.',
+  'tool.aiCitationExtractor': 'AI Trích xuất trích dẫn', 'tool.aiCitationExtractor.desc': 'Trích xuất tài liệu tham khảo, DOI và thư mục.',
+  'tool.aiInvoiceParser': 'AI Phân tích hóa đơn', 'tool.aiInvoiceParser.desc': 'Trích xuất mục, tổng và thông tin nhà cung cấp.',
 };
 
 const bn: T = {
@@ -2020,6 +2098,10 @@ const bn: T = {
   'tool.aiPdfChat.desc': 'আপনার PDF ডকুমেন্টের সাথে কথা বলুন।',
   'tool.aiRewriter': 'AI পুনর্লেখক',
   'tool.aiRewriter.desc': 'যেকোনো স্টাইলে ডকুমেন্ট আবার লিখুন।',
+
+  'tool.aiHighlighter': 'AI হাইলাইটার', 'tool.aiHighlighter.desc': 'গুরুত্বপূর্ণ বাক্য এবং সত্ত্বা স্বয়ংক্রিয়ভাবে হাইলাইট করুন।',
+  'tool.aiCitationExtractor': 'AI উদ্ধৃতি নিষ্কাশক', 'tool.aiCitationExtractor.desc': 'তথ্যসূত্র, DOI এবং গ্রন্থপঞ্জি নিষ্কাশন করুন।',
+  'tool.aiInvoiceParser': 'AI চালান পার্সার', 'tool.aiInvoiceParser.desc': 'লাইন আইটেম, মোট এবং বিক্রেতা তথ্য নিষ্কাশন করুন।',
 };
 
 const sw: T = {
@@ -2112,6 +2194,10 @@ const sw: T = {
   'tool.aiPdfChat.desc': 'Zungumza na hati zako za PDF.',
   'tool.aiRewriter': 'AI Mwandishi Upya',
   'tool.aiRewriter.desc': 'Andika upya hati kwa mtindo wowote.',
+
+  'tool.aiHighlighter': 'AI Mwangaza', 'tool.aiHighlighter.desc': 'Angazia sentensi muhimu na vyombo kiotomatiki.',
+  'tool.aiCitationExtractor': 'AI Mtoa Marejeleo', 'tool.aiCitationExtractor.desc': 'Toa marejeleo, DOI na biblia.',
+  'tool.aiInvoiceParser': 'AI Mchambuzi wa Ankara', 'tool.aiInvoiceParser.desc': 'Toa bidhaa, jumla na taarifa za muuzaji.',
 };
 
 export const translations: Record<Lang, T> = {

@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 import { MessageCircle, Loader2, RotateCcw, FileText, Send } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -133,7 +134,13 @@ const AIPDFChat = () => {
                       ? 'bg-primary text-primary-foreground'
                       : 'bg-muted text-foreground'
                   }`}>
-                    <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                    {msg.role === 'assistant' ? (
+                      <div className="prose prose-sm dark:prose-invert max-w-none leading-relaxed [&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
+                        <ReactMarkdown>{msg.content}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                    )}
                     {streaming && i === messages.length - 1 && msg.role === 'assistant' && (
                       <Loader2 className="h-3.5 w-3.5 animate-spin mt-1 inline-block" />
                     )}

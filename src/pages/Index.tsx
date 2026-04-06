@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useEffect, useState, useCallback } from 'react';
 import {
   Upload, Cpu, Download, Shield, Zap, Globe, Lock, FileText,
   ChevronRight, Star, ChevronLeft, Eye, Recycle,
-  Sparkles, Search, Heart,
+  Sparkles, Search, Heart, ChevronDown, Brain, ArrowRightLeft,
 } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import Header from '@/components/Header';

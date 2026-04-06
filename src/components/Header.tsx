@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Droplets, Lock, PenTool, ArrowLeftRight, Image, Eraser, Code, ImageIcon, FormInput, EyeOff, Layers, BookOpen, Camera, Shield, Wrench, Bookmark, Ruler, FileSpreadsheet, FileOutput, Table2, Search } from 'lucide-react';
+import { Combine, Menu, ChevronDown, FileText, ArrowRightLeft, Brain, Scissors, Minimize2, RotateCw, Lock, PenTool, Image, FileSpreadsheet, FileOutput, Table2, Search } from 'lucide-react';
 import ThemeToggle from '@/components/ThemeToggle';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet';
@@ -11,50 +11,32 @@ const toolGroups = [
   {
     labelKey: 'cat.pdftools',
     icon: FileText,
-    description: 'Edit, organize & secure your PDFs',
+    description: 'Edit, organize & secure',
     items: [
       { to: '/merge', label: 'Merge PDFs', icon: Combine },
       { to: '/split', label: 'Split PDFs', icon: Scissors },
       { to: '/compress', label: 'Compress PDF', icon: Minimize2 },
       { to: '/rotate', label: 'Rotate Pages', icon: RotateCw },
-      { to: '/delete-pages', label: 'Delete Pages', icon: FileText },
-      { to: '/reorder-pages', label: 'Reorder Pages', icon: ArrowLeftRight },
-      { to: '/add-watermark', label: 'Add Watermark', icon: Droplets },
       { to: '/encrypt', label: 'Encrypt PDF', icon: Lock },
       { to: '/pdf-signature', label: 'Sign PDF', icon: PenTool },
-      { to: '/pdf-to-images', label: 'PDF to Images', icon: ImageIcon },
-      { to: '/pdf-form-filler', label: 'Fill Forms', icon: FormInput },
-      { to: '/pdf-redact', label: 'Redact PDF', icon: EyeOff },
-      { to: '/pdf-overlay', label: 'PDF Overlay', icon: Layers },
-      { to: '/pdf-bookmarks', label: 'Bookmarks', icon: Bookmark },
-      { to: '/repair-pdf', label: 'Repair PDF', icon: Wrench },
-      { to: '/page-size', label: 'Page Size', icon: Ruler },
     ],
+    moreLink: '/#tools',
+    moreLabel: 'All PDF Tools →',
   },
   {
     labelKey: 'cat.converters',
     icon: ArrowRightLeft,
-    description: 'Convert between file formats',
+    description: 'Convert file formats',
     items: [
-      { to: '/convert', label: 'Convert Files', icon: ArrowRightLeft },
       { to: '/pdf-to-word', label: 'PDF to Word', icon: FileText },
       { to: '/word-to-pdf', label: 'Word to PDF', icon: FileText },
-      { to: '/pdf-to-excel', label: 'PDF to Excel', icon: Table2 },
-      { to: '/excel-to-pdf', label: 'Excel to PDF', icon: FileSpreadsheet },
-      { to: '/powerpoint-to-pdf', label: 'PowerPoint to PDF', icon: FileOutput },
       { to: '/image-to-pdf', label: 'Image to PDF', icon: Image },
-      { to: '/epub-to-pdf', label: 'EPUB to PDF', icon: BookOpen },
-      { to: '/scan-to-pdf', label: 'Scan to PDF', icon: Camera },
-      { to: '/pdf-a', label: 'PDF/A Converter', icon: Shield },
-      { to: '/heic-to-pdf', label: 'HEIC to PDF', icon: ImageIcon },
-      { to: '/merge-images', label: 'Merge Images', icon: Combine },
-      { to: '/bg-remover', label: 'Remove Background', icon: Eraser },
-      { to: '/svg-to-image', label: 'SVG to Image', icon: Code },
-      { to: '/html-to-pdf', label: 'HTML to PDF', icon: Code },
-      { to: '/compare-pdf', label: 'Compare PDFs', icon: ArrowLeftRight },
-      { to: '/pdf-to-powerpoint', label: 'PDF to PowerPoint', icon: FileOutput },
-      { to: '/markdown-to-pdf', label: 'Markdown to PDF', icon: Code },
+      { to: '/excel-to-pdf', label: 'Excel to PDF', icon: FileSpreadsheet },
+      { to: '/pdf-to-excel', label: 'PDF to Excel', icon: Table2 },
+      { to: '/powerpoint-to-pdf', label: 'PPTX to PDF', icon: FileOutput },
     ],
+    moreLink: '/#tools',
+    moreLabel: 'All Converters →',
   },
 ];
 
@@ -130,18 +112,18 @@ const Header = () => {
             </button>
 
             {toolsOpen && (
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[640px] max-h-[70vh] overflow-y-auto rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[520px] rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                 <div className="flex">
                   {toolGroups.map((group) => (
                     <div key={group.labelKey} className="flex-1 p-3">
                       {/* Group header */}
-                      <div className="flex items-center gap-2.5 px-3 py-2 mb-1">
+                      <div className="flex items-center gap-2 px-3 py-2 mb-1">
                         <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
                           <group.icon className="h-3.5 w-3.5 text-primary" />
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-foreground tracking-wide">{t(group.labelKey)}</p>
-                          <p className="text-[10px] text-muted-foreground leading-tight">{group.description}</p>
+                          <p className="text-xs font-bold text-foreground">{t(group.labelKey)}</p>
+                          <p className="text-[10px] text-muted-foreground">{group.description}</p>
                         </div>
                       </div>
                       {/* Items */}
@@ -151,7 +133,7 @@ const Header = () => {
                             key={item.to}
                             to={item.to}
                             onClick={() => setToolsOpen(false)}
-                            className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all ${
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${
                               isActive(item.to)
                                 ? 'bg-primary/10 text-primary font-medium'
                                 : 'text-muted-foreground hover:bg-accent hover:text-foreground'
@@ -161,6 +143,13 @@ const Header = () => {
                             {item.label}
                           </Link>
                         ))}
+                        <Link
+                          to={group.moreLink}
+                          onClick={() => setToolsOpen(false)}
+                          className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-primary hover:bg-primary/5 transition-all"
+                        >
+                          {group.moreLabel}
+                        </Link>
                       </div>
                     </div>
                   ))}
@@ -173,7 +162,7 @@ const Header = () => {
                     </div>
                     <div>
                       <p className="text-xs font-bold text-foreground">AI-Powered Tools</p>
-                      <p className="text-[10px] text-muted-foreground">Summarize, translate, Q&A with AI</p>
+                      <p className="text-[10px] text-muted-foreground">Summarize, translate, chat & more</p>
                     </div>
                   </div>
                   <Link

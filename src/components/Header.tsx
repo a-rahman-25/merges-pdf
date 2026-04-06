@@ -112,18 +112,18 @@ const Header = () => {
             </button>
 
             {toolsOpen && (
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[640px] max-h-[70vh] overflow-y-auto rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[520px] rounded-2xl border border-border bg-card/95 backdrop-blur-xl shadow-xl shadow-black/10 p-1 animate-in fade-in slide-in-from-top-2 duration-200 z-50">
                 <div className="flex">
                   {toolGroups.map((group) => (
                     <div key={group.labelKey} className="flex-1 p-3">
                       {/* Group header */}
-                      <div className="flex items-center gap-2.5 px-3 py-2 mb-1">
+                      <div className="flex items-center gap-2 px-3 py-2 mb-1">
                         <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10">
                           <group.icon className="h-3.5 w-3.5 text-primary" />
                         </div>
                         <div>
-                          <p className="text-xs font-bold text-foreground tracking-wide">{t(group.labelKey)}</p>
-                          <p className="text-[10px] text-muted-foreground leading-tight">{group.description}</p>
+                          <p className="text-xs font-bold text-foreground">{t(group.labelKey)}</p>
+                          <p className="text-[10px] text-muted-foreground">{group.description}</p>
                         </div>
                       </div>
                       {/* Items */}
@@ -133,7 +133,7 @@ const Header = () => {
                             key={item.to}
                             to={item.to}
                             onClick={() => setToolsOpen(false)}
-                            className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-all ${
+                            className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-all ${
                               isActive(item.to)
                                 ? 'bg-primary/10 text-primary font-medium'
                                 : 'text-muted-foreground hover:bg-accent hover:text-foreground'
@@ -143,6 +143,13 @@ const Header = () => {
                             {item.label}
                           </Link>
                         ))}
+                        <Link
+                          to={group.moreLink}
+                          onClick={() => setToolsOpen(false)}
+                          className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-primary hover:bg-primary/5 transition-all"
+                        >
+                          {group.moreLabel}
+                        </Link>
                       </div>
                     </div>
                   ))}
@@ -155,7 +162,7 @@ const Header = () => {
                     </div>
                     <div>
                       <p className="text-xs font-bold text-foreground">AI-Powered Tools</p>
-                      <p className="text-[10px] text-muted-foreground">Summarize, translate, Q&A with AI</p>
+                      <p className="text-[10px] text-muted-foreground">Summarize, translate, chat & more</p>
                     </div>
                   </div>
                   <Link

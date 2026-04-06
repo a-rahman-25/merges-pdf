@@ -578,24 +578,23 @@ const ToolCard = ({ tool, isFav, onToggleFav, t }: ToolCardProps) => (
   <Link
     to={tool.path}
     onClick={() => addRecent(tool.path)}
-    className="group relative flex h-full flex-col rounded-2xl border border-border bg-card p-4 sm:p-5 transition-all hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.97]"
-    aria-label={`${t(tool.titleKey)} — ${t(tool.descKey)}`}
+    className="group relative flex items-center gap-3 rounded-xl border border-border/60 bg-card p-3 transition-all hover:border-primary/30 hover:shadow-md hover:shadow-primary/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary active:scale-[0.98]"
+    aria-label={`${t(tool.titleKey)}`}
   >
+    <div className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${tool.color}`}>
+      <tool.icon className="h-4 w-4" aria-hidden="true" />
+    </div>
+    <div className="min-w-0 flex-1">
+      <h3 className="font-medium text-foreground text-sm truncate">{t(tool.titleKey)}</h3>
+      <p className="text-xs text-muted-foreground truncate">{t(tool.descKey)}</p>
+    </div>
     <button
       onClick={(e) => onToggleFav(tool.path, e)}
-      className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 p-1.5 rounded-lg opacity-100 sm:opacity-0 group-hover:opacity-100 hover:bg-accent transition-all active:scale-[0.9]"
-      aria-label={isFav ? `Remove ${t(tool.titleKey)} from favorites` : `Add ${t(tool.titleKey)} to favorites`}
+      className="p-1 rounded opacity-0 group-hover:opacity-100 hover:bg-accent transition-all shrink-0"
+      aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
     >
-      <Heart className={`h-4 w-4 ${isFav ? 'fill-tool-rose text-tool-rose' : 'text-muted-foreground'}`} />
+      <Heart className={`h-3.5 w-3.5 ${isFav ? 'fill-tool-rose text-tool-rose' : 'text-muted-foreground'}`} />
     </button>
-    <div className={`mb-3 flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-xl ${tool.color}`}>
-      <tool.icon className="h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-    </div>
-    <h3 className="font-semibold text-foreground text-sm sm:text-base">{t(tool.titleKey)}</h3>
-    <p className="mt-1 flex-1 text-xs sm:text-sm text-muted-foreground line-clamp-2">{t(tool.descKey)}</p>
-    <span className="mt-2 sm:mt-3 inline-flex items-center text-xs sm:text-sm font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100" aria-hidden="true">
-      {t('tools.trynow')} <ChevronRight className="ml-1 h-4 w-4" />
-    </span>
   </Link>
 );
 

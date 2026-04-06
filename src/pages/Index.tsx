@@ -115,8 +115,13 @@ const Index = () => {
   const [toolSearch, setToolSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<'all' | 'pdftools' | 'converters' | 'aitools'>('all');
   const [favorites, setFavorites] = useState<string[]>(getFavorites());
+  const [openSections, setOpenSections] = useState<Record<string, boolean>>({ pdftools: true, converters: false, aitools: false });
   const recent = getRecent();
   const visibleCount = 3;
+
+  const toggleSection = (id: string) => {
+    setOpenSections(prev => ({ ...prev, [id]: !prev[id] }));
+  };
   const maxIdx = testimonialKeys.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);
   const prev = useCallback(() => setTestimonialIdx(i => Math.max(i - 1, 0)), []);

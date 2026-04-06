@@ -255,7 +255,7 @@ const Index = () => {
         </RevealSection>
       </section>
 
-      {/* ─── Tools Grid ─── */}
+      {/* ─── Tools Section ─── */}
       <section id="tools" className="py-16 sm:py-20" aria-labelledby="tools-title">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <RevealSection>
@@ -267,9 +267,9 @@ const Index = () => {
             </p>
           </RevealSection>
 
-          {/* Search + Category Tabs */}
+          {/* Search */}
           <RevealSection delay={0.1}>
-            <div className="mt-8 space-y-4">
+            <div className="mt-8">
               <div className="mx-auto max-w-md relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
                 <input
@@ -281,39 +281,18 @@ const Index = () => {
                   className="w-full rounded-xl border border-border bg-card pl-10 pr-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 transition-all"
                 />
               </div>
-
-              {/* Category Tabs */}
-              <div className="flex justify-center overflow-x-auto scrollbar-hide">
-                <div className="inline-flex rounded-xl border border-border bg-card p-1 gap-1" role="tablist" aria-label="Tool categories">
-                  {categories.map(cat => (
-                    <button
-                      key={cat.id}
-                      role="tab"
-                      aria-selected={activeCategory === cat.id}
-                      onClick={() => setActiveCategory(cat.id)}
-                      className={`rounded-lg px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium transition-all whitespace-nowrap active:scale-[0.96] ${
-                        activeCategory === cat.id
-                          ? 'bg-primary text-primary-foreground shadow-sm'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-accent'
-                      }`}
-                    >
-                      {t(cat.labelKey)}
-                    </button>
-                  ))}
-                </div>
-              </div>
             </div>
           </RevealSection>
 
           {/* Favorites & Recent */}
           {showPersonalized && (
-            <RevealSection delay={0.15} className="mt-10 space-y-8">
+            <RevealSection delay={0.15} className="mt-8 space-y-6">
               {favTools.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                    <Star className="h-4 w-4 fill-tool-amber text-tool-amber" aria-hidden="true" /> {t('tools.favorites') || 'Your Favorites'}
+                  <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2 uppercase tracking-wider">
+                    <Star className="h-3.5 w-3.5 fill-tool-amber text-tool-amber" aria-hidden="true" /> {t('tools.favorites') || 'Your Favorites'}
                   </h3>
-                  <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+                  <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                     {favTools.map(tool => (
                       <ToolCard key={tool.path} tool={tool} isFav={true} onToggleFav={handleToggleFav} t={t} />
                     ))}
@@ -322,36 +301,87 @@ const Index = () => {
               )}
               {recentTools.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                    <Zap className="h-4 w-4 text-primary" aria-hidden="true" /> {t('tools.recent') || 'Recently Used'}
+                  <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2 uppercase tracking-wider">
+                    <Zap className="h-3.5 w-3.5 text-primary" aria-hidden="true" /> {t('tools.recent') || 'Recently Used'}
                   </h3>
-                  <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+                  <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                     {recentTools.map(tool => (
                       <ToolCard key={tool.path} tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
                     ))}
                   </div>
                 </div>
               )}
-              <div className="border-t border-border" />
             </RevealSection>
           )}
 
-          {/* All tools */}
-          <div className="mt-10" role="tabpanel">
-            <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
-              {filtered.map((tool, i) => (
-                <RevealSection key={tool.path + tool.titleKey} delay={Math.min(i * 0.025, 0.25)}>
-                  <ToolCard tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
-                </RevealSection>
-              ))}
-            </div>
-            {filtered.length === 0 && (
-              <div className="text-center py-12 text-muted-foreground" role="status">
-                <Search className="mx-auto h-8 w-8 mb-3 text-muted-foreground/50" aria-hidden="true" />
-                <p>{t('tools.noResults') || 'No tools found. Try a different search.'}</p>
+          {/* Collapsible Category Sections */}
+          {toolSearch.trim() ? (
+            /* Search results — flat list */
+            <div className="mt-8">
+              <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                {filtered.map((tool) => (
+                  <ToolCard key={tool.path} tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
+                ))}
               </div>
-            )}
-          </div>
+              {filtered.length === 0 && (
+                <div className="text-center py-12 text-muted-foreground" role="status">
+                  <Search className="mx-auto h-8 w-8 mb-3 text-muted-foreground/50" aria-hidden="true" />
+                  <p>{t('tools.noResults') || 'No tools found. Try a different search.'}</p>
+                </div>
+              )}
+            </div>
+          ) : (
+            /* Accordion sections */
+            <div className="mt-8 space-y-3">
+              {[
+                { id: 'pdftools', labelKey: 'cat.pdftools', icon: FileText, desc: 'Edit, organize & secure your PDFs', count: allTools.filter(t => t.category === 'pdftools').length },
+                { id: 'converters', labelKey: 'cat.converters', icon: ArrowRightLeft, desc: 'Convert between file formats', count: allTools.filter(t => t.category === 'converters').length },
+                { id: 'aitools', labelKey: 'cat.aitools', icon: Brain, desc: 'AI-powered document intelligence', count: allTools.filter(t => t.category === 'aitools').length },
+              ].map((section) => {
+                const isOpen = openSections[section.id] ?? false;
+                const sectionTools = allTools.filter(tool => tool.category === section.id);
+                return (
+                  <RevealSection key={section.id} delay={0.05}>
+                    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+                      <button
+                        onClick={() => toggleSection(section.id)}
+                        className="w-full flex items-center justify-between px-5 py-4 hover:bg-accent/50 transition-colors"
+                        aria-expanded={isOpen}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10">
+                            <section.icon className="h-4 w-4 text-primary" />
+                          </div>
+                          <div className="text-left">
+                            <h3 className="font-semibold text-foreground text-sm sm:text-base">{t(section.labelKey)}</h3>
+                            <p className="text-xs text-muted-foreground">{section.count} tools · {section.desc}</p>
+                          </div>
+                        </div>
+                        <ChevronDown className={`h-5 w-5 text-muted-foreground transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                      <AnimatePresence initial={false}>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="px-4 pb-4 pt-1 grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                              {sectionTools.map((tool) => (
+                                <ToolCard key={tool.path} tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  </RevealSection>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 

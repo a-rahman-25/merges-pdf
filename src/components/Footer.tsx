@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Combine, Shield, Globe } from 'lucide-react';
+import { Combine, Shield, Globe, Linkedin } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
 
 const toolLinks = [
@@ -75,6 +75,14 @@ const Footer = () => {
                 <Globe className="h-3.5 w-3.5" /> 150+ {t('stats.countries')}
               </div>
             </div>
+            <a
+              href="https://www.linkedin.com/company/merge-pdf/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+            >
+              <Linkedin className="h-4 w-4" /> Follow us on LinkedIn
+            </a>
           </div>
 
           {/* PDF Tools */}

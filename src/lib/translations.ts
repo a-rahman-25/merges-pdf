@@ -163,6 +163,10 @@ const en: T = {
   'tool.aiHighlighter': 'AI PDF Highlighter', 'tool.aiHighlighter.desc': 'Auto-highlight key sentences & entities.',
   'tool.aiCitationExtractor': 'AI Citation Extractor', 'tool.aiCitationExtractor.desc': 'Extract references, DOIs & bibliography.',
   'tool.aiInvoiceParser': 'AI Invoice Parser', 'tool.aiInvoiceParser.desc': 'Extract line items, totals & vendor info.',
+  'tool.aiPdfTranslator': 'AI PDF Translator', 'tool.aiPdfTranslator.desc': 'Translate full documents preserving layout.',
+  'tool.aiMeetingNotes': 'AI Meeting Notes', 'tool.aiMeetingNotes.desc': 'Extract action items & decisions from meetings.',
+  'tool.aiFormCreator': 'AI Form Creator', 'tool.aiFormCreator.desc': 'Design PDF forms with AI assistance.',
+  'tool.aiAccessibilityCheck': 'AI Accessibility Checker', 'tool.aiAccessibilityCheck.desc': 'Audit WCAG compliance & accessibility.',
   // ToolPageLayout
   'layout.allTools': 'Everything you need for PDFs',
   // Feature cards

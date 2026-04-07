@@ -292,7 +292,7 @@ const Index = () => {
                   <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2 uppercase tracking-wider">
                     <Star className="h-3.5 w-3.5 fill-tool-amber text-tool-amber" aria-hidden="true" /> {t('tools.favorites') || 'Your Favorites'}
                   </h3>
-                  <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                  <div className="grid gap-2 grid-cols-1 min-[480px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                     {favTools.map(tool => (
                       <ToolCard key={tool.path} tool={tool} isFav={true} onToggleFav={handleToggleFav} t={t} />
                     ))}
@@ -304,7 +304,7 @@ const Index = () => {
                   <h3 className="text-sm font-bold text-foreground mb-3 flex items-center gap-2 uppercase tracking-wider">
                     <Zap className="h-3.5 w-3.5 text-primary" aria-hidden="true" /> {t('tools.recent') || 'Recently Used'}
                   </h3>
-                  <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                  <div className="grid gap-2 grid-cols-1 min-[480px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                     {recentTools.map(tool => (
                       <ToolCard key={tool.path} tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
                     ))}
@@ -318,7 +318,7 @@ const Index = () => {
           {toolSearch.trim() ? (
             /* Search results — flat list */
             <div className="mt-8">
-              <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+              <div className="grid gap-2 grid-cols-1 min-[480px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                 {filtered.map((tool) => (
                   <ToolCard key={tool.path} tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
                 ))}
@@ -368,7 +368,7 @@ const Index = () => {
                             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
                             className="overflow-hidden"
                           >
-                            <div className="px-4 pb-4 pt-1 grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                            <div className="px-4 pb-4 pt-1 grid gap-2 grid-cols-1 min-[480px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
                               {sectionTools.map((tool) => (
                                 <ToolCard key={tool.path} tool={tool} isFav={favorites.includes(tool.path)} onToggleFav={handleToggleFav} t={t} />
                               ))}

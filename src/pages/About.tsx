@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Shield, Zap, Globe, Heart, Code, Users, Eye, Sparkles } from 'lucide-react';
+import { Shield, Zap, Globe, Heart, Code, Users, Eye, Sparkles, Linkedin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Header from '@/components/Header';
 import SEOHead from '@/components/SEOHead';
@@ -138,6 +138,14 @@ const About = () => (
             <a href="mailto:merge.pdf.st@gmail.com" className="text-primary hover:underline">merge.pdf.st@gmail.com</a>{' '}
             or visit our <Link to="/contact" className="text-primary hover:underline">contact page</Link>.
           </p>
+          <a
+            href="https://www.linkedin.com/company/merge-pdf/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-primary transition-colors"
+          >
+            <Linkedin className="h-4 w-4" /> Follow us on LinkedIn
+          </a>
         </div>
       </motion.div>
     </main>

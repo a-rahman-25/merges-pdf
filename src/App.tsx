@@ -84,6 +84,10 @@ const AiRewriter = lazy(() => import("./pages/AiRewriter"));
 const AiHighlighter = lazy(() => import("./pages/AiHighlighter"));
 const AiCitationExtractor = lazy(() => import("./pages/AiCitationExtractor"));
 const AiInvoiceParser = lazy(() => import("./pages/AiInvoiceParser"));
+const AiPdfTranslator = lazy(() => import("./pages/AiPdfTranslator"));
+const AiMeetingNotes = lazy(() => import("./pages/AiMeetingNotes"));
+const AiFormCreator = lazy(() => import("./pages/AiFormCreator"));
+const AiAccessibilityChecker = lazy(() => import("./pages/AiAccessibilityChecker"));
 
 const queryClient = new QueryClient();
 
@@ -208,6 +212,10 @@ const AnimatedRoutes = () => {
         <Route path="/ai-highlighter" element={<AiHighlighter />} />
         <Route path="/ai-citation-extractor" element={<AiCitationExtractor />} />
         <Route path="/ai-invoice-parser" element={<AiInvoiceParser />} />
+        <Route path="/ai-pdf-translator" element={<AiPdfTranslator />} />
+        <Route path="/ai-meeting-notes" element={<AiMeetingNotes />} />
+        <Route path="/ai-form-creator" element={<AiFormCreator />} />
+        <Route path="/ai-accessibility-check" element={<AiAccessibilityChecker />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

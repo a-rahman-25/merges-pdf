@@ -5,6 +5,7 @@ import {
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
   BookMarked, Camera, GitCompare, FileCode, Code, Globe, Shield,
   TableProperties, FolderSearch, Braces, SpellCheck, Wand2, Highlighter, Receipt,
+  ClipboardList, Accessibility, FileInput,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -87,6 +88,10 @@ export const allTools: ToolItem[] = [
   { icon: Highlighter, titleKey: 'tool.aiHighlighter', descKey: 'tool.aiHighlighter.desc', path: '/ai-highlighter', color: 'bg-tool-amber/15 text-tool-amber', category: 'aitools' },
   { icon: BookOpen, titleKey: 'tool.aiCitationExtractor', descKey: 'tool.aiCitationExtractor.desc', path: '/ai-citation-extractor', color: 'bg-tool-emerald/15 text-tool-emerald', category: 'aitools' },
   { icon: Receipt, titleKey: 'tool.aiInvoiceParser', descKey: 'tool.aiInvoiceParser.desc', path: '/ai-invoice-parser', color: 'bg-tool-rose/15 text-tool-rose', category: 'aitools' },
+  { icon: Languages, titleKey: 'tool.aiPdfTranslator', descKey: 'tool.aiPdfTranslator.desc', path: '/ai-pdf-translator', color: 'bg-tool-teal/15 text-tool-teal', category: 'aitools' },
+  { icon: ClipboardList, titleKey: 'tool.aiMeetingNotes', descKey: 'tool.aiMeetingNotes.desc', path: '/ai-meeting-notes', color: 'bg-tool-blue/15 text-tool-blue', category: 'aitools' },
+  { icon: FileInput, titleKey: 'tool.aiFormCreator', descKey: 'tool.aiFormCreator.desc', path: '/ai-form-creator', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },
+  { icon: Accessibility, titleKey: 'tool.aiAccessibilityCheck', descKey: 'tool.aiAccessibilityCheck.desc', path: '/ai-accessibility-check', color: 'bg-tool-cyan/15 text-tool-cyan', category: 'aitools' },
 ];
 
 export const categories = [

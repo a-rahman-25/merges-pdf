@@ -146,15 +146,16 @@ const Header = () => {
                         <button
                           onClick={() => {
                             setToolsOpen(false);
-                            // Determine which section to open based on group
                             const sectionId = group.labelKey.includes('pdf') ? 'pdftools' : 'converters';
                             window.dispatchEvent(new CustomEvent('open-tool-section', { detail: sectionId }));
-                            const el = document.getElementById('tools');
-                            if (el) {
-                              el.scrollIntoView({ behavior: 'smooth' });
-                            } else {
-                              window.location.href = '/#tools';
-                            }
+                            setTimeout(() => {
+                              const el = document.getElementById('tools');
+                              if (el) {
+                                el.scrollIntoView({ behavior: 'smooth' });
+                              } else {
+                                window.location.href = '/#tools';
+                              }
+                            }, 100);
                           }}
                           className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-primary hover:bg-primary/5 transition-all w-full text-left"
                         >

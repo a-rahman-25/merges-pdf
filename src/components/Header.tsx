@@ -146,6 +146,9 @@ const Header = () => {
                         <button
                           onClick={() => {
                             setToolsOpen(false);
+                            // Determine which section to open based on group
+                            const sectionId = group.labelKey.includes('pdf') ? 'pdftools' : 'converters';
+                            window.dispatchEvent(new CustomEvent('open-tool-section', { detail: sectionId }));
                             const el = document.getElementById('tools');
                             if (el) {
                               el.scrollIntoView({ behavior: 'smooth' });

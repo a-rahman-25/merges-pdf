@@ -352,7 +352,7 @@ const Index = () => {
                 const sectionTools = allTools.filter(tool => tool.category === section.id);
                 return (
                   <RevealSection key={section.id} delay={0.05}>
-                    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+                    <div id={`section-${section.id}`} className="rounded-2xl border border-border bg-card overflow-hidden">
                       <button
                         onClick={() => toggleSection(section.id)}
                         className="w-full flex items-center justify-between px-5 py-4 hover:bg-accent/50 transition-colors"

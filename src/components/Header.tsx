@@ -149,13 +149,15 @@ const Header = () => {
                             const sectionId = group.labelKey.includes('pdf') ? 'pdftools' : 'converters';
                             window.dispatchEvent(new CustomEvent('open-tool-section', { detail: sectionId }));
                             setTimeout(() => {
-                              const el = document.getElementById('tools');
-                              if (el) {
-                                el.scrollIntoView({ behavior: 'smooth' });
+                              const sectionEl = document.getElementById(`section-${sectionId}`);
+                              if (sectionEl) {
+                                sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
                               } else {
-                                window.location.href = '/#tools';
+                                const el = document.getElementById('tools');
+                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                else window.location.href = '/#tools';
                               }
-                            }, 100);
+                            }, 150);
                           }}
                           className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-primary hover:bg-primary/5 transition-all w-full text-left"
                         >

@@ -122,6 +122,16 @@ const Index = () => {
   const toggleSection = (id: string) => {
     setOpenSections(prev => ({ ...prev, [id]: !prev[id] }));
   };
+
+  // Listen for header "All Tools" / "All Converters" clicks
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const sectionId = (e as CustomEvent).detail as string;
+      setOpenSections(prev => ({ ...prev, [sectionId]: true }));
+    };
+    window.addEventListener('open-tool-section', handler);
+    return () => window.removeEventListener('open-tool-section', handler);
+  }, []);
   const maxIdx = testimonialKeys.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);
   const prev = useCallback(() => setTestimonialIdx(i => Math.max(i - 1, 0)), []);
@@ -342,7 +352,7 @@ const Index = () => {
                 const sectionTools = allTools.filter(tool => tool.category === section.id);
                 return (
                   <RevealSection key={section.id} delay={0.05}>
-                    <div className="rounded-2xl border border-border bg-card overflow-hidden">
+                    <div id={`section-${section.id}`} className="rounded-2xl border border-border bg-card overflow-hidden">
                       <button
                         onClick={() => toggleSection(section.id)}
                         className="w-full flex items-center justify-between px-5 py-4 hover:bg-accent/50 transition-colors"

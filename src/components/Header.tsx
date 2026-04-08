@@ -146,12 +146,18 @@ const Header = () => {
                         <button
                           onClick={() => {
                             setToolsOpen(false);
-                            const el = document.getElementById('tools');
-                            if (el) {
-                              el.scrollIntoView({ behavior: 'smooth' });
-                            } else {
-                              window.location.href = '/#tools';
-                            }
+                            const sectionId = group.labelKey.includes('pdf') ? 'pdftools' : 'converters';
+                            window.dispatchEvent(new CustomEvent('open-tool-section', { detail: sectionId }));
+                            setTimeout(() => {
+                              const sectionEl = document.getElementById(`section-${sectionId}`);
+                              if (sectionEl) {
+                                sectionEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                              } else {
+                                const el = document.getElementById('tools');
+                                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                                else window.location.href = '/#tools';
+                              }
+                            }, 150);
                           }}
                           className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-primary hover:bg-primary/5 transition-all w-full text-left"
                         >

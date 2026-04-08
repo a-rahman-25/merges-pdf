@@ -122,6 +122,16 @@ const Index = () => {
   const toggleSection = (id: string) => {
     setOpenSections(prev => ({ ...prev, [id]: !prev[id] }));
   };
+
+  // Listen for header "All Tools" / "All Converters" clicks
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const sectionId = (e as CustomEvent).detail as string;
+      setOpenSections(prev => ({ ...prev, [sectionId]: true }));
+    };
+    window.addEventListener('open-tool-section', handler);
+    return () => window.removeEventListener('open-tool-section', handler);
+  }, []);
   const maxIdx = testimonialKeys.length - visibleCount;
   const next = useCallback(() => setTestimonialIdx(i => Math.min(i + 1, maxIdx)), [maxIdx]);
   const prev = useCallback(() => setTestimonialIdx(i => Math.max(i - 1, 0)), []);

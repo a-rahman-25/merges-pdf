@@ -143,13 +143,20 @@ const Header = () => {
                             {item.label}
                           </Link>
                         ))}
-                        <Link
-                          to={group.moreLink}
-                          onClick={() => setToolsOpen(false)}
-                          className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-primary hover:bg-primary/5 transition-all"
+                        <button
+                          onClick={() => {
+                            setToolsOpen(false);
+                            const el = document.getElementById('tools');
+                            if (el) {
+                              el.scrollIntoView({ behavior: 'smooth' });
+                            } else {
+                              window.location.href = '/#tools';
+                            }
+                          }}
+                          className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-primary hover:bg-primary/5 transition-all w-full text-left"
                         >
                           {group.moreLabel}
-                        </Link>
+                        </button>
                       </div>
                     </div>
                   ))}

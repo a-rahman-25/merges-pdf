@@ -4,9 +4,12 @@ import { FileText, Loader2, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
-import { PDFDocument } from 'pdf-lib';
+import * as pdfjsLib from 'pdfjs-dist';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
+
+// @ts-ignore
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PreDownloadSummary from '@/components/PreDownloadSummary';

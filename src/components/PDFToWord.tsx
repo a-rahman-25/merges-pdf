@@ -4,9 +4,12 @@ import { FileText, Loader2, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
-import { PDFDocument } from 'pdf-lib';
+import * as pdfjsLib from 'pdfjs-dist';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
+
+// @ts-ignore
+pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
 import ReviewDialog from '@/components/ReviewDialog';
 import PreDownloadSummary from '@/components/PreDownloadSummary';
@@ -42,23 +45,54 @@ const PDFToWord = () => {
     setProcessing(true);
     try {
       const buffer = await file.file.arrayBuffer();
-      const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
-      const pages = pdf.getPages();
+      const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
+      const pageCount = pdf.numPages;
 
       const paragraphs: Paragraph[] = [
         new Paragraph({ children: [new TextRun({ text: `Converted from: ${file.name}`, bold: true, size: 28 })], spacing: { after: 300 } }),
       ];
 
-      for (let i = 0; i < pages.length; i++) {
+      let totalChars = 0;
+      for (let i = 1; i <= pageCount; i++) {
+        const page = await pdf.getPage(i);
+        const content = await page.getTextContent();
+
+        // Group items by line using Y coordinate from transform matrix
+        const lines: { y: number; text: string }[] = [];
+        for (const item of content.items as any[]) {
+          const str = item.str ?? '';
+          const y = Math.round((item.transform?.[5] ?? 0) * 10) / 10;
+          const last = lines[lines.length - 1];
+          if (last && Math.abs(last.y - y) < 2) {
+            last.text += (item.hasEOL ? '\n' : '') + str;
+          } else {
+            lines.push({ y, text: str });
+          }
+        }
+
         paragraphs.push(
-          new Paragraph({ children: [new TextRun({ text: `— Page ${i + 1} —`, bold: true, size: 24 })], spacing: { before: 400, after: 200 } }),
-          new Paragraph({ children: [new TextRun({ text: `[Page ${i + 1} content — pdf-lib extracts structure but not raw text. Page dimensions: ${Math.round(pages[i].getWidth())} × ${Math.round(pages[i].getHeight())} pts]`, size: 22 })], spacing: { after: 200 } })
+          new Paragraph({ children: [new TextRun({ text: `— Page ${i} —`, bold: true, size: 24 })], spacing: { before: 400, after: 200 } })
         );
+
+        const pageLines = lines.flatMap(l => l.text.split('\n')).map(s => s.trim()).filter(Boolean);
+        totalChars += pageLines.join(' ').length;
+
+        if (pageLines.length === 0) {
+          paragraphs.push(new Paragraph({ children: [new TextRun({ text: '[No extractable text on this page — it may be a scanned image]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));
+        } else {
+          for (const line of pageLines) {
+            paragraphs.push(new Paragraph({ children: [new TextRun({ text: line, size: 22 })], spacing: { after: 80 } }));
+          }
+        }
+      }
+
+      if (totalChars < 50) {
+        toast.warning('Very little text extracted — your PDF may be a scanned image (needs OCR).');
       }
 
       const doc = new Document({ sections: [{ children: paragraphs }] });
       const blob = await Packer.toBlob(doc);
-      setResult({ blob, pageCount: pages.length });
+      setResult({ blob, pageCount });
       toast.success('Converted to Word!');
       logToolUsage('PDF to Word', '/pdf-to-word');
     } catch (err) {
@@ -102,7 +136,7 @@ const PDFToWord = () => {
               <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
             </div>
           </div>
-          <p className="text-xs text-center text-muted-foreground">Note: Browser-based conversion extracts document structure. For full text extraction, use a dedicated desktop tool.</p>
+          <p className="text-xs text-center text-muted-foreground">Note: Text is extracted directly from the PDF. Scanned/image-only PDFs require OCR (try the OCR tool first).</p>
           <Button onClick={handleConvert} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
             {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Converting…</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
           </Button>

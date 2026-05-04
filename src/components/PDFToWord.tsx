@@ -172,9 +172,12 @@ const PDFToWord = () => {
               <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
             </div>
           </div>
-          <p className="text-xs text-center text-muted-foreground">Note: Text is extracted directly from the PDF. Scanned/image-only PDFs require OCR (try the OCR tool first).</p>
+          <p className="text-xs text-center text-muted-foreground flex items-center justify-center gap-1.5">
+            <ScanText className="h-3.5 w-3.5" />
+            Native text extraction with automatic OCR fallback for scanned PDFs.
+          </p>
           <Button onClick={handleConvert} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-            {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Converting…</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
+            {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />{progress || 'Converting…'}</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
           </Button>
         </motion.div>
       ) : (
@@ -183,6 +186,7 @@ const PDFToWord = () => {
           items={[
             { label: 'Source', value: file.name },
             { label: 'Pages', value: `${result.pageCount}` },
+            { label: 'OCR pages', value: result.ocrPages > 0 ? `${result.ocrPages} (scanned)` : 'None — native text' },
             { label: 'Output', value: `${file.name.replace(/\.pdf$/i, '.docx')}` },
             { label: 'Size', value: formatFileSize(result.blob.size) },
           ]}

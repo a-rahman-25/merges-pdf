@@ -1,12 +1,13 @@
 import { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Loader2, RotateCcw } from 'lucide-react';
+import { FileText, Loader2, RotateCcw, ScanText } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import * as pdfjsLib from 'pdfjs-dist';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
+import { createWorker } from 'tesseract.js';
 
 // @ts-ignore
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;

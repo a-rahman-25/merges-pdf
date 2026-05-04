@@ -19,7 +19,8 @@ import { logToolUsage } from '@/lib/analytics';
 const PDFToWord = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
   const [processing, setProcessing] = useState(false);
-  const [result, setResult] = useState<{ blob: Blob; pageCount: number } | null>(null);
+  const [progress, setProgress] = useState<string>('');
+  const [result, setResult] = useState<{ blob: Blob; pageCount: number; ocrPages: number } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const doDownload = useCallback((filename?: string) => {

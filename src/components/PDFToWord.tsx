@@ -136,7 +136,7 @@ const PDFToWord = () => {
               <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
             </div>
           </div>
-          <p className="text-xs text-center text-muted-foreground">Note: Browser-based conversion extracts document structure. For full text extraction, use a dedicated desktop tool.</p>
+          <p className="text-xs text-center text-muted-foreground">Note: Text is extracted directly from the PDF. Scanned/image-only PDFs require OCR (try the OCR tool first).</p>
           <Button onClick={handleConvert} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
             {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Converting…</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
           </Button>

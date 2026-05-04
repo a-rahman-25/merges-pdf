@@ -1,12 +1,13 @@
 import { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Loader2, RotateCcw } from 'lucide-react';
+import { FileText, Loader2, RotateCcw, ScanText } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import * as pdfjsLib from 'pdfjs-dist';
 import { Document, Packer, Paragraph, TextRun } from 'docx';
 import { saveAs } from 'file-saver';
+import { createWorker } from 'tesseract.js';
 
 // @ts-ignore
 pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;
@@ -18,7 +19,8 @@ import { logToolUsage } from '@/lib/analytics';
 const PDFToWord = () => {
   const [file, setFile] = useState<{ file: File; name: string; size: number } | null>(null);
   const [processing, setProcessing] = useState(false);
-  const [result, setResult] = useState<{ blob: Blob; pageCount: number } | null>(null);
+  const [progress, setProgress] = useState<string>('');
+  const [result, setResult] = useState<{ blob: Blob; pageCount: number; ocrPages: number } | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const doDownload = useCallback((filename?: string) => {
@@ -43,6 +45,8 @@ const PDFToWord = () => {
   const handleConvert = async () => {
     if (!file) return;
     setProcessing(true);
+    setProgress('Reading PDF…');
+    let ocrWorker: Awaited<ReturnType<typeof createWorker>> | null = null;
     try {
       const buffer = await file.file.arrayBuffer();
       const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
@@ -52,8 +56,10 @@ const PDFToWord = () => {
         new Paragraph({ children: [new TextRun({ text: `Converted from: ${file.name}`, bold: true, size: 28 })], spacing: { after: 300 } }),
       ];
 
-      let totalChars = 0;
+      let ocrPages = 0;
+
       for (let i = 1; i <= pageCount; i++) {
+        setProgress(`Extracting page ${i} of ${pageCount}…`);
         const page = await pdf.getPage(i);
         const content = await page.getTextContent();
 
@@ -70,15 +76,42 @@ const PDFToWord = () => {
           }
         }
 
+        let pageLines = lines.flatMap(l => l.text.split('\n')).map(s => s.trim()).filter(Boolean);
+        const nativeChars = pageLines.join(' ').replace(/\s/g, '').length;
+
+        // OCR fallback: if this page has < 20 non-whitespace chars, render & OCR it
+        if (nativeChars < 20) {
+          setProgress(`Page ${i}: no text found — running OCR…`);
+          if (!ocrWorker) {
+            ocrWorker = await createWorker('eng', 1, {
+              logger: (m: any) => {
+                if (m.status === 'recognizing text') {
+                  setProgress(`Page ${i}/${pageCount} OCR: ${Math.round((m.progress || 0) * 100)}%`);
+                }
+              },
+            });
+          }
+          const viewport = page.getViewport({ scale: 2 });
+          const canvas = document.createElement('canvas');
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          const ctx = canvas.getContext('2d')!;
+          await page.render({ canvasContext: ctx, viewport, canvas } as any).promise;
+          const { data } = await ocrWorker.recognize(canvas);
+          const ocrText = (data.text || '').trim();
+          if (ocrText) {
+            pageLines = ocrText.split('\n').map(s => s.trim()).filter(Boolean);
+            ocrPages++;
+          }
+          canvas.width = 0; canvas.height = 0;
+        }
+
         paragraphs.push(
           new Paragraph({ children: [new TextRun({ text: `— Page ${i} —`, bold: true, size: 24 })], spacing: { before: 400, after: 200 } })
         );
 
-        const pageLines = lines.flatMap(l => l.text.split('\n')).map(s => s.trim()).filter(Boolean);
-        totalChars += pageLines.join(' ').length;
-
         if (pageLines.length === 0) {
-          paragraphs.push(new Paragraph({ children: [new TextRun({ text: '[No extractable text on this page — it may be a scanned image]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));
+          paragraphs.push(new Paragraph({ children: [new TextRun({ text: '[No text could be extracted from this page]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));
         } else {
           for (const line of pageLines) {
             paragraphs.push(new Paragraph({ children: [new TextRun({ text: line, size: 22 })], spacing: { after: 80 } }));
@@ -86,19 +119,22 @@ const PDFToWord = () => {
         }
       }
 
-      if (totalChars < 50) {
-        toast.warning('Very little text extracted — your PDF may be a scanned image (needs OCR).');
-      }
-
+      setProgress('Building Word document…');
       const doc = new Document({ sections: [{ children: paragraphs }] });
       const blob = await Packer.toBlob(doc);
-      setResult({ blob, pageCount });
-      toast.success('Converted to Word!');
+      setResult({ blob, pageCount, ocrPages });
+      if (ocrPages > 0) {
+        toast.success(`Converted! Used OCR on ${ocrPages} scanned page${ocrPages > 1 ? 's' : ''}.`);
+      } else {
+        toast.success('Converted to Word!');
+      }
       logToolUsage('PDF to Word', '/pdf-to-word');
     } catch (err) {
       toast.error('Failed to convert PDF to Word.');
       console.error(err);
     } finally {
+      if (ocrWorker) await ocrWorker.terminate().catch(() => {});
+      setProgress('');
       setProcessing(false);
     }
   };
@@ -136,9 +172,12 @@ const PDFToWord = () => {
               <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
             </div>
           </div>
-          <p className="text-xs text-center text-muted-foreground">Note: Text is extracted directly from the PDF. Scanned/image-only PDFs require OCR (try the OCR tool first).</p>
+          <p className="text-xs text-center text-muted-foreground flex items-center justify-center gap-1.5">
+            <ScanText className="h-3.5 w-3.5" />
+            Native text extraction with automatic OCR fallback for scanned PDFs.
+          </p>
           <Button onClick={handleConvert} disabled={processing} size="lg" className="w-full gap-2 text-base font-display font-semibold h-14 rounded-xl">
-            {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />Converting…</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
+            {processing ? (<><Loader2 className="h-5 w-5 animate-spin" />{progress || 'Converting…'}</>) : (<><FileText className="h-5 w-5" />Convert to Word</>)}
           </Button>
         </motion.div>
       ) : (
@@ -147,6 +186,7 @@ const PDFToWord = () => {
           items={[
             { label: 'Source', value: file.name },
             { label: 'Pages', value: `${result.pageCount}` },
+            { label: 'OCR pages', value: result.ocrPages > 0 ? `${result.ocrPages} (scanned)` : 'None — native text' },
             { label: 'Output', value: `${file.name.replace(/\.pdf$/i, '.docx')}` },
             { label: 'Size', value: formatFileSize(result.blob.size) },
           ]}

@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Loader2, RotateCcw, ScanText, X, FileDown, Languages, Wand2, AlertTriangle, Image as ImageIcon, ChevronDown, ChevronUp } from 'lucide-react';
+import { FileText, Loader2, RotateCcw, ScanText, X, FileDown, Languages, Wand2, AlertTriangle, Image as ImageIcon, ChevronDown, ChevronUp, Gauge } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';

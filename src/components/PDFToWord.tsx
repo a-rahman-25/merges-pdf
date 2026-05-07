@@ -660,16 +660,34 @@ const PDFToWord = () => {
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-amber-600" />
                   <span className="text-sm font-display font-semibold text-foreground">
-                    OCR confidence report — {lowConfIndices.length} line{lowConfIndices.length > 1 ? 's' : ''} below {LOW_CONF_THRESHOLD}%
+                    OCR confidence report — {lowConfIndices.length} line{lowConfIndices.length === 1 ? '' : 's'} below {lowConfThreshold}%
                   </span>
                 </div>
                 {showReviewPanel ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
               </button>
               {showReviewPanel && (
-                <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
-                  <p className="text-xs text-muted-foreground">
-                    Edit any line to correct it before downloading. Changes apply to the Word file.
-                  </p>
+                <div className="space-y-3">
+                  <div className="rounded-lg border border-border bg-background p-3 space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <Label className="flex items-center gap-1.5 text-foreground">
+                        <Gauge className="h-3.5 w-3.5 text-primary" /> Low-confidence threshold
+                      </Label>
+                      <span className="font-mono font-medium text-foreground">{lowConfThreshold}%</span>
+                    </div>
+                    <Slider
+                      value={[lowConfThreshold]}
+                      onValueChange={(v) => setLowConfThreshold(v[0])}
+                      min={20}
+                      max={95}
+                      step={1}
+                    />
+                    <p className="text-[11px] text-muted-foreground">Lines scoring below this are flagged for review and highlighted in the Word file.</p>
+                  </div>
+
+                  <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+                    <p className="text-xs text-muted-foreground">
+                      Edit any line to correct it before downloading. Changes apply to the Word file.
+                    </p>
                   {lowConfIndices.map((idx) => {
                     const b = result.blocks[idx];
                     if (b.type !== 'text') return null;

@@ -179,25 +179,52 @@ async function canvasToPng(canvas: HTMLCanvasElement): Promise<{ bytes: Uint8Arr
   return { bytes: new Uint8Array(buf), w: canvas.width, h: canvas.height };
 }
 
-// Extract embedded images from a PDF page using its operator list
-async function extractPageImages(page: any): Promise<{ bytes: Uint8Array; w: number; h: number }[]> {
-  const out: { bytes: Uint8Array; w: number; h: number }[] = [];
+// Extract embedded images from a PDF page WITH positional info derived from
+// the page's content stream (transform matrix → x, y, width on page).
+async function extractPageImages(
+  page: any
+): Promise<{ bytes: Uint8Array; w: number; h: number; pageX: number; pageY: number; drawW: number; drawH: number }[]> {
+  const out: { bytes: Uint8Array; w: number; h: number; pageX: number; pageY: number; drawW: number; drawH: number }[] = [];
   try {
     const ops = await page.getOperatorList();
     const OPS = (pdfjsLib as any).OPS;
+    // Walk the operator stream tracking the current transform matrix (ctm).
+    // PDF transform: [a b c d e f]; image is drawn in unit square then transformed.
+    const stack: number[][] = [];
+    let ctm: number[] = [1, 0, 0, 1, 0, 0];
+    const mul = (m1: number[], m2: number[]) => [
+      m1[0] * m2[0] + m1[2] * m2[1],
+      m1[1] * m2[0] + m1[3] * m2[1],
+      m1[0] * m2[2] + m1[2] * m2[3],
+      m1[1] * m2[2] + m1[3] * m2[3],
+      m1[0] * m2[4] + m1[2] * m2[5] + m1[4],
+      m1[1] * m2[4] + m1[3] * m2[5] + m1[5],
+    ];
+
     const seen = new Set<string>();
     for (let i = 0; i < ops.fnArray.length; i++) {
       const fn = ops.fnArray[i];
-      if (fn === OPS.paintImageXObject || fn === OPS.paintJpegXObject || fn === OPS.paintInlineImageXObject) {
-        const args = ops.argsArray[i];
+      const args = ops.argsArray[i];
+      if (fn === OPS.save) stack.push(ctm.slice());
+      else if (fn === OPS.restore) ctm = stack.pop() || [1, 0, 0, 1, 0, 0];
+      else if (fn === OPS.transform) ctm = mul(ctm, args);
+      else if (
+        fn === OPS.paintImageXObject ||
+        fn === OPS.paintJpegXObject ||
+        fn === OPS.paintInlineImageXObject
+      ) {
         const name = args?.[0];
-        if (!name || seen.has(name)) continue;
-        seen.add(name);
+        const key = `${name}@${i}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        // ctm maps unit square to page space: width≈|a|, height≈|d|, origin = (e, f)
+        const drawW = Math.abs(ctm[0]) || Math.abs(ctm[2]) || 1;
+        const drawH = Math.abs(ctm[3]) || Math.abs(ctm[1]) || 1;
+        const pageX = ctm[4];
+        const pageY = ctm[5];
         try {
-          const imgObj: any = await new Promise((resolve, reject) => {
-            try {
-              page.objs.get(name, (o: any) => resolve(o));
-            } catch (e) { reject(e); }
+          const imgObj: any = await new Promise((resolve) => {
+            try { page.objs.get(name, (o: any) => resolve(o)); } catch { resolve(null); }
           });
           if (!imgObj) continue;
           const bm: ImageBitmap | HTMLImageElement | undefined = imgObj.bitmap;
@@ -206,37 +233,36 @@ async function extractPageImages(page: any): Promise<{ bytes: Uint8Array; w: num
           if (bm && (bm as any).width) {
             w = (bm as any).width; h = (bm as any).height;
             c.width = w; c.height = h;
-            const cx = c.getContext('2d')!;
-            cx.drawImage(bm as any, 0, 0);
+            c.getContext('2d')!.drawImage(bm as any, 0, 0);
           } else if (imgObj.data) {
             c.width = w; c.height = h;
             const cx = c.getContext('2d')!;
             const id = cx.createImageData(w, h);
-            // imgObj.data is RGBA or RGB
             const src = imgObj.data;
-            if (src.length === w * h * 4) {
-              id.data.set(src);
-            } else if (src.length === w * h * 3) {
+            if (src.length === w * h * 4) id.data.set(src);
+            else if (src.length === w * h * 3) {
               for (let p = 0, q = 0; p < src.length; p += 3, q += 4) {
-                id.data[q] = src[p]; id.data[q+1] = src[p+1]; id.data[q+2] = src[p+2]; id.data[q+3] = 255;
+                id.data[q] = src[p]; id.data[q + 1] = src[p + 1]; id.data[q + 2] = src[p + 2]; id.data[q + 3] = 255;
               }
             } else continue;
             cx.putImageData(id, 0, 0);
           } else continue;
           const png = await canvasToPng(c);
-          // Skip tiny/decoration images
           if (png.w < 40 || png.h < 40) continue;
-          out.push(png);
-        } catch { /* per-image errors are fine */ }
+          out.push({ ...png, pageX, pageY, drawW, drawH });
+        } catch { /* skip image errors */ }
       }
     }
   } catch { /* ignore */ }
   return out;
 }
 
-function fitImageToPage(w: number, h: number, maxW = 480, maxH = 640) {
-  const r = Math.min(maxW / w, maxH / h, 1);
-  return { width: Math.round(w * r), height: Math.round(h * r) };
+function fitImageToWidth(naturalW: number, naturalH: number, targetW: number, maxH = 720) {
+  const ratio = naturalH / naturalW;
+  let width = Math.min(targetW, naturalW * 1.5);
+  let height = width * ratio;
+  if (height > maxH) { height = maxH; width = height / ratio; }
+  return { width: Math.round(width), height: Math.round(height) };
 }
 
 async function buildDocxFromBlocks(blocks: Block[], sourceName: string): Promise<Blob> {

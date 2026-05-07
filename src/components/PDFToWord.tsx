@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Loader2, RotateCcw, ScanText, X, FileDown, Languages, Wand2, AlertTriangle, Image as ImageIcon, ChevronDown, ChevronUp } from 'lucide-react';
+import { FileText, Loader2, RotateCcw, ScanText, X, FileDown, Languages, Wand2, AlertTriangle, Image as ImageIcon, ChevronDown, ChevronUp, Gauge } from 'lucide-react';
+import { Slider } from '@/components/ui/slider';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -41,15 +42,26 @@ const OCR_LANGUAGES = [
   { code: 'vie', label: 'Vietnamese' },
 ];
 
-const LOW_CONF_THRESHOLD = 70;
+const DEFAULT_LOW_CONF = 70;
 
 type LineItem = { x: number; y: number; w: number; text: string };
+
+type ImageAlign = 'left' | 'center' | 'right';
 
 type Block =
   | { type: 'pageHeader'; page: number }
   | { type: 'colHeader'; text: string }
   | { type: 'text'; text: string; confidence?: number; page: number }
-  | { type: 'image'; bytes: Uint8Array; w: number; h: number; page: number; caption?: string }
+  | {
+      type: 'image';
+      bytes: Uint8Array;
+      w: number;
+      h: number;
+      page: number;
+      caption?: string;
+      align?: ImageAlign;
+      widthPct?: number; // % of page width the image occupies in the PDF
+    }
   | { type: 'empty' };
 
 function clusterColumns(items: any[], pageWidth: number): string[] {
@@ -167,25 +179,52 @@ async function canvasToPng(canvas: HTMLCanvasElement): Promise<{ bytes: Uint8Arr
   return { bytes: new Uint8Array(buf), w: canvas.width, h: canvas.height };
 }
 
-// Extract embedded images from a PDF page using its operator list
-async function extractPageImages(page: any): Promise<{ bytes: Uint8Array; w: number; h: number }[]> {
-  const out: { bytes: Uint8Array; w: number; h: number }[] = [];
+// Extract embedded images from a PDF page WITH positional info derived from
+// the page's content stream (transform matrix → x, y, width on page).
+async function extractPageImages(
+  page: any
+): Promise<{ bytes: Uint8Array; w: number; h: number; pageX: number; pageY: number; drawW: number; drawH: number }[]> {
+  const out: { bytes: Uint8Array; w: number; h: number; pageX: number; pageY: number; drawW: number; drawH: number }[] = [];
   try {
     const ops = await page.getOperatorList();
     const OPS = (pdfjsLib as any).OPS;
+    // Walk the operator stream tracking the current transform matrix (ctm).
+    // PDF transform: [a b c d e f]; image is drawn in unit square then transformed.
+    const stack: number[][] = [];
+    let ctm: number[] = [1, 0, 0, 1, 0, 0];
+    const mul = (m1: number[], m2: number[]) => [
+      m1[0] * m2[0] + m1[2] * m2[1],
+      m1[1] * m2[0] + m1[3] * m2[1],
+      m1[0] * m2[2] + m1[2] * m2[3],
+      m1[1] * m2[2] + m1[3] * m2[3],
+      m1[0] * m2[4] + m1[2] * m2[5] + m1[4],
+      m1[1] * m2[4] + m1[3] * m2[5] + m1[5],
+    ];
+
     const seen = new Set<string>();
     for (let i = 0; i < ops.fnArray.length; i++) {
       const fn = ops.fnArray[i];
-      if (fn === OPS.paintImageXObject || fn === OPS.paintJpegXObject || fn === OPS.paintInlineImageXObject) {
-        const args = ops.argsArray[i];
+      const args = ops.argsArray[i];
+      if (fn === OPS.save) stack.push(ctm.slice());
+      else if (fn === OPS.restore) ctm = stack.pop() || [1, 0, 0, 1, 0, 0];
+      else if (fn === OPS.transform) ctm = mul(ctm, args);
+      else if (
+        fn === OPS.paintImageXObject ||
+        fn === OPS.paintJpegXObject ||
+        fn === OPS.paintInlineImageXObject
+      ) {
         const name = args?.[0];
-        if (!name || seen.has(name)) continue;
-        seen.add(name);
+        const key = `${name}@${i}`;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        // ctm maps unit square to page space: width≈|a|, height≈|d|, origin = (e, f)
+        const drawW = Math.abs(ctm[0]) || Math.abs(ctm[2]) || 1;
+        const drawH = Math.abs(ctm[3]) || Math.abs(ctm[1]) || 1;
+        const pageX = ctm[4];
+        const pageY = ctm[5];
         try {
-          const imgObj: any = await new Promise((resolve, reject) => {
-            try {
-              page.objs.get(name, (o: any) => resolve(o));
-            } catch (e) { reject(e); }
+          const imgObj: any = await new Promise((resolve) => {
+            try { page.objs.get(name, (o: any) => resolve(o)); } catch { resolve(null); }
           });
           if (!imgObj) continue;
           const bm: ImageBitmap | HTMLImageElement | undefined = imgObj.bitmap;
@@ -194,40 +233,41 @@ async function extractPageImages(page: any): Promise<{ bytes: Uint8Array; w: num
           if (bm && (bm as any).width) {
             w = (bm as any).width; h = (bm as any).height;
             c.width = w; c.height = h;
-            const cx = c.getContext('2d')!;
-            cx.drawImage(bm as any, 0, 0);
+            c.getContext('2d')!.drawImage(bm as any, 0, 0);
           } else if (imgObj.data) {
             c.width = w; c.height = h;
             const cx = c.getContext('2d')!;
             const id = cx.createImageData(w, h);
-            // imgObj.data is RGBA or RGB
             const src = imgObj.data;
-            if (src.length === w * h * 4) {
-              id.data.set(src);
-            } else if (src.length === w * h * 3) {
+            if (src.length === w * h * 4) id.data.set(src);
+            else if (src.length === w * h * 3) {
               for (let p = 0, q = 0; p < src.length; p += 3, q += 4) {
-                id.data[q] = src[p]; id.data[q+1] = src[p+1]; id.data[q+2] = src[p+2]; id.data[q+3] = 255;
+                id.data[q] = src[p]; id.data[q + 1] = src[p + 1]; id.data[q + 2] = src[p + 2]; id.data[q + 3] = 255;
               }
             } else continue;
             cx.putImageData(id, 0, 0);
           } else continue;
           const png = await canvasToPng(c);
-          // Skip tiny/decoration images
           if (png.w < 40 || png.h < 40) continue;
-          out.push(png);
-        } catch { /* per-image errors are fine */ }
+          out.push({ ...png, pageX, pageY, drawW, drawH });
+        } catch { /* skip image errors */ }
       }
     }
   } catch { /* ignore */ }
   return out;
 }
 
-function fitImageToPage(w: number, h: number, maxW = 480, maxH = 640) {
-  const r = Math.min(maxW / w, maxH / h, 1);
-  return { width: Math.round(w * r), height: Math.round(h * r) };
+function fitImageToWidth(naturalW: number, naturalH: number, targetW: number, maxH = 720) {
+  const ratio = naturalH / naturalW;
+  let width = Math.min(targetW, naturalW * 1.5);
+  let height = width * ratio;
+  if (height > maxH) { height = maxH; width = height / ratio; }
+  return { width: Math.round(width), height: Math.round(height) };
 }
 
-async function buildDocxFromBlocks(blocks: Block[], sourceName: string): Promise<Blob> {
+async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfThreshold: number): Promise<Blob> {
+  // Page content width in EMU-ish target (Word default ~6.0 inches = 9000 twips ≈ 576 px)
+  const PAGE_WIDTH_PX = 600;
   const children: Paragraph[] = [
     new Paragraph({ children: [new TextRun({ text: `Converted from: ${sourceName}`, bold: true, size: 28 })], spacing: { after: 300 } }),
   ];
@@ -237,16 +277,21 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string): Promise
     } else if (b.type === 'colHeader') {
       children.push(new Paragraph({ children: [new TextRun({ text: b.text, size: 20, bold: true, italics: true, color: '6B7280' })], spacing: { after: 120 } }));
     } else if (b.type === 'text') {
-      const lowConf = b.confidence !== undefined && b.confidence < LOW_CONF_THRESHOLD;
+      const lowConf = b.confidence !== undefined && b.confidence < lowConfThreshold;
       children.push(new Paragraph({
         children: [new TextRun({ text: b.text, size: 22, color: lowConf ? 'B45309' : undefined, highlight: lowConf ? 'yellow' : undefined })],
         spacing: { after: 80 },
       }));
     } else if (b.type === 'image') {
-      const dim = fitImageToPage(b.w, b.h);
+      const targetW = b.widthPct ? Math.max(120, Math.round(PAGE_WIDTH_PX * b.widthPct)) : Math.round(PAGE_WIDTH_PX * 0.7);
+      const dim = fitImageToWidth(b.w, b.h, targetW);
+      const align =
+        b.align === 'left' ? AlignmentType.LEFT :
+        b.align === 'right' ? AlignmentType.RIGHT :
+        AlignmentType.CENTER;
       children.push(new Paragraph({
-        alignment: AlignmentType.CENTER,
-        spacing: { before: 120, after: 120 },
+        alignment: align,
+        spacing: { before: 120, after: 60 },
         children: [new ImageRun({
           // @ts-ignore - type required at runtime
           type: 'png',
@@ -255,7 +300,11 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string): Promise
         } as any)],
       }));
       if (b.caption) {
-        children.push(new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: b.caption, size: 18, italics: true, color: '6B7280' })], spacing: { after: 160 } }));
+        children.push(new Paragraph({
+          alignment: align,
+          children: [new TextRun({ text: b.caption, size: 18, italics: true, color: '6B7280' })],
+          spacing: { after: 160 },
+        }));
       }
     } else if (b.type === 'empty') {
       children.push(new Paragraph({ children: [new TextRun({ text: '[No text could be extracted from this page]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));
@@ -273,6 +322,7 @@ const PDFToWord = () => {
   const [preprocess, setPreprocess] = useState<boolean>(true);
   const [embedImages, setEmbedImages] = useState<boolean>(true);
   const [showReviewPanel, setShowReviewPanel] = useState<boolean>(true);
+  const [lowConfThreshold, setLowConfThreshold] = useState<number>(DEFAULT_LOW_CONF);
 
   const [result, setResult] = useState<{
     blocks: Block[];
@@ -289,8 +339,8 @@ const PDFToWord = () => {
   const workerRef = useRef<Awaited<ReturnType<typeof createWorker>> | null>(null);
 
   const lowConfIndices = useMemo(
-    () => result ? result.blocks.map((b, i) => ({ b, i })).filter(({ b }) => b.type === 'text' && b.confidence !== undefined && b.confidence < LOW_CONF_THRESHOLD).map(({ i }) => i) : [],
-    [result]
+    () => result ? result.blocks.map((b, i) => ({ b, i })).filter(({ b }) => b.type === 'text' && b.confidence !== undefined && b.confidence < lowConfThreshold).map(({ i }) => i) : [],
+    [result, lowConfThreshold]
   );
 
   const updateLowConfLine = (idx: number, newText: string) => {
@@ -308,10 +358,10 @@ const PDFToWord = () => {
     if (!result || !file) return;
     const baseName = file.name.replace(/\.pdf$/i, '');
     // Rebuild docx with any user edits applied
-    const blob = await buildDocxFromBlocks(result.blocks, file.name);
+    const blob = await buildDocxFromBlocks(result.blocks, file.name, lowConfThreshold);
     saveAs(blob, filename || `${baseName}.docx`);
     toast.success('Word file downloaded!');
-  }, [result, file]);
+  }, [result, file, lowConfThreshold]);
 
   const downloadTxt = useCallback(() => {
     if (!result || !file) return;
@@ -448,8 +498,21 @@ const PDFToWord = () => {
           checkCancel();
           setProgress(`Page ${i}: extracting images…`);
           const imgs = await extractPageImages(page);
-          for (const im of imgs) {
-            blocks.push({ type: 'image', bytes: im.bytes, w: im.w, h: im.h, page: i, caption: `Image from page ${i}` });
+          const pw = viewport.width || 612;
+          for (let imgIdx = 0; imgIdx < imgs.length; imgIdx++) {
+            const im = imgs[imgIdx];
+            // Determine alignment from horizontal position of image center on page
+            const cx = im.pageX + im.drawW / 2;
+            const ratio = cx / pw;
+            const align: ImageAlign = ratio < 0.38 ? 'left' : ratio > 0.62 ? 'right' : 'center';
+            const widthPct = Math.max(0.15, Math.min(1, im.drawW / pw));
+            const posLabel = align === 'center' ? 'centered' : align === 'left' ? 'left side' : 'right side';
+            blocks.push({
+              type: 'image',
+              bytes: im.bytes, w: im.w, h: im.h, page: i,
+              align, widthPct,
+              caption: `Figure ${imageCount + 1} — page ${i} (${posLabel}, ~${Math.round(widthPct * 100)}% of page width)`,
+            });
             imageCount++;
           }
         }
@@ -457,7 +520,7 @@ const PDFToWord = () => {
 
       checkCancel();
       setProgress('Building Word document…');
-      const blob = await buildDocxFromBlocks(blocks, file.name);
+      const blob = await buildDocxFromBlocks(blocks, file.name, lowConfThreshold);
       const rawText = `Converted from: ${file.name}\n` + txtParts.join('\n');
 
       setResult({ blocks, pageCount, ocrPages, multiColPages, imageCount, rawText, blob });
@@ -597,16 +660,34 @@ const PDFToWord = () => {
                 <div className="flex items-center gap-2">
                   <AlertTriangle className="h-4 w-4 text-amber-600" />
                   <span className="text-sm font-display font-semibold text-foreground">
-                    OCR confidence report — {lowConfIndices.length} line{lowConfIndices.length > 1 ? 's' : ''} below {LOW_CONF_THRESHOLD}%
+                    OCR confidence report — {lowConfIndices.length} line{lowConfIndices.length === 1 ? '' : 's'} below {lowConfThreshold}%
                   </span>
                 </div>
                 {showReviewPanel ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
               </button>
               {showReviewPanel && (
-                <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
-                  <p className="text-xs text-muted-foreground">
-                    Edit any line to correct it before downloading. Changes apply to the Word file.
-                  </p>
+                <div className="space-y-3">
+                  <div className="rounded-lg border border-border bg-background p-3 space-y-2">
+                    <div className="flex items-center justify-between text-xs">
+                      <Label className="flex items-center gap-1.5 text-foreground">
+                        <Gauge className="h-3.5 w-3.5 text-primary" /> Low-confidence threshold
+                      </Label>
+                      <span className="font-mono font-medium text-foreground">{lowConfThreshold}%</span>
+                    </div>
+                    <Slider
+                      value={[lowConfThreshold]}
+                      onValueChange={(v) => setLowConfThreshold(v[0])}
+                      min={20}
+                      max={95}
+                      step={1}
+                    />
+                    <p className="text-[11px] text-muted-foreground">Lines scoring below this are flagged for review and highlighted in the Word file.</p>
+                  </div>
+
+                  <div className="space-y-3 max-h-[420px] overflow-y-auto pr-1">
+                    <p className="text-xs text-muted-foreground">
+                      Edit any line to correct it before downloading. Changes apply to the Word file.
+                    </p>
                   {lowConfIndices.map((idx) => {
                     const b = result.blocks[idx];
                     if (b.type !== 'text') return null;
@@ -627,6 +708,7 @@ const PDFToWord = () => {
                       </div>
                     );
                   })}
+                  </div>
                 </div>
               )}
             </div>

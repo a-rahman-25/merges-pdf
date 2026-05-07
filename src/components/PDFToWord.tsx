@@ -708,6 +708,7 @@ const PDFToWord = () => {
                       </div>
                     );
                   })}
+                  </div>
                 </div>
               )}
             </div>

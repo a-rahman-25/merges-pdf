@@ -358,10 +358,10 @@ const PDFToWord = () => {
     if (!result || !file) return;
     const baseName = file.name.replace(/\.pdf$/i, '');
     // Rebuild docx with any user edits applied
-    const blob = await buildDocxFromBlocks(result.blocks, file.name);
+    const blob = await buildDocxFromBlocks(result.blocks, file.name, lowConfThreshold);
     saveAs(blob, filename || `${baseName}.docx`);
     toast.success('Word file downloaded!');
-  }, [result, file]);
+  }, [result, file, lowConfThreshold]);
 
   const downloadTxt = useCallback(() => {
     if (!result || !file) return;

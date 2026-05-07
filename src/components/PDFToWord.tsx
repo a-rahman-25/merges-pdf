@@ -322,6 +322,7 @@ const PDFToWord = () => {
   const [preprocess, setPreprocess] = useState<boolean>(true);
   const [embedImages, setEmbedImages] = useState<boolean>(true);
   const [showReviewPanel, setShowReviewPanel] = useState<boolean>(true);
+  const [lowConfThreshold, setLowConfThreshold] = useState<number>(DEFAULT_LOW_CONF);
 
   const [result, setResult] = useState<{
     blocks: Block[];

@@ -339,8 +339,8 @@ const PDFToWord = () => {
   const workerRef = useRef<Awaited<ReturnType<typeof createWorker>> | null>(null);
 
   const lowConfIndices = useMemo(
-    () => result ? result.blocks.map((b, i) => ({ b, i })).filter(({ b }) => b.type === 'text' && b.confidence !== undefined && b.confidence < LOW_CONF_THRESHOLD).map(({ i }) => i) : [],
-    [result]
+    () => result ? result.blocks.map((b, i) => ({ b, i })).filter(({ b }) => b.type === 'text' && b.confidence !== undefined && b.confidence < lowConfThreshold).map(({ i }) => i) : [],
+    [result, lowConfThreshold]
   );
 
   const updateLowConfLine = (idx: number, newText: string) => {

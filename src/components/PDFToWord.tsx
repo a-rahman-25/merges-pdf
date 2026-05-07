@@ -265,7 +265,9 @@ function fitImageToWidth(naturalW: number, naturalH: number, targetW: number, ma
   return { width: Math.round(width), height: Math.round(height) };
 }
 
-async function buildDocxFromBlocks(blocks: Block[], sourceName: string): Promise<Blob> {
+async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfThreshold: number): Promise<Blob> {
+  // Page content width in EMU-ish target (Word default ~6.0 inches = 9000 twips ≈ 576 px)
+  const PAGE_WIDTH_PX = 600;
   const children: Paragraph[] = [
     new Paragraph({ children: [new TextRun({ text: `Converted from: ${sourceName}`, bold: true, size: 28 })], spacing: { after: 300 } }),
   ];
@@ -275,16 +277,21 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string): Promise
     } else if (b.type === 'colHeader') {
       children.push(new Paragraph({ children: [new TextRun({ text: b.text, size: 20, bold: true, italics: true, color: '6B7280' })], spacing: { after: 120 } }));
     } else if (b.type === 'text') {
-      const lowConf = b.confidence !== undefined && b.confidence < LOW_CONF_THRESHOLD;
+      const lowConf = b.confidence !== undefined && b.confidence < lowConfThreshold;
       children.push(new Paragraph({
         children: [new TextRun({ text: b.text, size: 22, color: lowConf ? 'B45309' : undefined, highlight: lowConf ? 'yellow' : undefined })],
         spacing: { after: 80 },
       }));
     } else if (b.type === 'image') {
-      const dim = fitImageToPage(b.w, b.h);
+      const targetW = b.widthPct ? Math.max(120, Math.round(PAGE_WIDTH_PX * b.widthPct)) : Math.round(PAGE_WIDTH_PX * 0.7);
+      const dim = fitImageToWidth(b.w, b.h, targetW);
+      const align =
+        b.align === 'left' ? AlignmentType.LEFT :
+        b.align === 'right' ? AlignmentType.RIGHT :
+        AlignmentType.CENTER;
       children.push(new Paragraph({
-        alignment: AlignmentType.CENTER,
-        spacing: { before: 120, after: 120 },
+        alignment: align,
+        spacing: { before: 120, after: 60 },
         children: [new ImageRun({
           // @ts-ignore - type required at runtime
           type: 'png',
@@ -293,7 +300,11 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string): Promise
         } as any)],
       }));
       if (b.caption) {
-        children.push(new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: b.caption, size: 18, italics: true, color: '6B7280' })], spacing: { after: 160 } }));
+        children.push(new Paragraph({
+          alignment: align,
+          children: [new TextRun({ text: b.caption, size: 18, italics: true, color: '6B7280' })],
+          spacing: { after: 160 },
+        }));
       }
     } else if (b.type === 'empty') {
       children.push(new Paragraph({ children: [new TextRun({ text: '[No text could be extracted from this page]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));

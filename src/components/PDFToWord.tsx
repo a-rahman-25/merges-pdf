@@ -498,8 +498,21 @@ const PDFToWord = () => {
           checkCancel();
           setProgress(`Page ${i}: extracting images…`);
           const imgs = await extractPageImages(page);
-          for (const im of imgs) {
-            blocks.push({ type: 'image', bytes: im.bytes, w: im.w, h: im.h, page: i, caption: `Image from page ${i}` });
+          const pw = viewport.width || 612;
+          for (let imgIdx = 0; imgIdx < imgs.length; imgIdx++) {
+            const im = imgs[imgIdx];
+            // Determine alignment from horizontal position of image center on page
+            const cx = im.pageX + im.drawW / 2;
+            const ratio = cx / pw;
+            const align: ImageAlign = ratio < 0.38 ? 'left' : ratio > 0.62 ? 'right' : 'center';
+            const widthPct = Math.max(0.15, Math.min(1, im.drawW / pw));
+            const posLabel = align === 'center' ? 'centered' : align === 'left' ? 'left side' : 'right side';
+            blocks.push({
+              type: 'image',
+              bytes: im.bytes, w: im.w, h: im.h, page: i,
+              align, widthPct,
+              caption: `Figure ${imageCount + 1} — page ${i} (${posLabel}, ~${Math.round(widthPct * 100)}% of page width)`,
+            });
             imageCount++;
           }
         }
@@ -507,7 +520,7 @@ const PDFToWord = () => {
 
       checkCancel();
       setProgress('Building Word document…');
-      const blob = await buildDocxFromBlocks(blocks, file.name);
+      const blob = await buildDocxFromBlocks(blocks, file.name, lowConfThreshold);
       const rawText = `Converted from: ${file.name}\n` + txtParts.join('\n');
 
       setResult({ blocks, pageCount, ocrPages, multiColPages, imageCount, rawText, blob });

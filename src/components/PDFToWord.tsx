@@ -42,15 +42,26 @@ const OCR_LANGUAGES = [
   { code: 'vie', label: 'Vietnamese' },
 ];
 
-const LOW_CONF_THRESHOLD = 70;
+const DEFAULT_LOW_CONF = 70;
 
 type LineItem = { x: number; y: number; w: number; text: string };
+
+type ImageAlign = 'left' | 'center' | 'right';
 
 type Block =
   | { type: 'pageHeader'; page: number }
   | { type: 'colHeader'; text: string }
   | { type: 'text'; text: string; confidence?: number; page: number }
-  | { type: 'image'; bytes: Uint8Array; w: number; h: number; page: number; caption?: string }
+  | {
+      type: 'image';
+      bytes: Uint8Array;
+      w: number;
+      h: number;
+      page: number;
+      caption?: string;
+      align?: ImageAlign;
+      widthPct?: number; // % of page width the image occupies in the PDF
+    }
   | { type: 'empty' };
 
 function clusterColumns(items: any[], pageWidth: number): string[] {

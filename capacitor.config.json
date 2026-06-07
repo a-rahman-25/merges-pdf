@@ -2,9 +2,5 @@
   "appId": "com.mergespdf.app",
   "appName": "MergesPDF",
   "webDir": "dist",
-  "server": {
-    "url": "https://3a05c881-ec21-4000-898f-3c020a6bb3ad.lovableproject.com?forceHideBadge=true",
-    "cleartext": true
-  },
   "backgroundColor": "#FFF7ED"
 }

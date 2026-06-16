@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { formatFileSize } from '@/lib/pdf-utils';
 import * as pdfjsLib from 'pdfjs-dist';
-import { Document, Packer, Paragraph, TextRun, ImageRun, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle } from 'docx';
+import { Document, Packer, Paragraph, TextRun, ImageRun, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle, ShadingType, VerticalAlign } from 'docx';
 import { saveAs } from 'file-saver';
 import { createWorker } from 'tesseract.js';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
@@ -45,6 +45,7 @@ const OCR_LANGUAGES = [
 const DEFAULT_LOW_CONF = 70;
 
 type LineItem = { x: number; y: number; w: number; text: string };
+type TableDetection = { isTable: boolean; rows: string[][]; beforeText: string[]; tableKind?: 'service' | 'generic' };
 
 type ImageAlign = 'left' | 'center' | 'right';
 
@@ -65,10 +66,12 @@ type Block =
     }
   | { type: 'empty' };
 
-// Detect a tabular layout on a page by clustering text atoms into cells
-// (x-gap based) and rows (y-gap based), then snapping cells to column anchors.
-function detectTable(items: any[], pageWidth: number): { isTable: boolean; rows: string[][] } {
-  const atoms = items
+function cleanTableText(text: string) {
+  return text.replace(/\s+/g, ' ').trim();
+}
+
+function getTextAtoms(items: any[]): LineItem[] {
+  return items
     .filter((it) => (it.str ?? '').trim().length > 0)
     .map((it) => ({
       x: it.transform?.[4] ?? 0,
@@ -76,15 +79,108 @@ function detectTable(items: any[], pageWidth: number): { isTable: boolean; rows:
       w: it.width ?? (it.str?.length ?? 0) * 4,
       text: it.str as string,
     }));
-  if (atoms.length < 6) return { isTable: false, rows: [] };
-  atoms.sort((a, b) => b.y - a.y || a.x - b.x);
+}
 
-  const yLines: (typeof atoms)[] = [];
+function clusterTextLines(atoms: LineItem[]) {
+  atoms.sort((a, b) => b.y - a.y || a.x - b.x);
+  const yLines: LineItem[][] = [];
   for (const a of atoms) {
     const last = yLines[yLines.length - 1];
     if (last && Math.abs(last[0].y - a.y) < 2.5) last.push(a);
     else yLines.push([a]);
   }
+  return yLines.map((line) => {
+    line.sort((a, b) => a.x - b.x);
+    return { y: line[0].y, atoms: line, text: cleanTableText(line.map((a) => a.text).join(' ')) };
+  });
+}
+
+function median(values: number[]) {
+  const sorted = values.filter(Number.isFinite).sort((a, b) => a - b);
+  return sorted.length ? sorted[Math.floor(sorted.length / 2)] : undefined;
+}
+
+function detectServiceTable(items: any[], pageWidth: number): TableDetection {
+  const atoms = getTextAtoms(items);
+  const lines = clusterTextLines(atoms);
+  if (lines.length < 4) return { isTable: false, rows: [], beforeText: [] };
+
+  const headerIdx = lines.findIndex((l) => {
+    const t = l.text.toLowerCase();
+    return t.includes('service') && t.includes('description') && (t.includes('uom') || t.includes('unit')) && t.includes('price');
+  });
+  const repeatedServiceRows = lines.filter((l) => /transportation services trip basis/i.test(l.text)).length;
+  const repeatedUom = atoms.filter((a) => /^each$/i.test(cleanTableText(a.text))).length;
+  if (headerIdx === -1 && (repeatedServiceRows < 2 || repeatedUom < 2)) {
+    return { isTable: false, rows: [], beforeText: [] };
+  }
+
+  const headerAtoms = headerIdx >= 0 ? lines[headerIdx].atoms : [];
+  const leftX = Math.min(...atoms.map((a) => a.x));
+  const uomX = median([
+    ...headerAtoms.filter((a) => /^uom$/i.test(cleanTableText(a.text))).map((a) => a.x),
+    ...atoms.filter((a) => /^each$/i.test(cleanTableText(a.text))).map((a) => a.x),
+  ]) ?? pageWidth * 0.72;
+  const priceX = median(
+    headerAtoms.filter((a) => /^(unit|price)$/i.test(cleanTableText(a.text)) && a.x > uomX).map((a) => a.x)
+  ) ?? pageWidth * 0.86;
+  const split1 = (leftX + uomX) / 2;
+  const split2 = (uomX + priceX) / 2;
+
+  const beforeText = headerIdx > 0
+    ? lines.slice(0, headerIdx).map((l) => l.text).filter(Boolean)
+    : [];
+  const bodyLines = headerIdx >= 0 ? lines.slice(headerIdx + 1) : lines;
+  const rows: string[][] = [];
+  let current = ['', '', ''];
+  let started = headerIdx >= 0;
+
+  for (const line of bodyLines) {
+    const text = line.text;
+    if (!text) continue;
+    if (!started) {
+      if (!/transportation services trip basis|\beach\b/i.test(text)) continue;
+      started = true;
+    }
+    const cells = ['', '', ''];
+    for (const atom of line.atoms) {
+      const cIdx = atom.x < split1 ? 0 : atom.x < split2 ? 1 : 2;
+      cells[cIdx] = cleanTableText(`${cells[cIdx]} ${atom.text}`);
+    }
+    const hasData = cells.some(Boolean);
+    if (!hasData) continue;
+
+    const hasUomOrPrice = Boolean(cells[1] || cells[2]);
+    const startsNewService = /transportation services trip basis/i.test(cells[0]);
+    if (current.some(Boolean) && (hasUomOrPrice || startsNewService)) {
+      rows.push(current.map(cleanTableText));
+      current = ['', '', ''];
+    }
+    for (let c = 0; c < 3; c++) {
+      if (cells[c]) current[c] = cleanTableText(`${current[c]} ${cells[c]}`);
+    }
+  }
+  if (current.some(Boolean)) rows.push(current.map(cleanTableText));
+
+  const cleaned = rows.filter((r) => r[0] || r[1] || r[2]);
+  if (cleaned.length < 2) return { isTable: false, rows: [], beforeText: [] };
+  return {
+    isTable: true,
+    rows: [['Service Description', 'UOM', 'Unit Price'], ...cleaned],
+    beforeText,
+    tableKind: 'service',
+  };
+}
+
+// Detect a tabular layout on a page by clustering text atoms into cells
+// (x-gap based) and rows (y-gap based), then snapping cells to column anchors.
+function detectTable(items: any[], pageWidth: number): TableDetection {
+  const serviceTable = detectServiceTable(items, pageWidth);
+  if (serviceTable.isTable) return serviceTable;
+
+  const atoms = getTextAtoms(items);
+  if (atoms.length < 6) return { isTable: false, rows: [], beforeText: [] };
+  const yLines = clusterTextLines(atoms).map((l) => l.atoms);
 
   const cellGap = Math.max(14, pageWidth * 0.025);
   const cellLines = yLines.map((line) => {
@@ -123,10 +219,10 @@ function detectTable(items: any[], pageWidth: number): { isTable: boolean; rows:
   const minCount = Math.max(2, Math.floor(cellLines.length * 0.25));
   const keepIdx = counts.map((c, i) => (c >= minCount ? i : -1)).filter((i) => i >= 0);
   const colAnchors = keepIdx.map((i) => anchors[i]);
-  if (colAnchors.length < 2) return { isTable: false, rows: [] };
+  if (colAnchors.length < 2) return { isTable: false, rows: [], beforeText: [] };
 
   const multiCellLines = cellLines.filter((l) => l.cells.length >= 2).length;
-  if (multiCellLines < Math.max(3, cellLines.length * 0.35)) return { isTable: false, rows: [] };
+  if (multiCellLines < Math.max(3, cellLines.length * 0.35)) return { isTable: false, rows: [], beforeText: [] };
 
   const ncols = colAnchors.length;
   const matrix = cellLines.map((l) => {
@@ -168,8 +264,8 @@ function detectTable(items: any[], pageWidth: number): { isTable: boolean; rows:
 
   // Drop fully-empty rows
   const cleaned = rows.filter((r) => r.some((c) => c.trim().length > 0));
-  if (cleaned.length < 2) return { isTable: false, rows: [] };
-  return { isTable: true, rows: cleaned };
+  if (cleaned.length < 2) return { isTable: false, rows: [], beforeText: [] };
+  return { isTable: true, rows: cleaned, beforeText: [], tableKind: 'generic' };
 }
 
 function clusterColumns(items: any[], pageWidth: number): string[] {

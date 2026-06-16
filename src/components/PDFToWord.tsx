@@ -616,13 +616,20 @@ const PDFToWord = () => {
           blocks.push({ type: 'empty' });
           txtParts.push('[No text]');
         } else {
-          for (const line of pageLines) {
-            if (line.startsWith('[Column ')) {
-              blocks.push({ type: 'colHeader', text: line });
-            } else {
-              blocks.push({ type: 'text', text: line, page: i });
+          // Try to detect a tabular layout on this page
+          const tableDetect = detectTable(content.items as any[], viewport.width);
+          if (tableDetect.isTable) {
+            blocks.push({ type: 'table', rows: tableDetect.rows, page: i });
+            for (const row of tableDetect.rows) txtParts.push(row.join(' | '));
+          } else {
+            for (const line of pageLines) {
+              if (line.startsWith('[Column ')) {
+                blocks.push({ type: 'colHeader', text: line });
+              } else {
+                blocks.push({ type: 'text', text: line, page: i });
+              }
+              txtParts.push(line);
             }
-            txtParts.push(line);
           }
         }
 

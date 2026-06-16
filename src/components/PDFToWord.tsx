@@ -10,7 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { formatFileSize } from '@/lib/pdf-utils';
 import * as pdfjsLib from 'pdfjs-dist';
-import { Document, Packer, Paragraph, TextRun, ImageRun, AlignmentType } from 'docx';
+import { Document, Packer, Paragraph, TextRun, ImageRun, AlignmentType, Table, TableRow, TableCell, WidthType, BorderStyle } from 'docx';
 import { saveAs } from 'file-saver';
 import { createWorker } from 'tesseract.js';
 import { useReviewBeforeDownload } from '@/hooks/useReviewBeforeDownload';
@@ -52,6 +52,7 @@ type Block =
   | { type: 'pageHeader'; page: number }
   | { type: 'colHeader'; text: string }
   | { type: 'text'; text: string; confidence?: number; page: number }
+  | { type: 'table'; rows: string[][]; page: number }
   | {
       type: 'image';
       bytes: Uint8Array;
@@ -63,6 +64,113 @@ type Block =
       widthPct?: number; // % of page width the image occupies in the PDF
     }
   | { type: 'empty' };
+
+// Detect a tabular layout on a page by clustering text atoms into cells
+// (x-gap based) and rows (y-gap based), then snapping cells to column anchors.
+function detectTable(items: any[], pageWidth: number): { isTable: boolean; rows: string[][] } {
+  const atoms = items
+    .filter((it) => (it.str ?? '').trim().length > 0)
+    .map((it) => ({
+      x: it.transform?.[4] ?? 0,
+      y: Math.round((it.transform?.[5] ?? 0) * 10) / 10,
+      w: it.width ?? (it.str?.length ?? 0) * 4,
+      text: it.str as string,
+    }));
+  if (atoms.length < 6) return { isTable: false, rows: [] };
+  atoms.sort((a, b) => b.y - a.y || a.x - b.x);
+
+  const yLines: (typeof atoms)[] = [];
+  for (const a of atoms) {
+    const last = yLines[yLines.length - 1];
+    if (last && Math.abs(last[0].y - a.y) < 2.5) last.push(a);
+    else yLines.push([a]);
+  }
+
+  const cellGap = Math.max(14, pageWidth * 0.025);
+  const cellLines = yLines.map((line) => {
+    line.sort((a, b) => a.x - b.x);
+    const cells: { x: number; text: string }[] = [];
+    let cur: typeof line = [line[0]];
+    for (let i = 1; i < line.length; i++) {
+      const prev = line[i - 1];
+      const c = line[i];
+      const gap = c.x - (prev.x + prev.w);
+      if (gap > cellGap) {
+        cells.push({ x: cur[0].x, text: cur.map((a) => a.text).join(' ').trim() });
+        cur = [c];
+      } else cur.push(c);
+    }
+    cells.push({ x: cur[0].x, text: cur.map((a) => a.text).join(' ').trim() });
+    return { y: line[0].y, cells };
+  });
+
+  // Build column anchors from all cell start-x values
+  const xs = cellLines.flatMap((l) => l.cells.map((c) => c.x)).sort((a, b) => a - b);
+  const tol = Math.max(8, pageWidth * 0.04);
+  const anchors: number[] = [];
+  const counts: number[] = [];
+  for (const x of xs) {
+    const idx = anchors.length - 1;
+    if (idx >= 0 && x - anchors[idx] < tol) {
+      anchors[idx] = (anchors[idx] * counts[idx] + x) / (counts[idx] + 1);
+      counts[idx]++;
+    } else {
+      anchors.push(x);
+      counts.push(1);
+    }
+  }
+  // Keep only anchors that occur on at least ~25% of lines (real columns, not noise)
+  const minCount = Math.max(2, Math.floor(cellLines.length * 0.25));
+  const keepIdx = counts.map((c, i) => (c >= minCount ? i : -1)).filter((i) => i >= 0);
+  const colAnchors = keepIdx.map((i) => anchors[i]);
+  if (colAnchors.length < 2) return { isTable: false, rows: [] };
+
+  const multiCellLines = cellLines.filter((l) => l.cells.length >= 2).length;
+  if (multiCellLines < Math.max(3, cellLines.length * 0.35)) return { isTable: false, rows: [] };
+
+  const ncols = colAnchors.length;
+  const matrix = cellLines.map((l) => {
+    const row = new Array<string>(ncols).fill('');
+    for (const c of l.cells) {
+      let best = 0, bd = Infinity;
+      for (let i = 0; i < ncols; i++) {
+        const d = Math.abs(c.x - colAnchors[i]);
+        if (d < bd) { bd = d; best = i; }
+      }
+      row[best] = row[best] ? row[best] + ' ' + c.text : c.text;
+    }
+    return { y: l.y, row };
+  });
+
+  // Determine typical line gap to decide where rows break
+  const gaps: number[] = [];
+  for (let i = 1; i < matrix.length; i++) gaps.push(matrix[i - 1].y - matrix[i].y);
+  const sortedGaps = [...gaps].sort((a, b) => a - b);
+  const medGap = sortedGaps[Math.floor(sortedGaps.length / 2)] || 12;
+  const rowGapThreshold = Math.max(medGap * 1.6, medGap + 4);
+
+  const rows: string[][] = [];
+  let current = matrix[0].row.slice();
+  for (let i = 1; i < matrix.length; i++) {
+    const gap = matrix[i - 1].y - matrix[i].y;
+    if (gap > rowGapThreshold) {
+      rows.push(current);
+      current = matrix[i].row.slice();
+    } else {
+      for (let c = 0; c < ncols; c++) {
+        if (matrix[i].row[c]) {
+          current[c] = current[c] ? current[c] + ' ' + matrix[i].row[c] : matrix[i].row[c];
+        }
+      }
+    }
+  }
+  rows.push(current);
+
+  // Drop fully-empty rows
+  const cleaned = rows.filter((r) => r.some((c) => c.trim().length > 0));
+  if (cleaned.length < 2) return { isTable: false, rows: [] };
+  return { isTable: true, rows: cleaned };
+}
 
 function clusterColumns(items: any[], pageWidth: number): string[] {
   const atoms = items
@@ -268,7 +376,11 @@ function fitImageToWidth(naturalW: number, naturalH: number, targetW: number, ma
 async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfThreshold: number): Promise<Blob> {
   // Page content width in EMU-ish target (Word default ~6.0 inches = 9000 twips ≈ 576 px)
   const PAGE_WIDTH_PX = 600;
-  const children: Paragraph[] = [
+  const TABLE_WIDTH_DXA = 9360; // 6.5 inches (US Letter content width)
+  const cellBorder = { style: BorderStyle.SINGLE, size: 4, color: '999999' };
+  const cellBorders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
+
+  const children: (Paragraph | Table)[] = [
     new Paragraph({ children: [new TextRun({ text: `Converted from: ${sourceName}`, bold: true, size: 28 })], spacing: { after: 300 } }),
   ];
   for (const b of blocks) {
@@ -282,6 +394,27 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
         children: [new TextRun({ text: b.text, size: 22, color: lowConf ? 'B45309' : undefined, highlight: lowConf ? 'yellow' : undefined })],
         spacing: { after: 80 },
       }));
+    } else if (b.type === 'table') {
+      const ncols = Math.max(1, ...b.rows.map((r) => r.length));
+      const colW = Math.floor(TABLE_WIDTH_DXA / ncols);
+      const columnWidths = new Array(ncols).fill(colW);
+      const tableRows = b.rows.map((row, rIdx) => new TableRow({
+        children: new Array(ncols).fill(0).map((_, cIdx) => new TableCell({
+          borders: cellBorders,
+          width: { size: colW, type: WidthType.DXA },
+          margins: { top: 80, bottom: 80, left: 120, right: 120 },
+          children: [new Paragraph({
+            children: [new TextRun({ text: row[cIdx] ?? '', size: 20, bold: rIdx === 0 })],
+          })],
+        })),
+      }));
+      children.push(new Table({
+        width: { size: TABLE_WIDTH_DXA, type: WidthType.DXA },
+        columnWidths,
+        rows: tableRows,
+      }));
+      // Tables can't be adjacent without a paragraph between them in some renderers
+      children.push(new Paragraph({ children: [new TextRun('')], spacing: { after: 80 } }));
     } else if (b.type === 'image') {
       const targetW = b.widthPct ? Math.max(120, Math.round(PAGE_WIDTH_PX * b.widthPct)) : Math.round(PAGE_WIDTH_PX * 0.7);
       const dim = fitImageToWidth(b.w, b.h, targetW);
@@ -310,7 +443,7 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
       children.push(new Paragraph({ children: [new TextRun({ text: '[No text could be extracted from this page]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));
     }
   }
-  const doc = new Document({ sections: [{ children }] });
+  const doc = new Document({ sections: [{ children: children as any }] });
   return await Packer.toBlob(doc);
 }
 
@@ -372,6 +505,7 @@ const PDFToWord = () => {
         b.type === 'colHeader' ? b.text :
         b.type === 'text' ? b.text :
         b.type === 'image' ? `[Image: ${b.w}×${b.h} on page ${b.page}]` :
+        b.type === 'table' ? b.rows.map((r) => r.join(' | ')).join('\n') :
         b.type === 'empty' ? '[No text]' : ''
       ).join('\n');
     const blob = new Blob([`Converted from: ${file.name}\n${txt}`], { type: 'text/plain;charset=utf-8' });
@@ -483,13 +617,20 @@ const PDFToWord = () => {
           blocks.push({ type: 'empty' });
           txtParts.push('[No text]');
         } else {
-          for (const line of pageLines) {
-            if (line.startsWith('[Column ')) {
-              blocks.push({ type: 'colHeader', text: line });
-            } else {
-              blocks.push({ type: 'text', text: line, page: i });
+          // Try to detect a tabular layout on this page
+          const tableDetect = detectTable(content.items as any[], viewport.width);
+          if (tableDetect.isTable) {
+            blocks.push({ type: 'table', rows: tableDetect.rows, page: i });
+            for (const row of tableDetect.rows) txtParts.push(row.join(' | '));
+          } else {
+            for (const line of pageLines) {
+              if (line.startsWith('[Column ')) {
+                blocks.push({ type: 'colHeader', text: line });
+              } else {
+                blocks.push({ type: 'text', text: line, page: i });
+              }
+              txtParts.push(line);
             }
-            txtParts.push(line);
           }
         }
 

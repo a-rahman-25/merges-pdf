@@ -53,7 +53,7 @@ type Block =
   | { type: 'pageHeader'; page: number }
   | { type: 'colHeader'; text: string }
   | { type: 'text'; text: string; confidence?: number; page: number }
-  | { type: 'table'; rows: string[][]; page: number }
+  | { type: 'table'; rows: string[][]; page: number; tableKind?: 'service' | 'generic' }
   | {
       type: 'image';
       bytes: Uint8Array;
@@ -475,6 +475,11 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
   const TABLE_WIDTH_DXA = 9360; // 6.5 inches (US Letter content width)
   const cellBorder = { style: BorderStyle.SINGLE, size: 4, color: '999999' };
   const cellBorders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
+  const serviceBorder = { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' };
+  const serviceBorders = { top: serviceBorder, bottom: serviceBorder, left: serviceBorder, right: serviceBorder };
+  const serviceHeaderBorder = { style: BorderStyle.SINGLE, size: 1, color: '2E75B6' };
+  const serviceHeaderBorders = { top: serviceHeaderBorder, bottom: serviceHeaderBorder, left: serviceHeaderBorder, right: serviceHeaderBorder };
+  const cellMargins = { top: 100, bottom: 100, left: 150, right: 150 };
 
   const children: (Paragraph | Table)[] = [
     new Paragraph({ children: [new TextRun({ text: `Converted from: ${sourceName}`, bold: true, size: 28 })], spacing: { after: 300 } }),
@@ -492,15 +497,28 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
       }));
     } else if (b.type === 'table') {
       const ncols = Math.max(1, ...b.rows.map((r) => r.length));
-      const colW = Math.floor(TABLE_WIDTH_DXA / ncols);
-      const columnWidths = new Array(ncols).fill(colW);
+      const serviceWidths = [6200, 1200, 1960];
+      const evenColW = Math.floor(TABLE_WIDTH_DXA / ncols);
+      const columnWidths = b.tableKind === 'service' && ncols === 3 ? serviceWidths : new Array(ncols).fill(evenColW);
       const tableRows = b.rows.map((row, rIdx) => new TableRow({
+        tableHeader: rIdx === 0,
         children: new Array(ncols).fill(0).map((_, cIdx) => new TableCell({
-          borders: cellBorders,
-          width: { size: colW, type: WidthType.DXA },
-          margins: { top: 80, bottom: 80, left: 120, right: 120 },
+          borders: b.tableKind === 'service' ? (rIdx === 0 ? serviceHeaderBorders : serviceBorders) : cellBorders,
+          width: { size: columnWidths[cIdx], type: WidthType.DXA },
+          shading: b.tableKind === 'service'
+            ? { fill: rIdx === 0 ? '1F4E79' : (rIdx % 2 === 0 ? 'F5F8FC' : 'FFFFFF'), type: ShadingType.CLEAR }
+            : undefined,
+          margins: b.tableKind === 'service' ? cellMargins : { top: 80, bottom: 80, left: 120, right: 120 },
+          verticalAlign: b.tableKind === 'service' ? VerticalAlign.CENTER : undefined,
           children: [new Paragraph({
-            children: [new TextRun({ text: row[cIdx] ?? '', size: 20, bold: rIdx === 0 })],
+            alignment: b.tableKind === 'service' ? (cIdx === 0 && rIdx > 0 ? AlignmentType.LEFT : AlignmentType.CENTER) : undefined,
+            children: [new TextRun({
+              text: row[cIdx] ?? '',
+              size: 20,
+              font: b.tableKind === 'service' ? 'Arial' : undefined,
+              bold: rIdx === 0,
+              color: b.tableKind === 'service' && rIdx === 0 ? 'FFFFFF' : undefined,
+            })],
           })],
         })),
       }));

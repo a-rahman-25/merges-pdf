@@ -505,6 +505,7 @@ const PDFToWord = () => {
         b.type === 'colHeader' ? b.text :
         b.type === 'text' ? b.text :
         b.type === 'image' ? `[Image: ${b.w}×${b.h} on page ${b.page}]` :
+        b.type === 'table' ? b.rows.map((r) => r.join(' | ')).join('\n') :
         b.type === 'empty' ? '[No text]' : ''
       ).join('\n');
     const blob = new Blob([`Converted from: ${file.name}\n${txt}`], { type: 'text/plain;charset=utf-8' });

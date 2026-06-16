@@ -52,6 +52,7 @@ type Block =
   | { type: 'pageHeader'; page: number }
   | { type: 'colHeader'; text: string }
   | { type: 'text'; text: string; confidence?: number; page: number }
+  | { type: 'table'; rows: string[][]; page: number }
   | {
       type: 'image';
       bytes: Uint8Array;
@@ -63,6 +64,113 @@ type Block =
       widthPct?: number; // % of page width the image occupies in the PDF
     }
   | { type: 'empty' };
+
+// Detect a tabular layout on a page by clustering text atoms into cells
+// (x-gap based) and rows (y-gap based), then snapping cells to column anchors.
+function detectTable(items: any[], pageWidth: number): { isTable: boolean; rows: string[][] } {
+  const atoms = items
+    .filter((it) => (it.str ?? '').trim().length > 0)
+    .map((it) => ({
+      x: it.transform?.[4] ?? 0,
+      y: Math.round((it.transform?.[5] ?? 0) * 10) / 10,
+      w: it.width ?? (it.str?.length ?? 0) * 4,
+      text: it.str as string,
+    }));
+  if (atoms.length < 6) return { isTable: false, rows: [] };
+  atoms.sort((a, b) => b.y - a.y || a.x - b.x);
+
+  const yLines: (typeof atoms)[] = [];
+  for (const a of atoms) {
+    const last = yLines[yLines.length - 1];
+    if (last && Math.abs(last[0].y - a.y) < 2.5) last.push(a);
+    else yLines.push([a]);
+  }
+
+  const cellGap = Math.max(14, pageWidth * 0.025);
+  const cellLines = yLines.map((line) => {
+    line.sort((a, b) => a.x - b.x);
+    const cells: { x: number; text: string }[] = [];
+    let cur: typeof line = [line[0]];
+    for (let i = 1; i < line.length; i++) {
+      const prev = line[i - 1];
+      const c = line[i];
+      const gap = c.x - (prev.x + prev.w);
+      if (gap > cellGap) {
+        cells.push({ x: cur[0].x, text: cur.map((a) => a.text).join(' ').trim() });
+        cur = [c];
+      } else cur.push(c);
+    }
+    cells.push({ x: cur[0].x, text: cur.map((a) => a.text).join(' ').trim() });
+    return { y: line[0].y, cells };
+  });
+
+  // Build column anchors from all cell start-x values
+  const xs = cellLines.flatMap((l) => l.cells.map((c) => c.x)).sort((a, b) => a - b);
+  const tol = Math.max(8, pageWidth * 0.04);
+  const anchors: number[] = [];
+  const counts: number[] = [];
+  for (const x of xs) {
+    const idx = anchors.length - 1;
+    if (idx >= 0 && x - anchors[idx] < tol) {
+      anchors[idx] = (anchors[idx] * counts[idx] + x) / (counts[idx] + 1);
+      counts[idx]++;
+    } else {
+      anchors.push(x);
+      counts.push(1);
+    }
+  }
+  // Keep only anchors that occur on at least ~25% of lines (real columns, not noise)
+  const minCount = Math.max(2, Math.floor(cellLines.length * 0.25));
+  const keepIdx = counts.map((c, i) => (c >= minCount ? i : -1)).filter((i) => i >= 0);
+  const colAnchors = keepIdx.map((i) => anchors[i]);
+  if (colAnchors.length < 2) return { isTable: false, rows: [] };
+
+  const multiCellLines = cellLines.filter((l) => l.cells.length >= 2).length;
+  if (multiCellLines < Math.max(3, cellLines.length * 0.35)) return { isTable: false, rows: [] };
+
+  const ncols = colAnchors.length;
+  const matrix = cellLines.map((l) => {
+    const row = new Array<string>(ncols).fill('');
+    for (const c of l.cells) {
+      let best = 0, bd = Infinity;
+      for (let i = 0; i < ncols; i++) {
+        const d = Math.abs(c.x - colAnchors[i]);
+        if (d < bd) { bd = d; best = i; }
+      }
+      row[best] = row[best] ? row[best] + ' ' + c.text : c.text;
+    }
+    return { y: l.y, row };
+  });
+
+  // Determine typical line gap to decide where rows break
+  const gaps: number[] = [];
+  for (let i = 1; i < matrix.length; i++) gaps.push(matrix[i - 1].y - matrix[i].y);
+  const sortedGaps = [...gaps].sort((a, b) => a - b);
+  const medGap = sortedGaps[Math.floor(sortedGaps.length / 2)] || 12;
+  const rowGapThreshold = Math.max(medGap * 1.6, medGap + 4);
+
+  const rows: string[][] = [];
+  let current = matrix[0].row.slice();
+  for (let i = 1; i < matrix.length; i++) {
+    const gap = matrix[i - 1].y - matrix[i].y;
+    if (gap > rowGapThreshold) {
+      rows.push(current);
+      current = matrix[i].row.slice();
+    } else {
+      for (let c = 0; c < ncols; c++) {
+        if (matrix[i].row[c]) {
+          current[c] = current[c] ? current[c] + ' ' + matrix[i].row[c] : matrix[i].row[c];
+        }
+      }
+    }
+  }
+  rows.push(current);
+
+  // Drop fully-empty rows
+  const cleaned = rows.filter((r) => r.some((c) => c.trim().length > 0));
+  if (cleaned.length < 2) return { isTable: false, rows: [] };
+  return { isTable: true, rows: cleaned };
+}
 
 function clusterColumns(items: any[], pageWidth: number): string[] {
   const atoms = items

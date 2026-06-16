@@ -491,9 +491,19 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
       children.push(new Paragraph({ children: [new TextRun({ text: b.text, size: 20, bold: true, italics: true, color: '6B7280' })], spacing: { after: 120 } }));
     } else if (b.type === 'text') {
       const lowConf = b.confidence !== undefined && b.confidence < lowConfThreshold;
+      const isServiceTitle = /^call out services$/i.test(b.text.trim());
+      const isServiceSubtitle = /^\(?truck cover/i.test(b.text.trim());
       children.push(new Paragraph({
-        children: [new TextRun({ text: b.text, size: 22, color: lowConf ? 'B45309' : undefined, highlight: lowConf ? 'yellow' : undefined })],
-        spacing: { after: 80 },
+        alignment: isServiceTitle || isServiceSubtitle ? AlignmentType.CENTER : undefined,
+        children: [new TextRun({
+          text: b.text,
+          size: isServiceTitle ? 32 : isServiceSubtitle ? 22 : 22,
+          bold: isServiceTitle || undefined,
+          font: isServiceTitle || isServiceSubtitle ? 'Arial' : undefined,
+          color: lowConf ? 'B45309' : isServiceTitle ? '1F4E79' : isServiceSubtitle ? '444444' : undefined,
+          highlight: lowConf ? 'yellow' : undefined,
+        })],
+        spacing: { after: isServiceTitle ? 300 : isServiceSubtitle ? 400 : 80 },
       }));
     } else if (b.type === 'table') {
       const ncols = Math.max(1, ...b.rows.map((r) => r.length));
@@ -557,7 +567,17 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
       children.push(new Paragraph({ children: [new TextRun({ text: '[No text could be extracted from this page]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));
     }
   }
-  const doc = new Document({ sections: [{ children: children as any }] });
+  const doc = new Document({
+    sections: [{
+      properties: {
+        page: {
+          size: { width: 12240, height: 15840 },
+          margin: { top: 1080, right: 1080, bottom: 1080, left: 1080 },
+        },
+      },
+      children: children as any,
+    }],
+  });
   return await Packer.toBlob(doc);
 }
 

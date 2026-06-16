@@ -734,7 +734,11 @@ const PDFToWord = () => {
           // Try to detect a tabular layout on this page
           const tableDetect = detectTable(content.items as any[], viewport.width);
           if (tableDetect.isTable) {
-            blocks.push({ type: 'table', rows: tableDetect.rows, page: i });
+            for (const text of tableDetect.beforeText) {
+              blocks.push({ type: 'text', text, page: i });
+              txtParts.push(text);
+            }
+            blocks.push({ type: 'table', rows: tableDetect.rows, page: i, tableKind: tableDetect.tableKind });
             for (const row of tableDetect.rows) txtParts.push(row.join(' | '));
           } else {
             for (const line of pageLines) {

@@ -376,7 +376,11 @@ function fitImageToWidth(naturalW: number, naturalH: number, targetW: number, ma
 async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfThreshold: number): Promise<Blob> {
   // Page content width in EMU-ish target (Word default ~6.0 inches = 9000 twips ≈ 576 px)
   const PAGE_WIDTH_PX = 600;
-  const children: Paragraph[] = [
+  const TABLE_WIDTH_DXA = 9360; // 6.5 inches (US Letter content width)
+  const cellBorder = { style: BorderStyle.SINGLE, size: 4, color: '999999' };
+  const cellBorders = { top: cellBorder, bottom: cellBorder, left: cellBorder, right: cellBorder };
+
+  const children: (Paragraph | Table)[] = [
     new Paragraph({ children: [new TextRun({ text: `Converted from: ${sourceName}`, bold: true, size: 28 })], spacing: { after: 300 } }),
   ];
   for (const b of blocks) {
@@ -390,6 +394,27 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
         children: [new TextRun({ text: b.text, size: 22, color: lowConf ? 'B45309' : undefined, highlight: lowConf ? 'yellow' : undefined })],
         spacing: { after: 80 },
       }));
+    } else if (b.type === 'table') {
+      const ncols = Math.max(1, ...b.rows.map((r) => r.length));
+      const colW = Math.floor(TABLE_WIDTH_DXA / ncols);
+      const columnWidths = new Array(ncols).fill(colW);
+      const tableRows = b.rows.map((row, rIdx) => new TableRow({
+        children: new Array(ncols).fill(0).map((_, cIdx) => new TableCell({
+          borders: cellBorders,
+          width: { size: colW, type: WidthType.DXA },
+          margins: { top: 80, bottom: 80, left: 120, right: 120 },
+          children: [new Paragraph({
+            children: [new TextRun({ text: row[cIdx] ?? '', size: 20, bold: rIdx === 0 })],
+          })],
+        })),
+      }));
+      children.push(new Table({
+        width: { size: TABLE_WIDTH_DXA, type: WidthType.DXA },
+        columnWidths,
+        rows: tableRows,
+      }));
+      // Tables can't be adjacent without a paragraph between them in some renderers
+      children.push(new Paragraph({ children: [new TextRun('')], spacing: { after: 80 } }));
     } else if (b.type === 'image') {
       const targetW = b.widthPct ? Math.max(120, Math.round(PAGE_WIDTH_PX * b.widthPct)) : Math.round(PAGE_WIDTH_PX * 0.7);
       const dim = fitImageToWidth(b.w, b.h, targetW);
@@ -418,7 +443,7 @@ async function buildDocxFromBlocks(blocks: Block[], sourceName: string, lowConfT
       children.push(new Paragraph({ children: [new TextRun({ text: '[No text could be extracted from this page]', italics: true, size: 20, color: '888888' })], spacing: { after: 200 } }));
     }
   }
-  const doc = new Document({ sections: [{ children }] });
+  const doc = new Document({ sections: [{ children: children as any }] });
   return await Packer.toBlob(doc);
 }
 

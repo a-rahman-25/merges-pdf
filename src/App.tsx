@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { I18nProvider } from "./hooks/useI18n";
 import usePageTracking from "./hooks/usePageTracking";
 import NotFound from "./pages/NotFound";
@@ -94,6 +94,13 @@ const queryClient = new QueryClient();
 const AnimatedRoutes = () => {
   const location = useLocation();
   usePageTracking();
+
+  // Always land at the top of a newly opened tool page
+  useEffect(() => {
+    if (location.hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname, location.hash]);
+
   return (
     <>
       <Routes location={location} key={location.pathname}>

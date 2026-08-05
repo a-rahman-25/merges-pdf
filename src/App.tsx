@@ -94,6 +94,13 @@ const queryClient = new QueryClient();
 const AnimatedRoutes = () => {
   const location = useLocation();
   usePageTracking();
+
+  // Always land at the top of a newly opened tool page
+  useEffect(() => {
+    if (location.hash) return;
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname, location.hash]);
+
   return (
     <>
       <Routes location={location} key={location.pathname}>

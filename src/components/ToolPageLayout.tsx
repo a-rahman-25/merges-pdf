@@ -51,7 +51,7 @@ const ToolPageLayout = ({ children, activeTab }: ToolPageLayoutProps) => {
               <span className="ml-2 text-sm text-muted-foreground md:hidden">Tools</span>
             </div>
 
-            <main className="flex-1 mx-auto w-full max-w-4xl px-6 py-12 md:py-20">
+            <main className="flex-1 mx-auto w-full max-w-4xl px-6 py-6 md:py-10">
               {children}
 
               <PrivacyNotice />

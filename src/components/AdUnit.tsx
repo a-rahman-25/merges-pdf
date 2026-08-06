@@ -13,20 +13,44 @@ interface AdUnitProps {
 
 const AD_CLIENT = 'ca-pub-5661149285773520';
 
+const loadAdSense = () => {
+  if (document.querySelector('script[data-adsense]')) return;
+  const s = document.createElement('script');
+  s.async = true;
+  s.crossOrigin = 'anonymous';
+  s.dataset.adsense = 'true';
+  s.src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${AD_CLIENT}`;
+  document.head.appendChild(s);
+};
+
 const AdUnit = ({ slot, format = 'auto', className = '', layout = '' }: AdUnitProps) => {
   const adRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (pushed.current) return;
-    try {
-      const w = window as any;
-      (w.adsbygoogle = w.adsbygoogle || []).push({});
-      pushed.current = true;
-    } catch {
-      // AdSense not loaded or blocked
-    }
+    const el = adRef.current;
+    if (!el) return;
+
+    const tryPush = () => {
+      if (pushed.current) return;
+      // Skip while the container has no measurable width (avoids AdSense slot-size errors)
+      if (el.offsetWidth < 100) return;
+      try {
+        loadAdSense();
+        const w = window as any;
+        (w.adsbygoogle = w.adsbygoogle || []).push({});
+        pushed.current = true;
+      } catch {
+        // AdSense not loaded or blocked
+      }
+    };
+
+    tryPush();
+    const observer = new ResizeObserver(tryPush);
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
+
 
   const formatStyles: Record<string, React.CSSProperties> = {
     auto: { display: 'block' },

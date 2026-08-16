@@ -33,8 +33,9 @@ const AdUnit = ({ slot, format = 'auto', className = '', layout = '' }: AdUnitPr
 
     const tryPush = () => {
       if (pushed.current) return;
-      // Skip while the container has no measurable width (avoids AdSense slot-size errors)
-      if (el.offsetWidth < 100) return;
+      // Skip while the container or the <ins> slot has no measurable width
+      const ins = el.querySelector('ins.adsbygoogle') as HTMLElement | null;
+      if (el.offsetWidth < 100 || !ins || ins.offsetWidth < 100) return;
       try {
         loadAdSense();
         const w = window as any;

@@ -62,6 +62,7 @@ const PageSize = lazy(() => import("./pages/PageSize"));
 const PdfToExcel = lazy(() => import("./pages/PdfToExcel"));
 const EpubToPdf = lazy(() => import("./pages/EpubToPdf"));
 const HtmlToPdf = lazy(() => import("./pages/HtmlToPdf"));
+const UrlToPdf = lazy(() => import("./pages/UrlToPdf"));
 const PdfA = lazy(() => import("./pages/PdfA"));
 const ScanToPdf = lazy(() => import("./pages/ScanToPdf"));
 const PdfOverlay = lazy(() => import("./pages/PdfOverlay"));
@@ -156,6 +157,7 @@ const AnimatedRoutes = () => {
         <Route path="/page-size" element={<PageSize />} />
         <Route path="/epub-to-pdf" element={<EpubToPdf />} />
         <Route path="/html-to-pdf" element={<HtmlToPdf />} />
+        <Route path="/url-to-pdf" element={<UrlToPdf />} />
         <Route path="/pdf-a" element={<PdfA />} />
         <Route path="/scan-to-pdf" element={<ScanToPdf />} />
         <Route path="/pdf-overlay" element={<PdfOverlay />} />

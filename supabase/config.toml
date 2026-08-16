@@ -26,3 +26,6 @@ verify_jwt = false
 
 [functions.send-survey-email]
 verify_jwt = false
+
+[functions.fetch-webpage]
+verify_jwt = false

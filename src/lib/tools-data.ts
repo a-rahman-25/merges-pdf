@@ -5,7 +5,7 @@ import {
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
   BookMarked, Camera, GitCompare, FileCode, Code, Globe, Shield,
   TableProperties, FolderSearch, Braces, SpellCheck, Wand2, Highlighter, Receipt,
-  ClipboardList, Accessibility, FileInput,
+  ClipboardList, Accessibility, FileInput, Link2,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -59,6 +59,7 @@ export const allTools: ToolItem[] = [
   { icon: Image, titleKey: 'tool.heicToPdf', descKey: 'tool.heicToPdf.desc', path: '/heic-to-pdf', color: 'bg-tool-rose/15 text-tool-rose', category: 'converters' },
   { icon: BookMarked, titleKey: 'tool.epubToPdf', descKey: 'tool.epubToPdf.desc', path: '/epub-to-pdf', color: 'bg-tool-violet/15 text-tool-violet', category: 'converters' },
   { icon: Code, titleKey: 'tool.htmlToPdf', descKey: 'tool.htmlToPdf.desc', path: '/html-to-pdf', color: 'bg-tool-lime/15 text-tool-lime', category: 'converters' },
+  { icon: Link2, titleKey: 'tool.urlToPdf', descKey: 'tool.urlToPdf.desc', path: '/url-to-pdf', color: 'bg-tool-cyan/15 text-tool-cyan', category: 'converters' },
   { icon: Shield, titleKey: 'tool.pdfA', descKey: 'tool.pdfA.desc', path: '/pdf-a', color: 'bg-tool-blue/15 text-tool-blue', category: 'converters' },
   { icon: Camera, titleKey: 'tool.scanToPdf', descKey: 'tool.scanToPdf.desc', path: '/scan-to-pdf', color: 'bg-tool-amber/15 text-tool-amber', category: 'converters' },
   { icon: Layers, titleKey: 'tool.pdfOverlay', descKey: 'tool.pdfOverlay.desc', path: '/pdf-overlay', color: 'bg-tool-indigo/15 text-tool-indigo', category: 'converters' },

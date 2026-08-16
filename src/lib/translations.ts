@@ -136,6 +136,7 @@ const en: T = {
   'tool.pageSize': 'Page Size', 'tool.pageSize.desc': 'Resize all pages to A4, Letter, etc.',
   'tool.epubToPdf': 'EPUB to PDF', 'tool.epubToPdf.desc': 'Convert EPUB e-books to PDF.',
   'tool.htmlToPdf': 'HTML to PDF', 'tool.htmlToPdf.desc': 'Convert HTML code or files to PDF.',
+  'tool.urlToPdf': 'URL to PDF', 'tool.urlToPdf.desc': 'Save any web page link as a PDF.',
   'tool.pdfA': 'PDF/A Converter', 'tool.pdfA.desc': 'Convert PDFs to archival PDF/A format.',
   'tool.scanToPdf': 'Scan to PDF', 'tool.scanToPdf.desc': 'Camera or image scan to PDF.',
   'tool.pdfOverlay': 'PDF Overlay', 'tool.pdfOverlay.desc': 'Overlay one PDF on another.',

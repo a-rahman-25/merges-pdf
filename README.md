@@ -1,73 +1,32 @@
-# Welcome to your Lovable project
+# MergesPDF 🔒
 
-## Project info
+**Privacy-first PDF tools — everything runs in your browser, nothing is uploaded.**
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+🔗 **Live:** [mergespdf.com](https://mergespdf.com)
 
-## How can I edit this code?
+## About
 
-There are several ways of editing your application.
+MergesPDF is a client-side PDF toolkit built for people who don't want to upload sensitive documents to a third-party server just to merge, split, or compress a file. Every operation — merging, splitting, compressing, converting, signing, and OCR — happens entirely in your browser using client-side processing. No sign-up, no file storage, no server round-trip.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+- 📎 Merge multiple PDFs into one
+- ✂️ Split PDFs into separate files
+- 🗜️ Compress PDF file size
+- 🔄 Convert between formats
+- ✍️ Sign PDFs digitally
+- 🔍 OCR text extraction
 
-Changes made via Lovable will be committed automatically to this repo.
+## Why Client-Side?
 
-**Use your preferred IDE**
+Most online PDF tools require you to upload your files to their servers — which means your documents (often containing personal or sensitive information) pass through infrastructure you don't control. MergesPDF processes everything locally in the browser, so your files never leave your device.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Tech Stack
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- **Frontend:** React, TypeScript
+- **PDF Processing:** PDF.js
+- **APIs:** Browser-native File & Blob APIs
 
-Follow these steps:
+## Author
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Built and maintained by **[Abdelrahman Mohamed](https://www.linkedin.com/in/abdelrahman-mohamed-884630264)** — Full Stack Software Engineer based in Dammam, Saudi Arabia.

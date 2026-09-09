@@ -136,26 +136,26 @@ if (which === 'all' || which === 'dedicated') {
 }
 
 if (which === 'all' || which === 'generic') {
-  console.log(`\n=== ai-document-tool slugs (${genericSpecs.length}) — PRODUCTION payload (what the site sends today) ===\n`);
+  console.log(`\n=== ai-document-tool slugs (${genericSpecs.length}) — METADATA-ONLY payload (pre-fix behaviour) ===\n`);
   await runPool(genericSpecs, async (spec) => {
-    const inputText = JSON.stringify(spec.frontendBody);
-    const res = await callFunction(spec.fn, spec.frontendBody);
+    const inputText = JSON.stringify(spec.metadataOnlyBody);
+    const res = await callFunction(spec.fn, spec.metadataOnlyBody);
     const g = grade(spec, res, inputText);
-    writeFileSync(join(outDir, `generic_production__${spec.id}.md`), res.text || `NO OUTPUT\n${res.error || ''}`);
-    rows.push({ group: 'generic-production', id: spec.id, label: spec.label, mode: 'production', ...g });
+    writeFileSync(join(outDir, `generic_metadata_only__${spec.id}.md`), res.text || `NO OUTPUT\n${res.error || ''}`);
+    rows.push({ group: 'generic-metadata-only', id: spec.id, label: spec.label, ...g });
     console.log(
       `${String(g.score).padStart(3)}  ${spec.label.padEnd(32)} ` +
       `truth ${g.truth.hits.length}/${spec.truth.length}  invented numbers ${g.halluc.invented}/${g.halluc.total}  ${g.chars || 0} chars`
     );
   });
 
-  console.log(`\n=== ai-document-tool slugs — CONTROL payload (same call, document text included) ===\n`);
+  console.log(`\n=== ai-document-tool slugs — EXTRACTED-TEXT payload (post-fix behaviour) ===\n`);
   await runPool(genericSpecs, async (spec) => {
-    const inputText = JSON.stringify(spec.controlBody);
-    const res = await callFunction(spec.fn, spec.controlBody);
+    const inputText = JSON.stringify(spec.extractedTextBody);
+    const res = await callFunction(spec.fn, spec.extractedTextBody);
     const g = grade(spec, res, inputText);
-    writeFileSync(join(outDir, `generic_control__${spec.id}.md`), res.text || `NO OUTPUT\n${res.error || ''}`);
-    rows.push({ group: 'generic-control', id: spec.id, label: spec.label, mode: 'control', ...g });
+    writeFileSync(join(outDir, `generic_extracted_text__${spec.id}.md`), res.text || `NO OUTPUT\n${res.error || ''}`);
+    rows.push({ group: 'generic-extracted-text', id: spec.id, label: spec.label, ...g });
     console.log(
       `${String(g.score).padStart(3)}  ${spec.label.padEnd(32)} ` +
       `truth ${g.truth.hits.length}/${spec.truth.length}  invented numbers ${g.halluc.invented}/${g.halluc.total}`
@@ -165,7 +165,7 @@ if (which === 'all' || which === 'generic') {
 
 writeFileSync(join(outDir, 'results.json'), JSON.stringify(rows, null, 2));
 
-const ranked = rows.filter((r) => r.group !== 'generic-control').sort((a, b) => a.score - b.score);
+const ranked = rows.filter((r) => r.group !== 'generic-extracted-text').sort((a, b) => a.score - b.score);
 console.log('\n\n================ WORST OUTPUT FIRST ================\n');
 console.log('score  tool                              truth recall  invented numbers');
 for (const r of ranked) {
@@ -176,14 +176,15 @@ for (const r of ranked) {
   );
 }
 
-const prod = rows.filter((r) => r.group === 'generic-production');
-const ctrl = rows.filter((r) => r.group === 'generic-control');
+const before = rows.filter((r) => r.group === 'generic-metadata-only');
+const after = rows.filter((r) => r.group === 'generic-extracted-text');
 const avg = (a) => (a.length ? Math.round(a.reduce((s, x) => s + x.score, 0) / a.length) : 0);
-if (prod.length) {
-  console.log(`\nai-document-tool average score — production payload: ${avg(prod)} / 100`);
-  console.log(`ai-document-tool average score — control payload:    ${avg(ctrl)} / 100`);
-  const totalInventedProd = prod.reduce((s, x) => s + x.halluc.invented, 0);
-  const totalInventedCtrl = ctrl.reduce((s, x) => s + x.halluc.invented, 0);
-  console.log(`fabricated numeric claims — production: ${totalInventedProd}, control: ${totalInventedCtrl}`);
+if (before.length) {
+  console.log(`\nai-document-tool average score — metadata-only payload: ${avg(before)} / 100`);
+  console.log(`ai-document-tool average score — extracted-text payload: ${avg(after)} / 100`);
+  const sumTruth = (a) => a.reduce((s, x) => s + x.truth.hits.length, 0);
+  const possible = before.reduce((s, x) => s + x.truth.hits.length + x.truth.misses.length, 0);
+  console.log(`known document facts recovered — metadata-only: ${sumTruth(before)}/${possible}, extracted-text: ${sumTruth(after)}/${possible}`);
+  console.log(`fabricated numeric claims — metadata-only: ${before.reduce((s, x) => s + x.halluc.invented, 0)}, extracted-text: ${after.reduce((s, x) => s + x.halluc.invented, 0)}`);
 }
 console.log(`\nRaw model output for every tool saved under scripts/ai-audit/out/`);

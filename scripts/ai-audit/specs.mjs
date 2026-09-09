@@ -399,16 +399,17 @@ export const genericSpecs = genericTools.map(([slug, label, multi]) => ({
   multi: !!multi,
   truth: report.truth,
   structure: genericStructure[slug] || nonEmpty(),
-  // What production sends today.
-  frontendBody: {
+  // Metadata-only payload: name, page count and size, no document content.
+  // This is what AIDocumentTool.tsx sent before the extraction fix.
+  metadataOnlyBody: {
     toolSlug: slug,
     text: fileDescriptor(report, '248.3 KB'),
     filename: report.filename,
     pageCount: report.pageCount,
     ...(multi ? { filename2: reportB.filename, text2: fileDescriptor(reportB, '176.1 KB') } : {}),
   },
-  // What it should send: the extracted text.
-  controlBody: {
+  // The extracted document text, as the component sends it now.
+  extractedTextBody: {
     toolSlug: slug,
     text: report.text,
     filename: report.filename,

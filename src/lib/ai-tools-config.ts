@@ -15,8 +15,6 @@ export interface AIToolConfig {
   metaDescription: string;
   icon: any;
   color: string;
-  systemPrompt: string;
-  userPromptTemplate: string;
   category: 'analysis' | 'generation' | 'extraction' | 'education' | 'compliance' | 'writing';
   faqs: { q: string; a: string }[];
   acceptMultiple?: boolean;
@@ -41,8 +39,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Brain,
     color: 'bg-tool-blue/15 text-tool-blue',
     category: 'analysis',
-    systemPrompt: 'You are a document structure analyst. Given document info, generate a detailed structural map showing: main sections, subsections, key topics per section, and relationships between sections. Use a hierarchical format with indentation and symbols (📄 📂 📌 🔗) to create a visual map.',
-    userPromptTemplate: 'Create a visual structure map of this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What is a document summary map?', a: 'A visual representation of your document\'s structure showing sections, topics, and how they relate to each other.' },
       { q: 'What file types are supported?', a: 'Currently PDF files are supported.' },
@@ -58,8 +54,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Clock,
     color: 'bg-tool-amber/15 text-tool-amber',
     category: 'extraction',
-    systemPrompt: 'You are a timeline extraction specialist. Analyze the document and extract all events, dates, milestones, and deadlines. Present them in chronological order using a clear timeline format with dates and descriptions. Use symbols like 📅 🕐 ➡️ to make it visual.',
-    userPromptTemplate: 'Extract a timeline of events from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What kind of documents work best?', a: 'Documents with dates, events, or chronological information like reports, project plans, and historical documents.' },
       { q: 'Is it accurate?', a: 'AI extracts dates and events mentioned in the document. Always verify important dates.' },
@@ -74,8 +68,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Tag,
     color: 'bg-tool-emerald/15 text-tool-emerald',
     category: 'extraction',
-    systemPrompt: 'You are a keyword extraction expert. Analyze the document and extract the most important keywords and key phrases. Group them by relevance and topic. For each keyword, provide a brief context of why it\'s important in the document. Present as a ranked list.',
-    userPromptTemplate: 'Extract the most important keywords from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How many keywords are extracted?', a: 'Typically 15-30 keywords depending on document length and content.' },
       { q: 'Are phrases included?', a: 'Yes, both single keywords and multi-word key phrases are extracted.' },
@@ -90,8 +82,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Lightbulb,
     color: 'bg-tool-violet/15 text-tool-violet',
     category: 'generation',
-    systemPrompt: 'You are a creative idea generator. Based on the document content, generate innovative ideas, suggestions, and creative directions. Include practical next steps, potential improvements, and new angles. Organize ideas by category with actionable descriptions.',
-    userPromptTemplate: 'Generate creative ideas based on this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What kind of ideas does it generate?', a: 'Ideas range from improvements to the document\'s subject matter to new projects and creative angles.' },
     ],
@@ -105,8 +95,6 @@ export const aiTools: AIToolConfig[] = [
     icon: FileText,
     color: 'bg-tool-rose/15 text-tool-rose',
     category: 'generation',
-    systemPrompt: 'You are a professional report writer. Transform the raw document content into a well-structured report with: Executive Summary, Introduction, Key Findings, Analysis, Recommendations, and Conclusion. Use formal language and clear headings.',
-    userPromptTemplate: 'Convert this document into a structured report:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What report format is used?', a: 'A standard professional report with executive summary, findings, analysis, and recommendations.' },
     ],
@@ -120,8 +108,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Shield,
     color: 'bg-tool-indigo/15 text-tool-indigo',
     category: 'generation',
-    systemPrompt: 'You are a policy document specialist. Based on the input document, generate a formal company policy document with: Purpose, Scope, Policy Statement, Responsibilities, Procedures, Compliance, and Review Schedule. Use professional language.',
-    userPromptTemplate: 'Generate a company policy based on this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'Should I review the generated policy?', a: 'Yes, always review AI-generated policies with legal counsel before implementing.' },
     ],
@@ -135,8 +121,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Presentation,
     color: 'bg-tool-cyan/15 text-tool-cyan',
     category: 'generation',
-    systemPrompt: 'You are a presentation designer. Convert the document into a slide deck outline. For each slide provide: Slide number, Title, 3-5 bullet points, and speaker notes. Include a title slide, agenda, content slides, and closing slide. Aim for 8-15 slides.',
-    userPromptTemplate: 'Create a presentation outline from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How many slides are generated?', a: 'Typically 8-15 slides depending on document content.' },
     ],
@@ -151,8 +135,6 @@ export const aiTools: AIToolConfig[] = [
     color: 'bg-tool-teal/15 text-tool-teal',
     category: 'analysis',
     acceptMultiple: true,
-    systemPrompt: 'You are a document comparison specialist. Compare the two documents and provide: Key Differences, Similarities, Added Content, Removed Content, and Modified Sections. Use clear formatting with ✅ ❌ ⚠️ symbols.',
-    userPromptTemplate: 'Compare these two documents:\n\nDocument 1: {filename}\nDocument 2: {filename2}\nContent 1: {text}\nContent 2: {text2}',
     faqs: [
       { q: 'Can I compare different file types?', a: 'Currently both files should be PDFs.' },
     ],
@@ -166,8 +148,6 @@ export const aiTools: AIToolConfig[] = [
     icon: CheckCircle,
     color: 'bg-tool-lime/15 text-tool-lime',
     category: 'analysis',
-    systemPrompt: 'You are a fact-checking analyst. Review the document and identify claims, statistics, and statements that can be verified. For each claim provide: the claim, verification status (✅ Likely Accurate, ⚠️ Needs Verification, ❌ Potentially Inaccurate), and reasoning. Note: your analysis is based on general knowledge and should be verified with authoritative sources.',
-    userPromptTemplate: 'Fact check the claims in this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How accurate is the fact checking?', a: 'AI provides analysis based on its training data. Always verify important claims with authoritative sources.' },
     ],
@@ -181,8 +161,6 @@ export const aiTools: AIToolConfig[] = [
     icon: HelpCircle,
     color: 'bg-tool-pink/15 text-tool-pink',
     category: 'education',
-    systemPrompt: 'You are an educational content creator. Generate a comprehensive set of questions from the document: 5 multiple choice, 5 short answer, and 3 essay questions. Include answer keys for multiple choice and short answer. Questions should test comprehension at different levels.',
-    userPromptTemplate: 'Generate study questions from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What types of questions are generated?', a: 'Multiple choice, short answer, and essay questions at various difficulty levels.' },
     ],
@@ -196,8 +174,6 @@ export const aiTools: AIToolConfig[] = [
     icon: BookOpen,
     color: 'bg-tool-blue/15 text-tool-blue',
     category: 'extraction',
-    systemPrompt: 'You are a knowledge extraction specialist. Extract the most important insights, facts, statistics, conclusions, and learnings from the document. Organize by theme and importance. Use clear categories and bullet points.',
-    userPromptTemplate: 'Extract key knowledge from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What counts as key knowledge?', a: 'Important facts, statistics, conclusions, insights, and actionable information.' },
     ],
@@ -211,8 +187,6 @@ export const aiTools: AIToolConfig[] = [
     icon: ListChecks,
     color: 'bg-tool-emerald/15 text-tool-emerald',
     category: 'extraction',
-    systemPrompt: 'You are a task extraction specialist. Identify all tasks, action items, to-dos, and assignments in the document. For each task provide: Task description, Priority (High/Medium/Low), Assignee (if mentioned), Deadline (if mentioned), and Status. Present as a structured task list.',
-    userPromptTemplate: 'Extract tasks and action items from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'Does it detect deadlines?', a: 'Yes, if deadlines are mentioned in the document they will be associated with the relevant tasks.' },
     ],
@@ -226,8 +200,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Mail,
     color: 'bg-tool-amber/15 text-tool-amber',
     category: 'generation',
-    systemPrompt: 'You are a professional email writer. Based on the document content, generate 3 email drafts: 1) A brief summary email, 2) A detailed follow-up email, 3) An action-required email. Each should have a subject line, greeting, body, and sign-off. Use professional tone.',
-    userPromptTemplate: 'Generate emails based on this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How many email versions are created?', a: 'Three versions: brief summary, detailed follow-up, and action-required.' },
     ],
@@ -241,8 +213,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Tags,
     color: 'bg-tool-violet/15 text-tool-violet',
     category: 'analysis',
-    systemPrompt: 'You are a document classification expert. Analyze the document and assign relevant tags and categories. Provide: Primary Category, Secondary Categories, Topic Tags (10-15), Sentiment, Complexity Level, Target Audience, and Document Type. Present in a clear structured format.',
-    userPromptTemplate: 'Tag and categorize this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What tags are assigned?', a: 'Topic tags, categories, sentiment, complexity level, and document type.' },
     ],
@@ -256,8 +226,6 @@ export const aiTools: AIToolConfig[] = [
     icon: RefreshCw,
     color: 'bg-tool-rose/15 text-tool-rose',
     category: 'writing',
-    systemPrompt: 'You are a content rewriter. Rewrite the document content in 3 different styles: 1) Simplified (easy to understand), 2) Professional (formal business tone), 3) Engaging (conversational and dynamic). Maintain the core message while changing the style.',
-    userPromptTemplate: 'Rewrite this document in different styles:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What styles are available?', a: 'Simplified, Professional, and Engaging versions of your content.' },
     ],
@@ -271,8 +239,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Expand,
     color: 'bg-tool-cyan/15 text-tool-cyan',
     category: 'writing',
-    systemPrompt: 'You are a content expander. Take the short notes or brief content from the document and expand each point into detailed, well-explained paragraphs. Add context, examples, and elaboration while maintaining accuracy.',
-    userPromptTemplate: 'Expand the content of this document into detailed explanations:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How much does it expand?', a: 'Each point is expanded into 1-3 detailed paragraphs with examples and context.' },
     ],
@@ -286,8 +252,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Layers,
     color: 'bg-tool-indigo/15 text-tool-indigo',
     category: 'analysis',
-    systemPrompt: 'You are a summarization expert. Create three summary levels: 1) 🟢 Brief (2-3 sentences), 2) 🟡 Medium (1-2 paragraphs), 3) 🔴 Detailed (comprehensive with key points, findings, and conclusions). Label each level clearly.',
-    userPromptTemplate: 'Generate multi-level summaries of this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What are the summary levels?', a: 'Brief (2-3 sentences), Medium (1-2 paragraphs), and Detailed (comprehensive analysis).' },
     ],
@@ -301,8 +265,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Users,
     color: 'bg-tool-teal/15 text-tool-teal',
     category: 'extraction',
-    systemPrompt: 'You are a meeting notes analyst. Extract all action items, decisions, and follow-ups from the meeting document. For each: Action Item, Owner (if mentioned), Deadline, Priority, and Context. Also summarize key decisions made.',
-    userPromptTemplate: 'Extract action items from these meeting notes:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'Does it identify who is responsible?', a: 'Yes, if names are mentioned in the document they are associated with action items.' },
     ],
@@ -316,8 +278,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Network,
     color: 'bg-tool-lime/15 text-tool-lime',
     category: 'analysis',
-    systemPrompt: 'You are a knowledge graph specialist. Analyze the document and create a text-based knowledge graph showing: Key Entities, Relationships between entities, Hierarchy of concepts, and Dependencies. Use arrows (→) and indentation to show connections. Group by topic.',
-    userPromptTemplate: 'Generate a knowledge graph from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What is a knowledge graph?', a: 'A map showing entities (people, concepts, organizations) and their relationships.' },
     ],
@@ -331,8 +291,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Search,
     color: 'bg-tool-blue/15 text-tool-blue',
     category: 'extraction',
-    systemPrompt: 'You are a named entity recognition specialist. Extract all entities from the document: 👤 People, 🏢 Organizations, 📍 Locations, 📅 Dates, 💰 Monetary Values, 📊 Statistics, and 📧 Contact Info. Group by category and list occurrences.',
-    userPromptTemplate: 'Extract all entities from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What entities are detected?', a: 'People, organizations, locations, dates, monetary values, statistics, and contact information.' },
     ],
@@ -346,8 +304,6 @@ export const aiTools: AIToolConfig[] = [
     icon: AlertTriangle,
     color: 'bg-tool-amber/15 text-tool-amber',
     category: 'compliance',
-    systemPrompt: 'You are a risk analysis specialist. Analyze the document for: ⚠️ Potential Risks, ❌ Red Flags, 💡 Missing Clauses, 📋 Ambiguous Language, and 🔒 Liability Issues. Rate each risk as High/Medium/Low and provide mitigation suggestions.',
-    userPromptTemplate: 'Detect risks in this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'Is this legal advice?', a: 'No. AI risk detection is for informational purposes. Always consult a legal professional.' },
     ],
@@ -361,8 +317,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Scale,
     color: 'bg-tool-indigo/15 text-tool-indigo',
     category: 'compliance',
-    systemPrompt: 'You are a compliance analysis specialist. Review the document for compliance issues: Regulatory Requirements, Missing Disclosures, Privacy Concerns (GDPR/CCPA), Accessibility Issues, and Industry Standards. Provide a compliance scorecard with recommendations.',
-    userPromptTemplate: 'Check compliance of this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'Which regulations does it check?', a: 'General compliance patterns including GDPR, CCPA, and common industry standards.' },
     ],
@@ -376,8 +330,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Copy,
     color: 'bg-tool-rose/15 text-tool-rose',
     category: 'analysis',
-    systemPrompt: 'You are a content redundancy analyst. Analyze the document and identify: Duplicate Sections, Redundant Paragraphs, Repeated Information, and Inconsistent Statements. Highlight what can be consolidated or removed.',
-    userPromptTemplate: 'Detect duplicate content in this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What counts as duplicate?', a: 'Repeated paragraphs, similar sections, redundant information, and inconsistent repetitions.' },
     ],
@@ -391,8 +343,6 @@ export const aiTools: AIToolConfig[] = [
     icon: PenTool,
     color: 'bg-tool-emerald/15 text-tool-emerald',
     category: 'writing',
-    systemPrompt: 'You are a writing quality analyst. Evaluate the document for: Readability Score, Grammar Issues, Clarity Rating, Tone Consistency, Sentence Structure, Vocabulary Level, and Overall Quality. Provide specific improvement suggestions with examples.',
-    userPromptTemplate: 'Analyze the writing quality of this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What metrics are analyzed?', a: 'Readability, grammar, clarity, tone, sentence structure, and vocabulary.' },
     ],
@@ -406,8 +356,6 @@ export const aiTools: AIToolConfig[] = [
     icon: FolderOpen,
     color: 'bg-tool-violet/15 text-tool-violet',
     category: 'analysis',
-    systemPrompt: 'You are a document classification expert. Classify the document by: Document Type (report, memo, contract, etc.), Purpose, Target Audience, Formality Level, Subject Domain, Language Complexity, and Recommended Filing Category. Provide confidence scores.',
-    userPromptTemplate: 'Classify this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What categories does it classify into?', a: 'Document type, purpose, audience, formality, domain, and filing category.' },
     ],
@@ -421,8 +369,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Type,
     color: 'bg-tool-pink/15 text-tool-pink',
     category: 'writing',
-    systemPrompt: 'You are a title and headline creator. Generate 10 title options for the document in different styles: Descriptive, Creative, SEO-Friendly, Academic, Clickworthy, Professional, Concise, Question-Based, Action-Oriented, and Emotional. Explain why each works.',
-    userPromptTemplate: 'Generate titles for this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How many titles are generated?', a: 'Ten titles in different styles from professional to creative.' },
     ],
@@ -436,8 +382,6 @@ export const aiTools: AIToolConfig[] = [
     icon: LayoutDashboard,
     color: 'bg-tool-teal/15 text-tool-teal',
     category: 'generation',
-    systemPrompt: 'You are a presentation summary specialist. Create a concise 5-7 slide outline that captures the document\'s key points. Each slide: Title, 3 bullet points, and a key takeaway. Focus on the most impactful information.',
-    userPromptTemplate: 'Create summary slides from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How is this different from the presentation generator?', a: 'Summary slides are shorter (5-7 slides) and focus on key takeaways, while the presentation generator creates fuller decks.' },
     ],
@@ -451,8 +395,6 @@ export const aiTools: AIToolConfig[] = [
     icon: BarChart3,
     color: 'bg-tool-cyan/15 text-tool-cyan',
     category: 'analysis',
-    systemPrompt: 'You are a data insight analyst. Analyze the document for: Key Trends, Patterns, Anomalies, Statistical Highlights, Correlations, and Actionable Insights. Present findings with clear explanations and recommendations.',
-    userPromptTemplate: 'Generate data insights from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What kind of insights are generated?', a: 'Trends, patterns, anomalies, correlations, and actionable recommendations.' },
     ],
@@ -466,8 +408,6 @@ export const aiTools: AIToolConfig[] = [
     icon: List,
     color: 'bg-tool-lime/15 text-tool-lime',
     category: 'generation',
-    systemPrompt: 'You are a document outline specialist. Create a detailed, hierarchical outline of the document with: Main Sections (I, II, III...), Subsections (A, B, C...), Key Points (1, 2, 3...), and Brief Descriptions. Make it suitable for a table of contents.',
-    userPromptTemplate: 'Create an outline of this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What format is the outline?', a: 'A hierarchical structure with main sections, subsections, and key points.' },
     ],
@@ -481,8 +421,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Volume2,
     color: 'bg-tool-amber/15 text-tool-amber',
     category: 'writing',
-    systemPrompt: 'You are a tone conversion specialist. Rewrite the document content in 4 different tones: 🎩 Formal, 😊 Casual, 🎓 Academic, and 💼 Professional. Each version should convey the same information but with distinctly different tone and style.',
-    userPromptTemplate: 'Convert the tone of this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What tones are available?', a: 'Formal, Casual, Academic, and Professional.' },
     ],
@@ -496,8 +434,6 @@ export const aiTools: AIToolConfig[] = [
     icon: MessageSquare,
     color: 'bg-tool-blue/15 text-tool-blue',
     category: 'analysis',
-    systemPrompt: 'You are a document Q&A assistant. Based on the document content, answer the user\'s question thoroughly. If the answer is in the document, cite the relevant section. If it\'s not directly covered, provide the best inference.',
-    userPromptTemplate: 'Based on this document, answer questions:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'Can I ask follow-up questions?', a: 'Currently each question is independent. Upload and ask a new question for follow-ups.' },
     ],
@@ -511,8 +447,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Star,
     color: 'bg-tool-rose/15 text-tool-rose',
     category: 'extraction',
-    systemPrompt: 'You are a key takeaways specialist. Extract the 5-10 most important takeaways from the document. For each: a clear statement, why it matters, and any action it implies. Rank by importance. Be concise and impactful.',
-    userPromptTemplate: 'Extract key takeaways from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How many takeaways are extracted?', a: 'Typically 5-10 key takeaways ranked by importance.' },
     ],
@@ -526,8 +460,6 @@ export const aiTools: AIToolConfig[] = [
     icon: GraduationCap,
     color: 'bg-tool-emerald/15 text-tool-emerald',
     category: 'education',
-    systemPrompt: 'You are a study notes creator. Transform the document into well-organized study notes with: Key Concepts, Definitions, Important Facts, Examples, Memory Aids (mnemonics), and Review Questions. Format for easy studying.',
-    userPromptTemplate: 'Create study notes from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What format are the study notes?', a: 'Organized notes with key concepts, definitions, facts, examples, and review questions.' },
     ],
@@ -541,8 +473,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Zap,
     color: 'bg-tool-violet/15 text-tool-violet',
     category: 'education',
-    systemPrompt: 'You are a flashcard creator. Generate 15-20 flashcards from the document. Each card: Front (question/term) and Back (answer/definition). Cover the most important concepts. Mix question types: definitions, concepts, applications, and comparisons.',
-    userPromptTemplate: 'Create flashcards from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How many flashcards are created?', a: 'Typically 15-20 flashcards covering key concepts.' },
     ],
@@ -556,8 +486,6 @@ export const aiTools: AIToolConfig[] = [
     icon: BookMarked,
     color: 'bg-tool-indigo/15 text-tool-indigo',
     category: 'education',
-    systemPrompt: 'You are a concept explainer. Identify the most complex concepts in the document and explain each in 3 levels: 1) 🟢 Simple (explain like I\'m 10), 2) 🟡 Intermediate (general audience), 3) 🔴 Advanced (technical detail). Include analogies and examples.',
-    userPromptTemplate: 'Explain complex concepts from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'At what levels are concepts explained?', a: 'Three levels: Simple (ELI10), Intermediate (general), and Advanced (technical).' },
     ],
@@ -571,8 +499,6 @@ export const aiTools: AIToolConfig[] = [
     icon: FileText,
     color: 'bg-tool-teal/15 text-tool-teal',
     category: 'writing',
-    systemPrompt: 'You are an academic abstract writer. Generate a formal research abstract for the document with: Background, Objective, Methods (if applicable), Results/Findings, and Conclusion. Keep it 150-300 words. Also provide 5-8 keywords.',
-    userPromptTemplate: 'Generate an abstract for this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What format is the abstract?', a: 'Standard academic format: Background, Objective, Methods, Results, Conclusion, and Keywords.' },
     ],
@@ -586,8 +512,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Heading,
     color: 'bg-tool-pink/15 text-tool-pink',
     category: 'writing',
-    systemPrompt: 'You are a headline specialist. Generate compelling headlines for each section of the document, plus 5 overall headlines. Include: News-style, SEO-optimized, Social Media, Email Subject, and Blog Post versions. Each should be attention-grabbing.',
-    userPromptTemplate: 'Generate headlines for this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What types of headlines?', a: 'News-style, SEO, social media, email subjects, and blog post headlines.' },
     ],
@@ -601,8 +525,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Highlighter,
     color: 'bg-tool-lime/15 text-tool-lime',
     category: 'extraction',
-    systemPrompt: 'You are a content highlighter. Identify and extract the most important sections of the document. For each highlight: the content, why it\'s important (🔴 Critical, 🟡 Important, 🟢 Notable), and its page/section location. Provide a "highlights reel" summary.',
-    userPromptTemplate: 'Highlight the most important parts of this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How are importance levels determined?', a: 'AI evaluates based on impact, actionability, and relevance to the document\'s main purpose.' },
     ],
@@ -616,8 +538,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Target,
     color: 'bg-tool-cyan/15 text-tool-cyan',
     category: 'analysis',
-    systemPrompt: 'You are a topic detection specialist. Identify all topics discussed in the document. For each: Topic Name, Description, Coverage (% of document), Key Points, and Related Topics. Present as a topic map with primary and secondary topics.',
-    userPromptTemplate: 'Detect topics in this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'How many topics are identified?', a: 'All significant topics with primary and secondary classification.' },
     ],
@@ -632,8 +552,6 @@ export const aiTools: AIToolConfig[] = [
     color: 'bg-tool-rose/15 text-tool-rose',
     category: 'analysis',
     acceptMultiple: true,
-    systemPrompt: 'You are a document similarity analyst. Compare the two documents and provide: Overall Similarity Score (%), Topic Overlap, Matching Sections, Unique Content in Each, and Style Comparison. Present as a detailed similarity report.',
-    userPromptTemplate: 'Compare similarity between these documents:\n\nDocument 1: {filename}\nDocument 2: {filename2}\nContent 1: {text}\nContent 2: {text2}',
     faqs: [
       { q: 'How is similarity calculated?', a: 'AI analyzes topic overlap, matching sections, style similarity, and content coverage.' },
     ],
@@ -647,8 +565,6 @@ export const aiTools: AIToolConfig[] = [
     icon: Scale,
     color: 'bg-tool-indigo/15 text-tool-indigo',
     category: 'extraction',
-    systemPrompt: 'You are a legal contract analyst. Analyze the contract/document and extract: 1) Parties Involved, 2) Key Dates & Deadlines, 3) Obligations for each party, 4) Important Clauses (termination, liability, indemnity, confidentiality, IP), 5) Payment Terms, 6) Renewal/Expiration details, 7) Risks & Red Flags. Use clear headings and ⚠️ for risks.',
-    userPromptTemplate: 'Analyze this contract/legal document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What types of contracts work best?', a: 'Any contract, agreement, or legal document including NDAs, service agreements, employment contracts, and leases.' },
       { q: 'Should I rely on this for legal advice?', a: 'No. AI analysis is for informational purposes. Always consult a qualified attorney for legal decisions.' },
@@ -664,8 +580,6 @@ export const aiTools: AIToolConfig[] = [
     icon: BookOpen,
     color: 'bg-tool-emerald/15 text-tool-emerald',
     category: 'extraction',
-    systemPrompt: 'You are an academic citation specialist. Extract all references, citations, and bibliography entries from the document. For each: 1) Full citation in APA format, 2) Authors, 3) Year, 4) Title, 5) Source/Journal, 6) DOI/URL if available. Also provide: total citation count, most cited authors, publication year distribution, and citation types breakdown (journal, book, conference, web).',
-    userPromptTemplate: 'Extract all citations and references from this document:\n\nFilename: {filename}\nPages: {pageCount}\nContent: {text}',
     faqs: [
       { q: 'What citation formats are supported?', a: 'AI can recognize most citation styles and outputs in APA format. It handles in-text citations and bibliography sections.' },
       { q: 'Does it find in-text citations too?', a: 'Yes, both in-text citations and full bibliography/reference list entries are extracted.' },

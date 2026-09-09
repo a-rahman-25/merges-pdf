@@ -14,9 +14,16 @@ globalThis.fetch = async (input: string | URL | Request, init?: RequestInit) => 
   const url = String(input instanceof Request ? input.url : input);
   if (url.includes("ai.gateway.lovable.dev")) {
     captured = JSON.parse(String(init?.body ?? "{}"));
+    // Some functions stream and some read a single completion; answer in kind.
+    if ((captured as { stream?: boolean }).stream) {
+      return new Response(
+        'data: {"choices":[{"delta":{"content":"stubbed"}}]}\n\ndata: [DONE]\n\n',
+        { status: 200, headers: { "Content-Type": "text/event-stream" } },
+      );
+    }
     return new Response(
-      'data: {"choices":[{"delta":{"content":"stubbed"}}]}\n\ndata: [DONE]\n\n',
-      { status: 200, headers: { "Content-Type": "text/event-stream" } },
+      JSON.stringify({ choices: [{ message: { content: "{}" } }] }),
+      { status: 200, headers: { "Content-Type": "application/json" } },
     );
   }
   return await realFetch(input as string | URL | Request, init);

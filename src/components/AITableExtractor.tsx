@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
 import { extractPdfText } from '@/lib/pdf-text-extract';
+import { aiTablesToCsv } from '@/lib/ai-table-csv';
 import { streamAI } from '@/lib/stream-ai';
 import { useI18n } from '@/hooks/useI18n';
 
@@ -63,7 +64,7 @@ const AITableExtractor = () => {
   };
 
   const handleDownloadCSV = () => {
-    const blob = new Blob([result], { type: 'text/csv' });
+    const blob = new Blob([aiTablesToCsv(result)], { type: 'text/csv' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;

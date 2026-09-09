@@ -26,7 +26,8 @@ const PrivacyPolicy = () => (
         <section>
           <h2 className="font-display text-xl font-semibold text-foreground">2. Files You Upload</h2>
           <p className="mt-2"><strong className="text-foreground">Your files never leave your browser.</strong> All PDF processing (merge, split, compress, convert, rotate, etc.) is performed entirely in your web browser using client-side JavaScript. No files are uploaded to our servers.</p>
-          <p className="mt-2">For AI-powered features (summarize, translate, Q&A), a text representation of your document is sent to our secure backend for processing. <strong className="text-foreground">All data is automatically deleted immediately after processing.</strong> We do not store, log, or retain any file content.</p>
+          <p className="mt-2">The AI tools work differently, and it is worth being precise about it. When you use any AI feature — summarizing, translating, Q&amp;A, entity extraction, contract analysis and the rest — the text extracted from your PDF is sent over an encrypted connection to our backend, which forwards it to a third-party AI provider (the Lovable AI gateway, which runs Google Gemini models) to generate the result. <strong className="text-foreground">The PDF file itself is never uploaded</strong> — only the text inside it.</p>
+          <p className="mt-2">We do not store, log, or retain that text on our own infrastructure. Retention by the AI provider is governed by their terms, not ours, so we cannot promise on their behalf that it is deleted immediately. If your document is confidential and you would rather it not reach a third party, use the non-AI tools: merge, split, compress, convert, rotate, sign and the other client-side tools never send anything anywhere.</p>
         </section>
 
         <section>

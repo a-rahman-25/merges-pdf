@@ -53,5 +53,16 @@ async function build({ filename, text }) {
   console.log(`${path}  (${doc.getPageCount()} pages, ${bytes.length} bytes)`);
 }
 
+// Long enough to exceed the 15,000 character extraction budget, so the
+// "only the first N pages were analyzed" path can be exercised.
+const longReport = {
+  filename: 'q3-strategy-review-long.pdf',
+  text: Array.from({ length: 14 }, (_, i) =>
+    report.text.replace(/--- Page \d+ ---/g, `--- Page ${i + 1} ---`)
+      .replace('Q3 STRATEGY REVIEW', `Q3 STRATEGY REVIEW (APPENDIX ${i + 1})`)
+  ).join('\n'),
+};
+
 await build(report);
 await build(reportB);
+await build(longReport);

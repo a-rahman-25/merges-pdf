@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
+import { extractPdfText } from '@/lib/pdf-text-extract';
 import { streamAI } from '@/lib/stream-ai';
 import { useI18n } from '@/hooks/useI18n';
 import type { AIToolConfig } from '@/lib/ai-tools-config';
@@ -14,11 +15,17 @@ interface FileInfo {
   name: string;
   size: number;
   pageCount: number;
+  text: string;
 }
+
+// Below this, the PDF is almost certainly scanned images: the model would have
+// nothing to work from and would answer from the filename alone.
+const MIN_USABLE_TEXT = 50;
 
 const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
   const { t } = useI18n();
   const [files, setFiles] = useState<FileInfo[]>([]);
+  const [extracting, setExtracting] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [result, setResult] = useState('');
   const [copied, setCopied] = useState(false);
@@ -30,21 +37,37 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
     if (!selected.length) return;
 
     const parsed: FileInfo[] = [];
-    for (const f of selected.slice(0, maxFiles)) {
-      if (f.type !== 'application/pdf') { toast.error('Please select PDF files.'); return; }
-      try {
-        const buffer = await f.arrayBuffer();
-        const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
-        parsed.push({ file: f, name: f.name, size: f.size, pageCount: pdf.getPageCount() });
-      } catch {
-        toast.error(`Could not read: ${f.name}`);
-        return;
+    setExtracting(true);
+    try {
+      for (const f of selected.slice(0, maxFiles)) {
+        if (f.type !== 'application/pdf') { toast.error('Please select PDF files.'); return; }
+        try {
+          const buffer = await f.arrayBuffer();
+          const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
+          const text = await extractPdfText(f);
+          parsed.push({ file: f, name: f.name, size: f.size, pageCount: pdf.getPageCount(), text });
+        } catch {
+          toast.error(`Could not read: ${f.name}`);
+          return;
+        }
       }
+    } finally {
+      setExtracting(false);
+      e.target.value = '';
     }
+
+    const unreadable = parsed.filter((f) => f.text.trim().length < MIN_USABLE_TEXT);
+    if (unreadable.length) {
+      toast.error(
+        `No text could be extracted from ${unreadable.map((f) => f.name).join(', ')}. ` +
+        'Run it through the OCR tool first, then try again.'
+      );
+      return;
+    }
+
     setFiles(parsed);
     setResult('');
-    toast.success(`Selected: ${parsed.map(f => f.name).join(', ')}`);
-    e.target.value = '';
+    toast.success(`Selected: ${parsed.map(f => f.name).join(', ')} — text extracted`);
   }, [maxFiles]);
 
   const handleProcess = async () => {
@@ -55,13 +78,13 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
       const f = files[0];
       const body: Record<string, unknown> = {
         toolSlug: tool.slug,
-        text: `PDF Document: "${f.name}", ${f.pageCount} pages, ${formatFileSize(f.size)}.`,
+        text: f.text,
         filename: f.name,
         pageCount: f.pageCount,
       };
       if (files.length > 1) {
         body.filename2 = files[1].name;
-        body.text2 = `PDF Document: "${files[1].name}", ${files[1].pageCount} pages, ${formatFileSize(files[1].size)}.`;
+        body.text2 = files[1].text;
       }
 
       let accumulated = '';
@@ -107,7 +130,7 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          onClick={() => inputRef.current?.click()}
+          onClick={() => !extracting && inputRef.current?.click()}
           className="cursor-pointer rounded-2xl border-2 border-dashed border-border p-12 text-center hover:border-primary/50 hover:bg-accent/50 transition-all"
         >
           <input
@@ -120,11 +143,13 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
           />
           <div className="flex flex-col items-center gap-4">
             <div className={`rounded-xl p-4 ${tool.color}`}>
-              <Icon className="h-8 w-8" />
+              {extracting ? <Loader2 className="h-8 w-8 animate-spin" /> : <Icon className="h-8 w-8" />}
             </div>
             <div>
               <p className="text-lg font-display font-semibold text-foreground">
-                {tool.acceptMultiple ? t('ai.upload.pdfs') : t('ai.upload.pdf')}
+                {extracting
+                  ? 'Extracting text...'
+                  : tool.acceptMultiple ? t('ai.upload.pdfs') : t('ai.upload.pdf')}
               </p>
               <p className="mt-1 text-sm text-muted-foreground">{tool.description}</p>
             </div>
@@ -151,7 +176,7 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-foreground">{f.name}</p>
-                <p className="text-xs text-muted-foreground">{formatFileSize(f.size)} · {f.pageCount} {t('ai.pages')}</p>
+                <p className="text-xs text-muted-foreground">{formatFileSize(f.size)} · {f.pageCount} {t('ai.pages')} · Text extracted ✓</p>
               </div>
             </div>
           ))}

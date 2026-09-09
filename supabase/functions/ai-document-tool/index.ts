@@ -59,12 +59,21 @@ serve(async (req) => {
     const promptConfig = toolPrompts[toolSlug];
     if (!promptConfig) throw new Error(`Unknown tool: ${toolSlug}`);
 
-    const userContent = promptConfig.template
-      .replace("{filename}", filename || "document.pdf")
-      .replace("{pageCount}", String(pageCount || 1))
-      .replace("{text}", text || "")
-      .replace("{filename2}", filename2 || "")
-      .replace("{text2}", text2 || "");
+    const substitutions: Record<string, string> = {
+      filename: filename || "document.pdf",
+      pageCount: String(pageCount || 1),
+      text: text || "",
+      filename2: filename2 || "",
+      text2: text2 || "",
+    };
+
+    // A replacer function is required here: document text containing "$&" or
+    // "$`" would otherwise be treated as a replacement pattern and splice the
+    // template back into the prompt.
+    const userContent = promptConfig.template.replace(
+      /\{(filename2|pageCount|filename|text2|text)\}/g,
+      (_match, key: string) => substitutions[key],
+    );
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

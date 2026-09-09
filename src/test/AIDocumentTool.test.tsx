@@ -65,11 +65,12 @@ const upload = (...files: File[]) => {
 
 const processButton = () => screen.findByRole('button', { name: /Entities/i });
 
+type StreamArgs = { onDelta: (chunk: string) => void; onDone: () => void };
+
 describe('AIDocumentTool', () => {
   beforeEach(() => {
     Object.values(toast).forEach((fn) => fn.mockReset());
     extractPdfTextDetailed.mockReset().mockResolvedValue(extraction(DOC_TEXT));
-    type StreamArgs = { onDelta: (chunk: string) => void; onDone: () => void };
     streamAI.mockReset().mockImplementation(async ({ onDelta, onDone }: StreamArgs) => {
       onDelta('Organizations: Kestrel Automation. Locations: Osaka.');
       onDone();
@@ -102,6 +103,28 @@ describe('AIDocumentTool', () => {
     await waitFor(() => expect(extractPdfTextDetailed).toHaveBeenCalled());
     expect(screen.queryByRole('button', { name: /Entities/i })).not.toBeInTheDocument();
     expect(streamAI).not.toHaveBeenCalled();
+  });
+
+  it('renders the model markdown instead of printing its syntax', async () => {
+    streamAI.mockImplementation(async ({ onDelta, onDone }: StreamArgs) => {
+      onDelta('## Entities\n\n**Organizations:** Kestrel Automation\n\n- Osaka\n- Almeda Foods\n');
+      onDone();
+    });
+    render(<AIDocumentTool tool={tool} />);
+    upload(pdfFile());
+    fireEvent.click(await processButton());
+
+    const heading = await screen.findByRole('heading', { name: 'Entities' });
+    const strong = await screen.findByText('Organizations:');
+
+    expect(heading.tagName).toBe('H2');
+    expect(strong.tagName).toBe('STRONG');
+    expect(screen.getAllByRole('listitem').map((li) => li.textContent)).toEqual([
+      'Osaka',
+      'Almeda Foods',
+    ]);
+    // The raw syntax must not survive into the visible text.
+    expect(heading.closest('div')!.textContent).not.toMatch(/\*\*|##|^- /m);
   });
 
   it('tells the user when only part of a long PDF was analyzed', async () => {

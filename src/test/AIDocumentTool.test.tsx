@@ -7,11 +7,19 @@ const DOC_TEXT =
   '--- Page 1 ---\nQ3 STRATEGY REVIEW — HELIOS ROBOTICS\nRevenue EUR 42.7M, up 23% year over year. ' +
   'Main competitor Kestrel Automation holds 31% share. 68% of actuators come from a single vendor in Osaka.';
 
-const extractPdfText = vi.fn();
+const extractPdfTextDetailed = vi.fn();
 const streamAI = vi.fn();
 
+const extraction = (text: string, over: Record<string, unknown> = {}) => ({
+  text,
+  pagesIncluded: 12,
+  totalPages: 12,
+  truncated: false,
+  ...over,
+});
+
 vi.mock('@/lib/pdf-text-extract', () => ({
-  extractPdfText: (...args: unknown[]) => extractPdfText(...args),
+  extractPdfTextDetailed: (...args: unknown[]) => extractPdfTextDetailed(...args),
 }));
 
 vi.mock('@/lib/stream-ai', () => ({
@@ -26,9 +34,9 @@ vi.mock('@/hooks/useI18n', () => ({
   useI18n: () => ({ t: (key: string) => key }),
 }));
 
-vi.mock('sonner', () => ({
-  toast: { success: vi.fn(), error: vi.fn() },
-}));
+// Hoisted, because vi.mock factories run before module-level consts initialise.
+const toast = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn(), warning: vi.fn() }));
+vi.mock('sonner', () => ({ toast }));
 
 const tool = {
   slug: 'ai-entity-extractor',
@@ -38,8 +46,6 @@ const tool = {
   metaDescription: '',
   icon: () => null,
   color: '',
-  systemPrompt: '',
-  userPromptTemplate: '',
   category: 'extraction',
   faqs: [],
 } as unknown as AIToolConfig;
@@ -61,8 +67,10 @@ const processButton = () => screen.findByRole('button', { name: /Entities/i });
 
 describe('AIDocumentTool', () => {
   beforeEach(() => {
-    extractPdfText.mockReset().mockResolvedValue(DOC_TEXT);
-    streamAI.mockReset().mockImplementation(async ({ onDelta, onDone }: any) => {
+    Object.values(toast).forEach((fn) => fn.mockReset());
+    extractPdfTextDetailed.mockReset().mockResolvedValue(extraction(DOC_TEXT));
+    type StreamArgs = { onDelta: (chunk: string) => void; onDone: () => void };
+    streamAI.mockReset().mockImplementation(async ({ onDelta, onDone }: StreamArgs) => {
       onDelta('Organizations: Kestrel Automation. Locations: Osaka.');
       onDone();
     });
@@ -72,7 +80,7 @@ describe('AIDocumentTool', () => {
     render(<AIDocumentTool tool={tool} />);
     upload(pdfFile());
 
-    await waitFor(() => expect(extractPdfText).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(extractPdfTextDetailed).toHaveBeenCalledTimes(1));
     fireEvent.click(await processButton());
 
     await waitFor(() => expect(streamAI).toHaveBeenCalledTimes(1));
@@ -87,27 +95,39 @@ describe('AIDocumentTool', () => {
   });
 
   it('refuses to call the AI when no text could be extracted', async () => {
-    extractPdfText.mockResolvedValue('   ');
+    extractPdfTextDetailed.mockResolvedValue(extraction('   '));
     render(<AIDocumentTool tool={tool} />);
     upload(pdfFile('scanned.pdf'));
 
-    await waitFor(() => expect(extractPdfText).toHaveBeenCalled());
+    await waitFor(() => expect(extractPdfTextDetailed).toHaveBeenCalled());
     expect(screen.queryByRole('button', { name: /Entities/i })).not.toBeInTheDocument();
     expect(streamAI).not.toHaveBeenCalled();
+  });
+
+  it('tells the user when only part of a long PDF was analyzed', async () => {
+    extractPdfTextDetailed.mockResolvedValue(
+      extraction(DOC_TEXT, { pagesIncluded: 9, totalPages: 12, truncated: true }),
+    );
+    render(<AIDocumentTool tool={tool} />);
+    upload(pdfFile('long-contract.pdf'));
+
+    await waitFor(() => expect(toast.warning).toHaveBeenCalledTimes(1));
+    expect(toast.warning.mock.calls[0][0]).toMatch(/only the first 9 of 12 pages/);
+    expect(await screen.findByText(/first 9 of 12 pages analyzed/)).toBeInTheDocument();
   });
 
   it('sends the text of both documents for comparison tools', async () => {
     const secondText =
       '--- Page 1 ---\nQ2 STRATEGY REVIEW — HELIOS ROBOTICS\nRevenue EUR 34.6M, up 12% year over year. ' +
       'Kestrel Automation leads with 33% share.';
-    extractPdfText
-      .mockResolvedValueOnce(DOC_TEXT)
-      .mockResolvedValueOnce(secondText);
+    extractPdfTextDetailed
+      .mockResolvedValueOnce(extraction(DOC_TEXT))
+      .mockResolvedValueOnce(extraction(secondText));
 
     render(<AIDocumentTool tool={{ ...tool, slug: 'ai-document-similarity', acceptMultiple: true } as AIToolConfig} />);
     upload(pdfFile('q3.pdf'), pdfFile('q2.pdf'));
 
-    await waitFor(() => expect(extractPdfText).toHaveBeenCalledTimes(2));
+    await waitFor(() => expect(extractPdfTextDetailed).toHaveBeenCalledTimes(2));
     fireEvent.click(await processButton());
 
     await waitFor(() => expect(streamAI).toHaveBeenCalledTimes(1));

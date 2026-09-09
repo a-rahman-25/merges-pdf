@@ -1,11 +1,12 @@
 import { useState, useCallback, useRef } from 'react';
 import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
 import { Loader2, RotateCcw, FileText, Copy, Check, Download, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { formatFileSize } from '@/lib/pdf-utils';
 import { PDFDocument } from 'pdf-lib';
-import { extractPdfText } from '@/lib/pdf-text-extract';
+import { extractPdfTextDetailed } from '@/lib/pdf-text-extract';
 import { streamAI } from '@/lib/stream-ai';
 import { useI18n } from '@/hooks/useI18n';
 import type { AIToolConfig } from '@/lib/ai-tools-config';
@@ -16,6 +17,8 @@ interface FileInfo {
   size: number;
   pageCount: number;
   text: string;
+  pagesAnalyzed: number;
+  truncated: boolean;
 }
 
 // Below this, the PDF is almost certainly scanned images: the model would have
@@ -44,8 +47,16 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
         try {
           const buffer = await f.arrayBuffer();
           const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
-          const text = await extractPdfText(f);
-          parsed.push({ file: f, name: f.name, size: f.size, pageCount: pdf.getPageCount(), text });
+          const { text, pagesIncluded, truncated } = await extractPdfTextDetailed(f);
+          parsed.push({
+            file: f,
+            name: f.name,
+            size: f.size,
+            pageCount: pdf.getPageCount(),
+            text,
+            pagesAnalyzed: pagesIncluded,
+            truncated,
+          });
         } catch {
           toast.error(`Could not read: ${f.name}`);
           return;
@@ -68,6 +79,14 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
     setFiles(parsed);
     setResult('');
     toast.success(`Selected: ${parsed.map(f => f.name).join(', ')} — text extracted`);
+
+    // A long document does not fit in the model's context budget, and a result
+    // based on the first few pages should not look like a result for all of it.
+    for (const f of parsed.filter((x) => x.truncated)) {
+      toast.warning(
+        `${f.name} is long — only the first ${f.pagesAnalyzed} of ${f.pageCount} pages were analyzed.`
+      );
+    }
   }, [maxFiles]);
 
   const handleProcess = async () => {
@@ -176,7 +195,12 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-foreground">{f.name}</p>
-                <p className="text-xs text-muted-foreground">{formatFileSize(f.size)} · {f.pageCount} {t('ai.pages')} · Text extracted ✓</p>
+                <p className="text-xs text-muted-foreground">
+                  {formatFileSize(f.size)} · {f.pageCount} {t('ai.pages')} ·{' '}
+                  {f.truncated
+                    ? `first ${f.pagesAnalyzed} of ${f.pageCount} pages analyzed`
+                    : 'Text extracted ✓'}
+                </p>
               </div>
             </div>
           ))}
@@ -210,7 +234,9 @@ const AIDocumentTool = ({ tool }: { tool: AIToolConfig }) => {
                   </div>
                 )}
                 {result && (
-                  <p className="text-sm text-muted-foreground whitespace-pre-wrap leading-relaxed">{result}</p>
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-sm text-muted-foreground leading-relaxed">
+                    <ReactMarkdown>{result}</ReactMarkdown>
+                  </div>
                 )}
                 {processing && result && (
                   <Loader2 className="h-3.5 w-3.5 animate-spin text-primary mt-2" />

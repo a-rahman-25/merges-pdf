@@ -67,7 +67,8 @@ Be thorough and include all fields that would typically appear on this type of f
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "openai/gpt-6-astra",
+        reasoning_effort: "low",
         messages: [
           { role: "system", content: systemContent },
           { role: "user", content: `Create a ${formType} form with the following requirements: ${description}` },

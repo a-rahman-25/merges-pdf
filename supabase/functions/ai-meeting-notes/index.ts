@@ -50,7 +50,8 @@ ${textContent}`;
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "openai/gpt-6-astra",
+        reasoning_effort: "low",
         messages: [
           { role: "system", content: systemContent },
           { role: "user", content: "Extract all action items, decisions, key points, and follow-ups from this document." },

@@ -64,7 +64,8 @@ Fill in all fields that are available. Use "N/A" for fields not found in the doc
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "openai/gpt-6-astra",
+        reasoning_effort: "low",
         messages: [
           { role: "system", content: systemContent },
           { role: "user", content: "Parse this invoice/receipt and extract all line items, totals, dates, vendor info, and payment details." },

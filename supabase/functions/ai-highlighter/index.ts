@@ -46,7 +46,8 @@ Be thorough and precise. Only include entities that actually appear in the text.
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "openai/gpt-6-astra",
+        reasoning_effort: "low",
         messages: [
           { role: "system", content: systemContent },
           { role: "user", content: "Analyze this document and highlight the key sentences, entities, and important sections." },

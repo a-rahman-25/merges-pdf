@@ -28,7 +28,8 @@ Translate everything faithfully and accurately. Maintain the document's tone, st
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "openai/gpt-6-astra",
+        reasoning_effort: "low",
         messages: [
           { role: "system", content: systemContent },
           { role: "user", content: `Translate the entire document into ${targetLanguage}. Preserve all formatting and structure.` },

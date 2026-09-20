@@ -46,7 +46,8 @@ Be thorough — extract every single reference from the bibliography/references 
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "google/gemini-3-flash-preview",
+        model: "openai/gpt-6-astra",
+        reasoning_effort: "low",
         messages: [
           { role: "system", content: systemContent },
           { role: "user", content: "Extract all citations, references, bibliography entries, and DOIs from this academic paper." },

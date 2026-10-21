@@ -74,6 +74,7 @@ const AiClassify = lazy(() => import("./pages/AiClassify"));
 const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
 const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
+const PdfToDxf = lazy(() => import("./pages/PdfToDxf"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AiContractAnalyzer = lazy(() => import("./pages/AiContractAnalyzer"));
@@ -169,6 +170,7 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-to-html" element={<PdfToHtml />} />
         <Route path="/pdf-to-markdown" element={<PdfToMarkdown />} />
         <Route path="/pdf-to-json" element={<PdfToJson />} />
+        <Route path="/pdf-to-dxf" element={<PdfToDxf />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

@@ -5,7 +5,7 @@ import {
   FileSpreadsheet, Presentation, Image, Wrench, BookOpen, Maximize2,
   BookMarked, Camera, GitCompare, FileCode, Code, Globe, Shield,
   TableProperties, FolderSearch, Braces, SpellCheck, Wand2, Highlighter, Receipt,
-  ClipboardList, Accessibility, FileInput, Link2,
+  ClipboardList, Accessibility, FileInput, Link2, DraftingCompass,
   type LucideIcon,
 } from 'lucide-react';
 
@@ -69,6 +69,7 @@ export const allTools: ToolItem[] = [
   { icon: Code, titleKey: 'tool.pdfToHtml', descKey: 'tool.pdfToHtml.desc', path: '/pdf-to-html', color: 'bg-tool-lime/15 text-tool-lime', category: 'converters' },
   { icon: FileCode, titleKey: 'tool.pdfToMarkdown', descKey: 'tool.pdfToMarkdown.desc', path: '/pdf-to-markdown', color: 'bg-tool-teal/15 text-tool-teal', category: 'converters' },
   { icon: Braces, titleKey: 'tool.pdfToJson', descKey: 'tool.pdfToJson.desc', path: '/pdf-to-json', color: 'bg-tool-cyan/15 text-tool-cyan', category: 'converters' },
+  { icon: DraftingCompass, titleKey: 'tool.pdfToDxf', descKey: 'tool.pdfToDxf.desc', path: '/pdf-to-dxf', color: 'bg-tool-amber/15 text-tool-amber', category: 'converters' },
 
   // AI Tools
   { icon: Brain, titleKey: 'tool.aiSummarize', descKey: 'tool.aiSummarize.desc', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },

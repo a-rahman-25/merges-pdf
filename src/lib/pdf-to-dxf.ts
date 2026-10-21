@@ -1,6 +1,7 @@
 import * as pdfjsLib from 'pdfjs-dist';
+import workerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.mjs', import.meta.url).href;
+pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
 type M = [number, number, number, number, number, number];
 const mul = (a: M, b: M): M => [

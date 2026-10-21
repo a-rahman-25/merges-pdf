@@ -3,6 +3,16 @@ import workerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = workerUrl;
 
+// Polyfill for older browsers (needed by recent PDF reader versions)
+for (const C of [Map, WeakMap] as any[]) {
+  if (!C.prototype.getOrInsertComputed) {
+    C.prototype.getOrInsertComputed = function (k: any, f: (k: any) => any) { if (!this.has(k)) this.set(k, f(k)); return this.get(k); };
+  }
+  if (!C.prototype.getOrInsert) {
+    C.prototype.getOrInsert = function (k: any, v: any) { if (!this.has(k)) this.set(k, v); return this.get(k); };
+  }
+}
+
 type M = [number, number, number, number, number, number];
 const mul = (a: M, b: M): M => [
   a[0] * b[0] + a[2] * b[1], a[1] * b[0] + a[3] * b[1],

@@ -146,6 +146,7 @@ const en: T = {
   'tool.pdfToHtml': 'PDF to HTML', 'tool.pdfToHtml.desc': 'Convert PDF to clean, semantic HTML.',
   'tool.pdfToMarkdown': 'PDF to Markdown', 'tool.pdfToMarkdown.desc': 'Convert PDF content to Markdown format.',
   'tool.pdfToJson': 'PDF to JSON', 'tool.pdfToJson.desc': 'Extract PDF content as structured JSON data.',
+  'tool.pdfToDxf': 'PDF to DXF (AutoCAD)', 'tool.pdfToDxf.desc': 'Convert PDF drawings to DXF files for AutoCAD.',
   'tool.aiSummarize': 'AI Summarizer', 'tool.aiSummarize.desc': 'Get AI-generated summaries instantly.',
   'tool.aiTranslate': 'AI Translator', 'tool.aiTranslate.desc': 'Translate documents with AI.',
   'tool.aiQa': 'AI Q&A', 'tool.aiQa.desc': 'Ask questions about your PDF.',

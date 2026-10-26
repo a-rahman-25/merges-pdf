@@ -1,24 +1,32 @@
-# Merges-PDF
+# MergesPDF 🔒
 
-import these project
+**Privacy-first PDF tools — everything runs in your browser, nothing is uploaded.**
 
-This project was built with [Lovable](https://lovable.dev).
+🔗 **Live:** [mergespdf.com](https://mergespdf.com)
 
-## Build with Lovable
+## About
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/3a05c881-ec21-4000-898f-3c020a6bb3ad).
+MergesPDF is a client-side PDF toolkit built for people who don't want to upload sensitive documents to a third-party server just to merge, split, or compress a file. Every operation — merging, splitting, compressing, converting, signing, and OCR — happens entirely in your browser using client-side processing. No sign-up, no file storage, no server round-trip.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+## Features
 
-## Development
+- 📎 Merge multiple PDFs into one
+- ✂️ Split PDFs into separate files
+- 🗜️ Compress PDF file size
+- 🔄 Convert between formats
+- ✍️ Sign PDFs digitally
+- 🔍 OCR text extraction
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Why Client-Side?
 
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+Most online PDF tools require you to upload your files to their servers — which means your documents (often containing personal or sensitive information) pass through infrastructure you don't control. MergesPDF processes everything locally in the browser, so your files never leave your device.
+
+## Tech Stack
+
+- **Frontend:** React, TypeScript
+- **PDF Processing:** PDF.js
+- **APIs:** Browser-native File & Blob APIs
+
+## Author
+
+Built and maintained by **[Abdelrahman Mohamed](https://www.linkedin.com/in/abdelrahman-mohamed-884630264)** — Full Stack Software Engineer based in Dammam, Saudi Arabia.

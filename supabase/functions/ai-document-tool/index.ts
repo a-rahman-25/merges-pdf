@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { cap, MAX_DOCUMENT_CHARS, MAX_FILENAME_CHARS } from "../_shared/limits.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -52,19 +53,34 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { toolSlug, text, filename, pageCount, text2, filename2 } = await req.json();
+    const body = await req.json();
+    const toolSlug = cap(body.toolSlug, 100);
+    const text = cap(body.text, MAX_DOCUMENT_CHARS);
+    const text2 = cap(body.text2, MAX_DOCUMENT_CHARS);
+    const filename = cap(body.filename, MAX_FILENAME_CHARS);
+    const filename2 = cap(body.filename2, MAX_FILENAME_CHARS);
+    const pageCount = Number(body.pageCount) || 1;
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const promptConfig = toolPrompts[toolSlug];
     if (!promptConfig) throw new Error(`Unknown tool: ${toolSlug}`);
 
-    const userContent = promptConfig.template
-      .replace("{filename}", filename || "document.pdf")
-      .replace("{pageCount}", String(pageCount || 1))
-      .replace("{text}", text || "")
-      .replace("{filename2}", filename2 || "")
-      .replace("{text2}", text2 || "");
+    const substitutions: Record<string, string> = {
+      filename: filename || "document.pdf",
+      pageCount: String(pageCount || 1),
+      text: text || "",
+      filename2: filename2 || "",
+      text2: text2 || "",
+    };
+
+    // A replacer function is required here: document text containing "$&" or
+    // "$`" would otherwise be treated as a replacement pattern and splice the
+    // template back into the prompt.
+    const userContent = promptConfig.template.replace(
+      /\{(filename2|pageCount|filename|text2|text)\}/g,
+      (_match, key: string) => substitutions[key],
+    );
 
     const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",

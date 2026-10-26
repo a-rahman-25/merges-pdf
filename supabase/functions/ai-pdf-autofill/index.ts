@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { cap, capList, MAX_DOCUMENT_CHARS, MAX_FILENAME_CHARS, MAX_FORM_FIELDS } from "../_shared/limits.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -9,7 +10,10 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { formFields, contextText, filename } = await req.json();
+    const body = await req.json();
+    const formFields = capList<{ name?: string; type?: string }>(body.formFields, MAX_FORM_FIELDS);
+    const contextText = cap(body.contextText, MAX_DOCUMENT_CHARS);
+    const filename = cap(body.filename, MAX_FILENAME_CHARS) || "document.pdf";
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 

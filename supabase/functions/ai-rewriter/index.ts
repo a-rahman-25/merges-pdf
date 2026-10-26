@@ -1,4 +1,5 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
+import { cap, MAX_DOCUMENT_CHARS, MAX_FILENAME_CHARS } from "../_shared/limits.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -9,7 +10,11 @@ serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const { textContent, filename, pageCount, tone } = await req.json();
+    const body = await req.json();
+    const textContent = cap(body.textContent, MAX_DOCUMENT_CHARS);
+    const filename = cap(body.filename, MAX_FILENAME_CHARS) || "document.pdf";
+    const pageCount = Number(body.pageCount) || 1;
+    const tone = cap(body.tone, 50);
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 

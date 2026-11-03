@@ -65,6 +65,8 @@ const ExcelToPDF = () => {
           if ('richText' in o && Array.isArray(o.richText)) return (o.richText as { text: string }[]).map(t => t.text).join('');
           if ('text' in o) return String(o.text);
           if ('error' in o) return String(o.error);
+          if ('formula' in o || 'sharedFormula' in o) return '';
+          return '';
         }
         return String(v);
       };

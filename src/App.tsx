@@ -234,7 +234,10 @@ const AnimatedRoutes = () => {
 };
 
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
-const CommandPalette = lazy(() => import("./components/CommandPalette"));
+// Non-essential: if its file fails to load (stale deploy), render nothing instead of blanking the app.
+const CommandPalette = lazy(() =>
+  import("./components/CommandPalette").catch(() => ({ default: () => null }))
+);
 
 const KeyboardShortcuts = lazy(() => import("./components/KeyboardShortcuts"));
 const ProcessingHistory = lazy(() => import("./components/ProcessingHistory"));

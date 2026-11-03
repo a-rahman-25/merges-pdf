@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { Loader2, RotateCcw, FileSpreadsheet } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument } from 'pdf-lib';
 import ExcelJS from 'exceljs';
 import { Button } from '@/components/ui/button';
 import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';

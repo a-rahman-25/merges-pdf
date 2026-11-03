@@ -23,8 +23,12 @@ Most online PDF tools require you to upload your files to their servers — whic
 
 ## Tech Stack
 
-- **Frontend:** React, TypeScript
-- **PDF Processing:** PDF.js
+- **Frontend:** React, TypeScript, Vite
+- **Styling:** Tailwind CSS, shadcn/ui, Framer Motion
+- **PDF Processing:** PDF.js, pdf-lib
+- **OCR:** Tesseract.js
+- **Office Formats:** docx, ExcelJS
+- **Mobile:** Capacitor (Android / iOS), PWA
 - **APIs:** Browser-native File & Blob APIs
 
 ## Author

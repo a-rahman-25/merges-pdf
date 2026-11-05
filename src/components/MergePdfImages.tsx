@@ -6,6 +6,7 @@ import workerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 import { buildMergedPdf, moveItem, MergeItem, MergeSource, ImagePageSize } from '@/lib/merge-pdf-images';
 import { downloadBlob } from '@/lib/pdf-utils';
 import { logToolUsage } from '@/lib/analytics';
@@ -50,6 +51,7 @@ const MergePdfImages = () => {
   const [loading, setLoading] = useState(false);
   const [merging, setMerging] = useState(false);
   const [imageSize, setImageSize] = useState<ImagePageSize>('a4');
+  const [fileName, setFileName] = useState('merged');
   const [dragIndex, setDragIndex] = useState<number | null>(null);
 
   const addFiles = useCallback(async (files: File[]) => {
@@ -101,7 +103,8 @@ const MergePdfImages = () => {
     setMerging(true);
     try {
       const bytes = await buildMergedPdf(cards, sources, imageSize);
-      downloadBlob(bytes, 'merged.pdf');
+      const safe = (fileName.trim().replace(/[\\/:*?"<>|]/g, '_') || 'merged');
+      downloadBlob(bytes, `${safe}.pdf`);
       toast.success('Your PDF is ready!');
       logToolUsage('Merge PDF & Images', '/merge-pdf-images', cards.length);
     } catch (e) {
@@ -158,6 +161,12 @@ const MergePdfImages = () => {
           </div>
 
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <div className="flex items-center gap-2 text-sm">
+              <label htmlFor="merge-file-name" className="text-muted-foreground whitespace-nowrap">File name:</label>
+              <Input id="merge-file-name" value={fileName} onChange={(e) => setFileName(e.target.value)}
+                placeholder="merged" className="w-44" maxLength={80} />
+              <span className="text-muted-foreground">.pdf</span>
+            </div>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-muted-foreground">Image pages:</span>
               <Select value={imageSize} onValueChange={(v) => setImageSize(v as ImagePageSize)}>

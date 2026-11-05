@@ -75,6 +75,7 @@ const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
 const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
 const PdfToDxf = lazy(() => import("./pages/PdfToDxf"));
+const MergePdfImages = lazy(() => import("./pages/MergePdfImages"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AiContractAnalyzer = lazy(() => import("./pages/AiContractAnalyzer"));
@@ -171,6 +172,7 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-to-markdown" element={<PdfToMarkdown />} />
         <Route path="/pdf-to-json" element={<PdfToJson />} />
         <Route path="/pdf-to-dxf" element={<PdfToDxf />} />
+        <Route path="/merge-pdf-images" element={<MergePdfImages />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />

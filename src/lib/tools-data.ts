@@ -70,7 +70,7 @@ export const allTools: ToolItem[] = [
   { icon: FileCode, titleKey: 'tool.pdfToMarkdown', descKey: 'tool.pdfToMarkdown.desc', path: '/pdf-to-markdown', color: 'bg-tool-teal/15 text-tool-teal', category: 'converters' },
   { icon: Braces, titleKey: 'tool.pdfToJson', descKey: 'tool.pdfToJson.desc', path: '/pdf-to-json', color: 'bg-tool-cyan/15 text-tool-cyan', category: 'converters' },
   { icon: DraftingCompass, titleKey: 'tool.pdfToDxf', descKey: 'tool.pdfToDxf.desc', path: '/pdf-to-dxf', color: 'bg-tool-amber/15 text-tool-amber', category: 'converters' },
-  { icon: Layers, titleKey: 'tool.mergePdfImages', descKey: 'tool.mergePdfImages.desc', path: '/merge-pdf-images', color: 'bg-primary/15 text-primary', category: 'organize' },
+  { icon: Layers, titleKey: 'tool.mergePdfImages', descKey: 'tool.mergePdfImages.desc', path: '/merge-pdf-images', color: 'bg-primary/15 text-primary', category: 'pdftools' },
 
   // AI Tools
   { icon: Brain, titleKey: 'tool.aiSummarize', descKey: 'tool.aiSummarize.desc', path: '/ai-summarize', color: 'bg-tool-violet/15 text-tool-violet', category: 'aitools' },

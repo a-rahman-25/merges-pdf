@@ -103,7 +103,7 @@ const MergePdfImages = () => {
       const bytes = await buildMergedPdf(cards, sources, imageSize);
       downloadBlob(bytes, 'merged.pdf');
       toast.success('Your PDF is ready!');
-      logToolUsage?.('merge-pdf-images', cards.length);
+      logToolUsage('Merge PDF & Images', '/merge-pdf-images', cards.length);
     } catch (e) {
       toast.error('Merge failed. Please check your files.');
     } finally { setMerging(false); }

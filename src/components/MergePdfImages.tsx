@@ -6,6 +6,7 @@ import workerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
 import DropZone from '@/components/DropZone';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
 import { buildMergedPdf, moveItem, MergeItem, MergeSource, ImagePageSize } from '@/lib/merge-pdf-images';
 import { downloadBlob } from '@/lib/pdf-utils';
 import { logToolUsage } from '@/lib/analytics';
@@ -50,6 +51,7 @@ const MergePdfImages = () => {
   const [loading, setLoading] = useState(false);
   const [merging, setMerging] = useState(false);
   const [imageSize, setImageSize] = useState<ImagePageSize>('a4');
+  const [fileName, setFileName] = useState('merged');
   const [dragIndex, setDragIndex] = useState<number | null>(null);
 
   const addFiles = useCallback(async (files: File[]) => {

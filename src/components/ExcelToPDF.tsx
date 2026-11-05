@@ -1,7 +1,7 @@
 import { useState, useCallback, useRef } from 'react';
 import { Loader2, RotateCcw, FileSpreadsheet } from 'lucide-react';
 import { toast } from 'sonner';
-import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
+import { PDFDocument } from 'pdf-lib';
 import ExcelJS from 'exceljs';
 import { Button } from '@/components/ui/button';
 import { downloadBlob, formatFileSize } from '@/lib/pdf-utils';
@@ -54,61 +54,117 @@ const ExcelToPDF = () => {
       }
 
       const pdf = await PDFDocument.create();
-      const font = await pdf.embedFont(StandardFonts.Helvetica);
-      const boldFont = await pdf.embedFont(StandardFonts.HelveticaBold);
-      const fontSize = 8;
-      const margin = 40;
-      const rowHeight = 16;
-      const cellPadding = 4;
+      const ARABIC = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
+      const cellText = (v: unknown): string => {
+        if (v == null) return '';
+        if (v instanceof Date) return v.toLocaleDateString();
+        if (typeof v === 'number') return Number.isInteger(v) ? v.toLocaleString('en-US') : v.toLocaleString('en-US', { maximumFractionDigits: 2 });
+        if (typeof v === 'object') {
+          const o = v as Record<string, unknown>;
+          if ('result' in o) return cellText(o.result);
+          if ('richText' in o && Array.isArray(o.richText)) return (o.richText as { text: string }[]).map(t => t.text).join('');
+          if ('text' in o) return String(o.text);
+          if ('error' in o) return String(o.error);
+          if ('formula' in o || 'sharedFormula' in o) return '';
+          return '';
+        }
+        return String(v);
+      };
 
+      const S = 2; // render scale
+      const margin = 30, rowH = 18, headerH = 22, titleH = 30, footerH = 20, fontPx = 9;
+      const fontFamily = "'Segoe UI', Tahoma, Arial, 'Noto Naskh Arabic', sans-serif";
+      const sheets: { name: string; data: string[][] }[] = [];
       workbook.eachSheet((sheet) => {
         const data: string[][] = [];
-        sheet.eachRow((row) => {
-          const rowValues: string[] = [];
-          row.eachCell({ includeEmpty: true }, (cell) => {
-            rowValues.push(String(cell.value ?? ''));
-          });
-          data.push(rowValues);
+        const colCount = sheet.actualColumnCount || sheet.columnCount;
+        sheet.eachRow({ includeEmpty: false }, (row) => {
+          const vals: string[] = [];
+          for (let c = 1; c <= colCount; c++) vals.push(cellText(row.getCell(c).value));
+          if (vals.some(v => v.trim())) data.push(vals);
         });
-        if (data.length === 0) return;
-
-        const colCount = Math.max(...data.map(r => r.length), 1);
-        const pageWidth = Math.max(595, margin * 2 + colCount * 80);
-        const pageHeight = 842;
-        const colWidth = (pageWidth - margin * 2) / colCount;
-
-        let page = pdf.addPage([pageWidth, pageHeight]);
-        let y = pageHeight - margin;
-
-        page.drawText(sheet.name, { x: margin, y, font: boldFont, size: 12, color: rgb(0.1, 0.1, 0.1) });
-        y -= 24;
-
-        for (let r = 0; r < data.length; r++) {
-          if (y < margin + rowHeight) {
-            page = pdf.addPage([pageWidth, pageHeight]);
-            y = pageHeight - margin;
-          }
-
-          const isHeader = r === 0;
-          const currentFont = isHeader ? boldFont : font;
-
-          if (isHeader) {
-            page.drawRectangle({
-              x: margin, y: y - rowHeight + 4, width: pageWidth - margin * 2, height: rowHeight,
-              color: rgb(0.92, 0.92, 0.95),
-            });
-          }
-
-          for (let c = 0; c < colCount; c++) {
-            const cellText = String(data[r][c] ?? '').substring(0, 30);
-            const x = margin + c * colWidth + cellPadding;
-            page.drawText(cellText, { x, y: y - rowHeight + 8, font: currentFont, size: fontSize, color: rgb(0.15, 0.15, 0.15) });
-            page.drawLine({ start: { x: margin + c * colWidth, y: y + 4 }, end: { x: margin + c * colWidth, y: y - rowHeight + 4 }, thickness: 0.5, color: rgb(0.8, 0.8, 0.8) });
-          }
-          page.drawLine({ start: { x: margin, y: y - rowHeight + 4 }, end: { x: pageWidth - margin, y: y - rowHeight + 4 }, thickness: 0.5, color: rgb(0.8, 0.8, 0.8) });
-          y -= rowHeight;
-        }
+        if (data.length) sheets.push({ name: sheet.name, data });
       });
+      if (!sheets.length) throw new Error('Empty workbook');
+
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d')!;
+
+      for (const { name, data } of sheets) {
+        const colCount = Math.max(...data.map(r => r.length), 1);
+        const rtl = ARABIC.test(name) || data.slice(0, 5).some(r => r.some(c => ARABIC.test(c)));
+        const landscape = colCount > 4;
+        const pw = landscape ? 842 : 595, ph = landscape ? 595 : 842;
+        const usable = pw - margin * 2;
+
+        // measure column widths
+        ctx.font = `bold ${fontPx}px ${fontFamily}`;
+        const widths = Array.from({ length: colCount }, (_, c) =>
+          Math.min(220, Math.max(30, ...data.map(r => ctx.measureText(r[c] ?? '').width + 10))));
+        const total = widths.reduce((a, b) => a + b, 0);
+        const colW = widths.map(w => (w / total) * usable);
+        const fitScale = Math.min(1, total > usable ? usable / total : 1);
+        const fs = Math.max(6, fontPx * Math.max(fitScale, 0.75));
+
+        const header = data[0];
+        const body = data.slice(1);
+        const perPage = Math.floor((ph - margin * 2 - titleH - headerH - footerH) / rowH);
+        const pageTotal = Math.max(1, Math.ceil(body.length / perPage));
+
+        for (let p = 0; p < pageTotal; p++) {
+          canvas.width = pw * S; canvas.height = ph * S;
+          ctx.setTransform(S, 0, 0, S, 0, 0);
+          ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, pw, ph);
+          ctx.direction = rtl ? 'rtl' : 'ltr';
+          ctx.textBaseline = 'middle';
+
+          ctx.fillStyle = '#1a1a1a';
+          ctx.font = `bold 14px ${fontFamily}`;
+          ctx.textAlign = rtl ? 'right' : 'left';
+          ctx.fillText(name, rtl ? pw - margin : margin, margin + 12);
+
+          const colX = (c: number) => {
+            const before = colW.slice(0, c).reduce((a, b) => a + b, 0);
+            return rtl ? pw - margin - before - colW[c] : margin + before;
+          };
+          const drawRow = (row: string[], y: number, h: number, isHead: boolean, zebra: boolean) => {
+            if (isHead) { ctx.fillStyle = '#1F4E79'; ctx.fillRect(margin, y, usable, h); }
+            else if (zebra) { ctx.fillStyle = '#F3F6FA'; ctx.fillRect(margin, y, usable, h); }
+            ctx.font = `${isHead ? 'bold ' : ''}${fs}px ${fontFamily}`;
+            for (let c = 0; c < colCount; c++) {
+              const x = colX(c), w = colW[c];
+              let t = row[c] ?? '';
+              while (t.length > 1 && ctx.measureText(t).width > w - 6) t = t.slice(0, -2) + '…';
+              const isNum = /^-?[\d,.]+$/.test(t);
+              ctx.fillStyle = isHead ? '#ffffff' : '#222222';
+              ctx.direction = ARABIC.test(t) || (rtl && !isNum) ? 'rtl' : 'ltr';
+              ctx.textAlign = 'center';
+              if (!isHead) {
+                if (isNum) { ctx.textAlign = 'right'; ctx.direction = 'ltr'; ctx.fillText(t, x + w - 4, y + h / 2); continue; }
+                ctx.textAlign = rtl ? 'right' : 'left';
+                ctx.fillText(t, rtl ? x + w - 4 : x + 4, y + h / 2); continue;
+              }
+              ctx.fillText(t, x + w / 2, y + h / 2);
+            }
+            ctx.strokeStyle = '#cfd6df'; ctx.lineWidth = 0.5;
+            for (let c = 0; c < colCount; c++) ctx.strokeRect(colX(c), y, colW[c], h);
+          };
+
+          let y = margin + titleH;
+          drawRow(header, y, headerH, true, false);
+          y += headerH;
+          body.slice(p * perPage, (p + 1) * perPage).forEach((r, i) => { drawRow(r, y, rowH, false, i % 2 === 1); y += rowH; });
+
+          ctx.fillStyle = '#777777'; ctx.font = `9px ${fontFamily}`;
+          ctx.textAlign = 'center'; ctx.direction = rtl ? 'rtl' : 'ltr';
+          ctx.fillText(rtl ? `${name} - صفحة ${p + 1} من ${pageTotal}` : `${name} - Page ${p + 1} of ${pageTotal}`, pw / 2, ph - margin / 2 - 4);
+
+          const blob: Blob = await new Promise(res => canvas.toBlob(b => res(b!), 'image/png'));
+          const img = await pdf.embedPng(await blob.arrayBuffer());
+          const page = pdf.addPage([pw, ph]);
+          page.drawImage(img, { x: 0, y: 0, width: pw, height: ph });
+        }
+      }
 
       const pdfBytes = await pdf.save();
       setResult({ data: pdfBytes, pageCount: pdf.getPageCount() });

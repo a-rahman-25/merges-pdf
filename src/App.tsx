@@ -74,6 +74,8 @@ const AiClassify = lazy(() => import("./pages/AiClassify"));
 const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
 const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
+const PdfToDxf = lazy(() => import("./pages/PdfToDxf"));
+const MergePdfImages = lazy(() => import("./pages/MergePdfImages"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AiContractAnalyzer = lazy(() => import("./pages/AiContractAnalyzer"));
@@ -169,6 +171,8 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-to-html" element={<PdfToHtml />} />
         <Route path="/pdf-to-markdown" element={<PdfToMarkdown />} />
         <Route path="/pdf-to-json" element={<PdfToJson />} />
+        <Route path="/pdf-to-dxf" element={<PdfToDxf />} />
+        <Route path="/merge-pdf-images" element={<MergePdfImages />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />
@@ -232,7 +236,10 @@ const AnimatedRoutes = () => {
 };
 
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
-const CommandPalette = lazy(() => import("./components/CommandPalette"));
+// Non-essential: if its file fails to load (stale deploy), render nothing instead of blanking the app.
+const CommandPalette = lazy(() =>
+  import("./components/CommandPalette").catch(() => ({ default: () => null }))
+);
 
 const KeyboardShortcuts = lazy(() => import("./components/KeyboardShortcuts"));
 const ProcessingHistory = lazy(() => import("./components/ProcessingHistory"));

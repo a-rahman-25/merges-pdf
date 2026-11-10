@@ -37,6 +37,10 @@ type T = Record<string, string>;
 const en: T = {
   // Nav
   'nav.home': 'Home',
+  'cookie.message': 'We use cookies for ads and analytics to keep MergesPDF free. Your files are always processed locally in your browser and never uploaded.',
+  'cookie.accept': 'Accept',
+  'cookie.decline': 'Decline',
+  'cookie.learnMore': 'Learn more',
   'nav.tools': 'Tools',
   'nav.about': 'About',
   'nav.contact': 'Contact',
@@ -298,6 +302,10 @@ const en: T = {
 
 const ar: T = {
   'nav.home': 'الرئيسية', 'nav.tools': 'الأدوات', 'nav.about': 'من نحن', 'nav.contact': 'اتصل بنا', 'nav.blog': 'المدونة', 'nav.api': 'API',
+  'cookie.message': 'نستخدم ملفات تعريف الارتباط للإعلانات والتحليلات لإبقاء MergesPDF مجانياً. تتم معالجة ملفاتك محلياً في متصفحك دائماً ولا يتم رفعها أبداً.',
+  'cookie.accept': 'قبول',
+  'cookie.decline': 'رفض',
+  'cookie.learnMore': 'اعرف المزيد',
   'hero.badge': 'مجاني 100% · بدون تسجيل · بدون رفع ملفات · خصوصية دائمة',
   'hero.title1': 'مجموعة PDF', 'hero.title2': 'الخصوصية أولاً — مجانية للأبد',
   'hero.subtitle': 'كل أداة تعمل في متصفحك. ملفاتك لا تغادر جهازك أبداً. دمج، تقسيم، ضغط، توقيع وتحويل PDF.',

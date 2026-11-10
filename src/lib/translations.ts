@@ -37,6 +37,10 @@ type T = Record<string, string>;
 const en: T = {
   // Nav
   'nav.home': 'Home',
+  'cookie.message': 'We use cookies for ads and analytics to keep MergesPDF free. Your files are always processed locally in your browser and never uploaded.',
+  'cookie.accept': 'Accept',
+  'cookie.decline': 'Decline',
+  'cookie.learnMore': 'Learn more',
   'nav.tools': 'Tools',
   'nav.about': 'About',
   'nav.contact': 'Contact',

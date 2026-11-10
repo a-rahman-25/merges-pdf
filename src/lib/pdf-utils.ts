@@ -11,16 +11,17 @@ export interface PDFFileItem {
 }
 
 export async function getPageCount(file: File): Promise<number> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
   return pdf.getPageCount();
 }
 
 export async function mergePDFs(files: File[]): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const mergedPdf = await PDFDocument.create();
 
   for (const file of files) {
-  const { PDFDocument } = await loadPdfLib();
     const buffer = await file.arrayBuffer();
     const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
     const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
@@ -90,6 +91,7 @@ export async function rotatePDFPages(
 }
 
 export async function compressPDF(file: File): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
 
@@ -194,6 +196,7 @@ export async function addPageNumbers(
 }
 
 export async function flattenPDF(file: File): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const srcDoc = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const newDoc = await PDFDocument.create();
@@ -209,7 +212,6 @@ export async function flattenPDF(file: File): Promise<Uint8Array> {
 }
 
 export function formatFileSize(bytes: number): string {
-  const { PDFDocument } = await loadPdfLib();
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
   return (bytes / (1024 * 1024)).toFixed(1) + ' MB';

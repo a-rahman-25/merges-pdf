@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://mergepdf.st/sitemap.xml
+Sitemap: https://mergespdf.com/sitemap.xml

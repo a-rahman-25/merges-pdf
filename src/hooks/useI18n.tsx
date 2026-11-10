@@ -18,6 +18,11 @@ export const useI18n = () => {
 
 export const I18nProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLangState] = useState<Lang>(() => {
+    // /ar/... URLs always start in Arabic (they are the indexable Arabic pages)
+    if (typeof window !== 'undefined') {
+      const p = window.location.pathname;
+      if (p === '/ar' || p.startsWith('/ar/')) return 'ar';
+    }
     const saved = localStorage.getItem('lang') as Lang | null;
     if (saved && translations[saved]) return saved;
     const browserLang = navigator.language;

@@ -61,7 +61,7 @@ const AdUnit = ({ slot, format = 'auto', className = '', layout = '' }: AdUnitPr
 
 
   const formatStyles: Record<string, React.CSSProperties> = {
-    auto: { display: 'block' },
+    auto: { display: 'block', width: '100%', minHeight: '90px' },
     horizontal: { display: 'inline-block', width: '100%', height: '90px' },
     vertical: { display: 'inline-block', width: '160px', height: '600px' },
     rectangle: { display: 'inline-block', width: '336px', height: '280px' },

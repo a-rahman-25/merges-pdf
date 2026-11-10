@@ -1,4 +1,6 @@
-import { PDFDocument } from 'pdf-lib';
+// pdf-lib is lazy-loaded on first use so tool pages don't pay its 400KB+ upfront.
+let pdfLibPromise: Promise<typeof import('pdf-lib')> | null = null;
+const loadPdfLib = () => (pdfLibPromise ??= import('pdf-lib'));
 
 export interface PDFFileItem {
   id: string;
@@ -18,6 +20,7 @@ export async function mergePDFs(files: File[]): Promise<Uint8Array> {
   const mergedPdf = await PDFDocument.create();
 
   for (const file of files) {
+  const { PDFDocument } = await loadPdfLib();
     const buffer = await file.arrayBuffer();
     const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
     const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
@@ -31,6 +34,7 @@ export async function splitPDF(
   file: File,
   pageIndices?: number[]
 ): Promise<{ data: Uint8Array; name: string }[]> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const totalPages = pdf.getPageCount();
@@ -54,6 +58,7 @@ export async function extractPages(
   file: File,
   pageIndices: number[]
 ): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const newPdf = await PDFDocument.create();
@@ -68,6 +73,7 @@ export async function rotatePDFPages(
   rotation: 0 | 90 | 180 | 270,
   pageIndices?: number[]
 ): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const pages = pdf.getPages();
@@ -105,6 +111,7 @@ export async function deletePages(
   file: File,
   pageIndicesToDelete: number[]
 ): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const totalPages = pdf.getPageCount();
@@ -124,6 +131,7 @@ export async function addTextWatermark(
   text: string,
   options: { fontSize?: number; opacity?: number; rotation?: number; color?: { r: number; g: number; b: number } } = {}
 ): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const { fontSize = 50, opacity = 0.3, rotation = -45, color = { r: 0.5, g: 0.5, b: 0.5 } } = options;
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
@@ -149,6 +157,7 @@ export async function reorderPages(
   file: File,
   newOrder: number[]
 ): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
   const newPdf = await PDFDocument.create();
@@ -162,6 +171,7 @@ export async function addPageNumbers(
   file: File,
   options: { position?: 'bottom' | 'top'; fontSize?: number; startNumber?: number } = {}
 ): Promise<Uint8Array> {
+  const { PDFDocument } = await loadPdfLib();
   const { position = 'bottom', fontSize = 12, startNumber = 1 } = options;
   const buffer = await file.arrayBuffer();
   const pdf = await PDFDocument.load(buffer, { ignoreEncryption: true });
@@ -199,6 +209,7 @@ export async function flattenPDF(file: File): Promise<Uint8Array> {
 }
 
 export function formatFileSize(bytes: number): string {
+  const { PDFDocument } = await loadPdfLib();
   if (bytes < 1024) return bytes + ' B';
   if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
   return (bytes / (1024 * 1024)).toFixed(1) + ' MB';

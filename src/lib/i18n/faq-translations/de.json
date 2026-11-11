@@ -1,0 +1,406 @@
+{
+  "merge": [
+    {
+      "q": "Wie füge ich PDF-Dateien zusammen?",
+      "a": "Ziehen Sie Ihre PDF-Dateien in den Upload-Bereich, ordnen Sie sie neu an und klicken Sie auf \"Zusammenführen & Herunterladen\"."
+    },
+    {
+      "q": "Gibt es ein Limit für die Anzahl der Dateien?",
+      "a": "Nein, Sie können so viele PDF-Dateien zusammenführen, wie Ihr Browser verarbeiten kann."
+    },
+    {
+      "q": "Werden meine Dateien auf einen Server hochgeladen?",
+      "a": "Nein. Die gesamte Verarbeitung erfolgt zu 100% in Ihrem Browser. Ihre Dateien verlassen nie Ihr Gerät."
+    },
+    {
+      "q": "Kann ich die Seiten vor dem Zusammenführen neu ordnen?",
+      "a": "Ja! Nach dem Hochladen können Sie die Dateien per Drag & Drop neu anordnen."
+    },
+    {
+      "q": "Reduziert das Zusammenführen die Qualität?",
+      "a": "Nein. Der Zusammenführungsprozess bewahrt die Originalqualität jeder Seite."
+    },
+    {
+      "q": "Muss ich mich registrieren?",
+      "a": "Nein. MergesPDF ist völlig kostenlos ohne Registrierung oder E-Mail."
+    }
+  ],
+  "split": [
+    {
+      "q": "Wie funktioniert das PDF-Aufteilen?",
+      "a": "Laden Sie eine PDF-Datei hoch und wählen Sie, ob alle Seiten in einzelne Dateien aufgeteilt werden sollen, oder geben Sie einen Seitenbereich ein (z.B. \"1-3, 5\")."
+    },
+    {
+      "q": "Kann ich bestimmte Seiten extrahieren?",
+      "a": "Ja! Wechseln Sie in den \"Seitenbereich\"-Modus und geben Sie die gewünschten Seiten ein, wie \"1-3, 5, 8-10\"."
+    },
+    {
+      "q": "Gibt es eine Seitenbegrenzung?",
+      "a": "Nein. Sie können PDFs jeder Größe aufteilen — es gibt keine künstlichen Grenzen."
+    },
+    {
+      "q": "Haben die geteilten Dateien die gleiche Qualität?",
+      "a": "Ja. Seiten werden ohne Neukodierung kopiert, die Qualität bleibt erhalten."
+    },
+    {
+      "q": "Ist das kostenlos?",
+      "a": "Völlig kostenlos. Keine Abonnements, keine Wasserzeichen, keine versteckten Kosten."
+    }
+  ],
+  "compress": [
+    {
+      "q": "Wie funktioniert die PDF-Komprimierung?",
+      "a": "Unser Kompressor entfernt unnötige Metadaten, baut die Dokumentstruktur neu auf und entfernt ungenutzte Objekte."
+    },
+    {
+      "q": "Reduziert die Komprimierung die Qualität?",
+      "a": "Unsere Technik konzentriert sich auf die Entfernung von Metadaten. Der sichtbare Inhalt bleibt unverändert."
+    },
+    {
+      "q": "Wie viel kann ich die Dateigröße reduzieren?",
+      "a": "Die Ergebnisse variieren. PDFs mit vielen Metadaten können eine Reduktion von 10-60% erfahren."
+    },
+    {
+      "q": "Gibt es eine Dateigrößenbegrenzung?",
+      "a": "Keine feste Grenze, aber sehr große Dateien können langsamer verarbeitet werden."
+    },
+    {
+      "q": "Kann ich mehrere PDFs gleichzeitig komprimieren?",
+      "a": "Ja! Nutzen Sie das Stapelverarbeitungs-Tool für die gleichzeitige Komprimierung."
+    }
+  ],
+  "rotate": [
+    {
+      "q": "Wie drehe ich PDF-Seiten?",
+      "a": "Laden Sie ein PDF hoch, wählen Sie den Drehwinkel (90°, 180° oder 270°) und klicken Sie auf Drehen."
+    },
+    {
+      "q": "Kann ich nur bestimmte Seiten drehen?",
+      "a": "Derzeit gilt die Drehung für alle Seiten. Für selektive Drehung teilen Sie das PDF zuerst auf."
+    },
+    {
+      "q": "Ändert die Drehung den Inhalt?",
+      "a": "Nein, die Drehung ändert nur die Seitenausrichtung. Alle Inhalte bleiben gleich."
+    },
+    {
+      "q": "Kann ich eine Drehung rückgängig machen?",
+      "a": "Ja — drehen Sie das PDF einfach erneut."
+    }
+  ],
+  "encrypt": [
+    {
+      "q": "Wie funktioniert die PDF-Verschlüsselung?",
+      "a": "Geben Sie ein Passwort ein und wir bauen das PDF mit Schutz-Metadaten neu auf."
+    },
+    {
+      "q": "Kann ich das Passwort später entfernen?",
+      "a": "Sie können das geschützte PDF mit Ihrem Passwort in jedem PDF-Reader öffnen."
+    },
+    {
+      "q": "Ist die Verschlüsselung stark?",
+      "a": "Browser-basierte Verschlüsselung hat Grenzen. Für hochsensible Dokumente empfehlen wir ein professionelles Tool."
+    },
+    {
+      "q": "Brauchen Empfänger ein Passwort?",
+      "a": "Ja, jeder der das verschlüsselte PDF öffnen möchte, benötigt das von Ihnen festgelegte Passwort."
+    }
+  ],
+  "pdfToWord": [
+    {
+      "q": "Wie funktioniert die PDF-zu-Word-Konvertierung?",
+      "a": "Wir extrahieren die Dokumentstruktur und erstellen eine Word-Datei (.docx)."
+    },
+    {
+      "q": "Wird der gesamte Text beibehalten?",
+      "a": "Browser-basierte Konvertierung hat Grenzen. Für komplexe PDFs kann ein Desktop-Tool bessere Ergebnisse liefern."
+    },
+    {
+      "q": "Welches Format hat die Ausgabe?",
+      "a": "Die Ausgabe ist eine .docx-Datei, die in Word, Google Docs und LibreOffice geöffnet werden kann."
+    },
+    {
+      "q": "Wird mein PDF irgendwohin hochgeladen?",
+      "a": "Nein. Alles wird in Ihrem Browser verarbeitet. Ihre Datei verlässt nie Ihr Gerät."
+    }
+  ],
+  "wordToPdf": [
+    {
+      "q": "Welche Word-Formate werden unterstützt?",
+      "a": "Wir unterstützen .doc und .docx Dateien. Für beste Ergebnisse verwenden Sie .docx."
+    },
+    {
+      "q": "Wird die Formatierung beibehalten?",
+      "a": "Der Konverter extrahiert den Textinhalt und rendert ihn in ein gut formatiertes PDF."
+    },
+    {
+      "q": "Was ist mit Bildern in der Word-Datei?",
+      "a": "Derzeit wird der Textinhalt extrahiert. Eingebettete Bilder erscheinen möglicherweise nicht."
+    },
+    {
+      "q": "Gibt es eine Dateigrößenbegrenzung?",
+      "a": "Keine feste Grenze, aber sehr große Dokumente können länger dauern."
+    }
+  ],
+  "deletePages": [
+    {
+      "q": "Wie lösche ich Seiten aus einem PDF?",
+      "a": "Laden Sie ein PDF hoch, geben Sie die zu entfernenden Seitenzahlen ein (z.B. \"1-3, 5\") und klicken Sie auf Seiten löschen."
+    },
+    {
+      "q": "Kann ich gelöschte Seiten rückgängig machen?",
+      "a": "Die Originaldatei wird nie verändert. Verwenden Sie einfach die Originaldatei erneut."
+    },
+    {
+      "q": "Kann ich alle Seiten bis auf eine löschen?",
+      "a": "Ja, aber Sie müssen mindestens eine Seite behalten."
+    },
+    {
+      "q": "Wird die Seitenreihenfolge beibehalten?",
+      "a": "Ja. Die verbleibenden Seiten behalten ihre ursprüngliche Reihenfolge."
+    }
+  ],
+  "extractPages": [
+    {
+      "q": "Wie extrahiere ich Seiten aus einem PDF?",
+      "a": "Laden Sie ein PDF hoch, geben Sie die gewünschten Seitenzahlen ein (z.B. \"1-3, 5, 8\") und klicken Sie auf Extrahieren."
+    },
+    {
+      "q": "Was ist der Unterschied zwischen Extrahieren und Aufteilen?",
+      "a": "Extrahieren kombiniert ausgewählte Seiten in ein neues PDF. Aufteilen erstellt einzelne Dateien."
+    },
+    {
+      "q": "Kann ich Seiten in anderer Reihenfolge extrahieren?",
+      "a": "Seiten werden in der Reihenfolge des Originaldokuments extrahiert."
+    },
+    {
+      "q": "Wird die Qualität beibehalten?",
+      "a": "Ja. Seiten werden ohne Neukodierung kopiert."
+    }
+  ],
+  "watermark": [
+    {
+      "q": "Welche Art von Wasserzeichen kann ich hinzufügen?",
+      "a": "Sie können Textwasserzeichen mit anpassbarer Schriftgröße, Deckkraft und Drehung hinzufügen."
+    },
+    {
+      "q": "Kann ich ein Bild-Wasserzeichen hinzufügen?",
+      "a": "Derzeit werden nur Textwasserzeichen unterstützt."
+    },
+    {
+      "q": "Kann ich die Position des Wasserzeichens steuern?",
+      "a": "Das Wasserzeichen ist zentriert und um 45° gedreht. Sie können Deckkraft und Schriftgröße anpassen."
+    },
+    {
+      "q": "Ist das Wasserzeichen entfernbar?",
+      "a": "Das Wasserzeichen ist direkt in das PDF eingebettet und kann nicht leicht entfernt werden."
+    }
+  ],
+  "flatten": [
+    {
+      "q": "Was bewirkt das Glätten eines PDFs?",
+      "a": "Das Glätten entfernt Formularfelder, Anmerkungen und Ebenen und erzeugt ein statisches, nicht editierbares PDF."
+    },
+    {
+      "q": "Ist PDF-Glätten kostenlos?",
+      "a": "Ja, völlig kostenlos ohne Grenzen oder Registrierung."
+    },
+    {
+      "q": "Reduziert das Glätten die Dateigröße?",
+      "a": "Es kann. Durch das Entfernen interaktiver Elemente wird die Datei oft kleiner."
+    }
+  ],
+  "grayscale": [
+    {
+      "q": "Was bewirkt die Konvertierung in Graustufen?",
+      "a": "Es baut Ihr PDF ohne Farbdaten neu auf, was zu einem kleineren Schwarz-Weiß-Dokument führt."
+    },
+    {
+      "q": "Wird dies meine Dateigröße reduzieren?",
+      "a": "In vielen Fällen ja, besonders bei PDFs mit farbigen Bildern oder Grafiken."
+    },
+    {
+      "q": "Ist die Konvertierung umkehrbar?",
+      "a": "Nein. Farbinformationen werden dauerhaft entfernt. Behalten Sie die Originaldatei."
+    }
+  ],
+  "pageNumbers": [
+    {
+      "q": "Wie füge ich Seitenzahlen hinzu?",
+      "a": "Laden Sie Ihr PDF hoch, wählen Sie oben oder unten und klicken Sie auf \"Seitenzahlen hinzufügen\"."
+    },
+    {
+      "q": "Ist das Hinzufügen von Seitenzahlen kostenlos?",
+      "a": "Ja, völlig kostenlos ohne Grenzen oder Wasserzeichen."
+    },
+    {
+      "q": "Kann ich die Position anpassen?",
+      "a": "Sie können zwischen oben-mittig und unten-mittig wählen."
+    }
+  ],
+  "unlock": [
+    {
+      "q": "Welche Einschränkungen kann dieses Tool entfernen?",
+      "a": "Es entfernt Druck-, Kopier- und Bearbeitungsbeschränkungen. Es kann keinen Passwortschutz zum Öffnen umgehen."
+    },
+    {
+      "q": "Ist das Entsperren von PDFs kostenlos?",
+      "a": "Ja, völlig kostenlos. Ohne Registrierung oder Grenzen."
+    },
+    {
+      "q": "Ist das legal?",
+      "a": "Das Entfernen von Einschränkungen bei PDFs, die Sie besitzen oder berechtigt sind zu ändern, ist legal."
+    }
+  ],
+  "batch": [
+    {
+      "q": "Welche Stapeloperationen sind verfügbar?",
+      "a": "Sie können Stapel-Zusammenführung oder Stapel-Komprimierung mit Fortschrittsanzeige durchführen."
+    },
+    {
+      "q": "Wie viele Dateien kann ich gleichzeitig verarbeiten?",
+      "a": "Keine künstliche Begrenzung. Verarbeiten Sie so viele Dateien wie Ihr Browser kann."
+    },
+    {
+      "q": "Gibt es einen Fortschrittsindikator?",
+      "a": "Ja! Ein Fortschrittsbalken zeigt den Status jeder Datei an."
+    },
+    {
+      "q": "Werden alle Dateien lokal verarbeitet?",
+      "a": "Ja. Die gesamte Stapelverarbeitung erfolgt in Ihrem Browser."
+    }
+  ],
+  "formFiller": [
+    {
+      "q": "Wie funktioniert der PDF-Formular-Ausfüller?",
+      "a": "Laden Sie ein PDF mit Formularfeldern hoch und das Tool erkennt automatisch alle ausfüllbaren Felder."
+    },
+    {
+      "q": "Welche Feldtypen werden unterstützt?",
+      "a": "Textfelder werden voll unterstützt. Das Tool erkennt alle PDF-Formularfeldtypen."
+    },
+    {
+      "q": "Werden die Formulardaten in das PDF eingebettet?",
+      "a": "Ja — das Formular wird nach dem Ausfüllen geglättet."
+    },
+    {
+      "q": "Was wenn mein PDF keine Formularfelder hat?",
+      "a": "Das Tool informiert Sie, wenn keine ausfüllbaren Felder erkannt werden."
+    }
+  ],
+  "redact": [
+    {
+      "q": "Wie funktioniert die PDF-Schwärzung?",
+      "a": "Laden Sie ein PDF hoch und zeichnen Sie schwarze Rechtecke über sensible Bereiche."
+    },
+    {
+      "q": "Ist die Schwärzung dauerhaft?",
+      "a": "Ja — die Rechtecke werden direkt auf den PDF-Inhalt gezeichnet."
+    },
+    {
+      "q": "Kann ich die Schwärzung rückgängig machen?",
+      "a": "Nein. Einmal gespeichert, ist die Schwärzung dauerhaft. Behalten Sie immer eine Kopie des Originals."
+    },
+    {
+      "q": "Wird lokal verarbeitet?",
+      "a": "Ja. Ihr PDF verlässt nie Ihr Gerät."
+    }
+  ],
+  "pdfToImages": [
+    {
+      "q": "Wie konvertiere ich PDF in Bilder?",
+      "a": "Laden Sie ein PDF hoch, wählen Sie das Bildformat (PNG oder JPG) und die Qualität und klicken Sie auf Konvertieren."
+    },
+    {
+      "q": "Welche Qualitätseinstellungen gibt es?",
+      "a": "1x für Standardauflösung, 2x für hohe Qualität (empfohlen), 3x für maximale Details."
+    },
+    {
+      "q": "Kann ich bestimmte Seiten auswählen?",
+      "a": "Derzeit werden alle Seiten konvertiert. Verwenden Sie zuerst das Aufteilen-Tool."
+    },
+    {
+      "q": "Sind die Bilder hochauflösend?",
+      "a": "Ja, besonders bei 2x oder 3x Qualität."
+    }
+  ],
+  "mergeImages": [
+    {
+      "q": "Welche Bildformate kann ich zu einem PDF zusammenführen?",
+      "a": "Sie können JPG, JPEG, PNG und WEBP Bilder zu einem einzigen PDF-Dokument kombinieren."
+    },
+    {
+      "q": "Kann ich die Bilder vor dem Zusammenführen neu ordnen?",
+      "a": "Ja! Ziehen Sie die Miniaturansichten einfach per Drag & Drop."
+    },
+    {
+      "q": "Gibt es eine Begrenzung für die Anzahl der Bilder?",
+      "a": "Keine künstliche Begrenzung."
+    },
+    {
+      "q": "Wie steht es um die Bildqualität?",
+      "a": "Bilder werden in ihrer Originalauflösung eingebettet. Keine Komprimierung."
+    }
+  ],
+  "ocr": [
+    {
+      "q": "Was ist OCR?",
+      "a": "OCR (Optische Zeichenerkennung) wandelt Textbilder in maschinenlesbaren Text um."
+    },
+    {
+      "q": "Welche Sprachen werden unterstützt?",
+      "a": "Englisch, Spanisch, Französisch, Deutsch, Portugiesisch, Arabisch, vereinfachtes Chinesisch, Hindi und Japanisch."
+    },
+    {
+      "q": "Wird die OCR-Verarbeitung lokal durchgeführt?",
+      "a": "Ja! Tesseract.js läuft vollständig in Ihrem Browser."
+    },
+    {
+      "q": "Wie lange dauert OCR?",
+      "a": "Die meisten einseitigen Dokumente werden in unter 10 Sekunden verarbeitet."
+    },
+    {
+      "q": "Kann ich OCR auf ein gescanntes PDF anwenden?",
+      "a": "Ja! Laden Sie ein gescanntes PDF hoch und das Tool extrahiert den Text."
+    }
+  ],
+  "editor": [
+    {
+      "q": "Was kann ich mit dem PDF-Editor machen?",
+      "a": "Text, Hervorhebungen, Freihandzeichnungen, Linien, Pfeile, Rechtecke, Kreise, Haftnotizen und Bilder hinzufügen."
+    },
+    {
+      "q": "Wird lokal bearbeitet?",
+      "a": "Ja! Alles passiert in Ihrem Browser."
+    },
+    {
+      "q": "Kann ich meine Änderungen rückgängig machen?",
+      "a": "Ja — verwenden Sie Strg+Z zum Rückgängigmachen und Strg+Y zum Wiederherstellen."
+    },
+    {
+      "q": "Werden meine Anmerkungen Teil des PDFs?",
+      "a": "Ja. Beim Speichern werden alle Anmerkungen dauerhaft eingebettet."
+    },
+    {
+      "q": "Kann ich vorhandenen Text bearbeiten?",
+      "a": "Der Editor konzentriert sich auf das Hinzufügen von Anmerkungen."
+    }
+  ],
+  "svgToImage": [
+    {
+      "q": "In welche Bildformate kann ich SVG konvertieren?",
+      "a": "Sie können in PNG, JPG, WEBP und BMP konvertieren — alles in Ihrem Browser."
+    },
+    {
+      "q": "Verliere ich an Qualität?",
+      "a": "SVGs sind vektorbasiert und skalieren perfekt. Wählen Sie eine höhere Skalierung für scharfe Ausgabe."
+    },
+    {
+      "q": "Wird mein SVG hochgeladen?",
+      "a": "Nein. Alles läuft 100% in Ihrem Browser."
+    },
+    {
+      "q": "Kann ich SVGs mit Transparenz konvertieren?",
+      "a": "Ja! PNG und WEBP bewahren die Transparenz. JPG und BMP haben einen weißen Hintergrund."
+    }
+  ]
+}

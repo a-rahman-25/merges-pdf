@@ -1,0 +1,550 @@
+{
+  "merge": [
+    {
+      "q": "¿Cómo combino archivos PDF?",
+      "a": "Arrastra y suelta tus archivos PDF en el área de carga, reordénalos según sea necesario y haz clic en \"Combinar y Descargar\". El PDF combinado se descargará al instante."
+    },
+    {
+      "q": "¿Hay un límite de archivos?",
+      "a": "No, puedes combinar tantos archivos PDF como tu navegador pueda manejar. No hay límite artificial."
+    },
+    {
+      "q": "¿Se suben mis archivos a un servidor?",
+      "a": "No. Todo el procesamiento ocurre 100% en tu navegador. Tus archivos nunca salen de tu dispositivo."
+    },
+    {
+      "q": "¿Puedo reordenar las páginas antes de combinar?",
+      "a": "¡Sí! Después de cargar tus archivos, puedes arrastrarlos y soltarlos en cualquier orden."
+    },
+    {
+      "q": "¿La combinación reduce la calidad?",
+      "a": "No. El proceso de combinación preserva la calidad original de cada página."
+    },
+    {
+      "q": "¿Necesito registrarme?",
+      "a": "No. MergesPDF es completamente gratuito sin registro ni correo electrónico. Solo sube y combina."
+    }
+  ],
+  "split": [
+    {
+      "q": "¿Cómo funciona la división de PDF?",
+      "a": "Sube un archivo PDF y elige dividir todas las páginas en archivos individuales, o ingresa un rango de páginas (ej. \"1-3, 5\") para extraer páginas específicas."
+    },
+    {
+      "q": "¿Puedo extraer páginas específicas?",
+      "a": "¡Sí! Cambia al modo \"Rango de páginas\" e ingresa las páginas que deseas, como \"1-3, 5, 8-10\"."
+    },
+    {
+      "q": "¿Hay límite de páginas?",
+      "a": "No. Puedes dividir PDFs de cualquier tamaño — no hay límites artificiales."
+    },
+    {
+      "q": "¿Los archivos divididos mantienen la calidad?",
+      "a": "Sí. Las páginas se copian sin recodificación, preservando la calidad original."
+    },
+    {
+      "q": "¿Es gratuito?",
+      "a": "Completamente gratuito. Sin suscripciones, sin marcas de agua, sin costos ocultos."
+    }
+  ],
+  "compress": [
+    {
+      "q": "¿Cómo funciona la compresión de PDF?",
+      "a": "Nuestro compresor elimina metadatos innecesarios, reconstruye la estructura del documento y elimina objetos no utilizados para reducir el tamaño."
+    },
+    {
+      "q": "¿La compresión reduce la calidad?",
+      "a": "Nuestra técnica se enfoca en la eliminación de metadatos y optimización de estructura. El contenido visible permanece sin cambios."
+    },
+    {
+      "q": "¿Cuánto puedo reducir el tamaño?",
+      "a": "Los resultados varían. Los PDFs con muchos metadatos pueden ver una reducción del 10-60%."
+    },
+    {
+      "q": "¿Hay límite de tamaño de archivo?",
+      "a": "No hay límite fijo, pero archivos muy grandes pueden tardar más ya que todo se procesa en tu navegador."
+    },
+    {
+      "q": "¿Puedo comprimir varios PDFs a la vez?",
+      "a": "¡Sí! Usa la herramienta de procesamiento por lotes para comprimir varios PDFs simultáneamente."
+    }
+  ],
+  "rotate": [
+    {
+      "q": "¿Cómo roto páginas de PDF?",
+      "a": "Sube un PDF, selecciona el ángulo de rotación (90°, 180° o 270°) y haz clic en Rotar."
+    },
+    {
+      "q": "¿Puedo rotar solo páginas específicas?",
+      "a": "Actualmente, la rotación se aplica a todas las páginas. Para rotación selectiva, divide el PDF primero."
+    },
+    {
+      "q": "¿La rotación cambia el contenido?",
+      "a": "No, la rotación solo cambia la orientación de la página. Todo el contenido permanece igual."
+    },
+    {
+      "q": "¿Puedo deshacer una rotación?",
+      "a": "Sí — simplemente rota el PDF de nuevo. Por ejemplo, si rotaste 90°, rota 270° para volver al original."
+    }
+  ],
+  "encrypt": [
+    {
+      "q": "¿Cómo funciona el cifrado de PDF?",
+      "a": "Ingresa una contraseña y reconstruimos el PDF con metadatos de protección."
+    },
+    {
+      "q": "¿Puedo eliminar la contraseña después?",
+      "a": "Puedes abrir el PDF protegido con tu contraseña en cualquier lector de PDF."
+    },
+    {
+      "q": "¿Es fuerte el cifrado?",
+      "a": "El cifrado en el navegador tiene limitaciones. Para documentos muy sensibles, recomendamos usar una herramienta profesional."
+    },
+    {
+      "q": "¿Los destinatarios necesitarán contraseña?",
+      "a": "Sí, cualquiera que quiera abrir el PDF cifrado necesitará la contraseña que estableciste."
+    }
+  ],
+  "pdfToWord": [
+    {
+      "q": "¿Cómo funciona la conversión de PDF a Word?",
+      "a": "Extraemos la estructura del documento y creamos un archivo Word (.docx). La conversión preserva la estructura de la página."
+    },
+    {
+      "q": "¿Se preservará todo el texto?",
+      "a": "La conversión en el navegador tiene limitaciones. Para PDFs complejos, una herramienta de escritorio puede dar mejores resultados."
+    },
+    {
+      "q": "¿Cuál es el formato de salida?",
+      "a": "El archivo de salida es .docx compatible con Word, Google Docs y LibreOffice."
+    },
+    {
+      "q": "¿Se sube mi PDF a algún lugar?",
+      "a": "No. Todo se procesa en tu navegador. Tu archivo nunca sale de tu dispositivo."
+    }
+  ],
+  "wordToPdf": [
+    {
+      "q": "¿Qué formatos de Word son compatibles?",
+      "a": "Soportamos archivos .doc y .docx. Para mejores resultados, usa formato .docx."
+    },
+    {
+      "q": "¿Se preserva el formato?",
+      "a": "El convertidor extrae el contenido de texto y lo renderiza en un PDF bien formateado."
+    },
+    {
+      "q": "¿Qué pasa con las imágenes del archivo Word?",
+      "a": "Actualmente, se extrae y convierte el contenido de texto. Las imágenes incrustadas pueden no aparecer."
+    },
+    {
+      "q": "¿Hay límite de tamaño de archivo?",
+      "a": "Sin límite fijo, pero documentos muy grandes pueden tardar más en procesarse."
+    }
+  ],
+  "deletePages": [
+    {
+      "q": "¿Cómo elimino páginas de un PDF?",
+      "a": "Sube un PDF, ingresa los números de página a eliminar (ej. \"1-3, 5\") y haz clic en Eliminar Páginas."
+    },
+    {
+      "q": "¿Puedo deshacer las páginas eliminadas?",
+      "a": "El archivo original nunca se modifica. Si necesitas las páginas eliminadas, simplemente usa el archivo original de nuevo."
+    },
+    {
+      "q": "¿Puedo eliminar todas las páginas menos una?",
+      "a": "Sí, pero debes mantener al menos una página."
+    },
+    {
+      "q": "¿Se preserva el orden de las páginas?",
+      "a": "Sí. Las páginas restantes mantienen su orden original."
+    }
+  ],
+  "extractPages": [
+    {
+      "q": "¿Cómo extraigo páginas de un PDF?",
+      "a": "Sube un PDF, ingresa los números de página (ej. \"1-3, 5, 8\") y haz clic en Extraer."
+    },
+    {
+      "q": "¿Cuál es la diferencia entre Extraer y Dividir?",
+      "a": "Extraer combina las páginas seleccionadas en un nuevo PDF. Dividir crea archivos individuales por cada página."
+    },
+    {
+      "q": "¿Puedo extraer páginas en diferente orden?",
+      "a": "Las páginas se extraen en el orden en que aparecen en el documento original."
+    },
+    {
+      "q": "¿Se preserva la calidad?",
+      "a": "Sí. Las páginas se copian sin recodificación, preservando la calidad original."
+    }
+  ],
+  "watermark": [
+    {
+      "q": "¿Qué tipo de marcas de agua puedo añadir?",
+      "a": "Puedes añadir marcas de agua de texto con tamaño de fuente, opacidad y rotación personalizables."
+    },
+    {
+      "q": "¿Puedo añadir una marca de agua de imagen?",
+      "a": "Actualmente solo se admiten marcas de agua de texto. El soporte para imágenes llegará pronto."
+    },
+    {
+      "q": "¿Puedo controlar la posición de la marca de agua?",
+      "a": "La marca de agua está centrada y rotada a 45°. Puedes ajustar la opacidad y el tamaño de fuente."
+    },
+    {
+      "q": "¿La marca de agua es removible?",
+      "a": "La marca de agua está incrustada directamente en el PDF y no puede eliminarse fácilmente."
+    }
+  ],
+  "flatten": [
+    {
+      "q": "¿Qué hace el aplanamiento de PDF?",
+      "a": "El aplanamiento elimina campos de formulario, anotaciones y capas, produciendo un PDF estático no editable."
+    },
+    {
+      "q": "¿Es gratuito el aplanamiento?",
+      "a": "Sí, completamente gratuito sin límites ni registro."
+    },
+    {
+      "q": "¿El aplanamiento reduce el tamaño del archivo?",
+      "a": "Puede. Al eliminar elementos interactivos, el archivo a menudo se vuelve más pequeño."
+    }
+  ],
+  "grayscale": [
+    {
+      "q": "¿Qué hace la conversión a escala de grises?",
+      "a": "Reconstruye tu PDF sin datos de color, resultando en un documento en blanco y negro generalmente más pequeño."
+    },
+    {
+      "q": "¿Esto reducirá el tamaño de mi archivo?",
+      "a": "En muchos casos sí, especialmente para PDFs con imágenes o gráficos en color."
+    },
+    {
+      "q": "¿La conversión es reversible?",
+      "a": "No. La información de color se elimina permanentemente. Guarda el archivo original si podrías necesitar el color."
+    }
+  ],
+  "pageNumbers": [
+    {
+      "q": "¿Cómo añado números de página a un PDF?",
+      "a": "Sube tu PDF, elige la posición (arriba o abajo) y haz clic en \"Añadir números de página\"."
+    },
+    {
+      "q": "¿Es gratuito añadir números de página?",
+      "a": "Sí, completamente gratuito sin límites, sin marcas de agua, sin cuenta requerida."
+    },
+    {
+      "q": "¿Puedo personalizar la posición?",
+      "a": "Puedes elegir entre centro superior y centro inferior."
+    }
+  ],
+  "unlock": [
+    {
+      "q": "¿Qué restricciones puede eliminar esta herramienta?",
+      "a": "Elimina restricciones de impresión, copia y edición. No puede eludir la protección con contraseña de apertura."
+    },
+    {
+      "q": "¿Es gratuito desbloquear PDFs?",
+      "a": "Sí, completamente gratuito. Sin registro ni límites."
+    },
+    {
+      "q": "¿Es esto legal?",
+      "a": "Eliminar restricciones de PDFs que posees o tienes permiso para modificar es legal."
+    }
+  ],
+  "batch": [
+    {
+      "q": "¿Qué operaciones por lotes están disponibles?",
+      "a": "Puedes combinar todos los PDFs en uno o comprimir cada PDF individualmente con seguimiento del progreso."
+    },
+    {
+      "q": "¿Cuántos archivos puedo procesar a la vez?",
+      "a": "No hay límite artificial. Procesa tantos archivos como tu navegador pueda manejar."
+    },
+    {
+      "q": "¿Hay indicador de progreso?",
+      "a": "¡Sí! Una barra de progreso muestra el estado de cada archivo."
+    },
+    {
+      "q": "¿Todos los archivos se procesan localmente?",
+      "a": "Sí. Todo el procesamiento por lotes ocurre en tu navegador."
+    }
+  ],
+  "formFiller": [
+    {
+      "q": "¿Cómo funciona el rellenador de formularios PDF?",
+      "a": "Sube un PDF con campos de formulario y la herramienta detecta automáticamente todos los campos rellenables."
+    },
+    {
+      "q": "¿Qué tipos de campos de formulario son compatibles?",
+      "a": "Los campos de texto son totalmente compatibles. La herramienta detecta todos los tipos de campos."
+    },
+    {
+      "q": "¿Los datos del formulario se incrustan en el PDF?",
+      "a": "Sí — el formulario se aplana después del llenado, por lo que los datos se integran en el contenido del PDF."
+    },
+    {
+      "q": "¿Qué pasa si mi PDF no tiene campos de formulario?",
+      "a": "La herramienta te informará si no se detectan campos rellenables."
+    }
+  ],
+  "redact": [
+    {
+      "q": "¿Cómo funciona la redacción de PDF?",
+      "a": "Sube un PDF y dibuja rectángulos negros sobre las áreas sensibles. Esas áreas quedarán permanentemente ocultas."
+    },
+    {
+      "q": "¿La redacción es permanente?",
+      "a": "Sí — los rectángulos se dibujan directamente sobre el contenido del PDF."
+    },
+    {
+      "q": "¿Puedo deshacer la redacción?",
+      "a": "No. Una vez guardada, la redacción es permanente. Siempre guarda una copia del original."
+    },
+    {
+      "q": "¿Se procesa localmente?",
+      "a": "Sí. Tu PDF nunca sale de tu dispositivo."
+    }
+  ],
+  "pdfToImages": [
+    {
+      "q": "¿Cómo convierto PDF a imágenes?",
+      "a": "Sube un PDF, selecciona el formato de imagen (PNG o JPG) y la calidad, luego haz clic en Convertir."
+    },
+    {
+      "q": "¿Qué configuraciones de calidad están disponibles?",
+      "a": "1x para resolución estándar, 2x para alta calidad (recomendado), y 3x para máximo detalle."
+    },
+    {
+      "q": "¿Puedo seleccionar páginas específicas?",
+      "a": "Actualmente se convierten todas las páginas. Puedes usar la herramienta Dividir primero."
+    },
+    {
+      "q": "¿Las imágenes son de alta resolución?",
+      "a": "Sí, especialmente en calidad 2x o 3x."
+    }
+  ],
+  "mergeImages": [
+    {
+      "q": "¿Qué formatos de imagen puedo combinar en un PDF?",
+      "a": "Puedes combinar imágenes JPG, JPEG, PNG y WEBP en un único documento PDF."
+    },
+    {
+      "q": "¿Puedo reordenar las imágenes antes de combinar?",
+      "a": "¡Sí! Simplemente arrastra y suelta las miniaturas para ordenarlas."
+    },
+    {
+      "q": "¿Hay límite de número de imágenes?",
+      "a": "Sin límite artificial. Añade tantas imágenes como tu navegador pueda manejar."
+    },
+    {
+      "q": "¿Qué pasa con la calidad de imagen?",
+      "a": "Las imágenes se insertan en su resolución original. No se aplica compresión."
+    }
+  ],
+  "ocr": [
+    {
+      "q": "¿Qué es OCR?",
+      "a": "OCR (Reconocimiento Óptico de Caracteres) convierte imágenes de texto en texto legible por máquina."
+    },
+    {
+      "q": "¿Qué idiomas son compatibles?",
+      "a": "Inglés, español, francés, alemán, portugués, árabe, chino simplificado, hindi y japonés."
+    },
+    {
+      "q": "¿El procesamiento OCR es local?",
+      "a": "¡Sí! Tesseract.js se ejecuta completamente en tu navegador."
+    },
+    {
+      "q": "¿Cuánto tarda el OCR?",
+      "a": "Depende del número de páginas. La mayoría de documentos de una página se completan en menos de 10 segundos."
+    },
+    {
+      "q": "¿Puedo usar OCR en un PDF escaneado?",
+      "a": "¡Sí! Sube un PDF escaneado y la herramienta extraerá el texto."
+    }
+  ],
+  "editor": [
+    {
+      "q": "¿Qué puedo hacer con el Editor de PDF?",
+      "a": "Añadir texto, resaltados, dibujos, líneas, flechas, rectángulos, círculos, notas adhesivas e imágenes."
+    },
+    {
+      "q": "¿La edición es local?",
+      "a": "¡Sí! Todo ocurre en tu navegador. Tu PDF nunca sale de tu dispositivo."
+    },
+    {
+      "q": "¿Puedo deshacer mis cambios?",
+      "a": "Sí — usa Ctrl+Z para deshacer y Ctrl+Y para rehacer."
+    },
+    {
+      "q": "¿Las anotaciones serán parte del PDF?",
+      "a": "Sí. Al guardar, todas las anotaciones se incrustan permanentemente."
+    },
+    {
+      "q": "¿Puedo editar texto existente en el PDF?",
+      "a": "El editor se centra en añadir anotaciones. Para editar texto existente, puedes necesitar una herramienta de escritorio."
+    }
+  ],
+  "svgToImage": [
+    {
+      "q": "¿A qué formatos puedo convertir SVG?",
+      "a": "Puedes convertir a PNG, JPG, WEBP y BMP — todo procesado en tu navegador."
+    },
+    {
+      "q": "¿Perderé calidad?",
+      "a": "Los SVG son vectoriales, por lo que escalan perfectamente. Elige una escala mayor (2x-4x) para mejor resultado."
+    },
+    {
+      "q": "¿Se sube mi SVG a un servidor?",
+      "a": "No. Todo se ejecuta 100% en tu navegador."
+    },
+    {
+      "q": "¿Puedo convertir SVGs con transparencia?",
+      "a": "¡Sí! PNG y WEBP preservan la transparencia. JPG y BMP tendrán fondo blanco."
+    }
+  ],
+  "excelToPdf": [
+    {
+      "q": "¿Qué formatos de archivo son compatibles?",
+      "a": "Puedes convertir archivos .xlsx, .xls y .csv a PDF."
+    },
+    {
+      "q": "¿Se suben mis hojas de cálculo a un servidor?",
+      "a": "No. Todo el procesamiento ocurre 100% en tu navegador."
+    },
+    {
+      "q": "¿Preserva el formato?",
+      "a": "El convertidor renderiza datos de tabla con líneas de cuadrícula y encabezados."
+    },
+    {
+      "q": "¿Hay un límite de tamaño de archivo?",
+      "a": "No hay límite artificial — depende de la capacidad de memoria de tu navegador."
+    }
+  ],
+  "pptxToPdf": [
+    {
+      "q": "¿Qué formatos de PowerPoint son compatibles?",
+      "a": "Actualmente se admiten archivos .pptx. Los archivos .ppt antiguos deben guardarse como .pptx primero."
+    },
+    {
+      "q": "¿Se suben mis presentaciones a un servidor?",
+      "a": "No. Todo se procesa 100% en tu navegador."
+    },
+    {
+      "q": "¿Preserva las imágenes y animaciones?",
+      "a": "El convertidor extrae el contenido de texto y el diseño."
+    },
+    {
+      "q": "¿Necesito registrarme?",
+      "a": "No. Esta herramienta es completamente gratuita sin registro."
+    }
+  ],
+  "webpageToPdf": [
+    {
+      "q": "¿Cómo convierto HTML a PDF?",
+      "a": "Pega tu código HTML o sube un archivo HTML, luego haz clic en \"Convertir a PDF\"."
+    },
+    {
+      "q": "¿Puedo convertir una página web en vivo?",
+      "a": "Puedes guardar una página web como HTML (Ctrl+S) y luego subir el archivo."
+    },
+    {
+      "q": "¿Se suben mis archivos a un servidor?",
+      "a": "No. Todo el procesamiento ocurre 100% en tu navegador."
+    },
+    {
+      "q": "¿Preserva el estilo CSS?",
+      "a": "El convertidor extrae contenido de texto estructurado. Los diseños CSS complejos pueden simplificarse."
+    }
+  ],
+  "heicToPdf": [
+    {
+      "q": "¿Qué es el formato HEIC?",
+      "a": "HEIC es el formato de fotos predeterminado de Apple en iPhone y iPad. Ofrece mejor compresión que JPEG."
+    },
+    {
+      "q": "¿A qué puedo convertir HEIC?",
+      "a": "Puedes convertir imágenes HEIC/HEIF a JPG, PNG o combinarlas en un solo documento PDF."
+    },
+    {
+      "q": "¿Se suben mis fotos a un servidor?",
+      "a": "No. Toda la conversión ocurre 100% en tu navegador."
+    },
+    {
+      "q": "¿Puedo convertir varios archivos HEIC a la vez?",
+      "a": "¡Sí! Puedes seleccionar múltiples archivos HEIC/HEIF y convertirlos todos a la vez."
+    }
+  ],
+  "repairPdf": [
+    {
+      "q": "¿Qué tipos de daños de PDF se pueden reparar?",
+      "a": "Esta herramienta puede reparar tablas de referencias cruzadas corruptas, árboles de páginas rotos y metadatos dañados."
+    },
+    {
+      "q": "¿Cambiará la reparación el contenido de mi PDF?",
+      "a": "No. El proceso de reparación preserva todo el contenido existente."
+    },
+    {
+      "q": "¿Se suben mis archivos a un servidor?",
+      "a": "No. Todo el procesamiento ocurre 100% en tu navegador."
+    },
+    {
+      "q": "¿Qué pasa si mi PDF está demasiado dañado?",
+      "a": "Los archivos severamente corruptos pueden no ser recuperables. La herramienta te lo informará."
+    }
+  ],
+  "pdfBookmarks": [
+    {
+      "q": "¿Qué son los marcadores de PDF?",
+      "a": "Los marcadores de PDF son una tabla de contenidos que aparece como barra lateral en los lectores de PDF."
+    },
+    {
+      "q": "¿Puedo añadir varios marcadores?",
+      "a": "¡Sí! Puedes añadir tantos marcadores como necesites, cada uno apuntando a una página diferente."
+    },
+    {
+      "q": "¿Esto modificará el contenido de mi PDF?",
+      "a": "No. Añadir marcadores solo agrega metadatos de navegación."
+    },
+    {
+      "q": "¿Se suben mis archivos a un servidor?",
+      "a": "No. Todo el procesamiento ocurre 100% en tu navegador."
+    }
+  ],
+  "pageSize": [
+    {
+      "q": "¿Qué tamaños de página se admiten?",
+      "a": "Admitimos A4, A3, A5, Letter, Legal, Tabloid, B5 y Executive. El contenido se escala y centra automáticamente."
+    },
+    {
+      "q": "¿Redimensionar distorsionará mi contenido?",
+      "a": "No. El contenido se escala proporcionalmente manteniendo su relación de aspecto."
+    },
+    {
+      "q": "¿Puedo redimensionar páginas individuales?",
+      "a": "Actualmente, la herramienta redimensiona todas las páginas al mismo tamaño objetivo."
+    },
+    {
+      "q": "¿Se suben mis archivos a un servidor?",
+      "a": "No. Todo el procesamiento ocurre 100% en tu navegador."
+    }
+  ],
+  "pdfToExcel": [
+    {
+      "q": "¿Cómo funciona la extracción de PDF a Excel?",
+      "a": "La herramienta lee cada página del PDF, agrupa el texto por posición en filas y columnas, y exporta los datos como archivo Excel."
+    },
+    {
+      "q": "¿Funciona con PDFs escaneados?",
+      "a": "Esta herramienta extrae contenido basado en texto. Para PDFs escaneados, usa primero la herramienta OCR."
+    },
+    {
+      "q": "¿En qué formatos puedo descargar?",
+      "a": "Puedes descargar los datos extraídos como archivo .xlsx (Excel) o .csv."
+    },
+    {
+      "q": "¿Se suben mis archivos a un servidor?",
+      "a": "No. Todo el procesamiento ocurre 100% en tu navegador."
+    }
+  ]
+}

@@ -1,0 +1,658 @@
+{
+  "merge": [
+    {
+      "q": "How do I merge PDF files?",
+      "a": "Simply drag and drop your PDF files into the upload area, reorder them as needed, and click \"Merge & Download\". The combined PDF will be downloaded instantly."
+    },
+    {
+      "q": "Is there a limit on the number of files?",
+      "a": "No, you can merge as many PDF files as your browser can handle. There is no artificial limit on file count or size."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your files never leave your device — we have zero access to your documents."
+    },
+    {
+      "q": "Can I reorder pages before merging?",
+      "a": "Yes! After uploading your files, you can drag and drop them into any order before merging."
+    },
+    {
+      "q": "Does merging reduce quality?",
+      "a": "No. The merge process preserves the original quality of every page in your PDFs. No compression or modification is applied."
+    },
+    {
+      "q": "Do I need to sign up?",
+      "a": "No. MergesPDF is completely free with no sign-up, no login, and no email required. Just upload and merge."
+    }
+  ],
+  "split": [
+    {
+      "q": "How does PDF splitting work?",
+      "a": "Upload a PDF file and choose to split all pages into individual files, or enter a page range (e.g., \"1-3, 5\") to extract specific pages into a new PDF."
+    },
+    {
+      "q": "Can I extract specific pages?",
+      "a": "Yes! Switch to \"Page Range\" mode and enter the pages you want, like \"1-3, 5, 8-10\". They'll be combined into a single new PDF."
+    },
+    {
+      "q": "Is there a page limit?",
+      "a": "No. You can split PDFs of any size — there are no artificial page or file size limits."
+    },
+    {
+      "q": "Are the split files the same quality?",
+      "a": "Yes. Pages are copied without any re-encoding, so quality is preserved exactly as the original."
+    },
+    {
+      "q": "Is this free?",
+      "a": "Completely free. No subscriptions, no watermarks, no hidden costs."
+    }
+  ],
+  "compress": [
+    {
+      "q": "How does PDF compression work?",
+      "a": "Our compressor strips unnecessary metadata, rebuilds the document structure, and removes unused objects to reduce file size without affecting visible content."
+    },
+    {
+      "q": "Will compression reduce quality?",
+      "a": "The compression technique we use focuses on metadata removal and structure optimization. The visible content and page quality remain unchanged."
+    },
+    {
+      "q": "How much can I reduce the file size?",
+      "a": "Results vary by document. PDFs with lots of metadata, unused fonts, or duplicated objects can see 10-60% size reduction."
+    },
+    {
+      "q": "Is there a file size limit?",
+      "a": "There is no hard limit, but very large files (100MB+) may be slower to process since everything runs in your browser."
+    },
+    {
+      "q": "Can I compress multiple PDFs at once?",
+      "a": "Yes! Use the Batch Processing tool to compress multiple PDFs simultaneously with progress tracking."
+    }
+  ],
+  "rotate": [
+    {
+      "q": "How do I rotate PDF pages?",
+      "a": "Upload a PDF, select the rotation angle (90°, 180°, or 270°), and click Rotate. The rotated PDF will download instantly."
+    },
+    {
+      "q": "Can I rotate specific pages only?",
+      "a": "Currently, rotation applies to all pages in the PDF. For selective page rotation, split the PDF first, rotate individual pages, then merge them back."
+    },
+    {
+      "q": "Does rotation change the content?",
+      "a": "No, rotation only changes the page orientation. All text, images, and formatting remain exactly the same."
+    },
+    {
+      "q": "Can I undo a rotation?",
+      "a": "Yes — simply rotate the PDF again. For example, if you rotated 90° clockwise, rotate 270° to return to the original orientation."
+    }
+  ],
+  "encrypt": [
+    {
+      "q": "How does PDF encryption work?",
+      "a": "Enter a password and we rebuild the PDF with protection metadata. For maximum security, use a desktop tool like Adobe Acrobat with the password you set here."
+    },
+    {
+      "q": "Can I remove the password later?",
+      "a": "You can re-open the protected PDF with your password in any PDF reader. To remove the password, open it in a PDF editor and save without protection."
+    },
+    {
+      "q": "Is the encryption strong?",
+      "a": "Browser-based encryption has limitations compared to desktop tools. For highly sensitive documents, we recommend using the password with a professional PDF encryption tool."
+    },
+    {
+      "q": "Will recipients need a password?",
+      "a": "Yes, anyone who wants to open the encrypted PDF will need the password you set."
+    }
+  ],
+  "pdfToWord": [
+    {
+      "q": "How does PDF to Word conversion work?",
+      "a": "We extract the document structure from your PDF and create a Word (.docx) file. The conversion preserves page structure and basic formatting."
+    },
+    {
+      "q": "Will all text be preserved?",
+      "a": "Browser-based conversion has limitations. For complex PDFs with embedded fonts or advanced layouts, a desktop tool may produce better results."
+    },
+    {
+      "q": "What format is the output?",
+      "a": "The output is a Microsoft Word .docx file that can be opened in Word, Google Docs, LibreOffice, and most word processors."
+    },
+    {
+      "q": "Is my PDF uploaded anywhere?",
+      "a": "No. Everything is processed in your browser. Your file never leaves your device."
+    }
+  ],
+  "wordToPdf": [
+    {
+      "q": "What Word formats are supported?",
+      "a": "We support .doc and .docx files. For best results, use .docx format."
+    },
+    {
+      "q": "Is formatting preserved?",
+      "a": "The converter extracts text content and renders it into a well-formatted PDF. Complex formatting may not be fully preserved."
+    },
+    {
+      "q": "What about images in the Word file?",
+      "a": "Currently, text content is extracted and converted. Embedded images in Word documents may not appear in the output PDF."
+    },
+    {
+      "q": "Is there a file size limit?",
+      "a": "No hard limit, but very large documents may take longer to process since everything runs in your browser."
+    }
+  ],
+  "deletePages": [
+    {
+      "q": "How do I delete pages from a PDF?",
+      "a": "Upload a PDF, enter the page numbers you want to remove (e.g., \"1-3, 5\"), and click Delete Pages. A new PDF without those pages will be downloaded."
+    },
+    {
+      "q": "Can I undo deleted pages?",
+      "a": "The original file is never modified. If you need the deleted pages back, simply use the original file again."
+    },
+    {
+      "q": "Can I delete all pages except one?",
+      "a": "Yes, but you must keep at least one page. Enter all pages except the one you want to keep."
+    },
+    {
+      "q": "Is the page order preserved?",
+      "a": "Yes. The remaining pages keep their original order after deletion."
+    }
+  ],
+  "extractPages": [
+    {
+      "q": "How do I extract pages from a PDF?",
+      "a": "Upload a PDF, enter the page numbers you want (e.g., \"1-3, 5, 8\"), and click Extract. A new PDF with only those pages will be downloaded."
+    },
+    {
+      "q": "What's the difference between Extract and Split?",
+      "a": "Extract combines selected pages into one new PDF. Split creates individual files for each page."
+    },
+    {
+      "q": "Can I extract pages in a different order?",
+      "a": "Pages are extracted in the order they appear in the original document."
+    },
+    {
+      "q": "Is the quality preserved?",
+      "a": "Yes. Pages are copied without any re-encoding, preserving the original quality exactly."
+    }
+  ],
+  "watermark": [
+    {
+      "q": "What kind of watermarks can I add?",
+      "a": "You can add text watermarks with customizable font size, opacity, and rotation. The watermark is applied diagonally across every page."
+    },
+    {
+      "q": "Can I add an image watermark?",
+      "a": "Currently only text watermarks are supported. Image watermark support is coming soon."
+    },
+    {
+      "q": "Can I control the watermark position?",
+      "a": "The watermark is centered and rotated at 45° for maximum coverage. You can adjust opacity and font size."
+    },
+    {
+      "q": "Is the watermark removable?",
+      "a": "The watermark is embedded directly into the PDF. It cannot be easily removed, making it effective for document protection."
+    }
+  ],
+  "flatten": [
+    {
+      "q": "What does flattening a PDF do?",
+      "a": "Flattening removes form fields, annotations, layers, and interactive elements, producing a static, non-editable PDF."
+    },
+    {
+      "q": "Is PDF flattening free?",
+      "a": "Yes, completely free with no limits or sign-up required."
+    },
+    {
+      "q": "Will flattening reduce file size?",
+      "a": "It can. By removing interactive elements and rebuilding the structure, the file often becomes smaller."
+    }
+  ],
+  "grayscale": [
+    {
+      "q": "What does converting to grayscale do?",
+      "a": "It rebuilds your PDF without color data, resulting in a black-and-white document that is often smaller in file size."
+    },
+    {
+      "q": "Will this reduce my file size?",
+      "a": "In many cases yes, especially for PDFs with color images or graphics."
+    },
+    {
+      "q": "Is the conversion reversible?",
+      "a": "No. Color information is removed permanently. Keep the original file if you may need color again."
+    }
+  ],
+  "pageNumbers": [
+    {
+      "q": "How do I add page numbers to a PDF?",
+      "a": "Upload your PDF, choose top or bottom position, then click \"Add Page Numbers\". The tool adds sequential numbers to every page."
+    },
+    {
+      "q": "Is adding page numbers free?",
+      "a": "Yes, completely free with no limits, no watermarks, and no account required."
+    },
+    {
+      "q": "Can I customize the position?",
+      "a": "You can choose between top-center and bottom-center placement."
+    }
+  ],
+  "unlock": [
+    {
+      "q": "What restrictions can this tool remove?",
+      "a": "It removes print, copy, and edit restrictions (owner password). It cannot bypass open-password protection."
+    },
+    {
+      "q": "Is unlocking PDFs free?",
+      "a": "Yes, completely free. No sign-up or limits."
+    },
+    {
+      "q": "Is this legal?",
+      "a": "Removing restrictions from PDFs you own or have permission to modify is legal. Do not use this tool on documents you don't have the right to unlock."
+    }
+  ],
+  "batch": [
+    {
+      "q": "What batch operations are available?",
+      "a": "You can batch merge (combine all PDFs into one) or batch compress (compress each PDF individually) with progress tracking."
+    },
+    {
+      "q": "How many files can I process at once?",
+      "a": "There is no artificial limit. Process as many files as your browser can handle."
+    },
+    {
+      "q": "Is there a progress indicator?",
+      "a": "Yes! A progress bar shows the status of each file being processed."
+    },
+    {
+      "q": "Are all files processed locally?",
+      "a": "Yes. All batch processing happens in your browser. No files are uploaded to any server."
+    }
+  ],
+  "formFiller": [
+    {
+      "q": "How does the PDF form filler work?",
+      "a": "Upload a PDF with form fields, and the tool automatically detects all fillable fields. Enter your values and download the completed PDF."
+    },
+    {
+      "q": "What types of form fields are supported?",
+      "a": "Text fields are fully supported. The tool detects all PDF form field types including text inputs, checkboxes, and dropdowns."
+    },
+    {
+      "q": "Will the form data be embedded in the PDF?",
+      "a": "Yes — the form is flattened after filling, so the data becomes part of the PDF content."
+    },
+    {
+      "q": "What if my PDF has no form fields?",
+      "a": "The tool will let you know if no fillable fields are detected. Only PDFs with interactive form fields will work."
+    }
+  ],
+  "redact": [
+    {
+      "q": "How does PDF redaction work?",
+      "a": "Upload a PDF and draw black rectangles over sensitive areas on each page. The redacted PDF will have those areas permanently blacked out."
+    },
+    {
+      "q": "Is the redaction permanent?",
+      "a": "Yes — black rectangles are drawn directly onto the PDF content. The original text underneath is covered."
+    },
+    {
+      "q": "Can I undo redaction?",
+      "a": "No. Once saved, the redaction is permanent. Always keep a copy of the original file."
+    },
+    {
+      "q": "Is this processed locally?",
+      "a": "Yes. Your PDF never leaves your device. All redaction happens in your browser."
+    }
+  ],
+  "pdfToImages": [
+    {
+      "q": "How do I convert PDF to images?",
+      "a": "Upload a PDF, select the image format (PNG or JPG) and quality, then click Convert. Each page becomes a separate image."
+    },
+    {
+      "q": "What quality settings are available?",
+      "a": "1x for standard resolution, 2x for high quality (recommended), and 3x for maximum detail."
+    },
+    {
+      "q": "Can I select specific pages?",
+      "a": "Currently, all pages are converted. You can use our Split tool first to extract specific pages."
+    },
+    {
+      "q": "Are the images high resolution?",
+      "a": "Yes, especially at 2x or 3x quality. The images are rendered at the PDF's native resolution multiplied by your chosen scale."
+    }
+  ],
+  "mergeImages": [
+    {
+      "q": "What image formats can I merge into a PDF?",
+      "a": "You can combine JPG, JPEG, PNG, and WEBP images into a single PDF document."
+    },
+    {
+      "q": "Can I reorder the images before merging?",
+      "a": "Yes! Simply drag and drop the image thumbnails to arrange them in your preferred order."
+    },
+    {
+      "q": "Is there a limit on the number of images?",
+      "a": "No artificial limit. Add as many images as your browser can handle."
+    },
+    {
+      "q": "What about image quality?",
+      "a": "Images are embedded at their original resolution. No compression or quality loss is applied."
+    }
+  ],
+  "ocr": [
+    {
+      "q": "What is OCR?",
+      "a": "OCR (Optical Character Recognition) converts images of text into machine-readable text, making scanned documents searchable and editable."
+    },
+    {
+      "q": "What languages are supported?",
+      "a": "English, Spanish, French, German, Portuguese, Arabic, Chinese (Simplified), Hindi, and Japanese."
+    },
+    {
+      "q": "Is OCR processing done locally?",
+      "a": "Yes! Tesseract.js runs entirely in your browser. Your files never leave your device."
+    },
+    {
+      "q": "How long does OCR take?",
+      "a": "Processing time depends on page count and complexity. Most single-page documents complete in under 10 seconds."
+    },
+    {
+      "q": "Can I OCR a scanned PDF?",
+      "a": "Yes! Upload a scanned PDF and the tool will render each page, then extract text using OCR."
+    }
+  ],
+  "editor": [
+    {
+      "q": "What can I do with the PDF Editor?",
+      "a": "Add text, highlights, freehand drawings, lines, arrows, rectangles, circles, sticky notes, and images to any PDF page."
+    },
+    {
+      "q": "Is editing done locally?",
+      "a": "Yes! All rendering and editing happens in your browser. Your PDF never leaves your device."
+    },
+    {
+      "q": "Can I undo my changes?",
+      "a": "Yes — use Ctrl+Z to undo and Ctrl+Y to redo. The editor maintains a full undo/redo history."
+    },
+    {
+      "q": "Will my annotations be part of the PDF?",
+      "a": "Yes. When you save, all annotations are permanently embedded into the PDF."
+    },
+    {
+      "q": "Can I edit text already in the PDF?",
+      "a": "The editor focuses on adding annotations. To edit existing text, you may need a desktop tool."
+    }
+  ],
+  "svgToImage": [
+    {
+      "q": "What image formats can I convert SVG to?",
+      "a": "You can convert to PNG, JPG, WEBP, and BMP — all processed in your browser."
+    },
+    {
+      "q": "Will I lose quality?",
+      "a": "SVGs are vector-based so they scale perfectly. Choose a higher scale (2x–4x) for crisp output."
+    },
+    {
+      "q": "Is my SVG uploaded to a server?",
+      "a": "No. Everything runs 100% in your browser. Your files never leave your device."
+    },
+    {
+      "q": "Can I convert SVGs with transparency?",
+      "a": "Yes! PNG and WEBP preserve transparency. JPG and BMP will have a white background."
+    }
+  ],
+  "excelToPdf": [
+    {
+      "q": "What file formats are supported?",
+      "a": "You can convert .xlsx, .xls, and .csv files to PDF."
+    },
+    {
+      "q": "Are my spreadsheets uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your files never leave your device."
+    },
+    {
+      "q": "Does it preserve formatting?",
+      "a": "The converter renders table data with gridlines and headers. Complex Excel formatting like charts may not be preserved."
+    },
+    {
+      "q": "Is there a file size limit?",
+      "a": "No artificial limit — it depends on your browser's memory capacity."
+    }
+  ],
+  "pptxToPdf": [
+    {
+      "q": "What PowerPoint formats are supported?",
+      "a": "Currently .pptx files are supported. Older .ppt files need to be saved as .pptx first."
+    },
+    {
+      "q": "Are my presentations uploaded to a server?",
+      "a": "No. Everything is processed 100% in your browser. Your files never leave your device."
+    },
+    {
+      "q": "Does it preserve images and animations?",
+      "a": "The converter extracts text content and layout. Complex animations and embedded media may not be fully rendered."
+    },
+    {
+      "q": "Do I need to sign up?",
+      "a": "No. This tool is completely free with no sign-up required."
+    }
+  ],
+  "webpageToPdf": [
+    {
+      "q": "How do I convert HTML to PDF?",
+      "a": "Paste your HTML code or upload an HTML file, then click \"Convert to PDF\". The PDF will be generated instantly."
+    },
+    {
+      "q": "Can I convert a live webpage?",
+      "a": "You can save a webpage as HTML (Ctrl+S / Cmd+S) and then upload the file to convert it to PDF."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your data never leaves your device."
+    },
+    {
+      "q": "Does it preserve CSS styling?",
+      "a": "The converter extracts structured text content (headings, paragraphs, lists). Complex CSS layouts may be simplified."
+    }
+  ],
+  "heicToPdf": [
+    {
+      "q": "What is HEIC format?",
+      "a": "HEIC (High Efficiency Image Container) is Apple's default photo format on iPhone and iPad. It offers better compression than JPEG while maintaining quality."
+    },
+    {
+      "q": "What can I convert HEIC to?",
+      "a": "You can convert HEIC/HEIF images to JPG, PNG, or combine them into a single PDF document."
+    },
+    {
+      "q": "Are my photos uploaded to a server?",
+      "a": "No. All conversion happens 100% in your browser. Your photos never leave your device."
+    },
+    {
+      "q": "Can I convert multiple HEIC files at once?",
+      "a": "Yes! You can select multiple HEIC/HEIF files and convert them all at once."
+    }
+  ],
+  "repairPdf": [
+    {
+      "q": "What types of PDF damage can be repaired?",
+      "a": "This tool can fix corrupted cross-reference tables, broken page trees, damaged metadata, and re-index pages for a clean structure."
+    },
+    {
+      "q": "Will repairing change my PDF content?",
+      "a": "No. The repair process preserves all existing page content. It only fixes the internal structure and metadata."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All repair processing happens 100% in your browser. Your files never leave your device."
+    },
+    {
+      "q": "What if my PDF is too damaged to repair?",
+      "a": "Severely corrupted files (e.g., truncated or encrypted with unknown passwords) may not be recoverable. The tool will let you know."
+    }
+  ],
+  "pdfBookmarks": [
+    {
+      "q": "What are PDF bookmarks?",
+      "a": "PDF bookmarks are a table of contents that appears as a sidebar in PDF readers, allowing quick navigation to specific sections or pages."
+    },
+    {
+      "q": "Can I add multiple bookmarks?",
+      "a": "Yes! You can add as many bookmarks as you need, each pointing to a different page in your PDF document."
+    },
+    {
+      "q": "Will this modify my PDF content?",
+      "a": "No. Adding bookmarks only adds navigation metadata — your actual page content remains completely unchanged."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your files never leave your device."
+    }
+  ],
+  "pageSize": [
+    {
+      "q": "What page sizes are supported?",
+      "a": "We support A4, A3, A5, Letter, Legal, Tabloid, B5, and Executive sizes. Content is automatically scaled and centered."
+    },
+    {
+      "q": "Will resizing distort my content?",
+      "a": "No. Content is proportionally scaled to fit the new page size while maintaining its aspect ratio, then centered on the page."
+    },
+    {
+      "q": "Can I resize individual pages?",
+      "a": "Currently, the tool resizes all pages to the same target size. For individual page sizing, use the Crop tool."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your files never leave your device."
+    }
+  ],
+  "pdfToExcel": [
+    {
+      "q": "How does PDF to Excel extraction work?",
+      "a": "The tool reads each page of your PDF, groups text by position into rows and columns, and exports the structured data as an Excel spreadsheet or CSV file."
+    },
+    {
+      "q": "Will it work with scanned PDFs?",
+      "a": "This tool extracts text-based content. For scanned/image PDFs, use the OCR tool first to make text extractable, then convert to Excel."
+    },
+    {
+      "q": "What formats can I download?",
+      "a": "You can download the extracted data as an .xlsx (Excel) file or a .csv file for maximum compatibility."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your files never leave your device."
+    }
+  ],
+  "epubToPdf": [
+    {
+      "q": "What is an EPUB file?",
+      "a": "EPUB is a popular e-book format used by most e-readers (except Kindle). This tool converts EPUB files to PDF while preserving chapters and reading order."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your files never leave your device."
+    },
+    {
+      "q": "Will images from the EPUB be included?",
+      "a": "Currently the tool extracts and renders text content. Complex layouts and embedded images may be simplified."
+    }
+  ],
+  "htmlToPdf": [
+    {
+      "q": "How do I convert HTML to PDF?",
+      "a": "Paste your HTML code or upload an HTML file, then click \"Convert to PDF\". The tool renders the structured content into a PDF document."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser."
+    }
+  ],
+  "pdfA": [
+    {
+      "q": "What is PDF/A?",
+      "a": "PDF/A is an ISO-standardized version of PDF designed for long-term digital preservation of documents. It ensures the document can be reproduced exactly the same way in the future."
+    },
+    {
+      "q": "What changes does the conversion make?",
+      "a": "The tool adds required metadata (title, author, dates), embeds fonts, and sets PDF/A identification markers for archival compliance."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser."
+    }
+  ],
+  "scanToPdf": [
+    {
+      "q": "Can I use my phone camera?",
+      "a": "Yes! On mobile devices, the \"Take Photo\" button opens your camera directly. You can also upload existing images from your gallery."
+    },
+    {
+      "q": "What image formats are supported?",
+      "a": "JPG and PNG images are supported. Each image becomes one page in the resulting PDF, scaled to fit A4 size."
+    },
+    {
+      "q": "Are my photos uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser. Your photos never leave your device."
+    }
+  ],
+  "pdfOverlay": [
+    {
+      "q": "What is PDF overlay?",
+      "a": "PDF overlay places one PDF on top of another — useful for adding letterheads, stamps, watermarks, or backgrounds to existing documents."
+    },
+    {
+      "q": "What is the difference between foreground and background?",
+      "a": "Foreground places the overlay on top of the base PDF. Background places it behind, useful for adding letterhead templates."
+    },
+    {
+      "q": "Are my files uploaded to a server?",
+      "a": "No. All processing happens 100% in your browser."
+    }
+  ],
+  "comparePdf": [
+    {
+      "q": "How does PDF comparison work?",
+      "a": "We extract text from both PDFs page by page and compare them to find differences. The similarity score shows how much text overlaps."
+    },
+    {
+      "q": "Can I compare scanned PDFs?",
+      "a": "Only if the scanned PDF has a text layer (OCR). Image-only scans cannot be compared for text differences."
+    },
+    {
+      "q": "Are my files uploaded?",
+      "a": "No. All comparison happens 100% in your browser. Your files never leave your device."
+    }
+  ],
+  "pdfToPpt": [
+    {
+      "q": "What format is the output?",
+      "a": "The output is an HTML presentation file that can be opened in any browser and printed. Each PDF page becomes one slide."
+    },
+    {
+      "q": "Does it preserve images?",
+      "a": "Currently, text content is extracted from each page. For image-heavy PDFs, consider using PDF to Images instead."
+    },
+    {
+      "q": "Are my files uploaded?",
+      "a": "No. All processing happens 100% in your browser."
+    }
+  ],
+  "markdownToPdf": [
+    {
+      "q": "What Markdown features are supported?",
+      "a": "Headings (H1-H3), bullet lists, numbered lists, blockquotes, code blocks, horizontal rules, bold, italic, and links are all supported."
+    },
+    {
+      "q": "Can I upload a .md file?",
+      "a": "Yes! Click \"Load .md File\" to import a Markdown file, or paste your text directly into the editor."
+    },
+    {
+      "q": "Are my files uploaded?",
+      "a": "No. All conversion happens 100% in your browser."
+    }
+  ]
+}

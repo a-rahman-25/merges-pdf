@@ -4,7 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
-import { I18nProvider } from "./hooks/useI18n";
+import { I18nProvider, useI18n } from "./hooks/useI18n";
 import usePageTracking from "./hooks/usePageTracking";
 import NotFound from "./pages/NotFound";
 import HomeSkeleton from "./components/HomeSkeleton";
@@ -74,6 +74,8 @@ const AiClassify = lazy(() => import("./pages/AiClassify"));
 const PdfToHtml = lazy(() => import("./pages/PdfToHtml"));
 const PdfToMarkdown = lazy(() => import("./pages/PdfToMarkdown"));
 const PdfToJson = lazy(() => import("./pages/PdfToJson"));
+const PdfToDxf = lazy(() => import("./pages/PdfToDxf"));
+const MergePdfImages = lazy(() => import("./pages/MergePdfImages"));
 const AdminLogin = lazy(() => import("./pages/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
 const AiContractAnalyzer = lazy(() => import("./pages/AiContractAnalyzer"));
@@ -95,6 +97,16 @@ const queryClient = new QueryClient();
 const AnimatedRoutes = () => {
   const location = useLocation();
   usePageTracking();
+  const { lang, setLang } = useI18n();
+
+  // Arabic URLs live under /ar/... — strip the prefix so the same route table
+  // matches, and force the Arabic UI while on them.
+  const isArabicUrl = location.pathname === '/ar' || location.pathname.startsWith('/ar/');
+  const strippedPathname = isArabicUrl ? location.pathname.replace(/^\/ar/, '') || '/' : location.pathname;
+
+  useEffect(() => {
+    if (isArabicUrl && lang !== 'ar') setLang('ar');
+  }, [isArabicUrl, lang, setLang]);
 
   // Always land at the top of a newly opened tool page
   useEffect(() => {
@@ -104,7 +116,7 @@ const AnimatedRoutes = () => {
 
   return (
     <>
-      <Routes location={location} key={location.pathname}>
+      <Routes location={{ ...location, pathname: strippedPathname }} key={strippedPathname}>
         <Route path="/" element={<Index />} />
         <Route path="/merge" element={<Merge />} />
         <Route path="/split" element={<Split />} />
@@ -169,6 +181,8 @@ const AnimatedRoutes = () => {
         <Route path="/pdf-to-html" element={<PdfToHtml />} />
         <Route path="/pdf-to-markdown" element={<PdfToMarkdown />} />
         <Route path="/pdf-to-json" element={<PdfToJson />} />
+        <Route path="/pdf-to-dxf" element={<PdfToDxf />} />
+        <Route path="/merge-pdf-images" element={<MergePdfImages />} />
         <Route path="/ai-document-map" element={<AIToolPage />} />
         <Route path="/ai-document-timeline" element={<AIToolPage />} />
         <Route path="/ai-keyword-extractor" element={<AIToolPage />} />
@@ -232,9 +246,13 @@ const AnimatedRoutes = () => {
 };
 
 const PWAInstallPrompt = lazy(() => import("./components/PWAInstallPrompt"));
-const CommandPalette = lazy(() => import("./components/CommandPalette"));
+// Non-essential: if its file fails to load (stale deploy), render nothing instead of blanking the app.
+const CommandPalette = lazy(() =>
+  import("./components/CommandPalette").catch(() => ({ default: () => null }))
+);
 
 const KeyboardShortcuts = lazy(() => import("./components/KeyboardShortcuts"));
+const CookieConsent = lazy(() => import("./components/CookieConsent"));
 const ProcessingHistory = lazy(() => import("./components/ProcessingHistory"));
 
 const App = () => (
@@ -257,6 +275,9 @@ const App = () => (
 
           <Suspense fallback={null}>
             <KeyboardShortcuts />
+          </Suspense>
+          <Suspense fallback={null}>
+            <CookieConsent />
           </Suspense>
           <Suspense fallback={null}>
             <ProcessingHistory />

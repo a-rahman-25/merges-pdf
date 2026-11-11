@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { getConsent, onConsentChange } from '@/lib/consent';
 
 interface AdUnitProps {
   /** Ad slot ID from AdSense (leave empty for auto ads) */
@@ -33,6 +34,8 @@ const AdUnit = ({ slot, format = 'auto', className = '', layout = '' }: AdUnitPr
 
     const tryPush = () => {
       if (pushed.current) return;
+      // Ads load only after the visitor accepts cookies (AdSense consent)
+      if (getConsent() !== 'accepted') return;
       // Skip while the container or the <ins> slot has no measurable width
       const ins = el.querySelector('ins.adsbygoogle') as HTMLElement | null;
       if (el.offsetWidth < 100 || !ins || ins.offsetWidth < 100) return;
@@ -49,12 +52,16 @@ const AdUnit = ({ slot, format = 'auto', className = '', layout = '' }: AdUnitPr
     tryPush();
     const observer = new ResizeObserver(tryPush);
     observer.observe(el);
-    return () => observer.disconnect();
+    const offConsent = onConsentChange(tryPush);
+    return () => {
+      observer.disconnect();
+      offConsent();
+    };
   }, []);
 
 
   const formatStyles: Record<string, React.CSSProperties> = {
-    auto: { display: 'block' },
+    auto: { display: 'block', width: '100%', minHeight: '90px' },
     horizontal: { display: 'inline-block', width: '100%', height: '90px' },
     vertical: { display: 'inline-block', width: '160px', height: '600px' },
     rectangle: { display: 'inline-block', width: '336px', height: '280px' },

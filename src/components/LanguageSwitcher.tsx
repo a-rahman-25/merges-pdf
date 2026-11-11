@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Globe, Check, Search } from 'lucide-react';
 import { useI18n } from '@/hooks/useI18n';
 import { languages } from '@/lib/translations';
@@ -19,6 +20,8 @@ const regionGroups = [
 
 const LanguageSwitcher = () => {
   const { lang, setLang } = useI18n();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState('');
   const current = languages.find(l => l.code === lang);
@@ -34,6 +37,13 @@ const LanguageSwitcher = () => {
 
   const handleSelect = (code: string) => {
     setLang(code as any);
+    // Keep the URL in sync for the two indexable locales (en + ar)
+    const isArUrl = location.pathname === '/ar' || location.pathname.startsWith('/ar/');
+    if (code === 'ar' && !isArUrl) {
+      navigate(`/ar${location.pathname === '/' ? '' : location.pathname}`);
+    } else if (code !== 'ar' && isArUrl) {
+      navigate(location.pathname.replace(/^\/ar/, '') || '/');
+    }
     setOpen(false);
     setSearch('');
   };

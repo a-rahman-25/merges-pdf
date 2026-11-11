@@ -1,4 +1,9 @@
 import { useEffect } from 'react';
+import { allTools } from '@/lib/tools-data';
+import { translations } from '@/lib/translations';
+
+// Routes with real Arabic content — mirrors scripts/prerender.mjs
+const AR_CAPABLE_STATIC = ['/', '/about', '/contact', '/privacy', '/terms', '/blog', '/ai-document-tools', '/batch'];
 
 interface FAQItem {
   q: string;
@@ -73,6 +78,27 @@ const SEOHead = ({ title, description, path, faqs, jsonLd }: SEOHeadProps) => {
     }
     canonical.href = `${BASE_URL}${path}`;
 
+    // hreflang alternates (en / ar / x-default) for the two indexable locales
+    const tool = allTools.find(t => t.path === path);
+    const arCapable =
+      AR_CAPABLE_STATIC.includes(path) ||
+      Boolean(tool && (translations.ar as Record<string, string>)?.[tool.titleKey]);
+    const setAlternate = (hreflang: string, href: string) => {
+      let el = document.querySelector(`link[rel="alternate"][hreflang="${hreflang}"]`) as HTMLLinkElement;
+      if (!el) {
+        el = document.createElement('link');
+        el.rel = 'alternate';
+        el.setAttribute('hreflang', hreflang);
+        el.dataset.seoAlternate = 'true';
+        document.head.appendChild(el);
+      }
+      el.href = href;
+    };
+    setAlternate('en', `${BASE_URL}${path}`);
+    setAlternate('x-default', `${BASE_URL}${path}`);
+    if (arCapable) setAlternate('ar', `${BASE_URL}/ar${path === '/' ? '' : path}`);
+    else document.querySelector('link[rel="alternate"][hreflang="ar"]')?.remove();
+
     // WebApplication JSON-LD
     const appLdId = 'seo-jsonld-app';
     let appScript = document.getElementById(appLdId) as HTMLScriptElement;
@@ -122,6 +148,7 @@ const SEOHead = ({ title, description, path, faqs, jsonLd }: SEOHeadProps) => {
     return () => {
       document.getElementById(appLdId)?.remove();
       document.getElementById(faqLdId)?.remove();
+      document.querySelectorAll('link[data-seo-alternate]').forEach(el => el.remove());
     };
   }, [title, description, path, faqs, jsonLd]);
 
